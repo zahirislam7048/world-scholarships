@@ -1,0 +1,133 @@
+<title>বাংলাদেশ স্কলারশিপ তালিকা</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: register-style directory — summary strip, sticky filter bar, one card per record in a 2-col grid */
+:root{
+  --bg:#f5f7f4; --surface:#ffffff; --fg:#17211b; --muted:#5b6a61; --line:#dde4de;
+  --accent:#0b6b4a; --accent-soft:#e3f1ea; --flag:#c8323a;
+  --gov:#0b6b4a; --pub:#2c5aa0; --pri:#8a4b12; --intl:#6b3fa0; --warn-bg:#fff3d6; --warn-fg:#7a5200;
+  --display:"Anek Bangla","Hind Siliguri",system-ui,sans-serif;
+  --body:"Hind Siliguri","Anek Bangla",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1512; --surface:#161e1a; --fg:#e6ede8; --muted:#97a69d; --line:#26322b;
+  --accent:#4fc394; --accent-soft:#173226; --flag:#ff6b72;
+  --gov:#4fc394; --pub:#7aa7ec; --pri:#e3a25e; --intl:#b896ea; --warn-bg:#3a2e10; --warn-fg:#f2cf7a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1512; --surface:#161e1a; --fg:#e6ede8; --muted:#97a69d; --line:#26322b;
+  --accent:#4fc394; --accent-soft:#173226; --flag:#ff6b72;
+  --gov:#4fc394; --pub:#7aa7ec; --pri:#e3a25e; --intl:#b896ea; --warn-bg:#3a2e10; --warn-fg:#f2cf7a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 48px;display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--flag);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:65ch;margin:0}
+.notice{background:var(--warn-bg);color:var(--warn-fg);border-radius:8px;padding:10px 14px;font-size:14px;max-width:80ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stat{background:var(--surface);padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:13px;color:var(--muted)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line)}
+.bar input,.bar select{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:0}
+#q{flex:1 1 240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:5px 12px}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip:focus-visible,.bar input:focus-visible,.bar select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.prov{font-size:13px;color:var(--muted);font-weight:500}
+.tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.t-government{color:var(--gov)}.t-public{color:var(--pub)}.t-private{color:var(--pri)}.t-international{color:var(--intl)}
+h2{font-family:var(--display);font-weight:500;font-size:18px;line-height:1.3;margin:0;text-wrap:balance}
+.amt{font-weight:600;color:var(--accent)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.note{font-size:13px;color:var(--warn-fg);background:var(--warn-bg);border-radius:6px;padding:6px 10px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:10px;font-size:13px}
+.src{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.src:hover{text-decoration:underline}
+.status{font-size:12px;color:var(--muted)}
+.empty{color:var(--muted);padding:24px 0}
+footer{font-size:13px;color:var(--muted)}
+</style>
+<div class="wrap">
+<header>
+  <div class="eyebrow"><span class="dot"></span>Bangladesh · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
+  <h1>বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার</h1>
+  <p class="lede">এখন চালু আছে বা সামনে আসছে এমন সরকারি ও বিশ্ববিদ্যালয়ের স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
+  <p class="notice">সব তথ্য এখনো যাচাই বাকি। এগুলো অফিসিয়াল ডোমেইনের সার্চ ফলাফল থেকে নেওয়া, পেজ খুলে মেলানো হয়নি। আবেদনের আগে সোর্স লিংক খুলে টাকা, শর্ত আর সময় মিলিয়ে নিন।</p>
+</header>
+<section class="stats" id="stats"></section>
+<div class="bar">
+  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয় বা শর্ত দিয়ে খুঁজুন" aria-label="খুঁজুন">
+  <div class="chips" id="chips" role="group" aria-label="প্রতিষ্ঠানের ধরন"></div>
+  <select id="lvl" aria-label="লেভেল">
+    <option value="">সব লেভেল</option><option value="UG">স্নাতক (UG)</option><option value="PG">স্নাতকোত্তর / Masters</option><option value="PhD">PhD / Postdoc</option><option value="School">স্কুল / কলেজ</option>
+  </select>
+  <span class="count" id="count"></span>
+</div>
+<section class="grid" id="grid"></section>
+<footer>উৎস ফাইল: <span style="font-family:var(--mono)">data/scholarships/bangladesh/scholarships.csv</span>। কোনো তথ্য যাচাই হলে CSV-তে verification_status বদলে <code>verified</code> করুন।</footer>
+</div>
+<script>
+const DATA = __DATA__;
+const UPDATED = "__UPDATED__";
+const TYPES = {government:"সরকারি",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
+const bn = n => String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const state = {type:"", q:"", lvl:""};
+function lvlMatch(l, f){
+  if(!f) return true;
+  if(f==="UG") return /\bUG\b/.test(l);
+  if(f==="PG") return /PG|Masters|MS|MA|MPhil|MSc/.test(l);
+  if(f==="PhD") return /PhD|Postdoc/.test(l);
+  if(f==="School") return /Secondary|HSC|Degree/.test(l);
+}
+function stats(){
+  const unis = new Set(DATA.filter(d=>d.provider_type!=="government").map(d=>d.provider)).size;
+  const c = t => DATA.filter(d=>d.provider_type===t).length;
+  const items = [[DATA.length,"মোট রেকর্ড"],[c("government"),"সরকারি প্রোগ্রাম"],[unis,"বিশ্ববিদ্যালয়"],[new Set(DATA.filter(d=>d.provider_type==="public").map(d=>d.provider)).size,"পাবলিক"],[new Set(DATA.filter(d=>d.provider_type==="private").map(d=>d.provider)).size,"প্রাইভেট"]];
+  document.getElementById("stats").innerHTML = items.map(([n,l])=>`<div class="stat"><b>${bn(n)}</b><span>${l}</span></div>`).join("");
+}
+function chips(){
+  const opts = [["","সব"],...Object.entries(TYPES)];
+  const el = document.getElementById("chips");
+  el.innerHTML = opts.map(([k,l])=>`<button class="chip" data-k="${k}" aria-pressed="${state.type===k}">${l}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{state.type=b.dataset.k;chips();render()});
+}
+function render(){
+  const q = state.q.toLowerCase();
+  const rows = DATA.filter(d=>(!state.type||d.provider_type===state.type)&&lvlMatch(d.level,state.lvl)&&
+    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.notes].join(" ").toLowerCase().includes(q)));
+  document.getElementById("count").textContent = `${bn(rows.length)}টি দেখানো হচ্ছে`;
+  const g = document.getElementById("grid");
+  if(!rows.length){g.innerHTML=`<p class="empty">এই ফিল্টারে কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>`;return}
+  g.innerHTML = rows.map(d=>`<article class="card">
+    <div class="top"><span class="prov">${esc(d.provider)}</span><span class="tag t-${d.provider_type}">${TYPES[d.provider_type]}</span></div>
+    <h2>${esc(d.scholarship_name)}</h2>
+    <dl>
+      <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
+      <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
+      ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}
+      <dt>সেশন</dt><dd>${esc(d.session_year)}</dd>
+      ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
+    </dl>
+    ${d.notes?`<div class="note">${esc(d.notes)}</div>`:""}
+    <div class="foot"><a class="src" href="${esc(d.source_url)}" target="_blank" rel="noopener">${esc(d.source_domain)} ↗</a><span class="status">যাচাই বাকি</span></div>
+  </article>`).join("");
+}
+document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value;render()});
+document.getElementById("lvl").addEventListener("change",e=>{state.lvl=e.target.value;render()});
+document.getElementById("upd").textContent = bn(UPDATED);
+stats();chips();render();
+</script>
