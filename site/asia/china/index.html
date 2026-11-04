@@ -85,11 +85,21 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
+<style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
 <style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>
 </head>
 <body>
 <div class="wrap">
-<nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
 <header>
   <div class="eyebrow"><span class="dot"></span>China · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
   <h1>চীনের স্কলারশিপ</h1>
@@ -106,7 +116,7 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
 const DATA = [{"country": "China", "provider": "Tsinghua University", "provider_type": "public", "scholarship_name": "Chinese Government Scholarship (Type B) – Tsinghua graduate programs", "level": "PG / PhD", "coverage_amount": "Chinese Government Scholarship (CSC)", "eligibility": "International graduate applicants; apply in Round 1 for scholarship", "english_requirement": "IELTS 6.5 / TOEFL iBT 80 for English-taught programmes; waiver for full-time English-taught bachelor's", "english_source": "https://yz.tsinghua.edu.cn/en/info/1014/1121.htm", "session_year": "2027 intake", "deadline": "2026-12-15", "source_url": "https://yz.tsinghua.edu.cn/en/info/1027/1117.htm", "source_domain": "yz.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Round 1 closes 15 Dec 2026 17:00; Round 2 1 Jan–27 Feb 2027", "apply_url": "https://yz.tsinghua.edu.cn/en/info/1027/1117.htm"}, {"country": "China", "provider": "Tsinghua Shenzhen International Graduate School", "provider_type": "public", "scholarship_name": "SIGS scholarships for international students", "level": "PG / PhD", "coverage_amount": "Scholarships (see Financial Support page)", "eligibility": "Scholarship applicants should submit by December 2026", "english_requirement": "IELTS 6.5 / TOEFL iBT 85 (2027 notice); English-taught degree may get a waiver", "english_source": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm", "session_year": "2027 intake", "deadline": "2026-12-31", "source_url": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm", "source_domain": "sigs.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Admission open until 15 May 2027; Dec 2026 is the recommended date for scholarship applicants", "apply_url": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm"}];

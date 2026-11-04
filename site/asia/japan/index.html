@@ -85,11 +85,21 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
+<style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
 <style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>
 </head>
 <body>
 <div class="wrap">
-<nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
 <header>
   <div class="eyebrow"><span class="dot"></span>Japan · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
   <h1>জাপানের স্কলারশিপ</h1>
@@ -106,7 +116,7 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
 const DATA = [{"country": "Japan", "provider": "JASSO", "provider_type": "government", "scholarship_name": "JASSO Honors Scholarship for Privately Financed International Students", "level": "UG / PG", "coverage_amount": "Not stated in source snippet", "eligibility": "Privately financed students accepted by a Japanese university; apply through the university", "english_requirement": "Japanese JLPT N2 or EJU ≥200, or English CEFR B2", "english_source": "https://www.studyinjapan.go.jp/en/planning/scholarships/jasso-scholarships/", "session_year": "ongoing", "deadline": "", "source_url": "https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/", "source_domain": "studyinjapan.go.jp", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "MEXT 2027 embassy round closed (screening May–July 2026); 2028 round expected spring 2027", "apply_url": "https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/"}];

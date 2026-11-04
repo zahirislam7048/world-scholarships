@@ -52,10 +52,58 @@ h2{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.3;mar
 .meta{font-size:14px;color:var(--muted)} .meta b{color:var(--accent);font-variant-numeric:tabular-nums}
 .crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}
 .notice{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+</style><style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><style>
+.month{display:flex;flex-direction:column;gap:8px}
+.month h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0}
+.dl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.dl li{display:grid;grid-template-columns:72px 1fr auto;gap:4px 14px;align-items:start;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.dl .date{font-family:var(--display);font-weight:700;font-size:15px;line-height:1.2;color:var(--accent);font-variant-numeric:tabular-nums}
+.dl .date small{display:block;font-family:var(--body);font-weight:400;font-size:12px;color:var(--muted)}
+.dl .what{min-width:0;display:flex;flex-direction:column;gap:2px}
+.dl .what a{color:var(--fg);font-weight:600;text-decoration:none}
+.dl .what a:hover{color:var(--accent);text-decoration:underline}
+.dl .what span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.dl .what span a{font-weight:400;color:var(--accent)}
+.lede a{color:var(--accent)}
+.left{font-size:12px;font-weight:600;white-space:nowrap;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.left.soon{color:#b3261e;border-color:currentColor}
+@media (prefers-color-scheme:dark){.left.soon{color:#ff8a80}}
+@media (max-width:520px){.dl li{grid-template-columns:64px 1fr}.dl .left{grid-column:2;justify-self:start}}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters input[type=search],.filters select{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:0}
+.filters input[type=search]{flex:1 1 260px}
+.filters label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.count{font-size:13px;color:var(--muted)}
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}
+.res{display:flex;flex-direction:column;gap:6px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;min-width:0}
+.res .where{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.res h3{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.3;margin:0}
+.res p{margin:0;font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.res p b{color:var(--fg);font-weight:600}
+.res .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:4px}
+.res .apply{font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:6px 12px;background:var(--accent);color:var(--surface)}
+.res .apply.info{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.res .more{font-size:13px;color:var(--accent)}
+.empty{color:var(--muted)}
+.prose{max-width:68ch;display:flex;flex-direction:column;gap:14px}
+.prose h2{font-family:var(--display);font-weight:700;font-size:22px;margin:12px 0 0}
+.prose p,.prose li{margin:0;line-height:1.7}
+.prose ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.prose a{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav>
 <nav class="crumbs"><a href="/">হোম</a></nav>
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">Asia · সর্বশেষ আপডেট 2026-11-04</span>
@@ -124,6 +172,7 @@ h2{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.3;mar
 </a>
 </div>
 <p class="notice">তথ্য অফিসিয়াল সাইট থেকে সংগ্রহ করা, তবে আবেদনের আগে প্রতিটি স্কলারশিপের সোর্স লিংক খুলে টাকা, শর্ত আর শেষ তারিখ মিলিয়ে নিন।</p>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 </body>
 </html>

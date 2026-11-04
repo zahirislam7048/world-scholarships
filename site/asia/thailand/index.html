@@ -85,11 +85,21 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
+<style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
 <style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>
 </head>
 <body>
 <div class="wrap">
-<nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
 <header>
   <div class="eyebrow"><span class="dot"></span>Thailand · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
   <h1>থাইল্যান্ডের স্কলারশিপ</h1>
@@ -106,7 +116,7 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
 const DATA = [{"country": "Thailand", "provider": "TICA – Ministry of Foreign Affairs", "provider_type": "government", "scholarship_name": "Thai International Postgraduate Programme (TIPP) 2027", "level": "PG", "coverage_amount": "Tuition reimbursed by TICA (other benefits in guidelines)", "eligibility": "Nominated by the national focal point of an eligible country", "english_requirement": "Set by host university (examples: IELTS 5.0–6.0, TOEFL iBT 69–71); not needed if degree was taught in English", "english_source": "https://image.mfa.go.th/mfa/0/GH2PYnujXi/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/Guidelines_for_TIPP_2026.pdf", "session_year": "2027", "deadline": "", "source_url": "https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233", "source_domain": "tica-thaigov.mfa.go.th", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Course list published; deadlines marked TBC", "apply_url": "https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233"}];

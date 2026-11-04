@@ -85,11 +85,21 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
+<style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
 <style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>
 </head>
 <body>
 <div class="wrap">
-<nav class="crumbs"><a href="/">হোম</a> / <a href="/north-america/">উত্তর আমেরিকা</a></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/north-america/">উত্তর আমেরিকা</a></nav>
 <header>
   <div class="eyebrow"><span class="dot"></span>United States · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
   <h1>যুক্তরাষ্ট্রের স্কলারশিপ</h1>
@@ -106,7 +116,7 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
 const DATA = [{"country": "United States", "provider": "Amherst College", "provider_type": "private", "scholarship_name": "Need-based financial aid for international students (need-blind)", "level": "UG", "coverage_amount": "Meets 100% of calculated need for admitted international students", "eligibility": "CSS Profile required (no FAFSA)", "english_requirement": "TOEFL iBT 5.5 new scale (100 before 21 Jan 2026) / Duolingo 130 / IELTS Academic 7.5 — unless last 2 years of school were in English", "english_source": "https://www.amherst.edu/admission/apply/international", "session_year": "Fall 2027", "deadline": "2027-01-05", "source_url": "https://www.amherst.edu/offices/financialaid/international_students/appleton", "source_domain": "amherst.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Regular decision application 5 Jan 2027; financial aid documents 15 Jan 2027", "apply_url": "https://www.amherst.edu/admission/apply/international"}, {"country": "United States", "provider": "Yale University", "provider_type": "private", "scholarship_name": "Need-based financial aid for international students (need-blind)", "level": "UG", "coverage_amount": "Aid covers full demonstrated need", "eligibility": "International applicants admitted need-blind", "english_requirement": "Competitive applicants: IELTS 7+ / TOEFL 5+ new scale (100 before 21 Jan 2026) / Duolingo 120 — required unless ≥2 years of school in English", "english_source": "https://admissions.yale.edu/standardized-testing", "session_year": "Fall 2027", "deadline": "2027-02-15", "source_url": "https://admissions.yale.edu/international", "source_domain": "admissions.yale.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "15 Feb is the regular-decision financial aid deadline; check the admission deadline separately", "apply_url": "https://admissions.yale.edu/requirements"}, {"country": "United States", "provider": "Princeton University", "provider_type": "private", "scholarship_name": "Need-based financial aid for international students (need-blind)", "level": "UG", "coverage_amount": "Meets full demonstrated need with grants", "eligibility": "International applicants admitted need-blind", "english_requirement": "TOEFL / IELTS Academic / Duolingo / PTE Academic required unless English is native or ≥3 years at an English-medium secondary school (no minimum stated)", "english_source": "https://admission.princeton.edu/apply/international-students", "session_year": "Fall 2027", "deadline": "", "source_url": "https://admission.princeton.edu/cost-aid", "source_domain": "admission.princeton.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Regular decision deadline not found in source snippet", "apply_url": "https://admission.princeton.edu/apply/application-checklist"}, {"country": "United States", "provider": "Dartmouth College", "provider_type": "private", "scholarship_name": "Need-based financial aid for international students (need-blind)", "level": "UG", "coverage_amount": "Not stated in source snippet", "eligibility": "Need-blind admission extended to all international citizens", "english_requirement": "No minimum; successful applicants typically IELTS >7 / Duolingo >135 / TOEFL 5+ new scale (>100 old)", "english_source": "https://admissions.dartmouth.edu/glossary-question/if-english-not-my-first-language-am-i-required-submit-language-proficiency-test", "session_year": "Fall 2027", "deadline": "", "source_url": "https://financialaid.dartmouth.edu/apply-aid/international-students", "source_domain": "financialaid.dartmouth.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Deadlines not found in source snippet", "apply_url": "https://financialaid.dartmouth.edu/apply-aid/international-students"}];

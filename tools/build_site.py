@@ -11,6 +11,7 @@ import shutil
 import sys
 
 from build_preview import CONTINENTS, COUNTRIES, ROOT, load_rows, render
+from site_extra import FOOTER, NAV_CSS, PAGE_CSS, about_body, deadlines_body, nav, privacy_body, search_body
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -47,12 +48,12 @@ def country_page(slug, updated):
     # <title> and the claude-only meta come from page(); keep fonts and styles.
     head = "\n".join(l for l in head.splitlines() if not l.startswith(("<title>", '<meta name="claude:')))
     cont = slug.split("/")[0]
-    nav = f'<nav class="crumbs"><a href="/">হোম</a> / <a href="/{cont}/">{CONTINENTS[cont][1]}</a></nav>'
-    body = '<div class="wrap">\n' + nav + body
+    crumbs = f'<nav class="crumbs"><a href="/">হোম</a> / <a href="/{cont}/">{CONTINENTS[cont][1]}</a></nav>'
+    body = '<div class="wrap">\n' + nav() + crumbs + body
     # The repo-maintenance footer is for the preview pages only.
     start = body.index("<footer>")
-    body = body[:start] + '<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>' + body[body.index("</footer>") + 9:]
-    head += "\n<style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>"
+    body = body[:start] + FOOTER + body[body.index("</footer>") + 9:]
+    head += "\n" + NAV_CSS + "\n<style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>"
     name_en, title, heading = COUNTRIES[slug]
     desc = f"{heading}: এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।"
     return page(f"{title} | Higher Study Info", desc, f"/{slug}/", head, body)
@@ -100,7 +101,7 @@ h2{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.3;mar
 .meta{font-size:14px;color:var(--muted)} .meta b{color:var(--accent);font-variant-numeric:tabular-nums}
 .crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}
 .notice{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
-</style>"""
+</style>""" + NAV_CSS + PAGE_CSS
 NOTICE = '<p class="notice">তথ্য অফিসিয়াল সাইট থেকে সংগ্রহ করা, তবে আবেদনের আগে প্রতিটি স্কলারশিপের সোর্স লিংক খুলে টাকা, শর্ত আর শেষ তারিখ মিলিয়ে নিন।</p>'
 
 
@@ -121,6 +122,7 @@ def home_page(updated):
     all_rows = [r for s in COUNTRIES for r in load_rows(s)]
     upcoming = sum(1 for r in all_rows if r.get("deadline") and r["deadline"] >= updated)
     body = f"""<div class="wrap">
+{nav("/")}
 <header class="hero">
   <div class="hero-text">
     <span class="eyebrow">Higher Study Info · সর্বশেষ আপডেট {updated}</span>
@@ -138,6 +140,7 @@ def home_page(updated):
 </header>
 {chr(10).join(sections)}
 {NOTICE}
+{FOOTER}
 </div>"""
     return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC, ইউরোপ, আমেরিকা, ওশেনিয়া ও আফ্রিকার দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
 
@@ -146,6 +149,7 @@ def continent_page(cont, updated):
     en, bn, bn_of = CONTINENTS[cont]
     cards = "\n".join(card(s, updated) for s in slugs_in(cont))
     body = f"""<div class="wrap">
+{nav()}
 <nav class="crumbs"><a href="/">হোম</a></nav>
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">{en} · সর্বশেষ আপডেট {updated}</span>
@@ -155,6 +159,7 @@ def continent_page(cont, updated):
 {cards}
 </div>
 {NOTICE}
+{FOOTER}
 </div>"""
     return page(f"{bn_of} স্কলারশিপ | Higher Study Info", f"{bn_of} দেশগুলোতে এখন চালু ও আসন্ন স্কলারশিপের তালিকা।", f"/{cont}/", LIST_HEAD, body)
 
@@ -185,10 +190,19 @@ def main():
     for slug in COUNTRIES:
         (OUT / slug).mkdir(parents=True)
         (OUT / slug / "index.html").write_text(country_page(slug, updated), encoding="utf-8")
+    extra = {
+        "deadlines": ("শেষ তারিখ সামনে | Higher Study Info", "সব দেশের স্কলারশিপ শেষ তারিখ অনুযায়ী সাজানো, আবেদনের লিংকসহ।", deadlines_body),
+        "search": ("সব স্কলারশিপ খুঁজুন | Higher Study Info", "সব দেশের স্কলারশিপ এক জায়গায় খুঁজুন: দেশ, লেভেল, IELTS আর শেষ তারিখ দিয়ে।", search_body),
+        "about": ("আমাদের সম্পর্কে | Higher Study Info", "Higher Study Info কী, তথ্য কোথা থেকে আসে আর কীভাবে আপডেট হয়।", about_body),
+        "privacy": ("Privacy Policy | Higher Study Info", "higherstudyinfo.com-এর Privacy Policy: Google Analytics ও কুকি।", privacy_body),
+    }
+    for name, (title, desc, body_fn) in extra.items():
+        (OUT / name).mkdir()
+        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD, body_fn(updated)), encoding="utf-8")
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
+    urls = ["/", "/deadlines/", "/search/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{updated}</lastmod></url>\n" for u in urls)

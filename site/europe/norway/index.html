@@ -85,11 +85,21 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
+<style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
 <style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>
 </head>
 <body>
 <div class="wrap">
-<nav class="crumbs"><a href="/">হোম</a> / <a href="/europe/">ইউরোপ</a></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/europe/">ইউরোপ</a></nav>
 <header>
   <div class="eyebrow"><span class="dot"></span>Norway · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
   <h1>নরওয়ের স্কলারশিপ</h1>
@@ -106,7 +116,7 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
 const DATA = [{"country": "Norway", "provider": "NTNU – Department of Marine Technology (A. Wilhelmsen Foundation)", "provider_type": "private", "scholarship_name": "A. Wilhelmsen Foundation scholarship (MSc Marine Technology)", "level": "PG", "coverage_amount": "NOK 100,000 per year for 5 students from outside Europe", "eligibility": "Admitted to MSN1 programme; scholarship letter requested after admission", "english_requirement": "TOEFL iBT 90 (4.5 new scale) / IELTS above 6.0 (programme pages: 6.5)", "english_source": "https://www.ntnu.edu/studies/admissions/languagereq", "session_year": "Autumn 2027", "deadline": "2026-12-01", "source_url": "https://www.ntnu.edu/imt/scolarship", "source_domain": "ntnu.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "1 Dec 2026 is NTNU's non-EU application deadline; NTNU/UiO have no tuition-covering scholarships", "apply_url": "https://www.ntnu.edu/studies/imp/how_to_apply"}];
