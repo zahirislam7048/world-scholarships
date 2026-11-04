@@ -81,6 +81,13 @@ body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px
 .wrap{max-width:1080px;margin:0 auto;padding-block:40px 56px;display:flex;flex-direction:column;gap:28px}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:0;text-wrap:balance}
 .lede{color:var(--muted);max-width:62ch;margin:0}
+.hero{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px}
+.hero-text{display:flex;flex-direction:column;gap:10px;flex:1 1 420px;min-width:0}
+.total{flex:0 0 auto;display:flex;flex-direction:column;gap:2px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.total b{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,56px);line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.total>span{font-size:15px;font-weight:600}
+.total ul{list-style:none;margin:8px 0 0;padding:8px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted)}
+.total strong{color:var(--fg);font-variant-numeric:tabular-nums}
 .continent{display:flex;flex-direction:column;gap:12px}
 .continent h3{font-family:var(--display);font-weight:700;font-size:24px;margin:0;display:flex;align-items:baseline;gap:10px}
 .continent h3 a{color:inherit;text-decoration:none}.continent h3 a:hover{color:var(--accent)}
@@ -111,11 +118,23 @@ def home_page(updated):
 {cards}
 </div>
 </section>""")
+    all_rows = [r for s in COUNTRIES for r in load_rows(s)]
+    upcoming = sum(1 for r in all_rows if r.get("deadline") and r["deadline"] >= updated)
     body = f"""<div class="wrap">
-<header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">Higher Study Info · সর্বশেষ আপডেট {updated}</span>
-  <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
-  <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
+<header class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">Higher Study Info · সর্বশেষ আপডেট {updated}</span>
+    <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
+    <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
+  </div>
+  <aside class="total" aria-label="মোট স্কলারশিপ">
+    <b>{len(all_rows)}</b>
+    <span>মোট স্কলারশিপ</span>
+    <ul>
+      <li><strong>{len(COUNTRIES)}</strong> দেশ/প্রোগ্রাম</li>
+      <li><strong>{upcoming}</strong>টির শেষ তারিখ সামনে</li>
+    </ul>
+  </aside>
 </header>
 {chr(10).join(sections)}
 {NOTICE}
