@@ -1,16 +1,22 @@
-name: Deploy site to cPanel
+name: Build site into deploy branch
+
+# Builds site/ and commits it to the `deploy` branch, which cPanel's
+# Git Version Control pulls from (see DEPLOY.md).
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: deploy
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,12 +24,23 @@ jobs:
       - name: Build site
         run: python3 tools/build_site.py
 
-      - name: Upload to cPanel over FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
-          local-dir: ./site/
-          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+      - name: Commit to deploy branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code origin deploy >/dev/null; then
+            git fetch --depth 1 origin deploy
+            git worktree add -B deploy out origin/deploy
+          else
+            git worktree add --orphan -b deploy out
+          fi
+          find out -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R site/. out/
+          cd out
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Site unchanged"
+          else
+            git commit -q -m "Build site from ${GITHUB_SHA::7}"
+            git push origin deploy
+          fi
