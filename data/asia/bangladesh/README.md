@@ -24,4 +24,6 @@ The collecting session cannot open `.gov.bd` or university sites directly (netwo
 | session_year | academic/fiscal year or semester the source refers to |
 | deadline | application deadline (YYYY-MM-DD) when the source gives one |
 | collected_on | date the record was added or last changed |
+| english_requirement | IELTS/TOEFL/other English rule as the official source states it; blank for domestic Bangladeshi scholarships |
+| english_source | official page the English rule comes from |
 | notes | conflicts between sources, outdated pages, etc. |

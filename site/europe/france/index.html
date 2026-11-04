@@ -95,7 +95,7 @@ footer{font-size:13px;color:var(--muted)}
 </header>
 <section class="stats" id="stats"></section>
 <div class="bar">
-  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয় বা শর্ত দিয়ে খুঁজুন" aria-label="খুঁজুন">
+  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয়, শর্ত বা IELTS দিয়ে খুঁজুন" aria-label="খুঁজুন">
   <div class="chips" id="chips" role="group" aria-label="প্রতিষ্ঠানের ধরন"></div>
   <select id="lvl" aria-label="লেভেল">
     <option value="">সব লেভেল</option><option value="UG">স্নাতক (UG)</option><option value="PG">স্নাতকোত্তর / Masters</option><option value="PhD">PhD / Postdoc</option><option value="School">স্কুল / কলেজ</option>
@@ -106,7 +106,7 @@ footer{font-size:13px;color:var(--muted)}
 <footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "France", "provider": "Campus France", "provider_type": "government", "scholarship_name": "France Excellence Eiffel Scholarship", "level": "PG / PhD", "coverage_amount": "Not stated in source snippet", "eligibility": "Master's ≤29, PhD ≤35; apply through a French institution only", "session_year": "2027", "deadline": "2027-01-06", "source_url": "https://www.campusfrance.org/en/actu/call-for-france-excellence-eiffel-applications-2027", "source_domain": "campusfrance.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Deadline is for institutions; ask your institution for its earlier internal deadline. Results from 12 Apr 2027"}];
+const DATA = [{"country": "France", "provider": "Campus France", "provider_type": "government", "scholarship_name": "France Excellence Eiffel Scholarship", "level": "PG / PhD", "coverage_amount": "Not stated in source snippet", "eligibility": "Master's ≤29, PhD ≤35; apply through a French institution only", "english_requirement": "Set by the host programme (French-taught programmes usually B2 French)", "english_source": "https://www.campusfrance.org/en/the-france-excellence-eiffel-scholarship-program", "session_year": "2027", "deadline": "2027-01-06", "source_url": "https://www.campusfrance.org/en/actu/call-for-france-excellence-eiffel-applications-2027", "source_domain": "campusfrance.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Deadline is for institutions; ask your institution for its earlier internal deadline. Results from 12 Apr 2027"}];
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -135,7 +135,7 @@ function chips(){
 function render(){
   const q = state.q.toLowerCase();
   const rows = DATA.filter(d=>(!state.type||d.provider_type===state.type)&&lvlMatch(d.level,state.lvl)&&
-    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.notes].join(" ").toLowerCase().includes(q)));
+    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.english_requirement,d.notes].join(" ").toLowerCase().includes(q)));
   document.getElementById("count").textContent = `${bn(rows.length)}টি দেখানো হচ্ছে`;
   const g = document.getElementById("grid");
   if(!rows.length){g.innerHTML=`<p class="empty">এই ফিল্টারে কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>`;return}
@@ -146,6 +146,7 @@ function render(){
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}
+      ${d.english_requirement?`<dt>IELTS / English</dt><dd>${esc(d.english_requirement)}${d.english_source?` <a class="src" href="${esc(d.english_source)}" target="_blank" rel="noopener">সূত্র ↗</a>`:""}</dd>`:""}
       <dt>সেশন</dt><dd>${esc(d.session_year)}</dd>
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>

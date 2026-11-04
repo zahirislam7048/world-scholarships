@@ -120,7 +120,7 @@ def home_page(updated):
 {chr(10).join(sections)}
 {NOTICE}
 </div>"""
-    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া ও ইউরোপের দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
+    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC ও ইউরোপের দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
 
 
 def continent_page(cont, updated):
@@ -149,7 +149,10 @@ def redirect_page(target):
 
 
 # Pages that moved when the site was grouped by continent.
-REDIRECTS = {"bangladesh": "/asia/bangladesh/", "italy": "/europe/italy/", "erasmus-mundus": "/europe/erasmus-mundus/"}
+REDIRECTS = {
+    "bangladesh": "/asia/bangladesh/", "italy": "/europe/italy/", "erasmus-mundus": "/europe/erasmus-mundus/",
+    "asia/saudi-arabia": "/gcc/saudi-arabia/", "asia/uae": "/gcc/uae/", "asia/qatar": "/gcc/qatar/",
+}
 
 
 def main():
@@ -164,7 +167,7 @@ def main():
         (OUT / slug).mkdir(parents=True)
         (OUT / slug / "index.html").write_text(country_page(slug, updated), encoding="utf-8")
     for old, target in REDIRECTS.items():
-        (OUT / old).mkdir()
+        (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
     urls = ["/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
     (OUT / "sitemap.xml").write_text(

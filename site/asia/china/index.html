@@ -95,7 +95,7 @@ footer{font-size:13px;color:var(--muted)}
 </header>
 <section class="stats" id="stats"></section>
 <div class="bar">
-  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয় বা শর্ত দিয়ে খুঁজুন" aria-label="খুঁজুন">
+  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয়, শর্ত বা IELTS দিয়ে খুঁজুন" aria-label="খুঁজুন">
   <div class="chips" id="chips" role="group" aria-label="প্রতিষ্ঠানের ধরন"></div>
   <select id="lvl" aria-label="লেভেল">
     <option value="">সব লেভেল</option><option value="UG">স্নাতক (UG)</option><option value="PG">স্নাতকোত্তর / Masters</option><option value="PhD">PhD / Postdoc</option><option value="School">স্কুল / কলেজ</option>
@@ -106,7 +106,7 @@ footer{font-size:13px;color:var(--muted)}
 <footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "China", "provider": "Tsinghua University", "provider_type": "public", "scholarship_name": "Chinese Government Scholarship (Type B) – Tsinghua graduate programs", "level": "PG / PhD", "coverage_amount": "Chinese Government Scholarship (CSC)", "eligibility": "International graduate applicants; apply in Round 1 for scholarship", "session_year": "2027 intake", "deadline": "2026-12-15", "source_url": "https://yz.tsinghua.edu.cn/en/info/1027/1117.htm", "source_domain": "yz.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Round 1 closes 15 Dec 2026 17:00; Round 2 1 Jan–27 Feb 2027"}, {"country": "China", "provider": "Tsinghua Shenzhen International Graduate School", "provider_type": "public", "scholarship_name": "SIGS scholarships for international students", "level": "PG / PhD", "coverage_amount": "Scholarships (see Financial Support page)", "eligibility": "Scholarship applicants should submit by December 2026", "session_year": "2027 intake", "deadline": "2026-12-31", "source_url": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm", "source_domain": "sigs.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Admission open until 15 May 2027; Dec 2026 is the recommended date for scholarship applicants"}];
+const DATA = [{"country": "China", "provider": "Tsinghua University", "provider_type": "public", "scholarship_name": "Chinese Government Scholarship (Type B) – Tsinghua graduate programs", "level": "PG / PhD", "coverage_amount": "Chinese Government Scholarship (CSC)", "eligibility": "International graduate applicants; apply in Round 1 for scholarship", "english_requirement": "IELTS 6.5 / TOEFL iBT 80 for English-taught programmes; waiver for full-time English-taught bachelor's", "english_source": "https://yz.tsinghua.edu.cn/en/info/1014/1121.htm", "session_year": "2027 intake", "deadline": "2026-12-15", "source_url": "https://yz.tsinghua.edu.cn/en/info/1027/1117.htm", "source_domain": "yz.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Round 1 closes 15 Dec 2026 17:00; Round 2 1 Jan–27 Feb 2027"}, {"country": "China", "provider": "Tsinghua Shenzhen International Graduate School", "provider_type": "public", "scholarship_name": "SIGS scholarships for international students", "level": "PG / PhD", "coverage_amount": "Scholarships (see Financial Support page)", "eligibility": "Scholarship applicants should submit by December 2026", "english_requirement": "IELTS 6.5 / TOEFL iBT 85 (2027 notice); English-taught degree may get a waiver", "english_source": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm", "session_year": "2027 intake", "deadline": "2026-12-31", "source_url": "https://www.sigs.tsinghua.edu.cn/en/2026/0917/c7519a293346/page.htm", "source_domain": "sigs.tsinghua.edu.cn", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Admission open until 15 May 2027; Dec 2026 is the recommended date for scholarship applicants"}];
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -135,7 +135,7 @@ function chips(){
 function render(){
   const q = state.q.toLowerCase();
   const rows = DATA.filter(d=>(!state.type||d.provider_type===state.type)&&lvlMatch(d.level,state.lvl)&&
-    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.notes].join(" ").toLowerCase().includes(q)));
+    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.english_requirement,d.notes].join(" ").toLowerCase().includes(q)));
   document.getElementById("count").textContent = `${bn(rows.length)}টি দেখানো হচ্ছে`;
   const g = document.getElementById("grid");
   if(!rows.length){g.innerHTML=`<p class="empty">এই ফিল্টারে কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>`;return}
@@ -146,6 +146,7 @@ function render(){
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}
+      ${d.english_requirement?`<dt>IELTS / English</dt><dd>${esc(d.english_requirement)}${d.english_source?` <a class="src" href="${esc(d.english_source)}" target="_blank" rel="noopener">সূত্র ↗</a>`:""}</dd>`:""}
       <dt>সেশন</dt><dd>${esc(d.session_year)}</dd>
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>

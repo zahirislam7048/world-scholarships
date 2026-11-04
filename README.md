@@ -2,7 +2,7 @@
 
 Country-by-country list of current and upcoming scholarships, each with a link to the official source. Expired items are removed.
 
-Data lives in `data/<continent>/<country>/scholarships.csv` (continents: `asia`, `europe`). The website groups them the same way: https://higherstudyinfo.com/asia/bangladesh/ etc.
+Data lives in `data/<section>/<country>/scholarships.csv` (sections: `asia`, `gcc`, `europe`). The website groups them the same way: https://higherstudyinfo.com/asia/bangladesh/ etc.
 
 | dataset | claude.ai preview |
 |---|---|
@@ -10,7 +10,7 @@ Data lives in `data/<continent>/<country>/scholarships.csv` (continents: `asia`,
 | `europe/italy` | https://claude.ai/artifact/2ZddPNekLNEboGyxecSmcW |
 | `europe/erasmus-mundus` | https://claude.ai/artifact/XqHK8BnRFMiq2p1b2qf89A |
 
-Other datasets (website only) — Asia: india, china, japan, south-korea, singapore, hong-kong, taiwan, thailand, saudi-arabia, uae, qatar; Europe: germany, united-kingdom, france, sweden, switzerland, netherlands, belgium, finland, austria. Countries still to add: [`data/asia/README.md`](data/asia/README.md), [`data/europe/README.md`](data/europe/README.md).
+Other datasets (website only) — Asia: india, china, japan, south-korea, singapore, hong-kong, taiwan, thailand; GCC: saudi-arabia, uae, qatar, kuwait, oman, bahrain; Europe: germany, united-kingdom, france, sweden, switzerland, netherlands, belgium, finland, austria. Countries still to add / watched: [`data/asia/README.md`](data/asia/README.md), [`data/gcc/README.md`](data/gcc/README.md), [`data/europe/README.md`](data/europe/README.md).
 
 A scheduled task updates every dataset once a week (Sunday 09:41 Asia/Dhaka).
 

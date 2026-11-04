@@ -11,7 +11,11 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ORDER = {"government": 0, "eu": 1, "consortium": 2, "public": 3, "private": 4, "international": 5}
 # "<continent>/<country>" -> (English name, page title, heading). Order is display order.
-CONTINENTS = {"asia": ("Asia", "এশিয়া", "এশিয়ার"), "europe": ("Europe", "ইউরোপ", "ইউরোপের")}
+CONTINENTS = {
+    "asia": ("Asia", "এশিয়া", "এশিয়ার"),
+    "gcc": ("GCC · Gulf", "GCC (উপসাগরীয় দেশ)", "GCC দেশগুলোর"),
+    "europe": ("Europe", "ইউরোপ", "ইউরোপের"),
+}
 COUNTRIES = {
     "asia/bangladesh": ("Bangladesh", "বাংলাদেশ স্কলারশিপ তালিকা", "বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার"),
     "asia/india": ("India", "ভারত স্কলারশিপ তালিকা", "ভারতের স্কলারশিপ"),
@@ -22,9 +26,12 @@ COUNTRIES = {
     "asia/hong-kong": ("Hong Kong", "হংকং স্কলারশিপ তালিকা", "হংকংয়ের স্কলারশিপ"),
     "asia/taiwan": ("Taiwan", "তাইওয়ান স্কলারশিপ তালিকা", "তাইওয়ানের স্কলারশিপ"),
     "asia/thailand": ("Thailand", "থাইল্যান্ড স্কলারশিপ তালিকা", "থাইল্যান্ডের স্কলারশিপ"),
-    "asia/saudi-arabia": ("Saudi Arabia", "সৌদি আরব স্কলারশিপ তালিকা", "সৌদি আরবের স্কলারশিপ"),
-    "asia/uae": ("United Arab Emirates", "সংযুক্ত আরব আমিরাত স্কলারশিপ তালিকা", "সংযুক্ত আরব আমিরাতের স্কলারশিপ"),
-    "asia/qatar": ("Qatar", "কাতার স্কলারশিপ তালিকা", "কাতারের স্কলারশিপ"),
+    "gcc/saudi-arabia": ("Saudi Arabia", "সৌদি আরব স্কলারশিপ তালিকা", "সৌদি আরবের স্কলারশিপ"),
+    "gcc/uae": ("United Arab Emirates", "সংযুক্ত আরব আমিরাত স্কলারশিপ তালিকা", "সংযুক্ত আরব আমিরাতের স্কলারশিপ"),
+    "gcc/qatar": ("Qatar", "কাতার স্কলারশিপ তালিকা", "কাতারের স্কলারশিপ"),
+    "gcc/kuwait": ("Kuwait", "কুয়েত স্কলারশিপ তালিকা", "কুয়েতের স্কলারশিপ"),
+    "gcc/oman": ("Oman", "ওমান স্কলারশিপ তালিকা", "ওমানের স্কলারশিপ"),
+    "gcc/bahrain": ("Bahrain", "বাহরাইন স্কলারশিপ তালিকা", "বাহরাইনের স্কলারশিপ"),
     "europe/italy": ("Italy", "ইতালি স্কলারশিপ তালিকা", "ইতালির স্কলারশিপ"),
     "europe/germany": ("Germany", "জার্মানি স্কলারশিপ তালিকা", "জার্মানির স্কলারশিপ"),
     "europe/united-kingdom": ("United Kingdom", "যুক্তরাজ্য স্কলারশিপ তালিকা", "যুক্তরাজ্যের স্কলারশিপ"),

@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://higherstudyinfo.com/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/asia/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/europe/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/asia/bangladesh/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/asia/india/</loc><lastmod>2026-11-04</lastmod></url>
@@ -12,9 +13,12 @@
   <url><loc>https://higherstudyinfo.com/asia/hong-kong/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/asia/taiwan/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/asia/thailand/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://higherstudyinfo.com/asia/saudi-arabia/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://higherstudyinfo.com/asia/uae/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://higherstudyinfo.com/asia/qatar/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/saudi-arabia/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/uae/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/qatar/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/kuwait/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/oman/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://higherstudyinfo.com/gcc/bahrain/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/europe/italy/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/europe/germany/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://higherstudyinfo.com/europe/united-kingdom/</loc><lastmod>2026-11-04</lastmod></url>

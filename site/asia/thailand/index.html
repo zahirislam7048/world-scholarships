@@ -95,7 +95,7 @@ footer{font-size:13px;color:var(--muted)}
 </header>
 <section class="stats" id="stats"></section>
 <div class="bar">
-  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয় বা শর্ত দিয়ে খুঁজুন" aria-label="খুঁজুন">
+  <input id="q" type="search" placeholder="নাম, বিশ্ববিদ্যালয়, শর্ত বা IELTS দিয়ে খুঁজুন" aria-label="খুঁজুন">
   <div class="chips" id="chips" role="group" aria-label="প্রতিষ্ঠানের ধরন"></div>
   <select id="lvl" aria-label="লেভেল">
     <option value="">সব লেভেল</option><option value="UG">স্নাতক (UG)</option><option value="PG">স্নাতকোত্তর / Masters</option><option value="PhD">PhD / Postdoc</option><option value="School">স্কুল / কলেজ</option>
@@ -106,7 +106,7 @@ footer{font-size:13px;color:var(--muted)}
 <footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "Thailand", "provider": "TICA – Ministry of Foreign Affairs", "provider_type": "government", "scholarship_name": "Thai International Postgraduate Programme (TIPP) 2027", "level": "PG", "coverage_amount": "Tuition, allowance (see guidelines)", "eligibility": "Nominated by the national focal point of an eligible country", "session_year": "2027", "deadline": "", "source_url": "https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233", "source_domain": "tica-thaigov.mfa.go.th", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Course list published; deadlines marked TBC"}];
+const DATA = [{"country": "Thailand", "provider": "TICA – Ministry of Foreign Affairs", "provider_type": "government", "scholarship_name": "Thai International Postgraduate Programme (TIPP) 2027", "level": "PG", "coverage_amount": "Tuition reimbursed by TICA (other benefits in guidelines)", "eligibility": "Nominated by the national focal point of an eligible country", "english_requirement": "Set by host university (examples: IELTS 5.0–6.0, TOEFL iBT 69–71); not needed if degree was taught in English", "english_source": "https://image.mfa.go.th/mfa/0/GH2PYnujXi/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/Guidelines_for_TIPP_2026.pdf", "session_year": "2027", "deadline": "", "source_url": "https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233", "source_domain": "tica-thaigov.mfa.go.th", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Course list published; deadlines marked TBC"}];
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -135,7 +135,7 @@ function chips(){
 function render(){
   const q = state.q.toLowerCase();
   const rows = DATA.filter(d=>(!state.type||d.provider_type===state.type)&&lvlMatch(d.level,state.lvl)&&
-    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.notes].join(" ").toLowerCase().includes(q)));
+    (!q||[d.provider,d.scholarship_name,d.eligibility,d.coverage_amount,d.english_requirement,d.notes].join(" ").toLowerCase().includes(q)));
   document.getElementById("count").textContent = `${bn(rows.length)}টি দেখানো হচ্ছে`;
   const g = document.getElementById("grid");
   if(!rows.length){g.innerHTML=`<p class="empty">এই ফিল্টারে কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>`;return}
@@ -146,6 +146,7 @@ function render(){
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}
+      ${d.english_requirement?`<dt>IELTS / English</dt><dd>${esc(d.english_requirement)}${d.english_source?` <a class="src" href="${esc(d.english_source)}" target="_blank" rel="noopener">সূত্র ↗</a>`:""}</dd>`:""}
       <dt>সেশন</dt><dd>${esc(d.session_year)}</dd>
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>
