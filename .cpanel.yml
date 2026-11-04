@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/cp -R bangladesh erasmus-mundus index.html italy robots.txt sitemap.xml $DEPLOYPATH
