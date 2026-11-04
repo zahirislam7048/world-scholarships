@@ -115,11 +115,6 @@ def main():
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{updated}</lastmod></url>\n" for u in urls)
         + "</urlset>\n", encoding="utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
-    # cPanel Git Version Control runs these tasks on "Deploy HEAD Commit".
-    entries = sorted(p.name for p in OUT.iterdir())
-    (OUT / ".cpanel.yml").write_text(
-        "---\ndeployment:\n  tasks:\n    - export DEPLOYPATH=$HOME/public_html/\n"
-        + f"    - /bin/cp -R {' '.join(entries)} $DEPLOYPATH\n", encoding="utf-8")
     print(f"site/ built: {len(urls)} pages")
 
 

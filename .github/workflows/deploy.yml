@@ -1,18 +1,20 @@
-name: Build site into deploy branch
+name: Build site
 
-# Builds site/ and commits it to the `deploy` branch, which cPanel's
-# Git Version Control pulls from (see DEPLOY.md).
+# Rebuilds site/ from the data and commits it to main. cPanel's Git Version
+# Control pulls main and .cpanel.yml copies site/ into public_html (see DEPLOY.md).
+# Pushes made with GITHUB_TOKEN do not trigger this workflow again.
 
 on:
   push:
     branches: [main]
+    paths-ignore: ["site/**"]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: deploy
+  group: build-site
   cancel-in-progress: false
 
 jobs:
@@ -24,23 +26,14 @@ jobs:
       - name: Build site
         run: python3 tools/build_site.py
 
-      - name: Commit to deploy branch
+      - name: Commit site/ to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git ls-remote --exit-code origin deploy >/dev/null; then
-            git fetch --depth 1 origin deploy
-            git worktree add -B deploy out origin/deploy
-          else
-            git worktree add --orphan -b deploy out
-          fi
-          find out -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -R site/. out/
-          cd out
-          git add -A
+          git add site
           if git diff --cached --quiet; then
             echo "Site unchanged"
           else
             git commit -q -m "Build site from ${GITHUB_SHA::7}"
-            git push origin deploy
+            git push origin HEAD:main
           fi
