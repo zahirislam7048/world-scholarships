@@ -27,3 +27,4 @@ The collecting session cannot open `.gov.bd` or university sites directly (netwo
 | english_requirement | IELTS/TOEFL/other English rule as the official source states it; blank for domestic Bangladeshi scholarships |
 | english_source | official page the English rule comes from |
 | notes | conflicts between sources, outdated pages, etc. |
+| apply_url | official application portal / how-to-apply page when found; otherwise the official scholarship page (same as source_url) |

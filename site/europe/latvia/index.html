@@ -79,6 +79,9 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .src{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
 .src:hover{text-decoration:underline}
 .status{font-size:12px;color:var(--muted)}
+.apply{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:var(--surface)}
+.apply.info{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.apply:hover{filter:brightness(1.08)}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
@@ -106,7 +109,7 @@ footer{font-size:13px;color:var(--muted)}
 <footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "Latvia", "provider": "State Education Development Agency (VIAA)", "provider_type": "government", "scholarship_name": "Latvian state scholarships for foreign students", "level": "UG / PG / research", "coverage_amount": "Not stated in source snippet", "eligibility": "Citizens of 40+ countries with bilateral agreements or reciprocal scholarships; max two terms per study cycle", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027/28", "deadline": "2027-04-01", "source_url": "https://www.viaa.gov.lv/en/latvian-state-scholarships", "source_domain": "viaa.gov.lv", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Next call 1 Feb – 1 Apr 2027; check your country is eligible"}];
+const DATA = [{"country": "Latvia", "provider": "State Education Development Agency (VIAA)", "provider_type": "government", "scholarship_name": "Latvian state scholarships for foreign students", "level": "UG / PG / research", "coverage_amount": "Not stated in source snippet", "eligibility": "Citizens of 40+ countries with bilateral agreements or reciprocal scholarships; max two terms per study cycle", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027/28", "deadline": "2027-04-01", "source_url": "https://www.viaa.gov.lv/en/latvian-state-scholarships", "source_domain": "viaa.gov.lv", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Next call 1 Feb – 1 Apr 2027; check your country is eligible", "apply_url": "https://www.viaa.gov.lv/en/latvian-state-scholarships"}];
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -151,6 +154,7 @@ function render(){
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>
     ${d.notes?`<div class="note">${esc(d.notes)}</div>`:""}
+    ${d.apply_url?(d.apply_url!==d.source_url?`<a class="apply" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদন করুন ↗</a>`:`<a class="apply info" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদনের তথ্য ↗</a>`):""}
     <div class="foot"><a class="src" href="${esc(d.source_url)}" target="_blank" rel="noopener">${esc(d.source_domain)} ↗</a><span class="status">যাচাই বাকি</span></div>
   </article>`).join("");
 }

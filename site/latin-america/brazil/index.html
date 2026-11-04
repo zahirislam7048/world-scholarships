@@ -79,6 +79,9 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .src{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
 .src:hover{text-decoration:underline}
 .status{font-size:12px;color:var(--muted)}
+.apply{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:var(--surface)}
+.apply.info{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.apply:hover{filter:brightness(1.08)}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 </style>
@@ -106,7 +109,7 @@ footer{font-size:13px;color:var(--muted)}
 <footer><a href="/">higherstudyinfo.com</a> · প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "Brazil", "provider": "CNPq / Ministry of Foreign Affairs", "provider_type": "government", "scholarship_name": "PEC-PG master's and doctoral scholarships (Chamada CNPq 16/2026)", "level": "PG / PhD", "coverage_amount": "Up to 100 master's + 100 doctoral; monthly stipend R$2,100 (MSc) / R$3,100 (PhD) per Itamaraty page; SUS health access; possible return airfare", "eligibility": "Nationals and residents of participating countries; apply to the Brazilian programmes selected (final list Dec 2026)", "english_requirement": "Portuguese: CELPE-Bras listed as requirement (some sources say it depends on the institution)", "english_source": "https://www.gov.br/mre/pt-br/assuntos/cultura-e-educacao/temas-educacionais/programas-de-estudo-para-estrangeiros/pec-pg-pos-graduacao-1/processo-seletivo", "session_year": "Start from March 2027", "deadline": "", "source_url": "https://www.gov.br/cnpq/pt-br/assuntos/defeso-eleitoral/programa-vai-investir-r-22-19-milhoes-em-bolsas-de-mestrado-e-doutorado-inscricoes-vao-ate-13-de-agosto", "source_domain": "gov.br", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Stipend values differ between sources; check whether your country participates"}];
+const DATA = [{"country": "Brazil", "provider": "CNPq / Ministry of Foreign Affairs", "provider_type": "government", "scholarship_name": "PEC-PG master's and doctoral scholarships (Chamada CNPq 16/2026)", "level": "PG / PhD", "coverage_amount": "Up to 100 master's + 100 doctoral; monthly stipend R$2,100 (MSc) / R$3,100 (PhD) per Itamaraty page; SUS health access; possible return airfare", "eligibility": "Nationals and residents of participating countries; apply to the Brazilian programmes selected (final list Dec 2026)", "english_requirement": "Portuguese: CELPE-Bras listed as requirement (some sources say it depends on the institution)", "english_source": "https://www.gov.br/mre/pt-br/assuntos/cultura-e-educacao/temas-educacionais/programas-de-estudo-para-estrangeiros/pec-pg-pos-graduacao-1/processo-seletivo", "session_year": "Start from March 2027", "deadline": "", "source_url": "https://www.gov.br/cnpq/pt-br/assuntos/defeso-eleitoral/programa-vai-investir-r-22-19-milhoes-em-bolsas-de-mestrado-e-doutorado-inscricoes-vao-ate-13-de-agosto", "source_domain": "gov.br", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Stipend values differ between sources; check whether your country participates", "apply_url": "https://www.gov.br/mre/pt-br/assuntos/cultura-e-educacao/temas-educacionais/programas-de-estudo-para-estrangeiros/pec-pg-pos-graduacao-1/processo-seletivo"}];
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -151,6 +154,7 @@ function render(){
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>
     ${d.notes?`<div class="note">${esc(d.notes)}</div>`:""}
+    ${d.apply_url?(d.apply_url!==d.source_url?`<a class="apply" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদন করুন ↗</a>`:`<a class="apply info" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদনের তথ্য ↗</a>`):""}
     <div class="foot"><a class="src" href="${esc(d.source_url)}" target="_blank" rel="noopener">${esc(d.source_domain)} ↗</a><span class="status">যাচাই বাকি</span></div>
   </article>`).join("");
 }
