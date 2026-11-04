@@ -1,4 +1,4 @@
-<title>বাংলাদেশ স্কলারশিপ তালিকা</title>
+<title>__TITLE__</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -47,7 +47,7 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,40px);lin
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .prov{font-size:13px;color:var(--muted);font-weight:500}
 .tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
-.t-government{color:var(--gov)}.t-public{color:var(--pub)}.t-private{color:var(--pri)}.t-international{color:var(--intl)}
+.t-government{color:var(--gov)}.t-public{color:var(--pub)}.t-private{color:var(--pri)}.t-international{color:var(--intl)}.t-eu{color:var(--pub)}.t-consortium{color:var(--intl)}
 h2{font-family:var(--display);font-weight:500;font-size:18px;line-height:1.3;margin:0;text-wrap:balance}
 .amt{font-weight:600;color:var(--accent)}
 dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
@@ -62,9 +62,9 @@ footer{font-size:13px;color:var(--muted)}
 </style>
 <div class="wrap">
 <header>
-  <div class="eyebrow"><span class="dot"></span>Bangladesh · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
-  <h1>বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার</h1>
-  <p class="lede">এখন চালু আছে বা সামনে আসছে এমন সরকারি ও বিশ্ববিদ্যালয়ের স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
+  <div class="eyebrow"><span class="dot"></span>__COUNTRY_EN__ · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
+  <h1>__HEADING__</h1>
+  <p class="lede">এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
   <p class="notice">সব তথ্য এখনো যাচাই বাকি। এগুলো অফিসিয়াল ডোমেইনের সার্চ ফলাফল থেকে নেওয়া, পেজ খুলে মেলানো হয়নি। আবেদনের আগে সোর্স লিংক খুলে টাকা, শর্ত আর সময় মিলিয়ে নিন।</p>
 </header>
 <section class="stats" id="stats"></section>
@@ -77,12 +77,13 @@ footer{font-size:13px;color:var(--muted)}
   <span class="count" id="count"></span>
 </div>
 <section class="grid" id="grid"></section>
-<footer>উৎস ফাইল: <span style="font-family:var(--mono)">data/scholarships/bangladesh/scholarships.csv</span>। কোনো তথ্য যাচাই হলে CSV-তে verification_status বদলে <code>verified</code> করুন।</footer>
+<footer>উৎস ফাইল: <span style="font-family:var(--mono)">data/__SLUG__/scholarships.csv</span>। কোনো তথ্য যাচাই হলে CSV-তে verification_status বদলে <code>verified</code> করুন।</footer>
 </div>
 <script>
 const DATA = __DATA__;
 const UPDATED = "__UPDATED__";
-const TYPES = {government:"সরকারি",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
+const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
+const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
 const bn = n => String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const state = {type:"", q:"", lvl:""};
@@ -94,9 +95,9 @@ function lvlMatch(l, f){
   if(f==="School") return /Secondary|HSC|Degree/.test(l);
 }
 function stats(){
-  const unis = new Set(DATA.filter(d=>d.provider_type!=="government").map(d=>d.provider)).size;
   const c = t => DATA.filter(d=>d.provider_type===t).length;
-  const items = [[DATA.length,"মোট রেকর্ড"],[c("government"),"সরকারি প্রোগ্রাম"],[unis,"বিশ্ববিদ্যালয়"],[new Set(DATA.filter(d=>d.provider_type==="public").map(d=>d.provider)).size,"পাবলিক"],[new Set(DATA.filter(d=>d.provider_type==="private").map(d=>d.provider)).size,"প্রাইভেট"]];
+  const prov = t => new Set(DATA.filter(d=>d.provider_type===t).map(d=>d.provider)).size;
+  const items = [[DATA.length,"মোট রেকর্ড"],[new Set(DATA.map(d=>d.provider)).size,"প্রতিষ্ঠান"],...Object.entries(TYPES).map(([k,l])=>[prov(k),l])];
   document.getElementById("stats").innerHTML = items.map(([n,l])=>`<div class="stat"><b>${bn(n)}</b><span>${l}</span></div>`).join("");
 }
 function chips(){

@@ -2,7 +2,7 @@
 
 `scholarships.csv` lists scholarships that are open, upcoming, or standing policies. Expired items are removed. A scheduled task updates it once a week.
 
-Preview page: https://claude.ai/artifact/GHhrqtV9tbHzor4g3BAsZ5 (rebuilt with `python3 data/bangladesh/build_preview.py <out.html> [YYYY-MM-DD]`).
+Preview page: https://claude.ai/artifact/GHhrqtV9tbHzor4g3BAsZ5 (rebuilt with `python3 tools/build_preview.py bangladesh <out.html> [YYYY-MM-DD]`).
 
 ## How it is collected
 
@@ -19,7 +19,7 @@ The collecting session cannot open `.gov.bd` or university sites directly (netwo
 
 | column | meaning |
 |---|---|
-| provider_type | `government`, `public`, `private`, `international` |
+| provider_type | `government`, `eu`, `consortium`, `public`, `private`, `international` |
 | coverage_amount | waiver % or stipend amount as stated by the source |
 | session_year | academic/fiscal year or semester the source refers to |
 | deadline | application deadline (YYYY-MM-DD) when the source gives one |
