@@ -297,18 +297,26 @@ table.t{border-collapse:collapse;font-size:14px;min-width:420px}
 table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 table.t th{font-weight:600;color:var(--muted)}
 .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
-.calc label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.calc label{display:flex;flex-direction:column;justify-content:space-between;gap:4px;font-size:14px;color:var(--muted)}
 .calc input{font:inherit;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
 .out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .out div{padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
 .out b{display:block;font-family:var(--display);font-size:32px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
 .out span{font-size:13px;color:var(--muted)}
+.vcard{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;scroll-margin-top:16px}
+.vcard h2{margin:0}.vcard h2 small{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-left:6px}
+.vcard table.t{min-width:0;width:100%}.vcard table.t th{width:30%;min-width:110px}
+.vlinks{margin:0}.vlinks .apply{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:var(--surface)}
+.vsrc{font-size:13px;color:var(--muted);margin:0}
 </style>"""
 
 GUIDES = [
     ("/guides/documents/", "📄 কাগজপত্র ও সত্যায়ন", "বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।"),
     ("/guides/english-tests/", "🗣️ IELTS, TOEFL, Duolingo, PTE", "বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।"),
     ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
+    ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
+    ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
+    ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
 ]
 
 
@@ -458,6 +466,191 @@ def cgpa_body(updated):
       ("uni-assist — FAQs (grade conversion)", "https://www.uni-assist.de/en/faqs/get-information/"),
       ("BUET CSE — Undergraduate academic evaluation (grading table)", "https://cse.buet.ac.bd/academics/ug_eval"),
   ])}
+</article>
+{FOOTER}
+</div>
+{script}"""
+
+
+# ---------------------------------------------------------------- visa, tuition, budget
+# Every figure below comes from the official page cited next to it (checked 2026-11-04).
+VISA = [
+    {"c": "Germany", "bn": "জার্মানি", "visa": "National Visa (Study)",
+     "funds": "ব্লকড অ্যাকাউন্টে বছরে অন্তত €11,904 (মাসে €992 তোলা যায়) — বা স্কলারশিপ, ব্যাংক গ্যারান্টি, Verpflichtungserklärung",
+     "work": "বছরে 140 পূর্ণ দিন বা 280 অর্ধ দিন (Federal Employment Agency-র অনুমতি ছাড়া); বিশ্ববিদ্যালয়ের সহকারী-কাজ এর বাইরে",
+     "post": "", "fee": "",
+     "apply": ("German Embassy Dhaka — Study visa", "https://dhaka.diplo.de/bd-en/service/2685884-2685884"),
+     "src": [("German Embassy Dhaka — Study visa checklist (June 2026)", "https://dhaka.diplo.de/resource/blob/2685888/1826aadb06dfc6b0224e91583b6836cb/p-01-checklist-students-data.pdf"),
+             ("DAAD — Side jobs", "https://www.daad.de/en/studying-in-germany/work-career/side-jobs/")]},
+    {"c": "United Kingdom", "bn": "যুক্তরাজ্য", "visa": "Student visa",
+     "funds": "লন্ডনে মাসে £1,483, লন্ডনের বাইরে মাসে £1,136 (সর্বোচ্চ 9 মাস) + প্রথম বছরের বাকি টিউশন; টাকা টানা 28 দিন অ্যাকাউন্টে থাকতে হবে",
+     "work": "ডিগ্রি-লেভেল ফুল-টাইম কোর্সে টার্মে সপ্তাহে 20 ঘণ্টা, ছুটিতে ফুল-টাইম",
+     "post": "Graduate visa: 31 Dec 2026 পর্যন্ত আবেদনে 2 বছর, 1 Jan 2027 থেকে 18 মাস; PhD হলে 3 বছর",
+     "fee": "বাইরে থেকে আবেদন £558 (gov.uk-এ বর্তমান ফি দেখে নিন)",
+     "apply": ("GOV.UK — Student visa", "https://www.gov.uk/student-visa"),
+     "src": [("GOV.UK — Financial evidence for Student visa", "https://www.gov.uk/guidance/financial-evidence-for-student-and-child-student-route-applicants"),
+             ("GOV.UK — Immigration Rules Appendix Student", "https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-student"),
+             ("GOV.UK — Graduate visa", "https://www.gov.uk/graduate-visa")]},
+    {"c": "United States", "bn": "যুক্তরাষ্ট্র", "visa": "F-1 student visa",
+     "funds": "নির্দিষ্ট জাতীয় অঙ্ক নেই — বিশ্ববিদ্যালয়ের I-20-তে লেখা মোট খরচ দেখাতে হয়",
+     "work": "ক্লাস চলাকালীন ক্যাম্পাসে সপ্তাহে সর্বোচ্চ 20 ঘণ্টা",
+     "post": "", "fee": "ভিসা (MRV) ফি $185 + SEVIS I-901 ফি $350",
+     "apply": ("U.S. Embassy Dhaka", "https://bd.usembassy.gov/"),
+     "src": [("travel.state.gov — Student visa", "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html"),
+             ("ICE — I-901 SEVIS fee", "https://www.ice.gov/sevis/i901"),
+             ("Study in the States — Working in the US", "https://studyinthestates.dhs.gov/students/work/working-in-the-united-states")]},
+    {"c": "Canada", "bn": "কানাডা", "visa": "Study permit",
+     "funds": "একক আবেদনকারী: জীবনযাত্রার জন্য CAD 22,895 (1 Sep 2025 থেকে) + প্রথম বছরের টিউশন + যাতায়াত",
+     "work": "ক্যাম্পাসের বাইরে টার্মে সপ্তাহে 24 ঘণ্টা; নির্ধারিত ছুটিতে সীমাহীন",
+     "post": "", "fee": "",
+     "apply": ("IRCC — Study permit", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html"),
+     "src": [("IRCC — International students (CIMM, Apr 2026)", "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/committees/cimm-apr-22-2026/international-students.html"),
+             ("IRCC — Work off campus", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-off-campus.html")]},
+    {"c": "Australia", "bn": "অস্ট্রেলিয়া", "visa": "Student visa (subclass 500)",
+     "funds": "AUD 29,710 (12 মাসের জীবনযাত্রা) + প্রথম 12 মাসের কোর্স ফি + যাতায়াত; অথবা বার্ষিক আয় অন্তত AUD 60,000",
+     "work": "", "post": "", "fee": "",
+     "apply": ("Home Affairs — Student visa", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/changes-to-student-visa-application-rules-500-590"),
+     "src": [("Study Australia — Change to evidence of financial capacity", "https://www.studyaustralia.gov.au/en_in/tools-and-resources/news/change-to-evidence-of-financial-capacity-for-student-visas"),
+             ("Home Affairs — Financial capacity evidence", "https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0185.aspx")]},
+    {"c": "Italy", "bn": "ইতালি", "visa": "Study visa (type D)",
+     "funds": "বছরে €10,179.85 (মাসে প্রায় €848) — কিছু কনস্যুলেট ফেরার খরচও (প্রায় €500) চায়",
+     "work": "", "post": "", "fee": "",
+     "apply": ("Universitaly — pre-enrolment", "https://www.universitaly.it/"),
+     "src": [("Italian Consulate — Study visa checklist 2026/2027", "https://consdubai.esteri.it/wp-content/uploads/2026/05/StudyVisa_2026_2027.pdf")]},
+    {"c": "Japan", "bn": "জাপান", "visa": "Student (College Student)",
+     "funds": "",
+     "work": "অনুমতি নিয়ে সপ্তাহে 28 ঘণ্টা (দীর্ঘ ছুটিতে দিনে 8 ঘণ্টা); অনুমতি বিমানবন্দরেই নেওয়া যায়",
+     "post": "", "fee": "",
+     "apply": ("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
+     "src": [("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/")]},
+    {"c": "South Korea", "bn": "দক্ষিণ কোরিয়া", "visa": "D-2 student visa",
+     "funds": "মাসে অন্তত KRW 900,000 × 6 মাস = প্রায় KRW 5,400,000",
+     "work": "অনুমতি নিয়ে স্নাতকে সপ্তাহে 30, স্নাতকোত্তরে 35 ঘণ্টা (সূত্রভেদে আলাদা — বিশ্ববিদ্যালয়ে জেনে নিন); সাধারণত কোরিয়ান ভাষার দক্ষতা লাগে",
+     "post": "", "fee": "",
+     "apply": ("Study in Korea — Visa and stay", "https://www.studyinkorea.go.kr/ko/plan/visaAndStay.do"),
+     "src": [("Study in Korea — Residence and stay", "https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do")]},
+    {"c": "Malaysia", "bn": "মালয়েশিয়া", "visa": "Student Pass (EMGS-এর মাধ্যমে)",
+     "funds": "",
+     "work": "অনুমোদিত জায়গায় সপ্তাহে 20 ঘণ্টা — EMGS বলে শুধু 7 দিনের বেশি ছুটিতে, Immigration বলে পড়ার সময়েও; প্রতিষ্ঠানে জেনে নিন",
+     "post": "", "fee": "Student Pass RM60/বছর + ভিসা ফি (দেশভেদে, সর্বোচ্চ RM50) + EMGS প্রসেসিং ফি",
+     "apply": ("EMGS — Student Pass", "https://visa.educationmalaysia.gov.my/"),
+     "src": [("Immigration Malaysia — Student Pass", "https://www.imi.gov.my/index.php/en/main-services/pass/student-pass/"),
+             ("EMGS — FAQ", "https://educationmalaysia.gov.my/get-in-touch/faq")]},
+]
+
+
+def visa_body(updated):
+    blocks = []
+    for v in VISA:
+        rows = "".join(f"<tr><th>{k}</th><td>{html.escape(v[f])}</td></tr>" for k, f in
+                       [("ভিসা", "visa"), ("কত টাকা দেখাতে হয়", "funds"), ("পড়ার সময় কাজ", "work"),
+                        ("পড়া শেষে কাজের ভিসা", "post"), ("ভিসা ফি", "fee")] if v[f])
+        src = " · ".join(f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a>' for t, u in v["src"])
+        blocks.append(f"""<section class="vcard" id="{v['c'].lower().replace(' ', '-')}">
+  <h2>{v['bn']} <small>{v['c']}</small></h2>
+  <div class="tbl-wrap"><table class="t">{rows}</table></div>
+  <p class="vlinks"><a class="apply" href="{html.escape(v['apply'][1])}" target="_blank" rel="noopener">{html.escape(v['apply'][0])} ↗</a></p>
+  <p class="vsrc">সূত্র: {src}</p>
+</section>""")
+    toc = " · ".join(f'<a href="#{v["c"].lower().replace(" ", "-")}">{v["bn"]}</a>' for v in VISA)
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <h1>স্টুডেন্ট ভিসা — দেশভিত্তিক</h1>
+  <p class="lede" style="max-width:68ch">প্রতিটি দেশের স্টুডেন্ট ভিসায় কত টাকা দেখাতে হয়, পড়ার সময় কত ঘণ্টা কাজ করা যায়, আর কোথায় আবেদন — সরকারের অফিসিয়াল পেজ অনুযায়ী। যে তথ্য অফিসিয়াল সূত্রে পাইনি, সেটা লেখা হয়নি। ভিসার নিয়ম ঘন ঘন বদলায় — আবেদনের আগে সূত্র লিংক খুলে মিলিয়ে নিন।</p>
+  <p>{toc}</p>
+  {''.join(blocks)}
+</article>
+{FOOTER}
+</div>"""
+
+
+TUITION = [
+    ("জার্মানি", "সরকারি বিশ্ববিদ্যালয়ে সাধারণত স্নাতক ও বেশিরভাগ মাস্টার্সে টিউশন নেই। ব্যতিক্রম: Baden-Württemberg-এ non-EU শিক্ষার্থীদের প্রতি সেমিস্টারে €1,500 (PhD বাদে); Bavaria-র বিশ্ববিদ্যালয় নিজেরা ফি ঠিক করতে পারে। আলাদা একটা সেমিস্টার ফি (প্রশাসন, ছাত্র-সংগঠন, অনেক সময় যাতায়াত টিকিট) সবাইকে দিতে হয়।",
+     [("DAAD — Costs of education and living", "https://www.daad.de/en/studying-in-germany/living-in-germany/finances/")]),
+    ("অস্ট্রিয়া", "সরকারি বিশ্ববিদ্যালয়ে non-EU শিক্ষার্থীদের প্রতি সেমিস্টারে €726.72 টিউশন + প্রায় €25–26 ছাত্র-সংগঠন (ÖH) ফি। (Study in Austria একটি পেজে €751.92 লেখে — বিশ্ববিদ্যালয়ে মিলিয়ে নিন।) কিছু উন্নয়নশীল দেশের নাগরিক ছাড় পেতে পারেন।",
+     [("TU Wien — Tuition fee", "https://www.tuwien.at/en/studies/admission/students-union-fee-and-tuition-fee/tuition-fee"),
+      ("University of Vienna — Tuition fee", "https://studieren.univie.ac.at/en/studying-and-learning/financial-matters/amount-of-the-tuition-fee/students-union-fee")]),
+    ("ফ্রান্স", "সরকারি বিশ্ববিদ্যালয়ে EU-র বাইরের শিক্ষার্থীদের ২০২৬-২৭ সালের ফি: স্নাতক (licence) €2,902, মাস্টার্স €3,950 প্রতি বছর; PhD €398। প্রতিটি বিশ্ববিদ্যালয় চাইলে তার বিদেশি শিক্ষার্থীদের ১০% পর্যন্ত এই ফি থেকে ছাড় দিতে পারে।",
+     [("French Ministry of Higher Education — Rentrée 2026 press kit", "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2026-09/rentree26_dp_A4_220926_DIGITAL_BD_0.pdf")]),
+    ("নরওয়ে", "শরৎ ২০২৩ থেকে EU/EEA/সুইজারল্যান্ডের বাইরের নতুন শিক্ষার্থীদের টিউশন দিতে হয়; প্রতিটি প্রতিষ্ঠান নিজে ফি ঠিক করে (যেমন University of Oslo ২০২৭/২৮-এ বছরে NOK 218,000)। NORPART, NORHED-এর মতো সরকারি প্রোগ্রামের শিক্ষার্থীরা ছাড় পান।",
+     [("University of Oslo — Tuition fees", "https://www.uio.no/english/studies/admission/tuition/"),
+      ("Study in Norway — Cost and requirements", "https://studyinnorway.no/cost-and-requirements")]),
+]
+
+
+def tuition_body(updated):
+    items = "".join(
+        f'<section class="vcard"><h2>{c}</h2><p>{html.escape(t)}</p><p class="vsrc">সূত্র: ' +
+        " · ".join(f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(n)}</a>' for n, u in s) + "</p></section>"
+        for c, t, s in TUITION)
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <h1>টিউশন-ফ্রি ও কম খরচের দেশ</h1>
+  <p class="lede">ইউরোপের কিছু দেশে সরকারি বিশ্ববিদ্যালয়ে টিউশন নেই বা খুব কম — তবে নিয়ম বদলাচ্ছে। টিউশন কম হলেও থাকা-খাওয়ার খরচ আর ভিসার জন্য টাকা দেখাতে হয়; সেটা <a href="/guides/visa/">ভিসা গাইডে</a> আর <a href="/tools/budget/">বাজেট ক্যালকুলেটরে</a> দেখুন।</p>
+  {items}
+  <p class="warn">ফি প্রোগ্রাম ও বিশ্ববিদ্যালয়ভেদে আলাদা হতে পারে। আবেদনের আগে নির্দিষ্ট প্রোগ্রামের পেজে ফি দেখে নিন।</p>
+</article>
+{FOOTER}
+</div>"""
+
+
+# Preset values for the budget calculator, all from VISA sources above.
+BUDGET = [
+    {"k": "de", "n": "জার্মানি", "cur": "EUR", "funds": 11904, "fee": 0, "note": "ব্লকড অ্যাকাউন্টের ন্যূনতম (বছরে)। সরকারি বিশ্ববিদ্যালয়ে সাধারণত টিউশন নেই; Baden-Württemberg-এ non-EU সেমিস্টারে €1,500।"},
+    {"k": "uk-l", "n": "যুক্তরাজ্য — লন্ডন", "cur": "GBP", "funds": 1483 * 9, "fee": 558, "note": "£1,483 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও অ্যাকাউন্টে দেখাতে হয়।"},
+    {"k": "uk-o", "n": "যুক্তরাজ্য — লন্ডনের বাইরে", "cur": "GBP", "funds": 1136 * 9, "fee": 558, "note": "£1,136 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও দেখাতে হয়।"},
+    {"k": "us", "n": "যুক্তরাষ্ট্র", "cur": "USD", "funds": 0, "fee": 185 + 350, "note": "জাতীয় ন্যূনতম নেই — I-20-তে লেখা জীবনযাত্রার খরচ বসান। ফি = ভিসা $185 + SEVIS $350।"},
+    {"k": "ca", "n": "কানাডা", "cur": "CAD", "funds": 22895, "fee": 0, "note": "একক আবেদনকারীর জীবনযাত্রার ন্যূনতম; এর সাথে প্রথম বছরের টিউশন ও যাতায়াত দেখাতে হয়।"},
+    {"k": "au", "n": "অস্ট্রেলিয়া", "cur": "AUD", "funds": 29710, "fee": 0, "note": "১২ মাসের জীবনযাত্রা; এর সাথে প্রথম ১২ মাসের কোর্স ফি ও যাতায়াত। ভিসা ফি Home Affairs-এ দেখে বসান।"},
+    {"k": "it", "n": "ইতালি", "cur": "EUR", "funds": 10179.85, "fee": 0, "note": "বছরে ন্যূনতম; কিছু কনস্যুলেট ফেরার খরচ (প্রায় €500) আলাদা চায়।"},
+    {"k": "kr", "n": "দক্ষিণ কোরিয়া", "cur": "KRW", "funds": 5400000, "fee": 0, "note": "মাসে KRW 900,000 × 6 মাস।"},
+]
+
+
+def budget_body(updated):
+    opts = "".join(f'<option value="{b["k"]}">{b["n"]} ({b["cur"]})</option>' for b in BUDGET)
+    data = json.dumps({b["k"]: b for b in BUDGET}, ensure_ascii=False)
+    script = """<script>
+(function(){
+  var P=__DATA__;
+  var $=function(i){return document.getElementById(i)};
+  var cty=$("cty"),liv=$("liv"),tui=$("tui"),fee=$("fee"),oth=$("oth"),rate=$("rate");
+  function fmt(n,c){try{return new Intl.NumberFormat("en",{style:"currency",currency:c,maximumFractionDigits:0}).format(n)}catch(e){return Math.round(n)+" "+c}}
+  function load(){var p=P[cty.value];liv.value=p.funds;fee.value=p.fee;tui.value=0;oth.value=0;$("note").textContent=p.note;document.querySelectorAll(".cur").forEach(function(e){e.textContent=p.cur});
+    try{var r=localStorage.getItem("rate-"+p.cur);rate.value=r||""}catch(e){rate.value=""}calc()}
+  function num(e){var v=parseFloat(e.value);return isNaN(v)?0:v}
+  function calc(){var p=P[cty.value];var t=num(liv)+num(tui)+num(fee)+num(oth);$("tot").textContent=fmt(t,p.cur);
+    var r=num(rate);if(r>0){$("bdt").textContent="৳ "+new Intl.NumberFormat("en-IN",{maximumFractionDigits:0}).format(t*r);try{localStorage.setItem("rate-"+p.cur,rate.value)}catch(e){}}else{$("bdt").textContent="—"}}
+  cty.addEventListener("change",load);[liv,tui,fee,oth,rate].forEach(function(e){e.addEventListener("input",calc)});load();
+})();
+</script>""".replace("__DATA__", data)
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">টুল · ভিসার অঙ্ক যাচাই {updated}</span>
+  <h1>বাজেট ক্যালকুলেটর</h1>
+  <p class="lede" style="max-width:68ch">প্রথম বছরে আনুমানিক কত টাকা লাগবে, আর ভিসার জন্য কত দেখাতে হবে। দেশ বাছলে সরকারের অফিসিয়াল ন্যূনতম জীবনযাত্রার অঙ্ক আর জানা ভিসা ফি বসে যাবে; টিউশন আর অন্যান্য খরচ নিজে দিন। টাকায় দেখতে আজকের বিনিময় হার লিখুন।</p>
+  <div class="calc">
+    <label for="cty">দেশ<select id="cty" style="font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)">{opts}</select></label>
+    <label for="liv"><span>জীবনযাত্রা — ভিসার ন্যূনতম (<span class="cur"></span>)</span><input id="liv" type="number" min="0" step="1" inputmode="decimal"></label>
+    <label for="tui"><span>প্রথম বছরের টিউশন (<span class="cur"></span>)</span><input id="tui" type="number" min="0" step="1" value="0" inputmode="decimal"></label>
+    <label for="fee"><span>ভিসা ও সংশ্লিষ্ট ফি (<span class="cur"></span>)</span><input id="fee" type="number" min="0" step="1" inputmode="decimal"></label>
+    <label for="oth"><span>অন্যান্য: বিমান টিকিট, বীমা ইত্যাদি (<span class="cur"></span>)</span><input id="oth" type="number" min="0" step="1" value="0" inputmode="decimal"></label>
+    <label for="rate"><span>১ <span class="cur"></span> = কত টাকা?</span><input id="rate" type="number" min="0" step="0.01" placeholder="যেমন ১৪০ হলে 140" inputmode="decimal"></label>
+  </div>
+  <p id="note" class="warn"></p>
+  <div class="out" aria-live="polite">
+    <div><b id="tot">—</b><span>প্রথম বছরের মোট (আনুমানিক)</span></div>
+    <div><b id="bdt">—</b><span>বাংলাদেশি টাকায়</span></div>
+  </div>
+  <p>এটা একটা আনুমানিক হিসাব — ভিসার আসল শর্ত, টিউশন আর হার আবেদনের সময় অফিসিয়াল সূত্রে মিলিয়ে নিন। দেশভিত্তিক সূত্র <a href="/guides/visa/">ভিসা গাইডে</a> আছে।</p>
 </article>
 {FOOTER}
 </div>

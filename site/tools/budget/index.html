@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>বাজেট ক্যালকুলেটর | Higher Study Info</title>
+<meta name="description" content="বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।">
+<link rel="canonical" href="https://higherstudyinfo.com/tools/budget/">
+<meta property="og:title" content="বাজেট ক্যালকুলেটর | Higher Study Info">
+<meta property="og:description" content="বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://higherstudyinfo.com/tools/budget/">
+<meta name="google-site-verification" content="Grz7hydfzYqJABRoq_QOB3CM1w1c2fNkPtLkazkw38g" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2KEFM167"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WY2KEFM167');
+</script>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f7f4;--surface:#fff;--fg:#17211b;--muted:#5b6a61;--line:#dde4de;--accent:#0b6b4a;--accent-soft:#e3f1ea;
+  --display:"Anek Bangla","Hind Siliguri",system-ui,sans-serif;--body:"Hind Siliguri","Anek Bangla",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1512;--surface:#161e1a;--fg:#e6ede8;--muted:#97a69d;--line:#26322b;--accent:#4fc394;--accent-soft:#173226;color-scheme:dark}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1080px;margin:0 auto;padding-block:40px 56px;display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.hero{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px}
+.hero-text{display:flex;flex-direction:column;gap:10px;flex:1 1 420px;min-width:0}
+.total{flex:0 0 auto;display:flex;flex-direction:column;gap:2px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.total b{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,56px);line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.total>span{font-size:15px;font-weight:600}
+.total ul{list-style:none;margin:8px 0 0;padding:8px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted)}
+.total strong{color:var(--fg);font-variant-numeric:tabular-nums}
+.continent{display:flex;flex-direction:column;gap:12px}
+.continent h3{font-family:var(--display);font-weight:700;font-size:24px;margin:0;display:flex;align-items:baseline;gap:10px}
+.continent h3 a{color:inherit;text-decoration:none}.continent h3 a:hover{color:var(--accent)}
+.continent h3 small{font-family:var(--body);font-weight:400;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:8px;padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none}
+.card:hover,.card:focus-visible{border-color:var(--accent);outline:none}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h2{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.3;margin:0}
+.meta{font-size:14px;color:var(--muted)} .meta b{color:var(--accent);font-variant-numeric:tabular-nums}
+.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}
+.notice{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin:0}
+</style><style>
+.topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
+.topnav .brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg);text-decoration:none}
+.topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+.topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sitefoot a{color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><style>
+.month{display:flex;flex-direction:column;gap:8px}
+.month h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0}
+.dl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.dl li{display:grid;grid-template-columns:72px 1fr auto;gap:4px 14px;align-items:start;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.dl .date{font-family:var(--display);font-weight:700;font-size:15px;line-height:1.2;color:var(--accent);font-variant-numeric:tabular-nums}
+.dl .date small{display:block;font-family:var(--body);font-weight:400;font-size:12px;color:var(--muted)}
+.dl .what{min-width:0;display:flex;flex-direction:column;gap:2px}
+.dl .what a{color:var(--fg);font-weight:600;text-decoration:none}
+.dl .what a:hover{color:var(--accent);text-decoration:underline}
+.dl .what span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.dl .what span a{font-weight:400;color:var(--accent)}
+.lede a{color:var(--accent)}
+.left{font-size:12px;font-weight:600;white-space:nowrap;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.left.soon{color:#b3261e;border-color:currentColor}
+@media (prefers-color-scheme:dark){.left.soon{color:#ff8a80}}
+@media (max-width:520px){.dl li{grid-template-columns:64px 1fr}.dl .left{grid-column:2;justify-self:start}}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters input[type=search],.filters select{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:0}
+.filters input[type=search]{flex:1 1 260px}
+.filters label{font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.count{font-size:13px;color:var(--muted)}
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}
+.res{display:flex;flex-direction:column;gap:6px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;min-width:0}
+.res .where{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.res h3{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.3;margin:0}
+.res p{margin:0;font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.res p b{color:var(--fg);font-weight:600}
+.res .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:4px}
+.res .apply{font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:6px 12px;background:var(--accent);color:var(--surface)}
+.res .apply.info{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.res .more{font-size:13px;color:var(--accent)}
+.empty{color:var(--muted)}
+.prose{max-width:68ch;display:flex;flex-direction:column;gap:14px}
+.prose h2{font-family:var(--display);font-weight:700;font-size:22px;margin:12px 0 0}
+.prose p,.prose li{margin:0;line-height:1.7}
+.prose ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.prose a{color:var(--accent)}
+</style><style>
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 52px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--surface);font-weight:700;font-size:13px;display:grid;place-items:center}
+.steps h3{font-family:var(--display);font-weight:500;font-size:18px;margin:0 0 4px}
+.steps p{margin:4px 0 0}
+.warn{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:14px}
+.src-list{font-size:14px}
+.guides{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.tbl-wrap{overflow-x:auto}
+table.t{border-collapse:collapse;font-size:14px;min-width:420px}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{font-weight:600;color:var(--muted)}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.calc label{display:flex;flex-direction:column;justify-content:space-between;gap:4px;font-size:14px;color:var(--muted)}
+.calc input{font:inherit;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.out div{padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.out b{display:block;font-family:var(--display);font-size:32px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
+.out span{font-size:13px;color:var(--muted)}
+.vcard{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;scroll-margin-top:16px}
+.vcard h2{margin:0}.vcard h2 small{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-left:6px}
+.vcard table.t{min-width:0;width:100%}.vcard table.t th{width:30%;min-width:110px}
+.vlinks{margin:0}.vlinks .apply{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:var(--surface)}
+.vsrc{font-size:13px;color:var(--muted);margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/guides/" aria-current="page">গাইড ও টুল</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav>
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">টুল · ভিসার অঙ্ক যাচাই 2026-11-04</span>
+  <h1>বাজেট ক্যালকুলেটর</h1>
+  <p class="lede" style="max-width:68ch">প্রথম বছরে আনুমানিক কত টাকা লাগবে, আর ভিসার জন্য কত দেখাতে হবে। দেশ বাছলে সরকারের অফিসিয়াল ন্যূনতম জীবনযাত্রার অঙ্ক আর জানা ভিসা ফি বসে যাবে; টিউশন আর অন্যান্য খরচ নিজে দিন। টাকায় দেখতে আজকের বিনিময় হার লিখুন।</p>
+  <div class="calc">
+    <label for="cty">দেশ<select id="cty" style="font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)"><option value="de">জার্মানি (EUR)</option><option value="uk-l">যুক্তরাজ্য — লন্ডন (GBP)</option><option value="uk-o">যুক্তরাজ্য — লন্ডনের বাইরে (GBP)</option><option value="us">যুক্তরাষ্ট্র (USD)</option><option value="ca">কানাডা (CAD)</option><option value="au">অস্ট্রেলিয়া (AUD)</option><option value="it">ইতালি (EUR)</option><option value="kr">দক্ষিণ কোরিয়া (KRW)</option></select></label>
+    <label for="liv"><span>জীবনযাত্রা — ভিসার ন্যূনতম (<span class="cur"></span>)</span><input id="liv" type="number" min="0" step="1" inputmode="decimal"></label>
+    <label for="tui"><span>প্রথম বছরের টিউশন (<span class="cur"></span>)</span><input id="tui" type="number" min="0" step="1" value="0" inputmode="decimal"></label>
+    <label for="fee"><span>ভিসা ও সংশ্লিষ্ট ফি (<span class="cur"></span>)</span><input id="fee" type="number" min="0" step="1" inputmode="decimal"></label>
+    <label for="oth"><span>অন্যান্য: বিমান টিকিট, বীমা ইত্যাদি (<span class="cur"></span>)</span><input id="oth" type="number" min="0" step="1" value="0" inputmode="decimal"></label>
+    <label for="rate"><span>১ <span class="cur"></span> = কত টাকা?</span><input id="rate" type="number" min="0" step="0.01" placeholder="যেমন ১৪০ হলে 140" inputmode="decimal"></label>
+  </div>
+  <p id="note" class="warn"></p>
+  <div class="out" aria-live="polite">
+    <div><b id="tot">—</b><span>প্রথম বছরের মোট (আনুমানিক)</span></div>
+    <div><b id="bdt">—</b><span>বাংলাদেশি টাকায়</span></div>
+  </div>
+  <p>এটা একটা আনুমানিক হিসাব — ভিসার আসল শর্ত, টিউশন আর হার আবেদনের সময় অফিসিয়াল সূত্রে মিলিয়ে নিন। দেশভিত্তিক সূত্র <a href="/guides/visa/">ভিসা গাইডে</a> আছে।</p>
+</article>
+<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · যোগাযোগ: <a href="mailto:higherstudyinfo30@gmail.com">higherstudyinfo30@gmail.com</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
+</div>
+<script>
+(function(){
+  var P={"de": {"k": "de", "n": "জার্মানি", "cur": "EUR", "funds": 11904, "fee": 0, "note": "ব্লকড অ্যাকাউন্টের ন্যূনতম (বছরে)। সরকারি বিশ্ববিদ্যালয়ে সাধারণত টিউশন নেই; Baden-Württemberg-এ non-EU সেমিস্টারে €1,500।"}, "uk-l": {"k": "uk-l", "n": "যুক্তরাজ্য — লন্ডন", "cur": "GBP", "funds": 13347, "fee": 558, "note": "£1,483 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও অ্যাকাউন্টে দেখাতে হয়।"}, "uk-o": {"k": "uk-o", "n": "যুক্তরাজ্য — লন্ডনের বাইরে", "cur": "GBP", "funds": 10224, "fee": 558, "note": "£1,136 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও দেখাতে হয়।"}, "us": {"k": "us", "n": "যুক্তরাষ্ট্র", "cur": "USD", "funds": 0, "fee": 535, "note": "জাতীয় ন্যূনতম নেই — I-20-তে লেখা জীবনযাত্রার খরচ বসান। ফি = ভিসা $185 + SEVIS $350।"}, "ca": {"k": "ca", "n": "কানাডা", "cur": "CAD", "funds": 22895, "fee": 0, "note": "একক আবেদনকারীর জীবনযাত্রার ন্যূনতম; এর সাথে প্রথম বছরের টিউশন ও যাতায়াত দেখাতে হয়।"}, "au": {"k": "au", "n": "অস্ট্রেলিয়া", "cur": "AUD", "funds": 29710, "fee": 0, "note": "১২ মাসের জীবনযাত্রা; এর সাথে প্রথম ১২ মাসের কোর্স ফি ও যাতায়াত। ভিসা ফি Home Affairs-এ দেখে বসান।"}, "it": {"k": "it", "n": "ইতালি", "cur": "EUR", "funds": 10179.85, "fee": 0, "note": "বছরে ন্যূনতম; কিছু কনস্যুলেট ফেরার খরচ (প্রায় €500) আলাদা চায়।"}, "kr": {"k": "kr", "n": "দক্ষিণ কোরিয়া", "cur": "KRW", "funds": 5400000, "fee": 0, "note": "মাসে KRW 900,000 × 6 মাস।"}};
+  var $=function(i){return document.getElementById(i)};
+  var cty=$("cty"),liv=$("liv"),tui=$("tui"),fee=$("fee"),oth=$("oth"),rate=$("rate");
+  function fmt(n,c){try{return new Intl.NumberFormat("en",{style:"currency",currency:c,maximumFractionDigits:0}).format(n)}catch(e){return Math.round(n)+" "+c}}
+  function load(){var p=P[cty.value];liv.value=p.funds;fee.value=p.fee;tui.value=0;oth.value=0;$("note").textContent=p.note;document.querySelectorAll(".cur").forEach(function(e){e.textContent=p.cur});
+    try{var r=localStorage.getItem("rate-"+p.cur);rate.value=r||""}catch(e){rate.value=""}calc()}
+  function num(e){var v=parseFloat(e.value);return isNaN(v)?0:v}
+  function calc(){var p=P[cty.value];var t=num(liv)+num(tui)+num(fee)+num(oth);$("tot").textContent=fmt(t,p.cur);
+    var r=num(rate);if(r>0){$("bdt").textContent="৳ "+new Intl.NumberFormat("en-IN",{maximumFractionDigits:0}).format(t*r);try{localStorage.setItem("rate-"+p.cur,rate.value)}catch(e){}}else{$("bdt").textContent="—"}}
+  cty.addEventListener("change",load);[liv,tui,fee,oth,rate].forEach(function(e){e.addEventListener("input",calc)});load();
+})();
+</script>
+</body>
+</html>
