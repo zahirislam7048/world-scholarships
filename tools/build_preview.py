@@ -26,6 +26,15 @@ COUNTRIES = {
     "asia/uae": ("United Arab Emirates", "সংযুক্ত আরব আমিরাত স্কলারশিপ তালিকা", "সংযুক্ত আরব আমিরাতের স্কলারশিপ"),
     "asia/qatar": ("Qatar", "কাতার স্কলারশিপ তালিকা", "কাতারের স্কলারশিপ"),
     "europe/italy": ("Italy", "ইতালি স্কলারশিপ তালিকা", "ইতালির স্কলারশিপ"),
+    "europe/germany": ("Germany", "জার্মানি স্কলারশিপ তালিকা", "জার্মানির স্কলারশিপ"),
+    "europe/united-kingdom": ("United Kingdom", "যুক্তরাজ্য স্কলারশিপ তালিকা", "যুক্তরাজ্যের স্কলারশিপ"),
+    "europe/france": ("France", "ফ্রান্স স্কলারশিপ তালিকা", "ফ্রান্সের স্কলারশিপ"),
+    "europe/sweden": ("Sweden", "সুইডেন স্কলারশিপ তালিকা", "সুইডেনের স্কলারশিপ"),
+    "europe/switzerland": ("Switzerland", "সুইজারল্যান্ড স্কলারশিপ তালিকা", "সুইজারল্যান্ডের স্কলারশিপ"),
+    "europe/netherlands": ("Netherlands", "নেদারল্যান্ডস স্কলারশিপ তালিকা", "নেদারল্যান্ডসের স্কলারশিপ"),
+    "europe/belgium": ("Belgium", "বেলজিয়াম স্কলারশিপ তালিকা", "বেলজিয়ামের স্কলারশিপ"),
+    "europe/finland": ("Finland", "ফিনল্যান্ড স্কলারশিপ তালিকা", "ফিনল্যান্ডের স্কলারশিপ"),
+    "europe/austria": ("Austria", "অস্ট্রিয়া স্কলারশিপ তালিকা", "অস্ট্রিয়ার স্কলারশিপ"),
     "europe/erasmus-mundus": ("European Union", "Erasmus Mundus স্কলারশিপ", "Erasmus Mundus Joint Masters স্কলারশিপ"),
 }
 
