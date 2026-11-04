@@ -15,6 +15,11 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 - **Azerbaijan:** Heydar Aliyev International Education Grant (2026-27 nominations 16 Feb – 15 Apr)
 - **Vietnam:** MOET scholarships for international students (no current call found)
 
+## Checked — no current scholarship for international students found
+
+- **Sri Lanka:** foreign-student places capped at 0.5%; UGC says no government scholarship for them
+- **Philippines:** DOST programme only for Cambodia, Lao PDR, Myanmar; no 2027 intake found
+
 ## Not yet added (not individually searched)
 
-GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, Nepal, North Korea, Palestine, Philippines, Sri Lanka, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Yemen — plus the watched countries above.
+GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, North Korea, Palestine, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Yemen — plus the watched countries above.

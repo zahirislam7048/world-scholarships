@@ -18,6 +18,12 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 - **Slovakia:** Government scholarships for full degrees 2027-28 (usually close late May)
 - **Finland:** University of Helsinki scholarships (application 5–19 Jan 2027; scholarship terms not confirmed)
 
+## Checked — no current scholarship for international students found
+
+- **Spain:** no 2027-28 national or university excellence scholarship found for non-EU students (UC3M 2026-27 calls closed; AUIP for Latin Americans)
+- **Portugal:** FCT studentships require residence in Portugal
+- **Greece:** IKY foreign-national scholarships not currently open (IKY-Fulbright for US citizens only)
+
 ## Not yet added (not individually searched)
 
-Albania, Andorra, Belarus, Bosnia and Herzegovina, Bulgaria, Croatia, Greece, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, Portugal, San Marino, Spain, Ukraine, Vatican City — plus the watched countries above.
+Albania, Andorra, Belarus, Bosnia and Herzegovina, Bulgaria, Croatia, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, San Marino, Ukraine, Vatican City — plus the watched countries above.
