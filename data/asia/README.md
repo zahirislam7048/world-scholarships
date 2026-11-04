@@ -11,7 +11,10 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 - **Indonesia:** KNB Scholarship (usually Feb–Mar)
 - **Türkiye:** Türkiye Bursları (usually 10 Jan–20 Feb)
 - **Brunei:** Government of Brunei Darussalam Scholarship (usually Dec–Feb)
+- **Kazakhstan:** Government scholarship for foreign students (2026 round 30 Mar – 31 May)
+- **Azerbaijan:** Heydar Aliyev International Education Grant (2026-27 nominations 16 Feb – 15 Apr)
+- **Vietnam:** MOET scholarships for international students (no current call found)
 
-## Not yet added
+## Not yet added (not individually searched)
 
-GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Israel, Jordan, Kazakhstan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, Nepal, North Korea, Pakistan, Palestine, Philippines, Sri Lanka, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Vietnam, Yemen — plus the watched countries above.
+GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, Nepal, North Korea, Palestine, Philippines, Sri Lanka, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Yemen — plus the watched countries above.

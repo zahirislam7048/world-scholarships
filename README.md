@@ -2,7 +2,7 @@
 
 Country-by-country list of current and upcoming scholarships, each with a link to the official source. Expired items are removed.
 
-Data lives in `data/<section>/<country>/scholarships.csv` (sections: `asia`, `gcc`, `europe`, `north-america`, `latin-america`). The website groups them the same way: https://higherstudyinfo.com/asia/bangladesh/ etc.
+Data lives in `data/<section>/<country>/scholarships.csv` (sections: `asia`, `gcc`, `europe`, `north-america`, `latin-america`, `oceania`, `africa`). The website groups them the same way: https://higherstudyinfo.com/asia/bangladesh/ etc.
 
 | dataset | claude.ai preview |
 |---|---|
@@ -10,7 +10,7 @@ Data lives in `data/<section>/<country>/scholarships.csv` (sections: `asia`, `gc
 | `europe/italy` | https://claude.ai/artifact/2ZddPNekLNEboGyxecSmcW |
 | `europe/erasmus-mundus` | https://claude.ai/artifact/XqHK8BnRFMiq2p1b2qf89A |
 
-Other datasets (website only) — Asia: india, china, japan, south-korea, singapore, hong-kong, taiwan, thailand; GCC: saudi-arabia, uae, qatar, kuwait, oman, bahrain; Europe: germany, united-kingdom, france, sweden, switzerland, netherlands, belgium, finland, austria; North America: usa, canada; Latin America: brazil, colombia. Countries still to add / watched: [`data/asia/README.md`](data/asia/README.md), [`data/gcc/README.md`](data/gcc/README.md), [`data/europe/README.md`](data/europe/README.md), [`data/north-america/README.md`](data/north-america/README.md), [`data/latin-america/README.md`](data/latin-america/README.md).
+Other datasets (website only) — Asia: india, china, japan, south-korea, singapore, hong-kong, taiwan, thailand, pakistan, israel; GCC: saudi-arabia, uae, qatar, kuwait, oman, bahrain; Europe: germany, united-kingdom, france, sweden, switzerland, netherlands, belgium, finland, austria, denmark, norway, latvia, slovakia; North America: usa, canada; Latin America: brazil, colombia; Oceania: australia, new-zealand; Africa: mauritius. Countries still to add / watched: [`data/asia/README.md`](data/asia/README.md), [`data/gcc/README.md`](data/gcc/README.md), [`data/europe/README.md`](data/europe/README.md), [`data/north-america/README.md`](data/north-america/README.md), [`data/latin-america/README.md`](data/latin-america/README.md), [`data/oceania/README.md`](data/oceania/README.md), [`data/africa/README.md`](data/africa/README.md).
 
 A scheduled task updates every dataset once a week (Sunday 09:41 Asia/Dhaka).
 
