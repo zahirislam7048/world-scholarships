@@ -120,7 +120,7 @@ def home_page(updated):
 {chr(10).join(sections)}
 {NOTICE}
 </div>"""
-    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC ও ইউরোপের দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
+    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC, ইউরোপ, উত্তর ও লাতিন আমেরিকার দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
 
 
 def continent_page(cont, updated):

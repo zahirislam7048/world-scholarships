@@ -15,6 +15,8 @@ CONTINENTS = {
     "asia": ("Asia", "এশিয়া", "এশিয়ার"),
     "gcc": ("GCC · Gulf", "GCC (উপসাগরীয় দেশ)", "GCC দেশগুলোর"),
     "europe": ("Europe", "ইউরোপ", "ইউরোপের"),
+    "north-america": ("North America", "উত্তর আমেরিকা", "উত্তর আমেরিকার"),
+    "latin-america": ("Latin America", "লাতিন আমেরিকা", "লাতিন আমেরিকার"),
 }
 COUNTRIES = {
     "asia/bangladesh": ("Bangladesh", "বাংলাদেশ স্কলারশিপ তালিকা", "বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার"),
@@ -43,6 +45,10 @@ COUNTRIES = {
     "europe/finland": ("Finland", "ফিনল্যান্ড স্কলারশিপ তালিকা", "ফিনল্যান্ডের স্কলারশিপ"),
     "europe/austria": ("Austria", "অস্ট্রিয়া স্কলারশিপ তালিকা", "অস্ট্রিয়ার স্কলারশিপ"),
     "europe/erasmus-mundus": ("European Union", "Erasmus Mundus স্কলারশিপ", "Erasmus Mundus Joint Masters স্কলারশিপ"),
+    "north-america/usa": ("United States", "যুক্তরাষ্ট্র স্কলারশিপ তালিকা", "যুক্তরাষ্ট্রের স্কলারশিপ"),
+    "north-america/canada": ("Canada", "কানাডা স্কলারশিপ তালিকা", "কানাডার স্কলারশিপ"),
+    "latin-america/brazil": ("Brazil", "ব্রাজিল স্কলারশিপ তালিকা", "ব্রাজিলের স্কলারশিপ"),
+    "latin-america/colombia": ("Colombia", "কলম্বিয়া স্কলারশিপ তালিকা", "কলম্বিয়ার স্কলারশিপ"),
 }
 
 
