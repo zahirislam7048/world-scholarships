@@ -2,7 +2,7 @@
 
 `scholarships.csv` lists scholarships that are open, upcoming, or standing policies. Expired items are removed. A scheduled task updates it once a week.
 
-Preview page: https://claude.ai/artifact/GHhrqtV9tbHzor4g3BAsZ5 (rebuilt with `python3 tools/build_preview.py bangladesh <out.html> [YYYY-MM-DD]`).
+Preview page: https://claude.ai/artifact/GHhrqtV9tbHzor4g3BAsZ5 (rebuilt with `python3 tools/build_preview.py asia/bangladesh <out.html> [YYYY-MM-DD]`).
 
 ## How it is collected
 

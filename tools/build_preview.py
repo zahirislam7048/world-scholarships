@@ -1,6 +1,6 @@
-"""Build a country's scholarship preview page from data/<slug>/scholarships.csv.
+"""Build a country's scholarship preview page from data/<continent>/<country>/scholarships.csv.
 
-Usage: python3 tools/build_preview.py <slug> <output.html> [YYYY-MM-DD]
+Usage: python3 tools/build_preview.py <continent>/<country> <output.html> [YYYY-MM-DD]
 """
 import csv
 import datetime
@@ -10,11 +10,23 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ORDER = {"government": 0, "eu": 1, "consortium": 2, "public": 3, "private": 4, "international": 5}
-# slug -> (English name, page title, heading)
+# "<continent>/<country>" -> (English name, page title, heading). Order is display order.
+CONTINENTS = {"asia": ("Asia", "এশিয়া", "এশিয়ার"), "europe": ("Europe", "ইউরোপ", "ইউরোপের")}
 COUNTRIES = {
-    "bangladesh": ("Bangladesh", "বাংলাদেশ স্কলারশিপ তালিকা", "বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার"),
-    "italy": ("Italy", "ইতালি স্কলারশিপ তালিকা", "ইতালির স্কলারশিপ"),
-    "erasmus-mundus": ("European Union", "Erasmus Mundus স্কলারশিপ", "Erasmus Mundus Joint Masters স্কলারশিপ"),
+    "asia/bangladesh": ("Bangladesh", "বাংলাদেশ স্কলারশিপ তালিকা", "বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার"),
+    "asia/india": ("India", "ভারত স্কলারশিপ তালিকা", "ভারতের স্কলারশিপ"),
+    "asia/china": ("China", "চীন স্কলারশিপ তালিকা", "চীনের স্কলারশিপ"),
+    "asia/japan": ("Japan", "জাপান স্কলারশিপ তালিকা", "জাপানের স্কলারশিপ"),
+    "asia/south-korea": ("South Korea", "দক্ষিণ কোরিয়া স্কলারশিপ তালিকা", "দক্ষিণ কোরিয়ার স্কলারশিপ"),
+    "asia/singapore": ("Singapore", "সিঙ্গাপুর স্কলারশিপ তালিকা", "সিঙ্গাপুরের স্কলারশিপ"),
+    "asia/hong-kong": ("Hong Kong", "হংকং স্কলারশিপ তালিকা", "হংকংয়ের স্কলারশিপ"),
+    "asia/taiwan": ("Taiwan", "তাইওয়ান স্কলারশিপ তালিকা", "তাইওয়ানের স্কলারশিপ"),
+    "asia/thailand": ("Thailand", "থাইল্যান্ড স্কলারশিপ তালিকা", "থাইল্যান্ডের স্কলারশিপ"),
+    "asia/saudi-arabia": ("Saudi Arabia", "সৌদি আরব স্কলারশিপ তালিকা", "সৌদি আরবের স্কলারশিপ"),
+    "asia/uae": ("United Arab Emirates", "সংযুক্ত আরব আমিরাত স্কলারশিপ তালিকা", "সংযুক্ত আরব আমিরাতের স্কলারশিপ"),
+    "asia/qatar": ("Qatar", "কাতার স্কলারশিপ তালিকা", "কাতারের স্কলারশিপ"),
+    "europe/italy": ("Italy", "ইতালি স্কলারশিপ তালিকা", "ইতালির স্কলারশিপ"),
+    "europe/erasmus-mundus": ("European Union", "Erasmus Mundus স্কলারশিপ", "Erasmus Mundus Joint Masters স্কলারশিপ"),
 }
 
 
