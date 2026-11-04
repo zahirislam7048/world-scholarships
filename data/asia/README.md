@@ -14,4 +14,4 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 
 ## Not yet added
 
-Afghanistan, Armenia, Azerbaijan, Bahrain, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Israel, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, Nepal, North Korea, Oman, Pakistan, Palestine, Philippines, Sri Lanka, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Vietnam, Yemen — plus the watched countries above.
+GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Israel, Jordan, Kazakhstan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, Nepal, North Korea, Pakistan, Palestine, Philippines, Sri Lanka, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Vietnam, Yemen — plus the watched countries above.
