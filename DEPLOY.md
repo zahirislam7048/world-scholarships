@@ -19,6 +19,10 @@ The repository is public, so cPanel clones it over HTTPS with no key.
 
 ## Updating the live site
 
-After the weekly update (or any push to `main`), wait for the **Actions** run to finish, then in cPanel → **Git™ Version Control** → **Manage** → **Pull or Deploy**:
-1. **Update from Remote**
-2. **Deploy HEAD Commit**
+A cPanel **Cron Job** (once per hour) pulls `main` and copies `site/` into the document root, so the weekly update reaches the live site within about an hour:
+
+```
+cd ~/repositories/world-scholarships && git pull -q origin main && /bin/cp -R site/. ~/higherstudyinfo.com/
+```
+
+To update right away instead: cPanel → **Git™ Version Control** → **Manage** → **Pull or Deploy** → **Update from Remote** → **Deploy HEAD Commit**.
