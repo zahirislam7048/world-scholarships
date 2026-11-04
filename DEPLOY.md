@@ -2,7 +2,7 @@
 
 `tools/build_site.py` builds the static site into `site/` (home page, one page per dataset, `sitemap.xml`, `robots.txt`). Every page's `<head>` includes `tools/site_head.html` (Google site verification + Google Analytics `G-WY2KEFM167`).
 
-On every push to `main` (including the weekly data update), `.github/workflows/deploy.yml` rebuilds `site/` and commits it to `main`. cPanel pulls `main` and the root `.cpanel.yml` copies `site/` into `public_html/`; nothing is pushed to the server from GitHub, so no FTP password is stored anywhere.
+On every push to `main` (including the weekly data update), `.github/workflows/deploy.yml` rebuilds `site/` and commits it to `main`. cPanel pulls `main` and the root `.cpanel.yml` copies `site/` into the domain's document root `~/higherstudyinfo.com/`; nothing is pushed to the server from GitHub, so no FTP password is stored anywhere.
 
 ## One-time setup
 

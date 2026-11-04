@@ -1,5 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/public_html/
+    # Document root of higherstudyinfo.com in cPanel → Domains.
+    - export DEPLOYPATH=$HOME/higherstudyinfo.com/
+    - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R site/. $DEPLOYPATH
