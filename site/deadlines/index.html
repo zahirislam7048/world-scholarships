@@ -99,11 +99,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .prose p,.prose li{margin:0;line-height:1.7}
 .prose ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .prose a{color:var(--accent)}
+</style><style>
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 52px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--surface);font-weight:700;font-size:13px;display:grid;place-items:center}
+.steps h3{font-family:var(--display);font-weight:500;font-size:18px;margin:0 0 4px}
+.steps p{margin:4px 0 0}
+.warn{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:14px}
+.src-list{font-size:14px}
+.guides{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.tbl-wrap{overflow-x:auto}
+table.t{border-collapse:collapse;font-size:14px;min-width:420px}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{font-weight:600;color:var(--muted)}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.calc label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.calc input{font:inherit;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.out div{padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.out b{display:block;font-family:var(--display);font-size:32px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
+.out span{font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/" aria-current="page">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav>
+<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/" aria-current="page">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/guides/">গাইড ও টুল</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav>
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">সব দেশ · সর্বশেষ আপডেট 2026-11-04</span>
   <h1>শেষ তারিখ সামনে</h1>

@@ -11,7 +11,8 @@ import shutil
 import sys
 
 from build_preview import CONTINENTS, COUNTRIES, ROOT, load_rows, render
-from site_extra import FOOTER, NAV_CSS, PAGE_CSS, about_body, deadlines_body, nav, privacy_body, search_body
+from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, cgpa_body, deadlines_body, documents_body,
+                        english_tests_body, guides_index_body, nav, privacy_body, search_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -195,14 +196,18 @@ def main():
         "search": ("সব স্কলারশিপ খুঁজুন | Higher Study Info", "সব দেশের স্কলারশিপ এক জায়গায় খুঁজুন: দেশ, লেভেল, IELTS আর শেষ তারিখ দিয়ে।", search_body),
         "about": ("আমাদের সম্পর্কে | Higher Study Info", "Higher Study Info কী, তথ্য কোথা থেকে আসে আর কীভাবে আপডেট হয়।", about_body),
         "privacy": ("Privacy Policy | Higher Study Info", "higherstudyinfo.com-এর Privacy Policy: Google Analytics ও কুকি।", privacy_body),
+        "guides": ("গাইড ও টুল | Higher Study Info", "উচ্চশিক্ষার আবেদনের গাইড ও টুল: সত্যায়ন, IELTS, CGPA রূপান্তর।", guides_index_body),
+        "guides/documents": ("কাগজপত্র ও সত্যায়ন | Higher Study Info", "বিদেশে উচ্চশিক্ষার জন্য বাংলাদেশি সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।", documents_body),
+        "guides/english-tests": ("IELTS, TOEFL, Duolingo, PTE | Higher Study Info", "বাংলাদেশে IELTS, TOEFL, Duolingo, PTE-র ফি ও বুকিং, আর IELTS ছাড়ের পথ আছে এমন স্কলারশিপ।", english_tests_body),
+        "tools/cgpa": ("CGPA রূপান্তর | Higher Study Info", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (modified Bavarian formula) রূপান্তর।", cgpa_body),
     }
     for name, (title, desc, body_fn) in extra.items():
-        (OUT / name).mkdir()
-        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD, body_fn(updated)), encoding="utf-8")
+        (OUT / name).mkdir(parents=True)
+        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS, body_fn(updated)), encoding="utf-8")
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
+    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{updated}</lastmod></url>\n" for u in urls)

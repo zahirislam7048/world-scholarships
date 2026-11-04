@@ -15,7 +15,7 @@ NAV_CSS = """<style>
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
-NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/about/", "আমাদের সম্পর্কে")]
+NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/about/", "আমাদের সম্পর্কে")]
 
 
 def nav(current=""):
@@ -274,3 +274,191 @@ def privacy_body(updated):
 </article>
 {FOOTER}
 </div>"""
+
+
+# ---------------------------------------------------------------- guides & tools
+
+def _sources(items):
+    return '<h2>সূত্র</h2><ul class="src-list">' + "".join(
+        f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a></li>' for t, u in items) + "</ul>"
+
+
+GUIDE_CSS = """<style>
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 52px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--surface);font-weight:700;font-size:13px;display:grid;place-items:center}
+.steps h3{font-family:var(--display);font-weight:500;font-size:18px;margin:0 0 4px}
+.steps p{margin:4px 0 0}
+.warn{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:14px}
+.src-list{font-size:14px}
+.guides{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.tbl-wrap{overflow-x:auto}
+table.t{border-collapse:collapse;font-size:14px;min-width:420px}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{font-weight:600;color:var(--muted)}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.calc label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.calc input{font:inherit;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.out div{padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.out b{display:block;font-family:var(--display);font-size:32px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
+.out span{font-size:13px;color:var(--muted)}
+</style>"""
+
+GUIDES = [
+    ("/guides/documents/", "📄 কাগজপত্র ও সত্যায়ন", "বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।"),
+    ("/guides/english-tests/", "🗣️ IELTS, TOEFL, Duolingo, PTE", "বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।"),
+    ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
+]
+
+
+def guides_index_body(updated):
+    cards = "".join(f'<a class="card" href="{h}"><h2>{t}</h2><span class="meta">{d}</span></a>' for h, t, d in GUIDES)
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">Higher Study Info · গাইড ও টুল</span>
+  <h1>উচ্চশিক্ষার গাইড ও টুল</h1>
+  <p class="lede">আবেদনের প্রস্তুতির জন্য দরকারি তথ্য, অফিসিয়াল সূত্রের লিংকসহ।</p>
+</header>
+<div class="guides">{cards}</div>
+{FOOTER}
+</div>"""
+
+
+def documents_body(updated):
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <h1>কাগজপত্র ও সত্যায়ন</h1>
+  <p class="lede">বিদেশে ভর্তি, স্কলারশিপ বা ভিসার আবেদনে বাংলাদেশি সার্টিফিকেট সাধারণত সত্যায়িত করে দিতে হয়। কোন কাগজ কীভাবে সত্যায়ন করতে হবে তা প্রতিটি বিশ্ববিদ্যালয়, স্কলারশিপ বা দূতাবাস আলাদাভাবে বলে দেয় — নিচের ধাপগুলো সাধারণ ক্রম, আপনার প্রতিষ্ঠানের নির্দেশনা আগে দেখে নিন।</p>
+  <h2>সাধারণত যেসব কাগজ লাগে</h2>
+  <ul>
+    <li>পাসপোর্ট (মেয়াদ যথেষ্ট আছে কিনা দেখুন)</li>
+    <li>SSC, HSC, স্নাতক ও স্নাতকোত্তরের সার্টিফিকেট এবং মার্কশিট/ট্রান্সক্রিপ্ট</li>
+    <li>ইংরেজি দক্ষতার প্রমাণ (IELTS/TOEFL/Duolingo, বা Medium of Instruction সনদ — যেখানে গ্রহণযোগ্য)</li>
+    <li>CV, Statement of Purpose (SOP), রেফারেন্স/সুপারিশপত্র</li>
+    <li>ভিসার সময়: পুলিশ ক্লিয়ারেন্স, আর্থিক সামর্থ্যের প্রমাণ, স্বাস্থ্য সনদ — দেশভেদে আলাদা</li>
+  </ul>
+  <h2>সত্যায়নের ধাপ</h2>
+  <ol class="steps">
+    <li><h3>শিক্ষা মন্ত্রণালয়ে অনলাইন সত্যায়ন</h3>
+      <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ "বিদেশগামী শিক্ষার্থীদের সার্টিফিকেট এবং ট্রান্সক্রিপ্ট অনলাইনের মাধ্যমে সত্যায়ন" সেবা দেয়। SSC/HSC সনদ ও ট্রান্সক্রিপ্ট এবং সরকারি ও বেসরকারি বিশ্ববিদ্যালয়ের সনদ/ট্রান্সক্রিপ্টের জন্য আলাদা আবেদন ফর্ম আছে; নিজের প্রতিষ্ঠানের ধরন অনুযায়ী সঠিক ফর্ম বেছে নিন। নির্দেশিকা PDF আর আবেদনের লিংক একই পেজে।</p>
+      <p><a href="https://shed.gov.bd/pages/static-pages/694146bba31054345f0fc944" target="_blank" rel="noopener">শিক্ষা মন্ত্রণালয়ের অনলাইন সত্যায়ন পেজ ↗</a></p></li>
+    <li><h3>পররাষ্ট্র মন্ত্রণালয় — e-Apostille</h3>
+      <p>বাংলাদেশে এখন e-Apostille ব্যবস্থা চালু: সরকারি e-Apostille প্ল্যাটফর্মে নিবন্ধন করে কাগজ আপলোড, অনলাইনে ফি পরিশোধ, তারপর QR কোডসহ e-Apostille সনদ পাওয়া যায়। কোপেনহেগেনের বাংলাদেশ দূতাবাস জানায়, Apostille করা কাগজে ঢাকায় পররাষ্ট্র মন্ত্রণালয়ের আলাদা হাতে-সত্যায়ন লাগে না।</p>
+      <p class="warn">Apostille সাধারণত Apostille Convention-ভুক্ত দেশে চলে। আপনার গন্তব্য দেশ বা প্রতিষ্ঠান কোনটা চায় (Apostille, নাকি দূতাবাস সত্যায়ন) তা আগে নিশ্চিত হোন।</p>
+      <p><a href="https://copenhagen.mofa.gov.bd/pages/static-pages/6952668835ce18e1c05a9da2" target="_blank" rel="noopener">e-Apostille সম্পর্কে দূতাবাসের নোটিশ ↗</a></p></li>
+    <li><h3>পুলিশ ক্লিয়ারেন্স সার্টিফিকেট (ভিসার জন্য)</h3>
+      <p>অনলাইনে <a href="https://pcc.police.gov.bd/ords/r/pcc/pcc/home" target="_blank" rel="noopener">pcc.police.gov.bd</a>-এ নিবন্ধন করে আবেদন: ব্যক্তিগত তথ্য ও ঠিকানা, কাগজ আপলোড, যাচাই করে জমা (জমার পর আর সম্পাদনা করা যায় না), শেষে ফি পরিশোধ। পাসপোর্টের কপি প্রথম শ্রেণির গেজেটেড কর্মকর্তা দিয়ে সত্যায়িত করতে হয়; পোর্টাল অনুযায়ী পাসপোর্টের মেয়াদ অন্তত তিন মাস থাকতে হবে। বর্তমান ঠিকানার জেলা/মেট্রোপলিটন পুলিশ সনদ দেয়; অবস্থা জানতে পোর্টালে দেওয়া ফরম্যাটে 26969-এ SMS।</p>
+      <p class="warn">ফি: পোর্টালের বাংলা পেজে প্রায় ৳১,৫০০; পুরনো একটি পেজে ৳৫০০ লেখা — জমা দেওয়ার আগে পোর্টালে বর্তমান ফি দেখে নিন।</p></li>
+    <li><h3>গন্তব্য দেশের দূতাবাস (যদি চায়)</h3>
+      <p>কিছু দেশ বা প্রতিষ্ঠান ঢাকায় তাদের দূতাবাস থেকেও সত্যায়ন চায়। আবেদনের নির্দেশনায় এটা উল্লেখ থাকে।</p></li>
+  </ol>
+  {_sources([
+      ("শিক্ষা মন্ত্রণালয় — বিদেশগামী শিক্ষার্থীদের অনলাইন সত্যায়ন", "https://shed.gov.bd/pages/static-pages/694146bba31054345f0fc944"),
+      ("Embassy of Bangladesh, The Hague — Attestation of documents (e-Apostille)", "https://hague.mofa.gov.bd/pages/static-pages/attestation-of-documents-695d21c101f260dcf5c90aa9"),
+      ("Embassy of Bangladesh, Copenhagen — Attestation of documents", "https://copenhagen.mofa.gov.bd/pages/static-pages/6952668835ce18e1c05a9da2"),
+      ("Bangladesh Police — Police Clearance Certificate portal", "https://pcc.police.gov.bd/ords/r/pcc/pcc/home"),
+      ("Bangladesh Police — Police clearance certificate", "https://www.police.gov.bd/en/police_clearance_certificate"),
+  ])}
+</article>
+{FOOTER}
+</div>"""
+
+
+WAIVER_RE = r"waiv|exempt|medium[- ]of[- ]instruction|English[- ]medium|English-taught|taught (entirely )?in English|No test certificate|no IELTS|optional|No TaiwanICDF minimum|No SI requirement"
+
+
+def english_tests_body(updated):
+    import re
+    rows = [r for r in all_rows() if r.get("english_requirement") and re.search(WAIVER_RE, r["english_requirement"], re.I)]
+    trs = "".join(
+        f'<tr><td>{html.escape(COUNTRIES[r["slug"]][0])}</td><td><a href="/{r["slug"]}/">{html.escape(r["scholarship_name"])}</a></td>'
+        f'<td>{html.escape(r["english_requirement"])}</td></tr>' for r in rows)
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <h1>IELTS, TOEFL, Duolingo, PTE</h1>
+  <p class="lede" style="max-width:68ch">বাংলাদেশ থেকে কোন পরীক্ষা কোথায় দেবেন, ফি কত — অফিসিয়াল সূত্র অনুযায়ী। প্রতিটি স্কলারশিপের নির্দিষ্ট স্কোর তার কার্ডে "IELTS / English" অংশে আছে।</p>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>পরীক্ষা</th><th>বাংলাদেশে ফি</th><th>কোথায় বুক করবেন</th></tr>
+    <tr><td><b>IELTS</b> (Academic / General)</td><td>কম্পিউটারে ৳৩১,১০০; UKVI ৳৩৪,৮৫০ (British Council)। কাগজে কেন্দ্রভেদে আলাদা — বুকিং পেজে দেখুন।</td><td><a href="https://www.britishcouncil.org.bd/en/exam/ielts/book-test" target="_blank" rel="noopener">British Council</a> · <a href="https://ielts.idp.com/bangladesh/about/ielts-exam-fee" target="_blank" rel="noopener">IDP</a></td></tr>
+    <tr><td><b>TOEFL iBT</b></td><td>দেশভেদে আলাদা — ETS-এর ফি পেজে Bangladesh বেছে নিন।</td><td><a href="https://www.ets.org/toefl/test-takers/ibt/register/fees.html" target="_blank" rel="noopener">ETS</a></td></tr>
+    <tr><td><b>Duolingo English Test</b></td><td>US$৭০; বাসা থেকে অনলাইনে, প্রায় ১ ঘণ্টা। Duolingo-র হিসাবে ৬,৫০০+ প্রোগ্রাম গ্রহণ করে।</td><td><a href="https://englishtest.duolingo.com/applicants" target="_blank" rel="noopener">Duolingo</a></td></tr>
+    <tr><td><b>PTE Academic</b></td><td>দেশভেদে আলাদা — Pearson-এর কেন্দ্র ও ফি পেজে দেখুন।</td><td><a href="https://www.pearsonpte.com/pte-academic/" target="_blank" rel="noopener">Pearson PTE</a></td></tr>
+  </table></div>
+  <p class="warn">TOEFL iBT-এর স্কোর-স্কেল ২১ জানুয়ারি ২০২৬ থেকে বদলেছে (নতুন স্কেল ১–৬)। তাই অনেক বিশ্ববিদ্যালয় দুটো স্কোর লেখে — যেমন "TOEFL 4.5 (আগের স্কেলে 90)"। কোনো বিশ্ববিদ্যালয় IELTS Online বা Home Edition গ্রহণ নাও করতে পারে; আবেদনের আগে দেখে নিন।</p>
+  <h2>IELTS ছাড়ের পথ আছে এমন স্কলারশিপ ({bn(len(rows))}টি)</h2>
+  <p>নিচের স্কলারশিপগুলোর অফিসিয়াল তথ্যে IELTS ছাড়া যোগ্যতা প্রমাণের কোনো পথ উল্লেখ আছে — যেমন আগের ডিগ্রি ইংরেজি মাধ্যমে হলে (Medium of Instruction সনদ), বা নির্দিষ্ট দেশ থেকে ডিগ্রি থাকলে, বা টেস্ট ঐচ্ছিক হলে। শর্ত প্রত্যেকটির জন্য আলাদা — পুরো লেখা পড়ুন।</p>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>দেশ</th><th>স্কলারশিপ</th><th>ইংরেজির শর্ত (অফিসিয়াল সূত্র অনুযায়ী)</th></tr>
+    {trs}
+  </table></div>
+  {_sources([
+      ("IDP Bangladesh — IELTS exam fee", "https://ielts.idp.com/bangladesh/about/ielts-exam-fee"),
+      ("British Council Bangladesh — Book IELTS", "https://www.britishcouncil.org.bd/en/exam/ielts/book-test"),
+      ("ETS — TOEFL iBT registration fee", "https://www.ets.org/toefl/test-takers/ibt/register/fees.html"),
+      ("Duolingo English Test — accepting institutions", "https://englishtest.duolingo.com/test_takers/accepting_institutions"),
+      ("Pearson — PTE Academic", "https://www.pearsonpte.com/pte-academic/"),
+  ])}
+</article>
+{FOOTER}
+</div>"""
+
+
+def cgpa_body(updated):
+    bands = [("A+", "4.00", "80% বা বেশি"), ("A", "3.75", "75% – 79%"), ("A-", "3.50", "70% – 74%"), ("B+", "3.25", "65% – 69%"),
+             ("B", "3.00", "60% – 64%"), ("B-", "2.75", "55% – 59%"), ("C+", "2.50", "50% – 54%"), ("C", "2.25", "45% – 49%"),
+             ("D", "2.00", "40% – 44%"), ("F", "0.00", "40%-এর কম")]
+    rows = "".join(f"<tr><td>{g}</td><td>{p}</td><td>{m}</td></tr>" for g, p, m in bands)
+    script = """<script>
+(function(){
+  var B=[[4.00,"A+","80% বা বেশি"],[3.75,"A","75% – 79%"],[3.50,"A-","70% – 74%"],[3.25,"B+","65% – 69%"],[3.00,"B","60% – 64%"],[2.75,"B-","55% – 59%"],[2.50,"C+","50% – 54%"],[2.25,"C","45% – 49%"],[2.00,"D","40% – 44%"]];
+  var c=document.getElementById("cg"),mx=document.getElementById("mx"),mn=document.getElementById("mn");
+  var g=document.getElementById("ger"),b=document.getElementById("band"),msg=document.getElementById("msg");
+  function run(){
+    var nd=parseFloat(c.value),nmax=parseFloat(mx.value),nmin=parseFloat(mn.value);
+    if(isNaN(nd)||isNaN(nmax)||isNaN(nmin)||nmax<=nmin){g.textContent="—";b.textContent="—";msg.textContent="সঠিক সংখ্যা দিন (সর্বোচ্চ > ন্যূনতম পাস)।";msg.hidden=false;return}
+    if(nd>nmax||nd<nmin){g.textContent="—";b.textContent="—";msg.textContent="CGPA ন্যূনতম পাস ও সর্বোচ্চের মধ্যে হতে হবে।";msg.hidden=false;return}
+    msg.textContent="";msg.hidden=true;
+    var de=1+3*(nmax-nd)/(nmax-nmin);g.textContent=(Math.floor(de*10)/10).toFixed(1);
+    if(nmax===4){var hit=B.find(function(x){return nd>=x[0]});b.textContent=hit?hit[1]+" · "+hit[2]:"—"}else{b.textContent="৪.০০ স্কেলে প্রযোজ্য"}
+  }
+  [c,mx,mn].forEach(function(e){e.addEventListener("input",run)});run();
+})();
+</script>"""
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">টুল</span>
+  <h1>CGPA রূপান্তর</h1>
+  <p class="lede" style="max-width:68ch">জার্মানি ও ইউরোপের অনেক বিশ্ববিদ্যালয় বিদেশি গ্রেডকে "modified Bavarian formula" দিয়ে জার্মান গ্রেডে (১.০ সবচেয়ে ভালো, ৪.০ পাস) রূপান্তর করে। আপনার CGPA দিন:</p>
+  <div class="calc">
+    <label for="cg">আপনার CGPA<input id="cg" type="number" step="0.01" min="0" value="3.50" inputmode="decimal"></label>
+    <label for="mx">সর্বোচ্চ সম্ভব (Nmax)<input id="mx" type="number" step="0.01" value="4.00" inputmode="decimal"></label>
+    <label for="mn">ন্যূনতম পাস (Nmin)<input id="mn" type="number" step="0.01" value="2.00" inputmode="decimal"></label>
+  </div>
+  <div class="out" aria-live="polite">
+    <div><b id="ger">—</b><span>জার্মান গ্রেড (আনুমানিক)</span></div>
+    <div><b id="band" style="font-size:22px">—</b><span>সমান গ্রেড-পয়েন্টের ব্যান্ড (৪.০০ স্কেল)</span></div>
+  </div>
+  <p id="msg" class="warn" hidden></p>
+  <p><b>সূত্র:</b> জার্মান গ্রেড = 1 + 3 × (Nmax − আপনার CGPA) ÷ (Nmax − Nmin)। ফলাফল এক দশমিকে কেটে দেখানো হয়। ন্যূনতম পাস CGPA আপনার বিশ্ববিদ্যালয়ের নিয়ম অনুযায়ী বদলে নিন — আর মনে রাখুন, প্রতিটি জার্মান বিশ্ববিদ্যালয় বা uni-assist নিজস্ব Nmin ধরতে পারে; চূড়ান্ত রূপান্তর তারাই করে।</p>
+  <h2>বাংলাদেশের প্রচলিত গ্রেডিং (UGC-অনুমোদিত)</h2>
+  <p>অনেক বাংলাদেশি বিশ্ববিদ্যালয় এই স্কেল ব্যবহার করে (BUET-এর প্রকাশিত টেবিল)। কিছু বিভাগ বা প্রোগ্রাম আলাদা স্কেল ব্যবহার করে — আপনার ট্রান্সক্রিপ্টের পেছনের টেবিল দেখুন। মনে রাখুন, CGPA থেকে শতাংশের কোনো অফিসিয়াল সূত্র নেই; ব্যান্ডটা শুধু কোন গ্রেড-পয়েন্ট কোন নম্বর-সীমার সমান তা দেখায়।</p>
+  <div class="tbl-wrap"><table class="t"><tr><th>লেটার গ্রেড</th><th>গ্রেড পয়েন্ট</th><th>নম্বর</th></tr>{rows}</table></div>
+  {_sources([
+      ("TUM — Grade conversion using the Bavarian formula", "https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany"),
+      ("uni-assist — FAQs (grade conversion)", "https://www.uni-assist.de/en/faqs/get-information/"),
+      ("BUET CSE — Undergraduate academic evaluation (grading table)", "https://cse.buet.ac.bd/academics/ug_eval"),
+  ])}
+</article>
+{FOOTER}
+</div>
+{script}"""
