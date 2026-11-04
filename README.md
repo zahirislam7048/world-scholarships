@@ -12,4 +12,6 @@ A scheduled task updates every dataset once a week (Sunday 09:41 Asia/Dhaka).
 
 Every dataset uses the same columns and keep/remove rule; see [`data/bangladesh/README.md`](data/bangladesh/README.md). `provider_type` is one of `government`, `eu`, `consortium`, `public`, `private`, `international`.
 
+Website: https://higherstudyinfo.com, deployed to cPanel on every push to `main` (see [`DEPLOY.md`](DEPLOY.md)).
+
 Rebuild a preview page: `python3 tools/build_preview.py <slug> <out.html> [YYYY-MM-DD]` (slug = folder name under `data/`).
