@@ -124,6 +124,12 @@ table.t th{font-weight:600;color:var(--muted)}
 .vcard table.t{min-width:0;width:100%}.vcard table.t th{width:30%;min-width:110px}
 .vlinks{margin:0}.vlinks .apply{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:var(--surface)}
 .vsrc{font-size:13px;color:var(--muted);margin:0}
+</style><style>
+.otool{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.otool label{display:flex;flex-direction:column;justify-content:space-between;gap:4px;font-size:14px;color:var(--muted)}
+.otool textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;resize:vertical;width:100%}
+.ooutput{white-space:pre-wrap;font-family:var(--mono);font-size:13px;line-height:1.6;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:0;overflow-x:auto}
+.obtn{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:8px;padding:8px 14px;background:var(--accent);color:var(--surface);cursor:pointer}
 </style>
 </head>
 <body>
@@ -134,7 +140,7 @@ table.t th{font-weight:600;color:var(--muted)}
   <h1>উচ্চশিক্ষার গাইড ও টুল</h1>
   <p class="lede">আবেদনের প্রস্তুতির জন্য দরকারি তথ্য, অফিসিয়াল সূত্রের লিংকসহ।</p>
 </header>
-<div class="guides"><a class="card" href="/guides/documents/"><h2>📄 কাগজপত্র ও সত্যায়ন</h2><span class="meta">বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।</span></a><a class="card" href="/guides/english-tests/"><h2>🗣️ IELTS, TOEFL, Duolingo, PTE</h2><span class="meta">বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।</span></a><a class="card" href="/tools/cgpa/"><h2>🧮 CGPA রূপান্তর</h2><span class="meta">বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।</span></a><a class="card" href="/guides/visa/"><h2>🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক</h2><span class="meta">৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।</span></a><a class="card" href="/guides/tuition-free/"><h2>💶 টিউশন-ফ্রি ও কম খরচের দেশ</h2><span class="meta">জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।</span></a><a class="card" href="/tools/budget/"><h2>💰 বাজেট ক্যালকুলেটর</h2><span class="meta">প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।</span></a></div>
+<div class="guides"><a class="card" href="/guides/documents/"><h2>📄 কাগজপত্র ও সত্যায়ন</h2><span class="meta">বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।</span></a><a class="card" href="/guides/english-tests/"><h2>🗣️ IELTS, TOEFL, Duolingo, PTE</h2><span class="meta">বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।</span></a><a class="card" href="/tools/cgpa/"><h2>🧮 CGPA রূপান্তর</h2><span class="meta">বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।</span></a><a class="card" href="/guides/visa/"><h2>🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক</h2><span class="meta">৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।</span></a><a class="card" href="/guides/tuition-free/"><h2>💶 টিউশন-ফ্রি ও কম খরচের দেশ</h2><span class="meta">জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।</span></a><a class="card" href="/tools/budget/"><h2>💰 বাজেট ক্যালকুলেটর</h2><span class="meta">প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।</span></a><a class="card" href="/guides/sop/"><h2>✍️ Statement of Purpose (SOP)</h2><span class="meta">কাঠামো, দৈর্ঘ্য, কী করবেন না — আর নিজের তথ্য দিয়ে আউটলাইন বানানোর টুল।</span></a><a class="card" href="/guides/motivation-letter/"><h2>📝 Motivation Letter</h2><span class="meta">DAAD, Erasmus Mundus-এর মতো ইউরোপীয় আবেদনের জন্য — প্রশ্ন, কাঠামো আর আউটলাইন টুল।</span></a></div>
 <footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · যোগাযোগ: <a href="mailto:higherstudyinfo30@gmail.com">higherstudyinfo30@gmail.com</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 </body>

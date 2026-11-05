@@ -14,7 +14,7 @@ from build_preview import CONTINENTS, COUNTRIES, ROOT, load_rows, render
 import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
-                        tuition_body, visa_body)
+                        tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -207,15 +207,17 @@ def main():
         "tools/cgpa": ("CGPA রূপান্তর | Higher Study Info", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (modified Bavarian formula) রূপান্তর।", cgpa_body),
         "guides/visa": ("স্টুডেন্ট ভিসা — দেশভিত্তিক | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, কানাডা, অস্ট্রেলিয়া, ইতালি, জাপান, কোরিয়া, মালয়েশিয়ার স্টুডেন্ট ভিসায় কত টাকা দেখাতে হয় ও কাজের নিয়ম।", visa_body),
         "guides/tuition-free": ("টিউশন-ফ্রি ও কম খরচের দেশ | Higher Study Info", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়েতে EU-র বাইরের শিক্ষার্থীদের টিউশন — অফিসিয়াল সূত্রে।", tuition_body),
+        "guides/sop": ("Statement of Purpose (SOP) লেখার গাইড | Higher Study Info", "SOP-এর কাঠামো, দৈর্ঘ্য, ভুলগুলো আর আউটলাইন বানানোর টুল — বিশ্ববিদ্যালয়ের অফিসিয়াল নির্দেশনা অনুযায়ী।", sop_body),
+        "guides/motivation-letter": ("Motivation Letter লেখার গাইড | Higher Study Info", "DAAD ও ইউরোপীয় স্কলারশিপের Motivation Letter: প্রশ্ন, কাঠামো, দৈর্ঘ্য আর আউটলাইন টুল।", motivation_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
         (OUT / name).mkdir(parents=True)
-        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS, body_fn(updated)), encoding="utf-8")
+        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS + OUTLINE_CSS, body_fn(updated)), encoding="utf-8")
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
+    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

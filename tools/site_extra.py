@@ -322,6 +322,8 @@ GUIDES = [
     ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
     ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
+    ("/guides/sop/", "✍️ Statement of Purpose (SOP)", "কাঠামো, দৈর্ঘ্য, কী করবেন না — আর নিজের তথ্য দিয়ে আউটলাইন বানানোর টুল।"),
+    ("/guides/motivation-letter/", "📝 Motivation Letter", "DAAD, Erasmus Mundus-এর মতো ইউরোপীয় আবেদনের জন্য — প্রশ্ন, কাঠামো আর আউটলাইন টুল।"),
 ]
 
 
@@ -660,3 +662,143 @@ def budget_body(updated):
 {FOOTER}
 </div>
 {script}"""
+
+
+# ---------------------------------------------------------------- SOP & motivation letter
+
+def _outline_tool(kind):
+    """Fields -> an English outline skeleton the applicant fills in themselves (not a finished letter)."""
+    if kind == "sop":
+        fields = [("prog", "প্রোগ্রাম ও বিশ্ববিদ্যালয়", "e.g. MS in Computer Science, University of X"),
+                  ("interest", "যে বিষয়ে আগ্রহ / গবেষণার প্রশ্ন", "e.g. low-resource NLP for Bangla"),
+                  ("exp", "সবচেয়ে প্রাসঙ্গিক অভিজ্ঞতা (প্রজেক্ট/থিসিস/চাকরি) — আপনার ভূমিকা ও ফল", "e.g. undergrad thesis on ..., built ..., result ..."),
+                  ("fit", "কেন এই প্রোগ্রাম — কোন অধ্যাপক/ল্যাব/কোর্স", "e.g. Prof. Y's lab on ..."),
+                  ("goal", "পড়া শেষে লক্ষ্য", "e.g. research role in ..., return to teach at ...")]
+        order = [("Opening", "State your field and the specific question or problem that drives you: {interest}."),
+                 ("Preparation", "Your most relevant work, with your role and the outcome: {exp}. What did it teach you?"),
+                 ("Fit", "Why {prog}: name the faculty, lab or courses — {fit} — and what you will contribute."),
+                 ("Goals", "Where this degree leads: {goal}."),
+                 ("Close", "One or two sentences tying interest, preparation and goals together.")]
+    else:
+        fields = [("prog", "প্রোগ্রাম, বিশ্ববিদ্যালয় ও দেশ", "e.g. MSc Water Management, University of X, Germany"),
+                  ("why", "কেন এই বিষয় — কী থেকে আগ্রহ শুরু", "e.g. flood work in my district ..."),
+                  ("exp", "আগের পড়া/কাজের অভিজ্ঞতা, যা এই প্রোগ্রামে কাজে লাগবে", "e.g. 2 years at ..., project on ..."),
+                  ("fit", "কেন এই প্রোগ্রাম, বিশ্ববিদ্যালয় ও দেশ", "e.g. modules on ..., partner institutes ..."),
+                  ("back", "দেশে ফিরে কীভাবে কাজে লাগাবেন", "e.g. apply ... at my department / ministry")]
+        order = [("Motivation", "What draws you to this field and why now: {why}."),
+                 ("Background", "Studies and work that prepared you, and how: {exp}."),
+                 ("Choice", "Why {prog} — the programme, the university and the country: {fit}."),
+                 ("Goals during the stay", "What you want to learn or achieve while studying there."),
+                 ("After the degree", "How you will use the qualification, especially back home: {back}.")]
+    inputs = "".join(
+        f'<label for="o-{k}">{l}<textarea id="o-{k}" rows="2" placeholder="{html.escape(ph)}"></textarea></label>' for k, l, ph in fields)
+    tpl = json.dumps(order, ensure_ascii=False)
+    keys = json.dumps([k for k, _, _ in fields])
+    return f"""<h2>আউটলাইন বানান</h2>
+<p>নিচের ঘরগুলোতে নিজের তথ্য লিখুন (বাংলা বা ইংরেজিতে) — একটা অনুচ্ছেদ-ভিত্তিক কাঠামো তৈরি হবে। এটা খসড়ার কঙ্কাল মাত্র; চিঠিটা নিজের ভাষায় লিখুন। এখানে লেখা কিছুই কোথাও পাঠানো বা সংরক্ষণ হয় না।</p>
+<div class="otool">{inputs}</div>
+<pre id="o-out" class="ooutput" aria-live="polite"></pre>
+<p><button type="button" id="o-copy" class="obtn">আউটলাইন কপি করুন</button> <span id="o-msg" class="count"></span></p>
+<script>
+(function(){{
+  var T={tpl},K={keys};
+  function v(k){{var e=document.getElementById("o-"+k);return e.value.trim()||"["+e.previousSibling.textContent.trim()+"]"}}
+  function run(){{document.getElementById("o-out").textContent=T.map(function(p,i){{
+    return (i+1)+". "+p[0]+"\\n   "+p[1].replace(/\\{{(\\w+)\\}}/g,function(_,k){{return K.indexOf(k)>=0?v(k):"_"}})}}).join("\\n\\n")}}
+  K.forEach(function(k){{document.getElementById("o-"+k).addEventListener("input",run)}});run();
+  document.getElementById("o-copy").addEventListener("click",function(){{
+    var t=document.getElementById("o-out").textContent,m=document.getElementById("o-msg");
+    var done=function(){{m.textContent="কপি হয়েছে"}},fail=function(){{var r=document.createRange();r.selectNodeContents(document.getElementById("o-out"));var s=getSelection();s.removeAllRanges();s.addRange(r);m.textContent="সিলেক্ট করা হয়েছে — Ctrl+C চাপুন"}};
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,fail);else fail();
+  }});
+}})();
+</script>"""
+
+
+OUTLINE_CSS = """<style>
+.otool{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.otool label{display:flex;flex-direction:column;justify-content:space-between;gap:4px;font-size:14px;color:var(--muted)}
+.otool textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;resize:vertical;width:100%}
+.ooutput{white-space:pre-wrap;font-family:var(--mono);font-size:13px;line-height:1.6;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:0;overflow-x:auto}
+.obtn{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:8px;padding:8px 14px;background:var(--accent);color:var(--surface);cursor:pointer}
+</style>"""
+
+
+def sop_body(updated):
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সূত্র যাচাই {GUIDES_CHECKED}</span>
+  <h1>Statement of Purpose (SOP)</h1>
+  <div style="max-width:68ch;display:flex;flex-direction:column;gap:14px">
+  <p class="lede">SOP হলো একাডেমিক চিঠি: আপনি কী নিয়ে পড়তে বা গবেষণা করতে চান, তার জন্য কী প্রস্তুতি আছে, কেন এই প্রোগ্রাম, আর ভবিষ্যৎ লক্ষ্য কী। যুক্তরাষ্ট্র, কানাডা, অস্ট্রেলিয়ার মাস্টার্স/PhD আবেদনে সাধারণত SOP চাওয়া হয়। ইউরোপে একই ধরনের লেখাকে প্রায়ই <a href="/guides/motivation-letter/">Motivation Letter</a> বলে।</p>
+  <h2>দৈর্ঘ্য</h2>
+  <p>প্রোগ্রামের নির্দেশনাই আগে। উদাহরণ: UC Berkeley মোটামুটি ৫০০–১,০০০ শব্দ বলে, Cornell সাধারণত ১–২ পৃষ্ঠা, UCLA-র প্রশ্নে সর্বোচ্চ ৫০০ শব্দ, Harvard-এর ইংরেজি বিভাগে সর্বোচ্চ ১,০০০ শব্দ। সীমা পেরোবেন না।</p>
+  <h2>কাঠামো</h2>
+  <ol class="steps">
+    <li><h3>শুরু: আগ্রহ ও প্রশ্ন</h3><p>কোন বিষয় বা সমস্যা নিয়ে কাজ করতে চান, আর কীভাবে সেখানে পৌঁছালেন — সংক্ষেপে। জীবনকাহিনি দিয়ে শুরু করবেন না; Berkeley আত্মজীবনীমূলক গল্প এড়াতে বলে।</p></li>
+    <li><h3>প্রস্তুতি: নির্দিষ্ট উদাহরণ</h3><p>থিসিস, প্রজেক্ট, গবেষণা বা চাকরি — প্রজেক্টের নাম/বিষয়, তত্ত্বাবধায়ক, আপনার নির্দিষ্ট ভূমিকা, কী শিখলেন, ফল কী। শুধু CV আবার লিখবেন না; অভিজ্ঞতার মানে ব্যাখ্যা করুন।</p></li>
+    <li><h3>কেন এই প্রোগ্রাম</h3><p>কোন অধ্যাপক, ল্যাব, কোর্স বা সুবিধা আপনার আগ্রহের সাথে মেলে — নাম ধরে। কিছু প্রোগ্রাম অধ্যাপকের নাম লেখা বাধ্যতামূলক করে।</p></li>
+    <li><h3>লক্ষ্য</h3><p>ডিগ্রির পর কী করতে চান — বাস্তবসম্মত ও নির্দিষ্ট।</p></li>
+  </ol>
+  <h2>যা করবেন, যা করবেন না</h2>
+  <ul>
+    <li>প্রতিটি প্রোগ্রামের জন্য আলাদা SOP লিখুন — একই লেখা সবখানে পাঠাবেন না (Purdue OWL)।</li>
+    <li>গুণ দাবি না করে উদাহরণ দিয়ে দেখান (Berkeley: "demonstrate everything by example")।</li>
+    <li>CGPA কম হওয়া বা পড়ায় বিরতির মতো সমস্যা থাকলে সংক্ষেপে, ইতিবাচকভাবে ব্যাখ্যা করুন — অজুহাত নয়, কী শিখেছেন ও কীভাবে উন্নতি করেছেন।</li>
+    <li>অন্যের SOP বা ইন্টারনেটের নমুনা কপি করবেন না; বিশ্ববিদ্যালয়গুলো অনেক সময় plagiarism যাচাই করে।</li>
+    <li>জমার আগে বানান-ব্যাকরণ দেখুন, আর আপনার বিষয়ের বাইরের কাউকে দিয়েও একবার পড়িয়ে নিন।</li>
+  </ul>
+  </div>
+  {_outline_tool("sop")}
+  {_sources([
+      ("UC Berkeley Graduate Division — Writing your statements", "https://grad.berkeley.edu/admissions/application-process/writing-your-statements/"),
+      ("Cornell Graduate School — Academic statement of purpose", "https://gradschool.cornell.edu/admissions/application-steps/statements-of-purpose/"),
+      ("Harvard GSAS — Statement of purpose", "https://gsas.harvard.edu/apply/applying-degree-programs/statement-purpose-personal-statement-and-writing-sample"),
+      ("Purdue OWL — Drafting your statement of purpose", "https://owl.purdue.edu/owl/general_writing/graduate_school_applications/graduate_school_applications_statements_of_purpose/statements_of_purpose_drafting_your_statement.html"),
+  ])}
+</article>
+{FOOTER}
+</div>"""
+
+
+def motivation_body(updated):
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সূত্র যাচাই {GUIDES_CHECKED}</span>
+  <h1>Motivation Letter</h1>
+  <div style="max-width:68ch;display:flex;flex-direction:column;gap:14px">
+  <p class="lede">ইউরোপের বিশ্ববিদ্যালয় আর স্কলারশিপ (DAAD, Erasmus Mundus ইত্যাদি) সাধারণত Motivation Letter চায়: কেন এই বিষয়, কেন এই প্রোগ্রাম ও দেশ, আপনার প্রস্তুতি কী, আর ডিগ্রি দিয়ে কী করবেন — বিশেষ করে দেশে ফিরে। একাডেমিক SOP-এর জন্য দেখুন <a href="/guides/sop/">SOP গাইড</a>।</p>
+  <h2>দৈর্ঘ্য</h2>
+  <p>স্কলারশিপের নির্দেশনা দেখুন। DAAD-এর উদাহরণ: STEM study scholarship-এ ১–৩ পৃষ্ঠা, ডক্টরাল ও রিসার্চ গ্রান্টে সাধারণত ১–২ পৃষ্ঠা, Helmut Schmidt Programme-এ সর্বোচ্চ ২ পৃষ্ঠা আর তারিখসহ।</p>
+  <h2>DAAD যে প্রশ্নগুলোর উত্তর চায়</h2>
+  <ol class="steps">
+    <li><h3>এই পড়া থেকে কী পেতে চান</h3><p>ব্যক্তিগতভাবে আর ক্যারিয়ারে — জার্মানিতে (বা গন্তব্য দেশে) পড়ার একাডেমিক ও ব্যক্তিগত কারণ।</p></li>
+    <li><h3>আগের অভিজ্ঞতা কীভাবে কাজে লাগবে</h3><p>পড়াশোনা আর কাজের অভিজ্ঞতা — এই প্রোগ্রামে কীভাবে সাহায্য করবে।</p></li>
+    <li><h3>কেন এই প্রোগ্রাম ও বিশ্ববিদ্যালয়</h3><p>নির্দিষ্ট কোর্স, মডিউল, গবেষণা, প্রতিষ্ঠানের কোন দিক আপনাকে টানে।</p></li>
+    <li><h3>থাকার সময় লক্ষ্য</h3><p>পড়ার সময় কী শিখতে বা করতে চান। ডক্টরাল আবেদনে গবেষণা-পরিকল্পনার সংক্ষিপ্ত রূপরেখা।</p></li>
+    <li><h3>দেশে ফিরে কীভাবে কাজে লাগাবেন</h3><p>যোগ্যতাটা নিজের দেশে কোথায়, কীভাবে ব্যবহার করবেন — বাস্তব ও নির্দিষ্ট।</p></li>
+  </ol>
+  <h2>যা করবেন, যা করবেন না</h2>
+  <ul>
+    <li>লেখার আগে প্রশ্নগুলো নিয়ে ভাবুন, নোট নিন, তারপর আউটলাইন বানান — DAAD এভাবেই বলে।</li>
+    <li>শুরুতে CV আবার লিখবেন না; অলংকারপূর্ণ বা তোষামোদের ভাষা এড়ান (DAAD)।</li>
+    <li>দক্ষতার নাম বলাই যথেষ্ট নয় — সেটা দিয়ে কী অর্জন করেছেন, উদাহরণ দিন। CV বা রেফারেন্স লেটার থেকে কপি করা লেখা মূল্যায়নকারীরা ধরে ফেলেন (Chevening)।</li>
+    <li>Chevening তাদের প্রবন্ধে AI দিয়ে তৈরি উত্তর নিষিদ্ধ করেছে — নিজের ভাষায়, নিজের অভিজ্ঞতা দিয়ে লিখুন।</li>
+    <li>শেষে আবার পড়ে অপ্রয়োজনীয় ও পুনরাবৃত্ত অংশ কেটে দিন (DAAD)।</li>
+  </ul>
+  </div>
+  {_outline_tool("motivation")}
+  {_sources([
+      ("DAAD — Letter of motivation (instruction sheet)", "https://www2.daad.de/medien/letter_of_motivation_nawam.pdf"),
+      ("DAAD — Study scholarships for STEM disciplines", "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57742130"),
+      ("DAAD — Helmut Schmidt Programme FAQ", "https://static.daad.de/media/daad_de/pdfs_nicht_barrierefrei/in-deutschland-studieren-forschen-lehren/daad_helmut_schmidt_programme_frequently_asked_questions.pdf"),
+      ("Chevening — Application advice", "https://www.chevening.org/news/application-advice/"),
+      ("Chevening — Application criteria", "https://www.chevening.org/resource-hub/guidance/application-criteria/"),
+  ])}
+</article>
+{FOOTER}
+</div>"""
