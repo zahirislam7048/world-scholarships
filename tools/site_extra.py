@@ -1,6 +1,7 @@
 """Site-wide navigation and the cross-country pages: deadlines, search, about, privacy."""
 import html
 import json
+import pathlib
 
 from build_preview import CONTINENTS, COUNTRIES, load_rows
 
@@ -15,7 +16,7 @@ NAV_CSS = """<style>
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
-NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/about/", "আমাদের সম্পর্কে")]
+NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
 
 
 def nav(current=""):
@@ -802,3 +803,93 @@ def motivation_body(updated):
 </article>
 {FOOTER}
 </div>"""
+
+
+SUBJECT_BN = {
+    "Computer Science / AI": "কম্পিউটার সায়েন্স / AI", "Natural Language Processing": "ন্যাচারাল ল্যাঙ্গুয়েজ প্রসেসিং (NLP)",
+    "Bioinformatics": "বায়োইনফরমেটিক্স", "Cybersecurity": "সাইবার সিকিউরিটি", "Robotics": "রোবোটিক্স",
+    "Electrical / Power Engineering": "ইলেকট্রিক্যাল / পাওয়ার ইঞ্জিনিয়ারিং",
+    "Environmental Engineering / Water": "এনভায়রনমেন্টাল ইঞ্জিনিয়ারিং / পানি", "Public Health": "পাবলিক হেলথ",
+    "Economics / Business": "অর্থনীতি / বিজনেস",
+}
+
+
+def professors_body(updated):
+    import csv
+    rows = list(csv.DictReader(open(pathlib.Path(__file__).resolve().parent.parent / "data" / "professors" / "professors.csv", encoding="utf-8")))
+    data = [{"n": r["name"], "t": r["title"], "u": r["university"], "c": r["country"], "d": r["department"],
+             "s": r["subject"], "r": r["research_interests"], "p": r["profile_url"], "x": r["directory_url"]} for r in rows]
+    subj = sorted({r["subject"] for r in rows})
+    unis = sorted({r["university"] for r in rows})
+    s_opts = "".join(f'<option value="{html.escape(s)}">{html.escape(SUBJECT_BN.get(s, s))}</option>' for s in subj)
+    u_opts = "".join(f'<option value="{html.escape(u)}">{html.escape(u)}</option>' for u in unis)
+    chips = "".join(f'<button type="button" class="chip" data-s="{html.escape(s)}">{html.escape(SUBJECT_BN.get(s, s))} '
+                    f'<small>{bn(sum(r["subject"] == s for r in rows))}</small></button>' for s in subj)
+    dirs = {}
+    for r in rows:
+        dirs.setdefault((r["university"], r["department"]), r["directory_url"])
+    dir_list = "".join(f'<li><a href="{html.escape(x)}" target="_blank" rel="noopener">{html.escape(u)} — {html.escape(d)}</a></li>'
+                       for (u, d), x in sorted(dirs.items()))
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    script = """<script>
+var DATA = __DATA__;
+(function(){
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+  var q=document.getElementById("q"),sj=document.getElementById("subj"),un=document.getElementById("uni"),out=document.getElementById("out"),cnt=document.getElementById("cnt");
+  function render(){
+    var s=q.value.trim().toLowerCase();
+    var rows=DATA.filter(function(r){
+      if(sj.value&&r.s!==sj.value)return false;
+      if(un.value&&r.u!==un.value)return false;
+      return !s||[r.n,r.t,r.u,r.c,r.d,r.s,r.r].join(" ").toLowerCase().indexOf(s)>=0;
+    });
+    document.querySelectorAll(".chip").forEach(function(b){b.classList.toggle("on",b.dataset.s===sj.value)});
+    cnt.textContent=bn(rows.length)+" জন প্রফেসর";
+    if(!rows.length){out.innerHTML='<p class="empty">কাউকে পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>';return}
+    out.innerHTML=rows.map(function(r){
+      return '<article class="res"><span class="where">'+esc(r.u)+' · '+esc(r.c)+'</span><h3>'+esc(r.n)+'</h3>'+
+        '<p>'+esc(r.t)+' · '+esc(r.d)+'</p>'+
+        '<p><b>গবেষণার বিষয়:</b> '+esc(r.r)+'</p>'+
+        '<div class="row">'+(r.p?'<a class="apply" href="'+esc(r.p)+'" target="_blank" rel="noopener">অফিসিয়াল প্রোফাইল ↗</a>':'')+
+        '<a class="'+(r.p?'more':'apply info')+'" href="'+esc(r.x)+'" target="_blank" rel="noopener">ফ্যাকাল্টি তালিকা ↗</a></div></article>';
+    }).join("");
+  }
+  [q,sj,un].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
+  document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){sj.value=sj.value===b.dataset.s?"":b.dataset.s;render()})});
+  render();
+})();
+</script>""".replace("__DATA__", payload)
+    return f"""<style>
+.chips{{display:flex;flex-wrap:wrap;gap:8px}}
+.chip{{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px}}
+.chip small{{color:var(--muted)}}.chip.on{{background:var(--accent);color:var(--surface);border-color:var(--accent)}}.chip.on small{{color:inherit}}
+</style>
+<div class="wrap">
+{nav("/professors/")}
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">প্রফেসর সার্চ · সংগ্রহ {bn(len(rows))} জন · {bn(len(unis))}টি বিশ্ববিদ্যালয়</span>
+  <h1>প্রফেসর খুঁজুন — বিষয় ও ডিপার্টমেন্ট অনুযায়ী</h1>
+  <p class="lede">MS/PhD-র জন্য সুপারভাইজার খুঁজতে: নাম, বিশ্ববিদ্যালয়, ডিপার্টমেন্ট বা গবেষণার বিষয় (যেমন “machine learning”, “dengue”, “desalination”) লিখে খুঁজুন। প্রতিটি নাম বিশ্ববিদ্যালয়ের অফিসিয়াল পেজ থেকে নেওয়া; যোগাযোগের ঠিকানা ওই প্রোফাইলেই পাবেন।</p>
+</header>
+<div class="chips" aria-label="বিষয়">{chips}</div>
+<div class="filters" role="search">
+  <input id="q" type="search" placeholder="যেমন: machine learning, NUS, epidemiology" aria-label="খুঁজুন">
+  <select id="subj" aria-label="বিষয়"><option value="">সব বিষয়</option>{s_opts}</select>
+  <select id="uni" aria-label="বিশ্ববিদ্যালয়"><option value="">সব বিশ্ববিদ্যালয়</option>{u_opts}</select>
+  <span class="count" id="cnt"></span>
+</div>
+<section class="results" id="out"><p class="empty">তালিকা লোড হচ্ছে…</p></section>
+<h2>প্রফেসরকে ইমেইল করার আগে</h2>
+<ul>
+  <li>প্রোফাইল আর সাম্প্রতিক ২–৩টি পেপার পড়ুন; ইমেইলে নির্দিষ্ট করে লিখুন তাঁর কোন কাজের সঙ্গে আপনার আগ্রহ মেলে।</li>
+  <li>ছোট রাখুন (১৫০–২৫০ শব্দ), CV সংযুক্ত করুন, বিষয়ের লাইনে লিখুন কোন প্রোগ্রাম/সেশনের জন্য।</li>
+  <li>সবাইকে একই কপি-পেস্ট ইমেইল পাঠাবেন না; উত্তর না এলে ১–২ সপ্তাহ পর একবার ভদ্রভাবে মনে করিয়ে দিন।</li>
+  <li>অনেক বিশ্ববিদ্যালয়ে (যেমন ইউরোপের অনেক Master's) আগে প্রফেসরকে ইমেইল করা লাগে না — প্রোগ্রামের অফিসিয়াল নির্দেশনা দেখুন।</li>
+</ul>
+<h2>পূর্ণ ফ্যাকাল্টি তালিকা (অফিসিয়াল)</h2>
+<ul class="src-list">{dir_list}</ul>
+<p class="vsrc">পদবি ও গবেষণার বিষয় অফিসিয়াল পেজের সার্চ-স্নিপেট থেকে নেওয়া, সংগ্রহ: {html.escape(rows[0]["collected_on"])}। পদবি বদলে যেতে পারে — যোগাযোগের আগে প্রোফাইলে মিলিয়ে নিন। স্প্যাম এড়াতে এখানে কোনো ইমেইল বা ফোন নম্বর রাখা হয়নি।</p>
+{FOOTER}
+</div>
+{script}"""
