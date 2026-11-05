@@ -353,6 +353,9 @@ GUIDES = [
     ("/guides/professor-email/", "✉️ প্রফেসরকে ইমেইল", "সুপারভাইজার খোঁজা, ইমেইলের কাঠামো আর ফলো-আপের নিয়ম।"),
     ("/guides/funded-phd/", "🎓 ফান্ডেড PhD — TA, RA, বেতনভুক্ত PhD", "যুক্তরাষ্ট্র-কানাডার Assistantship ও ন্যূনতম ফান্ডিং, ইউরোপে বেতনসহ PhD পদ।"),
     ("/guides/part-time-work/", "💼 পড়ার সময় পার্ট-টাইম কাজ", "দেশভিত্তিক কাজের ঘণ্টার সীমা আর ভিসা বাঁচিয়ে কাজের সতর্কতা।"),
+    ("/guides/interview/", "🎤 ভিসা ও স্কলারশিপ ইন্টারভিউ", "Chevening-ধরনের স্কলারশিপ ইন্টারভিউ আর ঢাকায় US F-1 ভিসা ইন্টারভিউর প্রস্তুতি।"),
+    ("/guides/student-file/", "🏦 স্টুডেন্ট ফাইল ও টাকা পাঠানো", "বাংলাদেশ ব্যাংকের নিয়মে টিউশন ও জীবনযাত্রার খরচ বিদেশে পাঠানো।"),
+    ("/guides/pre-departure/", "🧳 যাওয়ার আগের চেকলিস্ট", "কাগজ, টাকা, স্বাস্থ্য, যাত্রা আর পৌঁছানোর প্রথম সপ্তাহ — টিক দেওয়ার তালিকা।"),
     ("/guides/motivation-letter/", "📝 Motivation Letter", "DAAD, Erasmus Mundus-এর মতো ইউরোপীয় আবেদনের জন্য — প্রশ্ন, কাঠামো আর আউটলাইন টুল।"),
 ]
 
@@ -1233,7 +1236,7 @@ def guide_links(country_en=None, level=""):
         g += [("/guides/funded-phd/", "ফান্ডেড PhD (TA/RA)"), ("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
     europe = country_en and any(s.startswith("europe/") and COUNTRIES[s][0] == country_en for s in COUNTRIES)
     g.append(("/guides/motivation-letter/", "Motivation Letter লেখা") if europe else ("/guides/sop/", "SOP লেখা"))
-    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"),
+    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/interview/", "ইন্টারভিউর প্রস্তুতি"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"),
           ("/guides/documents/", "কাগজপত্র ও সত্যায়ন"), ("/tools/cgpa/", "CGPA রূপান্তর"), ("/tools/eligibility/", "যোগ্যতা যাচাই")]
     seen, out = set(), []
     for h, t in g:
@@ -1396,3 +1399,117 @@ def part_time_body(updated):
     <li>কাজ পেতে প্রায়ই স্থানীয় ভাষা লাগে (যেমন জার্মানি, জাপান, কোরিয়া, ফ্রান্স) — ভাষা শেখা শুরু করুন দেশে থাকতেই।</li>
   </ul>""", uniq,
         '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li><li><a href="/guides/visa/">স্টুডেন্ট ভিসা</a></li><li><a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a></li><li><a href="/guides/funded-phd/">ফান্ডেড PhD</a></li></ul></section>')
+
+
+def interview_body(updated):
+    return _guide("interview", "ভিসা ও স্কলারশিপ ইন্টারভিউ",
+        "অনেক স্কলারশিপ (Chevening, GKS, DAAD-এর কিছু প্রোগ্রাম) চূড়ান্ত বাছাইয়ের আগে ইন্টারভিউ নেয়, আর যুক্তরাষ্ট্রের মতো দেশে ভিসার জন্য দূতাবাসে ইন্টারভিউ দিতে হয়। দুটোর প্রস্তুতি আলাদা।",
+        """<h2>স্কলারশিপ ইন্টারভিউ</h2>
+  <p>উদাহরণ হিসেবে Chevening-এর অফিসিয়াল নির্দেশনা — অন্য স্কলারশিপেও একই ধরনের প্রশ্ন আসে।</p>
+  <ol class="steps">
+    <li><h3>নিজের আবেদন আবার পড়ুন</h3><p>প্রবন্ধে যা লিখেছেন, ইন্টারভিউতে তার বাইরে নতুন উদাহরণসহ একই কথা বলতে পারতে হবে। মত বদলে থাকলে সেটা ব্যাখ্যা করুন।</p></li>
+    <li><h3>প্রশ্নের মূল বিষয়গুলো</h3><p>নেতৃত্ব, অন্যকে প্রভাবিত করা, পেশাগত নেটওয়ার্ক, কোর্স ও বিশ্ববিদ্যালয় বাছাইয়ের কারণ, আর দেশে ফিরে আপনার প্রভাব — স্বল্প, মধ্য ও দীর্ঘমেয়াদি নির্দিষ্ট লক্ষ্য।</p></li>
+    <li><h3>STAR কাঠামোয় উত্তর</h3><p>Situation, Task, Action, Result — "আমরা" নয়, <b>আপনি</b> কী করেছেন বলুন, আর ফল সংখ্যায় দেখান।</p></li>
+    <li><h3>কোর্স ও দেশ নিয়ে পড়াশোনা</h3><p>কোন মডিউল কেন, একই রকম কোর্সের মধ্যে এটা কেন; আপনার দেশের অগ্রাধিকারের সাথে স্কলারশিপদাতা দেশের লক্ষ্যের মিল।</p></li>
+    <li><h3>মক ইন্টারভিউ</h3><p>বন্ধু বা সহকর্মীর সাথে জোরে অনুশীলন করুন। মুখস্থ বা কপি করা উত্তর সহজে ধরা পড়ে — Chevening বলে "সঠিক উত্তর" বলে কিছু নেই, আপনার নিজের সত্যি উত্তরই চায়।</p></li>
+    <li><h3>শেষে প্রশ্ন আর দিনের প্রস্তুতি</h3><p>প্যানেলকে জিজ্ঞেস করার মতো একটা ভাবনাপূর্ণ প্রশ্ন রাখুন; আগেভাগে পৌঁছান, আনুষ্ঠানিক পোশাক পরুন।</p></li>
+  </ol>
+  <h2>যুক্তরাষ্ট্রের স্টুডেন্ট ভিসা (F-1) — ঢাকা</h2>
+  <p><b>সাথে নিন</b> (U.S. Embassy Dhaka):</p>
+  <ul>
+    <li>মূল Form I-20 (বিশ্ববিদ্যালয়ের সই করা), SEVIS ফি-র রসিদ</li>
+    <li>DS-160 কনফার্মেশন পেজ (বারকোডসহ), অ্যাপয়েন্টমেন্ট লেটার, ফি-র রসিদ</li>
+    <li>পাসপোর্ট — যুক্তরাষ্ট্রে থাকার সময়ের পরও অন্তত ৬ মাস মেয়াদ; আগের পাসপোর্টগুলোও আলাদা করে (স্টেপল না করে)</li>
+    <li>অনলাইনে ছবি আপলোড না হলে একটা নিয়মমাফিক প্রিন্ট ছবি</li>
+    <li>সহায়ক কাগজ: মার্কশিট/ট্রান্সক্রিপ্ট, পরীক্ষার স্কোর, ৩–১২ মাসের ব্যাংক স্টেটমেন্ট। দূতাবাস বলে এগুলো বাধ্যতামূলক নয় — সিদ্ধান্ত মূলত DS-160 আর আপনার উত্তরের উপর।</li>
+  </ul>
+  <p><b>যা জানা জরুরি:</b></p>
+  <ul>
+    <li>পড়ার পরিকল্পনা, খরচ কীভাবে চালাবেন আর বাংলাদেশের সাথে আপনার বন্ধন — নিজের ভাষায়, সংক্ষেপে বলতে পারুন।</li>
+    <li>বন্ধু, আত্মীয় বা আইনজীবী সাথে ঢুকতে পারেন না।</li>
+    <li><b>কোনো জাল কাগজ দেবেন না।</b> সন্দেহ হলে ভিসা প্রত্যাখ্যান আর স্থায়ী নিষেধাজ্ঞা হতে পারে। এজেন্ট যদি "ব্যাংক স্টেটমেন্ট বানিয়ে দেওয়ার" প্রস্তাব দেয়, সরে আসুন।</li>
+  </ul>
+  <p>অন্য দেশের ভিসায় কত টাকা দেখাতে হয়: <a href="/guides/visa/">স্টুডেন্ট ভিসা — দেশভিত্তিক</a>।</p>""",
+        [("Chevening — How to succeed at your Chevening interview", "https://www.chevening.org/resource-hub/guidance/how-to-succeed-at-your-chevening-interview/"),
+         ("Chevening — 5 questions to consider before your interview", "https://www.chevening.org/news/5-questions-to-consider-before-your-chevening-interview/"),
+         ("Chevening — 5 tips from real Chevening interviewers", "https://www.chevening.org/news/5-tips-for-standing-out-in-your-interview-from-real-chevening-interviewers/"),
+         ("U.S. Embassy in Bangladesh — Interview steps", "https://bd.usembassy.gov/interview-steps/"),
+         ("U.S. Embassy in Bangladesh — Supporting documents", "https://bd.usembassy.gov/supporting-documents/"),
+         ("U.S. Department of State — Student visa", "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html")],
+        related_scholarships("ইন্টারভিউ হয় এমন কিছু স্কলারশিপ", lambda s_, r: r["provider_type"] == "government" and not s_.startswith("asia/bangladesh"), 12))
+
+
+def student_file_body(updated):
+    return _guide("student-file", "স্টুডেন্ট ফাইল ও বিদেশে টাকা পাঠানো",
+        "বাংলাদেশ থেকে বিদেশে টিউশন ফি আর জীবনযাত্রার খরচ পাঠাতে হয় অনুমোদিত ডিলার (AD) ব্যাংকের মাধ্যমে — সাধারণত ব্যাংকে একটা \"স্টুডেন্ট ফাইল\" খুলে। নিয়ম বাংলাদেশ ব্যাংকের Foreign Exchange নির্দেশিকা ও সার্কুলারে।",
+        """<h2>কী কী পাঠানো যায়</h2>
+  <ul>
+    <li><b>আবেদন, ভর্তি ও পরীক্ষার ফি:</b> AD ব্যাংক ছাড়তে পারে, তবে টাকা সরাসরি প্রতিষ্ঠানের কাছে যেতে হবে।</li>
+    <li><b>টিউশন ও জীবনযাত্রার খরচ:</b> বিশ্ববিদ্যালয়ের দেওয়া খরচের হিসাব (বার্ষিক টিউশন, থাকা-খাওয়া, বীমা, আনুষঙ্গিক) অনুযায়ী।</li>
+    <li><b>স্বাস্থ্যবীমা:</b> ভিসা বা ভর্তির জন্য বাধ্যতামূলক হলে।</li>
+    <li><b>পেমেন্ট প্রতিষ্ঠান বা ব্লকড অ্যাকাউন্ট:</b> ভর্তির কাগজে নির্দিষ্ট পেমেন্ট প্রতিষ্ঠানের নাম থাকলে সেখানে পাঠানো যায়; ব্লকড অ্যাকাউন্টের টাকা পড়ার খরচেই ব্যবহার করতে হবে।</li>
+  </ul>
+  <h2>ব্যাংকে যা লাগে (সাধারণত)</h2>
+  <ol class="steps">
+    <li><h3>ভর্তির কাগজ ও খরচের হিসাব</h3><p>অফার/ভর্তির চিঠি আর প্রতিষ্ঠানের দেওয়া বার্ষিক খরচের হিসাব।</p></li>
+    <li><h3>সত্যায়িত সনদ ও বৈধ পাসপোর্ট</h3><p>দেখুন <a href="/guides/documents/">কাগজপত্র ও সত্যায়ন</a>।</p></li>
+    <li><h3>ব্যাংকের আবেদন ফর্ম</h3><p>ব্যাংক প্রতিটি শিক্ষার্থীর জন্য আলাদা ফাইল রাখে, যা বাংলাদেশ ব্যাংক পরিদর্শন করতে পারে।</p></li>
+  </ol>
+  <h2>জরুরি শর্ত</h2>
+  <ul>
+    <li>টাকা পাঠানোর এক বছরের মধ্যে বিদেশে যেতে হবে বলে ব্যাংক নিশ্চিত হবে।</li>
+    <li><b>ভিসা প্রত্যাখ্যাত হলে</b> পাঠানো টাকা দেশে ফেরত আনতে হবে — ব্যাংক এ বিষয়ে আপনার কাছ থেকে অঙ্গীকারনামা নেবে। তাই ভিসার আগে বড় অঙ্ক পাঠানোর আগে প্রতিষ্ঠানের ফেরতের (refund) নিয়ম দেখে নিন।</li>
+    <li>প্রতিষ্ঠান বা বিষয় বদলালে বা নতুন কোর্সে গেলে ব্যাংকের সাথে আগে কথা বলুন।</li>
+    <li>হুন্ডি বা অনানুষ্ঠানিক পথে টাকা পাঠাবেন না — এটা অবৈধ, আর ভিসার আর্থিক প্রমাণ হিসেবেও গ্রহণযোগ্য হয় না।</li>
+    <li>শিক্ষার ফি কার্ডে পরিশোধ নিয়ে বাংলাদেশ ব্যাংকের নতুন সার্কুলার আছে (আগস্ট ২০২৬) — কার্ডে দেওয়ার আগে নিজের ব্যাংকে সর্বশেষ সীমা জেনে নিন।</li>
+  </ul>
+  <p class="meta">ব্যাংকভেদে কাগজের তালিকা কিছুটা আলাদা হয়। ফাইল খোলার আগে নিজের ব্যাংকের Foreign Exchange / Student File ডেস্কে জিজ্ঞেস করুন।</p>""",
+        [("Bangladesh Bank — FE Circular No. 37 (30 Sep 2025)", "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302025fepd37e.pdf"),
+         ("Bangladesh Bank — FE circular (10 Aug 2026)", "https://www.bb.org.bd/mediaroom/circulars/fepd/aug102026fepd-129e.pdf"),
+         ("Bangladesh Bank — Guidelines for Foreign Exchange Transactions, Vol. 1, Chapter 11 (Private remittances)", "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/11.pdf")],
+        '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/guides/visa/">ভিসায় কত টাকা দেখাতে হয়</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li><li><a href="/guides/pre-departure/">যাওয়ার আগের চেকলিস্ট</a></li></ul></section>')
+
+
+PRE_DEPARTURE = [
+    ("কাগজপত্র", ["পাসপোর্টের মেয়াদ পুরো কোর্স + অন্তত ৬ মাস", "ভিসা / রেসিডেন্স পারমিটের কাগজ (যেমন I-20, CoE, ভর্তির চিঠি) হাতের ব্যাগে",
+                   "I-20/CoE-তে নাম ও জন্মতারিখ পাসপোর্টের সাথে হুবহু মেলে কিনা দেখুন",
+                   "মূল সনদ, মার্কশিট আর সত্যায়িত কপি", "স্কলারশিপ / ফান্ডিংয়ের চিঠি আর আর্থিক কাগজ",
+                   "সব জরুরি কাগজের স্ক্যান কপি অনলাইনে (ইমেইল/ক্লাউডে)", "পাসপোর্ট সাইজ ছবি (কয়েক কপি)"]),
+    ("টাকা ও ব্যাংক", ["স্টুডেন্ট ফাইলের মাধ্যমে টিউশন / ব্লকড অ্যাকাউন্টের টাকা পাঠানো হয়েছে", "আন্তর্জাতিক লেনদেন চালু ডেবিট/ক্রেডিট কার্ড",
+                       "প্রথম কয়েক সপ্তাহের খরচের জন্য কিছু বৈদেশিক মুদ্রা (দেশের নিয়মিত সীমার মধ্যে)"]),
+    ("স্বাস্থ্য", ["বাধ্যতামূলক স্বাস্থ্যবীমা চূড়ান্ত", "টিকার রেকর্ড আর প্রেসক্রিপশন (ইংরেজিতে), নিয়মিত ওষুধ কিছুদিনের মতো",
+                   "ভিসার জন্য দেশ মেডিক্যাল পরীক্ষা চাইলে তা সম্পন্ন"]),
+    ("যাত্রা ও পৌঁছানো", ["কবে পৌঁছাতে হবে বিশ্ববিদ্যালয়ে জেনে টিকিট — যুক্তরাষ্ট্রে I-20-র শুরুর ৩০ দিনের বেশি আগে ঢোকা যায় না",
+                          "প্রথম রাতগুলোর থাকার ব্যবস্থা নিশ্চিত", "বিমানবন্দর থেকে যাতায়াতের পরিকল্পনা",
+                          "ইন্টারন্যাশনাল অফিস / উপদেষ্টার নাম ও ফোন নম্বর", "হাতের ব্যাগে এক সেট কাপড় আর প্রয়োজনীয় জিনিস (লাগেজ দেরিতে এলে)",
+                          "তরল ১০০ মিলির কম পাত্রে; লাগেজের ওজন সীমা এয়ারলাইনে মিলিয়ে নেওয়া"]),
+    ("পৌঁছানোর পর প্রথম সপ্তাহ", ["বিশ্ববিদ্যালয়ে রিপোর্ট / ভর্তি নিশ্চিত", "দেশের নিয়মে ঠিকানা নিবন্ধন ও রেসিডেন্স পারমিট",
+                                  "স্থানীয় সিম আর ব্যাংক অ্যাকাউন্ট", "বাংলাদেশ দূতাবাসের যোগাযোগ সংরক্ষণ", "ওরিয়েন্টেশনে অংশ নেওয়া"]),
+]
+
+
+def pre_departure_body(updated):
+    sections = "".join(f'<h2>{t}</h2><ul class="chk">' + "".join(
+        f'<li><label><input type="checkbox" data-k="{gi}-{ii}"> {html.escape(x)}</label></li>' for ii, x in enumerate(items)) + "</ul>"
+        for gi, (t, items) in enumerate(PRE_DEPARTURE))
+    total = sum(len(i) for _, i in PRE_DEPARTURE)
+    return _guide("pre-departure", "যাওয়ার আগের চেকলিস্ট",
+        "ভিসা পাওয়ার পর থেকে পৌঁছানোর প্রথম সপ্তাহ পর্যন্ত যা যা করতে হয়। টিক দিলে এই ব্রাউজারে মনে থাকবে — কোথাও পাঠানো হয় না।",
+        f"""<style>.chk{{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}}.chk label{{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer}}
+.chk input{{margin-top:5px;accent-color:var(--accent)}}.chk input:checked+*{{}}.chk label:has(input:checked){{color:var(--muted);text-decoration:line-through}}</style>
+  <p class="warn"><b id="pd-n">০</b> / {bn(total)} সম্পন্ন · <button type="button" id="pd-reset" class="obtn" style="padding:4px 10px;font-size:13px">সব মুছুন</button></p>
+  {sections}
+  <p class="meta">প্রতিটি দেশ ও বিশ্ববিদ্যালয়ের নিজস্ব pre-departure তথ্য দেখুন — স্বাস্থ্যবীমা, আবহাওয়া, যাতায়াত, বাসা।</p>
+  <script>
+  (function(){{var K="hsi-predep",st={{}};try{{st=JSON.parse(localStorage.getItem(K)||"{{}}")}}catch(e){{}}
+  var bx=document.querySelectorAll(".chk input"),n=document.getElementById("pd-n"),bn=function(x){{return String(x).replace(/\\d/g,function(c){{return "০১২৩৪৫৬৭৮৯"[c]}})}};
+  function upd(){{var c=0;bx.forEach(function(b){{if(b.checked)c++}});n.textContent=bn(c)}}
+  bx.forEach(function(b){{b.checked=!!st[b.dataset.k];b.addEventListener("change",function(){{st[b.dataset.k]=b.checked;try{{localStorage.setItem(K,JSON.stringify(st))}}catch(e){{}}upd()}})}});
+  document.getElementById("pd-reset").onclick=function(){{st={{}};try{{localStorage.removeItem(K)}}catch(e){{}}bx.forEach(function(b){{b.checked=false}});upd()}};upd()}})();
+  </script>""",
+        [("EducationUSA — Gather pre-departure materials and documents", "https://educationusa.state.gov/your-5-steps-us-study/prepare-your-departure/graduate/gather-pre-departure-materials-and"),
+         ("EducationUSA — Prepare for your departure", "https://educationusa.state.gov/your-5-steps-us-study/prepare-your-departure"),
+         ("Study Australia — Preparing to travel", "https://www.studyaustralia.gov.au/en/plan-your-move/preparing-to-travel"),
+         ("Study Australia — How to prepare for your flight", "https://www.studyaustralia.gov.au/en/tools-and-resources/tips-and-advice-for-students/how-to-prepare-for-your-flight-to-australia"),
+         ("Bangladesh Bank — FE Circular No. 37 (student remittances)", "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302025fepd37e.pdf")],
+        '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/guides/student-file/">স্টুডেন্ট ফাইল ও টাকা পাঠানো</a></li><li><a href="/guides/visa/">স্টুডেন্ট ভিসা</a></li><li><a href="/guides/part-time-work/">পড়ার সময় কাজ</a></li><li><a href="/guides/documents/">কাগজপত্র ও সত্যায়ন</a></li></ul></section>')

@@ -19,7 +19,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
-                        funded_phd_body, part_time_body)
+                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -371,6 +371,9 @@ def main():
         "scholarships": ("সব স্কলারশিপের তালিকা (A–Z) | Higher Study Info", "অঞ্চল ও দেশ অনুযায়ী সাজানো সব চালু ও আসন্ন স্কলারশিপের তালিকা, প্রতিটির আলাদা পেজসহ।", scholarships_index_body),
         "guides/funded-phd": ("ফান্ডেড PhD — TA, RA ও বেতনভুক্ত PhD | Higher Study Info", "যুক্তরাষ্ট্র ও কানাডায় Teaching/Research Assistantship, ন্যূনতম PhD ফান্ডিং আর ইউরোপে বেতনসহ PhD পদ — অফিসিয়াল সূত্রে।", funded_phd_body),
         "guides/part-time-work": ("পড়ার সময় পার্ট-টাইম কাজ — দেশভিত্তিক নিয়ম | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, কানাডা, অস্ট্রেলিয়া, ইতালি, ফ্রান্স, জাপান, কোরিয়া, মালয়েশিয়ায় স্টুডেন্ট ভিসায় কত ঘণ্টা কাজ করা যায়।", part_time_body),
+        "guides/interview": ("ভিসা ও স্কলারশিপ ইন্টারভিউর প্রস্তুতি | Higher Study Info", "Chevening-ধরনের স্কলারশিপ ইন্টারভিউ আর ঢাকায় US F-1 স্টুডেন্ট ভিসা ইন্টারভিউ: কী সাথে নেবেন, কী জিজ্ঞেস করা হয়।", interview_body),
+        "guides/student-file": ("স্টুডেন্ট ফাইল ও বিদেশে টাকা পাঠানো | Higher Study Info", "বাংলাদেশ ব্যাংকের নিয়মে স্টুডেন্ট ফাইল খুলে টিউশন ফি ও জীবনযাত্রার খরচ বিদেশে পাঠানোর নিয়ম।", student_file_body),
+        "guides/pre-departure": ("বিদেশে যাওয়ার আগের চেকলিস্ট | Higher Study Info", "ভিসা পাওয়ার পর থেকে পৌঁছানো পর্যন্ত কাগজ, টাকা, স্বাস্থ্য ও যাত্রার টিক-দেওয়া চেকলিস্ট।", pre_departure_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -379,7 +382,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)
