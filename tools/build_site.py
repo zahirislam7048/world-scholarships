@@ -223,7 +223,7 @@ def _fold(line):
 
 def ics(events, name):
     """events: [(row, page path)] with a deadline -> an iCalendar file with 7-day and 1-day reminders."""
-    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    stamp = site_extra.CHECKED.replace("-", "") + "T000000Z"  # stable between builds, so unchanged files aren't recommitted
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Higher Study Info//Scholarship deadlines//BN",
              "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{_ics_text(name)}", "X-PUBLISHED-TTL:PT12H"]
     for r, path in events:

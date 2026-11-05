@@ -9,7 +9,7 @@ X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:scholarship-lester-b-pearson-international-scholarship-canada-20261106@
  higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261106
 DTEND;VALUE=DATE:20261107
 SUMMARY:শেষ তারিখ: Lester B. Pearson International Scholars
@@ -36,7 +36,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-azrieli-international-postdoctoral-fellowship-202728-israel
  -20261111@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261111
 DTEND;VALUE=DATE:20261112
 SUMMARY:শেষ তারিখ: Azrieli International Postdoctoral Fello
@@ -63,7 +63,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-padua-international-excellence-scholarship-italy-20261115@h
  igherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:শেষ তারিখ: Padua International Excellence Scholarsh
@@ -90,7 +90,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-international-scholars-program-incl-karen-mckellin-internat
  ional-leader-of-tomorrow-award-20261115@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:শেষ তারিখ: International Scholars Program (incl. Ka
@@ -118,7 +118,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-daad-study-scholarships-master-studies-for-all-academic-dis
  ciplines-germany-20261116@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:শেষ তারিখ: DAAD Study Scholarships – Master Studi
@@ -146,7 +146,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-merit-named-founder-dr-miyan-scholarships-bangladesh-202611
  25@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:শেষ তারিখ: Merit\, named & Founder Dr. Miyan Schola
@@ -173,7 +173,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-isu-bocconi-scholarship-need-based-international-early-sess
  ion-italy-20261130@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:শেষ তারিখ: ISU Bocconi Scholarship (need-based) –
@@ -200,7 +200,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-hong-kong-phd-fellowship-scheme-2027-28-hong-kong-20261201@
  higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:শেষ তারিখ: Hong Kong PhD Fellowship Scheme 2027/28 
@@ -227,7 +227,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-ernst-mach-grant-worldwide-austria-20261201@higherstudyinfo
  .com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:শেষ তারিখ: Ernst Mach Grant – worldwide (Austria)
@@ -252,7 +252,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-a-wilhelmsen-foundation-scholarship-msc-marine-technology-n
  orway-20261201@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:শেষ তারিখ: A. Wilhelmsen Foundation scholarship (MS
@@ -279,7 +279,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-commonwealth-shared-scholarships-master-s-united-kingdom-20
  261208@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:শেষ তারিখ: Commonwealth Shared Scholarships (Master
@@ -306,7 +306,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-chinese-government-scholarship-type-b-tsinghua-graduate-pro
  grams-china-20261215@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:শেষ তারিখ: Chinese Government Scholarship (Type B) 
@@ -333,7 +333,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-mbzuai-full-scholarship-msc-phd-in-ai-uae-20261215@higherst
  udyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:শেষ তারিখ: MBZUAI full scholarship (MSc / PhD in AI
@@ -360,7 +360,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-merit-based-international-scholarships-italy-20261215@highe
  rstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:শেষ তারিখ: Merit-Based International Scholarships (
@@ -387,7 +387,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-research-training-program-rtp-stipend-scholarship-internati
  onal-australia-20261218@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:শেষ তারিখ: Research Training Program (RTP) Stipend 
@@ -414,7 +414,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-sigs-scholarships-for-international-students-china-20261231
  @higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:শেষ তারিখ: SIGS scholarships for international stud
@@ -441,7 +441,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-kaust-ms-phd-fellowship-saudi-arabia-20270103@higherstudyin
  fo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270103
 DTEND;VALUE=DATE:20270104
 SUMMARY:শেষ তারিখ: KAUST MS / PhD fellowship (Saudi Arabia)
@@ -466,7 +466,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-erasmus-mundus-master-in-international-law-of-security-peac
  e-sustainable-development-erasm-20270104@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:শেষ তারিখ: Erasmus Mundus Master in International L
@@ -494,7 +494,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-aalto-university-excellence-scholarship-finland-20270105@hi
  gherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270105
 DTEND;VALUE=DATE:20270106
 SUMMARY:শেষ তারিখ: Aalto University Excellence Scholarship 
@@ -521,7 +521,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-need-based-financial-aid-for-international-students-need-bl
  ind-usa-20270105@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270105
 DTEND;VALUE=DATE:20270106
 SUMMARY:শেষ তারিখ: Need-based financial aid for internation
@@ -548,7 +548,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-france-excellence-eiffel-scholarship-france-20270106@higher
  studyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
 SUMMARY:শেষ তারিখ: France Excellence Eiffel Scholarship (Fr
@@ -575,7 +575,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-research-scholarships-incl-singa-graduate-by-research-singa
  pore-20270115@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:শেষ তারিখ: Research scholarships incl. SINGA (gradu
@@ -602,7 +602,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-danish-government-scholarship-non-eu-eea-students-denmark-2
  0270115@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:শেষ তারিখ: Danish Government Scholarship (non-EU/EE
@@ -629,7 +629,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-erasmus-mundus-master-euroculture-erasmus-mundus-20270115@h
  igherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:শেষ তারিখ: Erasmus Mundus Master Euroculture (Europ
@@ -656,7 +656,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-i-mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus-
  20270126@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270126
 DTEND;VALUE=DATE:20270127
 SUMMARY:শেষ তারিখ: i-MESC Erasmus Mundus Joint Master (Clas
@@ -683,7 +683,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-khalifa-university-graduate-scholarship-phd-fall-2027-uae-2
  0270201@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:শেষ তারিখ: Khalifa University graduate scholarship 
@@ -710,7 +710,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-hbku-graduate-scholarships-tuition-waivers-qatar-20270201@h
  igherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:শেষ তারিখ: HBKU graduate scholarships / tuition wai
@@ -737,7 +737,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-icp-connect-master-of-science-in-food-technology-belgium-20
  270201@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:শেষ তারিখ: ICP Connect – Master of Science in Foo
@@ -764,7 +764,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-ernst-mach-grant-universities-of-applied-sciences-austria-2
  0270201@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:শেষ তারিখ: Ernst Mach Grant – Universities of App
@@ -791,7 +791,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-university-of-auckland-doctoral-scholarship-new-zealand-202
  70201@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:শেষ তারিখ: University of Auckland Doctoral Scholars
@@ -818,7 +818,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-need-based-financial-aid-for-international-students-need-bl
  ind-usa-2-20270215@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:শেষ তারিখ: Need-based financial aid for internation
@@ -845,7 +845,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-si-scholarship-for-global-professionals-sweden-20270224@hig
  herstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270224
 DTEND;VALUE=DATE:20270225
 SUMMARY:শেষ তারিখ: SI Scholarship for Global Professionals 
@@ -872,7 +872,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-research-training-program-rtp-stipend-international-round-1
  -australia-20270228@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:শেষ তারিখ: Research Training Program (RTP) Stipend 
@@ -899,7 +899,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-taiwanicdf-international-higher-education-scholarship-taiwa
  n-20270315@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270315
 DTEND;VALUE=DATE:20270316
 SUMMARY:শেষ তারিখ: TaiwanICDF International Higher Educatio
@@ -926,7 +926,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-latvian-state-scholarships-for-foreign-students-latvia-2027
  0401@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270401
 DTEND;VALUE=DATE:20270402
 SUMMARY:শেষ তারিখ: Latvian state scholarships for foreign s
@@ -953,7 +953,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:scholarship-national-scholarship-programme-of-the-slovak-republic-stays
  -in-2027-28-slovakia-20270430@higherstudyinfo.com
-DTSTAMP:20261105T052849Z
+DTSTAMP:20261104T000000Z
 DTSTART;VALUE=DATE:20270430
 DTEND;VALUE=DATE:20270501
 SUMMARY:শেষ তারিখ: National Scholarship Programme of the Sl
