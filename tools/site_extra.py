@@ -952,15 +952,34 @@ SUBJECT_BN = {
     "Bioinformatics": "বায়োইনফরমেটিক্স", "Cybersecurity": "সাইবার সিকিউরিটি", "Robotics": "রোবোটিক্স",
     "Electrical / Power Engineering": "ইলেকট্রিক্যাল / পাওয়ার ইঞ্জিনিয়ারিং",
     "Environmental Engineering / Water": "এনভায়রনমেন্টাল ইঞ্জিনিয়ারিং / পানি", "Public Health": "পাবলিক হেলথ",
-    "Economics / Business": "অর্থনীতি / বিজনেস",
+    "Economics / Business": "অর্থনীতি / বিজনেস", "Mechanical Engineering": "মেকানিক্যাল ইঞ্জিনিয়ারিং",
+    "Civil / Geotechnical Engineering": "সিভিল / জিওটেকনিক্যাল ইঞ্জিনিয়ারিং", "Agriculture / Food": "কৃষি / খাদ্য",
+    "Pharmacy / Pharmaceutical Sciences": "ফার্মেসি / ফার্মাসিউটিক্যাল সায়েন্স", "Energy": "এনার্জি / নবায়নযোগ্য শক্তি",
 }
+COUNTRY_BN = {"Australia": "অস্ট্রেলিয়া", "Canada": "কানাডা", "China": "চীন", "Finland": "ফিনল্যান্ড", "Germany": "জার্মানি",
+              "Italy": "ইতালি", "Japan": "জাপান", "Malaysia": "মালয়েশিয়া", "Netherlands": "নেদারল্যান্ডস", "Saudi Arabia": "সৌদি আরব",
+              "Singapore": "সিঙ্গাপুর", "South Korea": "দক্ষিণ কোরিয়া", "Sweden": "সুইডেন", "UAE": "সংযুক্ত আরব আমিরাত",
+              "United Kingdom": "যুক্তরাজ্য", "United States": "যুক্তরাষ্ট্র"}
+SUPERVISOR_TIPS = [  # (countries, tip, source link) — how supervision works, from guides already on the site
+    ("যুক্তরাষ্ট্র", "PhD-তে ভর্তি হয় প্রোগ্রামে, তবে ফান্ডিং (RA) প্রায়ই প্রফেসরের অনুদান থেকে আসে — ডিপার্টমেন্টের প্রফেসররাই অনেক সময় ঠিক করেন কে ফান্ডিং পাবে (EducationUSA)।", "/guides/funded-phd/"),
+    ("যুক্তরাজ্য", "PhD আবেদনে গবেষণা প্রকল্প আর সম্ভাব্য সুপারভাইজার ঠিক করা আবেদনের অংশ — আগে যোগাযোগ করুন (Oxford, Cambridge)।", "/guides/professor-email/"),
+    ("জার্মানি", "DAAD-এর ডক্টরাল স্কলারশিপে গবেষণা প্রস্তাব জার্মানির সম্ভাব্য সুপারভাইজারের সাথে আলোচনা করে লিখতে হয়।", "/guides/research-proposal/"),
+    ("সুইডেন, নেদারল্যান্ডস, নরওয়ে, ডেনমার্ক", "PhD সাধারণত বেতনভুক্ত চাকরি — বিজ্ঞপ্তি দেখে আবেদন (EURAXESS, বিশ্ববিদ্যালয়ের vacancy পেজ); বিজ্ঞপ্তির যোগাযোগ-ব্যক্তিকে প্রশ্ন করা যায়।", "/guides/funded-phd/"),
+    ("কানাডা", "অনেক বিশ্ববিদ্যালয়ে PhD-র ন্যূনতম ফান্ডিং নিশ্চিত, যার একটা অংশ আসে সুপারভাইজার বা প্রোগ্রাম থেকে (UBC) — তাই সম্ভাব্য সুপারভাইজারের সাথে আগে কথা বলা কাজে লাগে।", "/guides/funded-phd/"),
+    ("মালয়েশিয়া", "Universiti Malaya-র GRAS-এর মতো সহায়তায় আগে সুপারভাইজারের সাথে যোগাযোগ করে তাঁর শর্ত পূরণ করতে হয়।", "/asia/malaysia/"),
+    ("জাপান", "MEXT গবেষণা-শিক্ষার্থী আবেদনে গবেষণা পরিকল্পনা আর পছন্দের বিশ্ববিদ্যালয়ের তালিকা জমা দিতে হয় — যে ল্যাবে যেতে চান তার প্রফেসরের কাজ আগে দেখে নিন।", "/asia/japan/"),
+]
 
 
 def professors_body(updated):
     import csv
     rows = list(csv.DictReader(open(pathlib.Path(__file__).resolve().parent.parent / "data" / "professors" / "professors.csv", encoding="utf-8")))
     data = [{"n": r["name"], "t": r["title"], "u": r["university"], "c": r["country"], "d": r["department"],
-             "s": r["subject"], "r": r["research_interests"], "p": r["profile_url"], "x": r["directory_url"]} for r in rows]
+             "s": r["subject"], "r": r["research_interests"], "p": r["profile_url"], "x": r["directory_url"],
+             "cs": next((f"/{k}/" for k, v in COUNTRIES.items() if v[0] == {"UAE": "United Arab Emirates"}.get(r["country"], r["country"])), "")} for r in rows]
+    ctry = sorted({r["country"] for r in rows})
+    c_opts = "".join(f'<option value="{html.escape(c)}">{html.escape(COUNTRY_BN.get(c, c))} ({bn(sum(r["country"] == c for r in rows))})</option>' for c in ctry)
+    tips = "".join(f'<li><b>{c}:</b> {t} <a href="{h}">আরও →</a></li>' for c, t, h in SUPERVISOR_TIPS)
     subj = sorted({r["subject"] for r in rows})
     unis = sorted({r["university"] for r in rows})
     s_opts = "".join(f'<option value="{html.escape(s)}">{html.escape(SUBJECT_BN.get(s, s))}</option>' for s in subj)
@@ -969,21 +988,23 @@ def professors_body(updated):
                     f'<small>{bn(sum(r["subject"] == s for r in rows))}</small></button>' for s in subj)
     dirs = {}
     for r in rows:
-        dirs.setdefault((r["university"], r["department"]), r["directory_url"])
-    dir_list = "".join(f'<li><a href="{html.escape(x)}" target="_blank" rel="noopener">{html.escape(u)} — {html.escape(d)}</a></li>'
-                       for (u, d), x in sorted(dirs.items()))
+        dirs.setdefault(r["country"], {}).setdefault((r["university"], r["department"]), r["directory_url"])
+    dir_list = "".join(f'<li><b>{html.escape(COUNTRY_BN.get(c, c))}:</b> ' + " · ".join(
+        f'<a href="{html.escape(x)}" target="_blank" rel="noopener">{html.escape(u)} — {html.escape(d)}</a>' for (u, d), x in sorted(dirs[c].items())) + "</li>"
+        for c in sorted(dirs))
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     script = """<script>
 var DATA = __DATA__;
 (function(){
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
   var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
-  var q=document.getElementById("q"),sj=document.getElementById("subj"),un=document.getElementById("uni"),out=document.getElementById("out"),cnt=document.getElementById("cnt");
+  var q=document.getElementById("q"),sj=document.getElementById("subj"),un=document.getElementById("uni"),ct=document.getElementById("ctry"),out=document.getElementById("out"),cnt=document.getElementById("cnt");
   function render(){
     var s=q.value.trim().toLowerCase();
     var rows=DATA.filter(function(r){
       if(sj.value&&r.s!==sj.value)return false;
       if(un.value&&r.u!==un.value)return false;
+      if(ct.value&&r.c!==ct.value)return false;
       return !s||[r.n,r.t,r.u,r.c,r.d,r.s,r.r].join(" ").toLowerCase().indexOf(s)>=0;
     });
     document.querySelectorAll(".chip").forEach(function(b){b.classList.toggle("on",b.dataset.s===sj.value)});
@@ -994,10 +1015,10 @@ var DATA = __DATA__;
         '<p>'+esc(r.t)+' · '+esc(r.d)+'</p>'+
         '<p><b>গবেষণার বিষয়:</b> '+esc(r.r)+'</p>'+
         '<div class="row">'+(r.p?'<a class="apply" href="'+esc(r.p)+'" target="_blank" rel="noopener">অফিসিয়াল প্রোফাইল ↗</a>':'')+
-        '<a class="'+(r.p?'more':'apply info')+'" href="'+esc(r.x)+'" target="_blank" rel="noopener">ফ্যাকাল্টি তালিকা ↗</a></div></article>';
+        '<a class="'+(r.p?'more':'apply info')+'" href="'+esc(r.x)+'" target="_blank" rel="noopener">ফ্যাকাল্টি তালিকা ↗</a>'+(r.cs?'<a class="more" href="'+r.cs+'">এই দেশের স্কলারশিপ</a>':'')+'</div></article>';
     }).join("");
   }
-  [q,sj,un].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
+  [q,sj,un,ct].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
   document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){sj.value=sj.value===b.dataset.s?"":b.dataset.s;render()})});
   render();
 })();
@@ -1010,7 +1031,7 @@ var DATA = __DATA__;
 <div class="wrap">
 {nav("/professors/")}
 <header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">প্রফেসর সার্চ · সংগ্রহ {bn(len(rows))} জন · {bn(len(unis))}টি বিশ্ববিদ্যালয়</span>
+  <span class="eyebrow">প্রফেসর সার্চ · {bn(len(rows))} জন · {bn(len(unis))}টি বিশ্ববিদ্যালয় · {bn(len(ctry))}টি দেশ</span>
   <h1>প্রফেসর খুঁজুন — বিষয় ও ডিপার্টমেন্ট অনুযায়ী</h1>
   <p class="lede">MS/PhD-র জন্য সুপারভাইজার খুঁজতে: নাম, বিশ্ববিদ্যালয়, ডিপার্টমেন্ট বা গবেষণার বিষয় (যেমন “machine learning”, “dengue”, “desalination”) লিখে খুঁজুন। প্রতিটি নাম বিশ্ববিদ্যালয়ের অফিসিয়াল পেজ থেকে নেওয়া; যোগাযোগের ঠিকানা ওই প্রোফাইলেই পাবেন।</p>
 </header>
@@ -1018,6 +1039,7 @@ var DATA = __DATA__;
 <div class="filters" role="search">
   <input id="q" type="search" placeholder="যেমন: machine learning, NUS, epidemiology" aria-label="খুঁজুন">
   <select id="subj" aria-label="বিষয়"><option value="">সব বিষয়</option>{s_opts}</select>
+  <select id="ctry" aria-label="দেশ"><option value="">সব দেশ</option>{c_opts}</select>
   <select id="uni" aria-label="বিশ্ববিদ্যালয়"><option value="">সব বিশ্ববিদ্যালয়</option>{u_opts}</select>
   <span class="count" id="cnt"></span>
 </div>
@@ -1026,10 +1048,19 @@ var DATA = __DATA__;
 <ul>
   <li>প্রোফাইল আর সাম্প্রতিক ২–৩টি পেপার পড়ুন; ইমেইলে নির্দিষ্ট করে লিখুন তাঁর কোন কাজের সঙ্গে আপনার আগ্রহ মেলে।</li>
   <li>ছোট রাখুন (১৫০–২৫০ শব্দ), CV সংযুক্ত করুন, বিষয়ের লাইনে লিখুন কোন প্রোগ্রাম/সেশনের জন্য।</li>
-  <li>সবাইকে একই কপি-পেস্ট ইমেইল পাঠাবেন না; উত্তর না এলে ১–২ সপ্তাহ পর একবার ভদ্রভাবে মনে করিয়ে দিন।</li>
+  <li>সবাইকে একই কপি-পেস্ট ইমেইল পাঠাবেন না; উত্তর না এলে ৩–৪ সপ্তাহ পর একবার ভদ্রভাবে মনে করিয়ে দিন (Edinburgh)।</li>
   <li>অনেক বিশ্ববিদ্যালয়ে (যেমন ইউরোপের অনেক Master's) আগে প্রফেসরকে ইমেইল করা লাগে না — প্রোগ্রামের অফিসিয়াল নির্দেশনা দেখুন।</li>
 </ul>
-<h2>পূর্ণ ফ্যাকাল্টি তালিকা (অফিসিয়াল)</h2>
+<h2>দেশভিত্তিক: সুপারভাইজার কখন, কীভাবে</h2>
+<ul>{tips}</ul>
+<h2>নিজে আরও প্রফেসর খুঁজবেন যেভাবে</h2>
+<ul>
+  <li>লক্ষ্য বিশ্ববিদ্যালয়ের ডিপার্টমেন্ট → "People" / "Faculty" পেজ → গবেষণা গ্রুপ বা ল্যাবের পেজ।</li>
+  <li>ইউরোপে বেতনসহ PhD পদ: ইউরোপীয় কমিশনের <a href="https://euraxess.ec.europa.eu/jobs/search" target="_blank" rel="noopener">EURAXESS Jobs</a>।</li>
+  <li>আগ্রহের বিষয়ের সাম্প্রতিক পেপারের লেখকদের তালিকা দেখুন — যাঁরা নিয়মিত লেখেন, তাঁদের প্রোফাইল খুলুন।</li>
+  <li>তালিকায় নিজের বিষয় না পেলে জানান: <a href="mailto:higherstudyinfo30@gmail.com">higherstudyinfo30@gmail.com</a> — প্রতি সপ্তাহে নতুন বিশ্ববিদ্যালয় যোগ হয়।</li>
+</ul>
+<h2>পূর্ণ ফ্যাকাল্টি তালিকা (অফিসিয়াল) — দেশ অনুযায়ী</h2>
 <ul class="src-list">{dir_list}</ul>
 <p class="vsrc">পদবি ও গবেষণার বিষয় অফিসিয়াল পেজের সার্চ-স্নিপেট থেকে নেওয়া, সংগ্রহ: {html.escape(rows[0]["collected_on"])}। পদবি বদলে যেতে পারে — যোগাযোগের আগে প্রোফাইলে মিলিয়ে নিন। স্প্যাম এড়াতে এখানে কোনো ইমেইল বা ফোন নম্বর রাখা হয়নি।</p>
 {FOOTER}
