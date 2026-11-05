@@ -10,6 +10,15 @@
 <meta property="og:description" content="পাকিস্তানের স্কলারশিপ: এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://higherstudyinfo.com/asia/pakistan/">
+<meta property="og:site_name" content="Higher Study Info">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:image" content="https://higherstudyinfo.com/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0b6b4a">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "হোম", "item": "https://higherstudyinfo.com/"}, {"@type": "ListItem", "position": 2, "name": "এশিয়া", "item": "https://higherstudyinfo.com/asia/"}, {"@type": "ListItem", "position": 3, "name": "Pakistan", "item": "https://higherstudyinfo.com/asia/pakistan/"}]}</script>
 <meta name="google-site-verification" content="Grz7hydfzYqJABRoq_QOB3CM1w1c2fNkPtLkazkw38g" />
 
 <!-- Google tag (gtag.js) -->
@@ -85,6 +94,7 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
 .note.watch{font-weight:600;border:1px dashed currentColor}
+.more-link{font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}.more-link:hover{text-decoration:underline}
 </style>
 <style>
 .topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
@@ -122,7 +132,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <script>
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
-const DATA = ([{"country": "Pakistan", "provider": "Higher Education Commission (HEC)", "provider_type": "government", "scholarship_name": "Allama Iqbal Scholarships for Central Asian and friendly countries", "level": "UG / PG / PhD", "coverage_amount": "Tuition, monthly stipend, accommodation allowance, airfare (as per policy)", "eligibility": "Citizens of the listed Central Asian and partner countries", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "ongoing (5-year programme)", "deadline": "", "source_url": "https://www.hec.gov.pk/english/scholarshipsgrants/CAFC/AMIC/Pages/default.aspx", "source_domain": "hec.gov.pk", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "350 awards over 5 years; no deadline on the page — check eligible country list", "apply_url": "https://www.hec.gov.pk/english/scholarshipsgrants/CAFC/AMIC/Pages/default.aspx"}]).filter(d => !d.deadline || d.deadline >= TODAY);
+const DATA = ([{"country": "Pakistan", "provider": "Higher Education Commission (HEC)", "provider_type": "government", "scholarship_name": "Allama Iqbal Scholarships for Central Asian and friendly countries", "level": "UG / PG / PhD", "coverage_amount": "Tuition, monthly stipend, accommodation allowance, airfare (as per policy)", "eligibility": "Citizens of the listed Central Asian and partner countries", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "ongoing (5-year programme)", "deadline": "", "source_url": "https://www.hec.gov.pk/english/scholarshipsgrants/CAFC/AMIC/Pages/default.aspx", "source_domain": "hec.gov.pk", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "350 awards over 5 years; no deadline on the page — check eligible country list", "apply_url": "https://www.hec.gov.pk/english/scholarshipsgrants/CAFC/AMIC/Pages/default.aspx", "page": "/scholarship/allama-iqbal-scholarships-for-central-asian-and-friendly-countries-pakistan/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -169,6 +179,7 @@ function render(){
     ${/^Next round/.test(d.session_year)?`<div class="note watch">⏳ পরের রাউন্ডের অপেক্ষায় — নতুন রাউন্ড এখনো ঘোষণা হয়নি। নিচের তথ্য আগের রাউন্ডের, ঘোষণা হলে হালনাগাদ হবে।</div>`:""}
     ${d.notes?`<div class="note">${esc(d.notes)}</div>`:""}
     ${d.apply_url?(d.apply_url!==d.source_url&&!/^Next round/.test(d.session_year)?`<a class="apply" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদন করুন ↗</a>`:`<a class="apply info" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদনের তথ্য ↗</a>`):""}
+    ${d.page?`<a class="more-link" href="${d.page}">বিস্তারিত দেখুন →</a>`:""}
     <div class="foot"><a class="src" href="${esc(d.source_url)}" target="_blank" rel="noopener">${esc(d.source_domain)} ↗</a><span class="status">যাচাই বাকি</span></div>
   </article>`).join("");
 }

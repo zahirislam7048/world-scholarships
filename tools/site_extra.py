@@ -32,6 +32,7 @@ CONTACT_HTML = (f'<ul><li>ইমেইল: <a href="mailto:{EMAIL}">{EMAIL}</a><
                 f'<li>ফোন: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li></ul>')
 
 CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
+PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_site.main
 GUIDES_CHECKED = "2026-11-04"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
 
@@ -51,8 +52,10 @@ def all_rows():
     out = []
     for slug, (name_en, title, heading) in COUNTRIES.items():
         cont = slug.split("/")[0]
-        for r in load_rows(slug):
-            out.append({**r, "slug": slug, "section": cont, "section_bn": CONTINENTS[cont][1]})
+        for i, r in enumerate(load_rows(slug)):
+            page = PAGES.get((slug, i))
+            out.append({**r, "slug": slug, "section": cont, "section_bn": CONTINENTS[cont][1],
+                        "page": f"/scholarship/{page}/" if page else f"/{slug}/"})
     return out
 
 
@@ -118,7 +121,7 @@ def deadlines_body(updated):
             items.append(f"""<li data-d="{d}">
   <span class="date">{bn(day)} {BN_MONTHS[int(m) - 1]}<small>{bn(y)}</small></span>
   <span class="what"><a href="{html.escape(apply)}" target="_blank" rel="noopener">{html.escape(r["scholarship_name"])}</a>
-  <span>{html.escape(name_en)} · {html.escape(r["provider"])} · {html.escape(r["level"])} · <a href="/{r["slug"]}/">বিস্তারিত</a></span></span>
+  <span>{html.escape(name_en)} · {html.escape(r["provider"])} · {html.escape(r["level"])} · <a href="{r["page"]}">বিস্তারিত</a></span></span>
   <span class="left"></span>
 </li>""")
         sections.append(f"""<section class="month" data-month="{key}">
@@ -162,7 +165,7 @@ def search_body(updated):
         "n": r["scholarship_name"], "p": r["provider"], "c": COUNTRIES[r["slug"]][0], "s": r["section"],
         "l": r["level"], "cov": r["coverage_amount"], "e": r.get("english_requirement", ""),
         "d": r.get("deadline", ""), "a": r.get("apply_url") or r["source_url"], "src": r["source_url"],
-        "u": f'/{r["slug"]}/', "el": r.get("eligibility", ""), "w": r.get("session_year", "").startswith("Next round"),
+        "u": r["page"], "el": r.get("eligibility", ""), "w": r.get("session_year", "").startswith("Next round"),
     } for r in all_rows()]
     sections = "".join(f'<option value="{k}">{v[1]}</option>' for k, v in CONTINENTS.items())
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
@@ -192,7 +195,7 @@ var DATA = __DATA__;
         (r.cov?'<p><b>সুবিধা:</b> '+esc(r.cov)+'</p>':'')+
         (r.e?'<p><b>IELTS / English:</b> '+esc(r.e)+'</p>':'')+
         (r.d&&r.d>=today?'<p><b>শেষ তারিখ:</b> '+esc(r.d)+'</p>':'')+(r.w?'<p class="warn">⏳ পরের রাউন্ডের অপেক্ষায় — এখনো ঘোষণা হয়নি</p>':'')+
-        '<div class="row"><a class="apply'+(info?' info':'')+'" href="'+esc(r.a)+'" target="_blank" rel="noopener">'+(info?'আবেদনের তথ্য ↗':'আবেদন করুন ↗')+'</a><a class="more" href="'+r.u+'">দেশের পেজ</a></div></article>';
+        '<div class="row"><a class="apply'+(info?' info':'')+'" href="'+esc(r.a)+'" target="_blank" rel="noopener">'+(info?'আবেদনের তথ্য ↗':'আবেদন করুন ↗')+'</a><a class="more" href="'+r.u+'">বিস্তারিত</a></div></article>';
     }).join("");
   }
   [q,sec,lv,dl].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
@@ -221,7 +224,7 @@ var DATA = __DATA__;
 
 
 def about_body(updated):
-    total = len(all_rows())
+    total = sum(not r.get("session_year", "").startswith("Next round") for r in all_rows())
     return f"""<div class="wrap">
 {nav("/about/")}
 <article class="prose">
@@ -314,6 +317,7 @@ table.t th{font-weight:600;color:var(--muted)}
 .vcard table.t{min-width:0;width:100%}.vcard table.t th{width:30%;min-width:110px}
 .vlinks{margin:0}.vlinks .apply{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:var(--surface)}
 .vsrc{font-size:13px;color:var(--muted);margin:0}
+.vcard td a,.vsrc a{color:var(--accent)}
 </style>"""
 
 GUIDES = [

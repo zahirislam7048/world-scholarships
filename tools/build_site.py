@@ -6,11 +6,12 @@ Every page gets tools/site_head.html (Google verification + Analytics) in <head>
 """
 import datetime
 import html
+import json
 import pathlib
 import shutil
 import sys
 
-from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, render
+from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, page_slugs, render
 import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
@@ -21,7 +22,17 @@ OUT = ROOT / "site"
 BASE_CSS = "body{margin:0}img{max-width:100%}[hidden]{display:none!important}"
 
 
-def page(title, description, path, head_extra, body):
+def jsonld(*objs):
+    return "".join('<script type="application/ld+json">' + json.dumps(o, ensure_ascii=False).replace("</", "<\\/") + "</script>" for o in objs)
+
+
+def crumbs_ld(items):
+    """items: [(name, path)] -> BreadcrumbList."""
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + p} for i, (n, p) in enumerate(items)]}
+
+
+def page(title, description, path, head_extra, body, ld=""):
     return f"""<!doctype html>
 <html lang="bn">
 <head>
@@ -34,6 +45,15 @@ def page(title, description, path, head_extra, body):
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{DOMAIN}{path}">
+<meta property="og:site_name" content="Higher Study Info">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:image" content="{DOMAIN}/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0b6b4a">
+{ld}
 {(ROOT / "tools" / "site_head.html").read_text(encoding="utf-8").strip()}
 <style>{BASE_CSS}</style>
 {head_extra}
@@ -45,8 +65,11 @@ def page(title, description, path, head_extra, body):
 """
 
 
+PAGES = {}
+
+
 def country_page(slug, updated):
-    frag = render(slug, site_extra.CHECKED)
+    frag = render(slug, site_extra.CHECKED, PAGES)
     head, body = frag.split('<div class="wrap">', 1)
     # <title> and the claude-only meta come from page(); keep fonts and styles.
     head = "\n".join(l for l in head.splitlines() if not l.startswith(("<title>", '<meta name="claude:')))
@@ -59,7 +82,8 @@ def country_page(slug, updated):
     head += "\n" + NAV_CSS + "\n<style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>"
     name_en, title, heading = COUNTRIES[slug]
     desc = f"{heading}: এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।"
-    return page(f"{title} | Higher Study Info", desc, f"/{slug}/", head, body)
+    ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/")]))
+    return page(f"{title} | Higher Study Info", desc, f"/{slug}/", head, body, ld)
 
 
 def card(slug, updated):
@@ -150,7 +174,12 @@ def home_page(updated):
 {NOTICE}
 {FOOTER}
 </div>"""
-    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC, ইউরোপ, আমেরিকা, ওশেনিয়া ও আফ্রিকার দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body)
+    ld = jsonld({"@context": "https://schema.org", "@type": "WebSite", "name": "Higher Study Info", "url": DOMAIN + "/",
+                 "inLanguage": "bn", "potentialAction": {"@type": "SearchAction", "target": DOMAIN + "/search/?q={search_term_string}",
+                                                         "query-input": "required name=search_term_string"}},
+                {"@context": "https://schema.org", "@type": "Organization", "name": "Higher Study Info", "url": DOMAIN + "/",
+                 "logo": DOMAIN + "/apple-touch-icon.png", "email": site_extra.EMAIL})
+    return page("Higher Study Info | দেশভিত্তিক স্কলারশিপ", "এশিয়া, GCC, ইউরোপ, আমেরিকা, ওশেনিয়া ও আফ্রিকার দেশভিত্তিক চালু ও আসন্ন স্কলারশিপের তালিকা, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।", "/", LIST_HEAD, body, ld)
 
 
 def continent_page(cont, updated):
@@ -170,6 +199,64 @@ def continent_page(cont, updated):
 {FOOTER}
 </div>"""
     return page(f"{bn_of} স্কলারশিপ | Higher Study Info", f"{bn_of} দেশগুলোতে এখন চালু ও আসন্ন স্কলারশিপের তালিকা।", f"/{cont}/", LIST_HEAD, body)
+
+
+TYPE_BN = {"government": "সরকারি", "eu": "ইউরোপীয় ইউনিয়ন", "consortium": "কনসোর্টিয়াম", "public": "পাবলিক বিশ্ববিদ্যালয়",
+           "private": "প্রাইভেট বিশ্ববিদ্যালয়", "international": "আন্তর্জাতিক সংস্থা"}
+
+
+def scholarship_page(slug, i, r, updated):
+    e = html.escape
+    name_en, title, heading = COUNTRIES[slug]
+    cont = slug.split("/")[0]
+    path = f"/scholarship/{PAGES[(slug, i)]}/"
+    watch = is_watch(r)
+    apply_url = r.get("apply_url") or r["source_url"]
+    direct = apply_url != r["source_url"] and not watch
+    rows = [("প্রতিষ্ঠান", e(r["provider"]) + f' <span class="meta">({TYPE_BN.get(r["provider_type"], e(r["provider_type"]))})</span>'),
+            ("দেশ", f'<a href="/{slug}/">{e(name_en)}</a>'), ("লেভেল", e(r["level"])), ("সুবিধা", e(r["coverage_amount"])),
+            ("শর্ত", e(r.get("eligibility", ""))),
+            ("IELTS / English", e(r.get("english_requirement", "")) + (f' <a href="{e(r["english_source"])}" target="_blank" rel="noopener">সূত্র ↗</a>' if r.get("english_source") else "")),
+            ("সেশন", e(r.get("session_year", "")))]
+    if r.get("deadline"):
+        rows.append(("শেষ তারিখ", f'<b class="dl" data-d="{e(r["deadline"])}">{e(r["deadline"])}</b> <span id="left" class="meta"></span>'))
+    if r.get("notes"):
+        rows.append(("নোট", e(r["notes"])))
+    table = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
+    others = [(j, o) for j, o in enumerate(load_rows(slug)) if j != i and (slug, j) in PAGES]
+    related = "".join(f'<li><a href="/scholarship/{PAGES[(slug, j)]}/">{e(o["scholarship_name"])}</a> <span class="meta">· {e(o["level"])}</span></li>' for j, o in others[:8])
+    badge = '<p class="warn">⏳ <b>পরের রাউন্ডের অপেক্ষায়</b> — নতুন রাউন্ড এখনো ঘোষণা হয়নি। নিচের তথ্য আগের রাউন্ডের; ঘোষণা হলে এখানে হালনাগাদ হবে।</p>' if watch else ""
+    desc = f"{r['scholarship_name']} ({name_en}): {r['level']} লেভেলের স্কলারশিপ — সুবিধা, শর্ত, IELTS, শেষ তারিখ আর অফিসিয়াল আবেদনের লিংক।"
+    body = f"""<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a> / <a href="/{cont}/">{CONTINENTS[cont][1]}</a> / <a href="/{slug}/">{e(name_en)}</a></nav>
+<article class="vcard" style="max-width:820px">
+  <span class="eyebrow">{e(name_en)} · {e(r["provider"])} · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
+  <h1 style="font-size:clamp(26px,5vw,38px)">{e(r["scholarship_name"])}</h1>
+  {badge}
+  <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
+  <div class="tbl-wrap"><table class="t">{table}</table></div>
+  <p class="vlinks"><a class="apply" href="{e(apply_url)}" target="_blank" rel="noopener">{"আবেদন করুন ↗" if direct else "অফিসিয়াল পেজ ↗"}</a></p>
+  <p class="vsrc">সূত্র: <a href="{e(r["source_url"])}" target="_blank" rel="noopener">{e(r["source_domain"])}</a> · সংগ্রহ {e(r.get("collected_on", ""))}। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
+</article>
+<section style="max-width:820px;display:flex;flex-direction:column;gap:8px">
+  <h2>আবেদনের প্রস্তুতি</h2>
+  <ul>
+    <li><a href="/guides/documents/">কাগজপত্র ও সত্যায়ন</a> · <a href="/guides/english-tests/">IELTS / TOEFL / Duolingo</a> · <a href="/tools/cgpa/">CGPA রূপান্তর</a></li>
+    <li><a href="/guides/sop/">SOP লেখা</a> · <a href="/guides/motivation-letter/">Motivation Letter</a> · <a href="/professors/">প্রফেসর সার্চ</a></li>
+  </ul>
+  {f'<h2>{e(name_en)}-এর অন্যান্য স্কলারশিপ</h2><ul>{related}</ul>' if related else ""}
+</section>
+{NOTICE}
+{FOOTER}
+</div>
+<script>
+(function(){{var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
+var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){{return String(x).replace(/\\d/g,function(c){{return "০১২৩৪৫৬৭৮৯"[c]}})}};
+if(n<0){{document.getElementById("expired").hidden=false}}else{{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}}}})();
+</script>"""
+    ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/"), (r["scholarship_name"], path)]))
+    return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS, body, ld)
 
 
 def redirect_page(target):
@@ -194,6 +281,14 @@ def main():
     site_extra.CHECKED = (ROOT / "data" / "LAST_CHECKED").read_text(encoding="utf-8").strip()
     shutil.rmtree(OUT, ignore_errors=True)
     OUT.mkdir()
+    for f in (ROOT / "tools" / "static").iterdir():
+        shutil.copy(f, OUT / f.name)
+    PAGES.update((k, v) for k, v in page_slugs().items()
+                 if not (load_rows(k[0])[k[1]].get("deadline") or "9999") < updated)
+    site_extra.PAGES = PAGES
+    for (slug, i), ps in PAGES.items():
+        (OUT / "scholarship" / ps).mkdir(parents=True)
+        (OUT / "scholarship" / ps / "index.html").write_text(scholarship_page(slug, i, load_rows(slug)[i], updated), encoding="utf-8")
     (OUT / "index.html").write_text(home_page(updated), encoding="utf-8")
     for cont in CONTINENTS:
         (OUT / cont).mkdir()
@@ -223,7 +318,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
+    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

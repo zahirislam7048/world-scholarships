@@ -6,7 +6,9 @@ import csv
 import datetime
 import json
 import pathlib
+import re
 import sys
+import unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ORDER = {"government": 0, "eu": 1, "consortium": 2, "public": 3, "private": 4, "international": 5}
@@ -82,13 +84,31 @@ def load_rows(slug):
     return rows
 
 
-def render(slug, updated):
+def page_slugs():
+    """(country slug, row index) -> URL slug of that scholarship's own page, unique across the site."""
+    out, seen = {}, set()
+    for slug in COUNTRIES:
+        for i, r in enumerate(load_rows(slug)):
+            name = unicodedata.normalize("NFKD", r["scholarship_name"]).encode("ascii", "ignore").decode().lower()
+            base = re.sub(r"[^a-z0-9]+", "-", f"{name} {slug.split('/')[1]}").strip("-")[:90].strip("-")
+            s, n = base, 2
+            while s in seen:
+                s, n = f"{base}-{n}", n + 1
+            seen.add(s)
+            out[(slug, i)] = s
+    return out
+
+
+def render(slug, updated, pages=None):
     name_en, title, heading = COUNTRIES[slug]
     html = (ROOT / "tools" / "preview_template.html").read_text(encoding="utf-8")
     for key, val in {"__TITLE__": title, "__COUNTRY_EN__": name_en, "__HEADING__": heading,
                      "__SLUG__": slug, "__UPDATED__": updated}.items():
         html = html.replace(key, val)
-    return html.replace("__DATA__", json.dumps(load_rows(slug), ensure_ascii=False).replace("</", "<\\/"))
+    rows = load_rows(slug)
+    if pages:
+        rows = [{**r, "page": f"/scholarship/{pages[(slug, i)]}/"} if (slug, i) in pages else r for i, r in enumerate(rows)]
+    return html.replace("__DATA__", json.dumps(rows, ensure_ascii=False).replace("</", "<\\/"))
 
 
 if __name__ == "__main__":
