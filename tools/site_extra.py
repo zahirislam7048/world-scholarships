@@ -30,6 +30,10 @@ PHONE_TEL = "+8801644842785"
 CONTACT_HTML = (f'<ul><li>ইমেইল: <a href="mailto:{EMAIL}">{EMAIL}</a></li>'
                 f'<li>ফোন: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li></ul>')
 
+CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
+GUIDES_CHECKED = "2026-11-04"  # when the guide and tool figures were last verified
+PRIVACY_EFFECTIVE = "2026-11-04"
+
 FOOTER = ('<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
           f' · যোগাযোগ: <a href="mailto:{EMAIL}">{EMAIL}</a>'
           ' · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>')
@@ -141,7 +145,7 @@ def deadlines_body(updated):
     return f"""<div class="wrap">
 {nav("/deadlines/")}
 <header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">সব দেশ · সর্বশেষ আপডেট {updated}</span>
+  <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই {CHECKED}</span>
   <h1>শেষ তারিখ সামনে</h1>
   <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে আবেদনের পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
 </header>
@@ -172,6 +176,7 @@ var DATA = __DATA__;
   function render(){
     var s=q.value.trim().toLowerCase();
     var rows=DATA.filter(function(r){
+      if(r.d&&r.d<today)return false;
       if(sec.value&&r.s!==sec.value)return false;
       if(!lvl(r.l,lv.value))return false;
       if(dl.checked&&!(r.d&&r.d>=today))return false;
@@ -197,7 +202,7 @@ var DATA = __DATA__;
     return f"""<div class="wrap">
 {nav("/search/")}
 <header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">সব দেশ · সর্বশেষ আপডেট {updated}</span>
+  <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই {CHECKED}</span>
   <h1>সব স্কলারশিপ খুঁজুন</h1>
   <p class="lede">সব দেশের স্কলারশিপ এক জায়গায়। নাম, দেশ, বিশ্ববিদ্যালয়, শর্ত বা IELTS স্কোর লিখে খুঁজুন; অঞ্চল আর লেভেল দিয়ে ছাঁকুন। যেগুলোর শেষ তারিখ আগে, সেগুলো উপরে দেখায়।</p>
 </header>
@@ -230,7 +235,7 @@ def about_body(updated):
     <li>"যাচাই বাকি" মানে তথ্যটি অফিসিয়াল পেজের সারাংশ থেকে নেওয়া, পুরো পেজ খুলে মেলানো হয়নি। তাই আবেদনের আগে সূত্র লিংক খুলে মিলিয়ে নিন।</li>
   </ul>
   <h2>কত ঘন ঘন আপডেট হয়</h2>
-  <p>প্রতি সপ্তাহে তালিকা আপডেট হয়: নতুন বিজ্ঞপ্তি যোগ হয়, মেয়াদ শেষ হওয়া স্কলারশিপ বাদ যায়, আর নতুন দেশ যোগ হয়। সর্বশেষ আপডেট: {updated}।</p>
+  <p>প্রতি সপ্তাহে তালিকা আপডেট হয়: নতুন বিজ্ঞপ্তি যোগ হয়, মেয়াদ শেষ হওয়া স্কলারশিপ বাদ যায়, আর নতুন দেশ যোগ হয়। সর্বশেষ যাচাই: {CHECKED}।</p>
   <h2>আমরা কারা নই</h2>
   <p>Higher Study Info কোনো সরকার, বিশ্ববিদ্যালয় বা স্কলারশিপ প্রদানকারী প্রতিষ্ঠানের অংশ নয়, আর আবেদন গ্রহণ করে না। আবেদন সবসময় সংশ্লিষ্ট প্রতিষ্ঠানের অফিসিয়াল সাইটে করতে হয়। কেউ এই সাইটের নামে টাকা চাইলে তা প্রতারণা।</p>
   <h2>যোগাযোগ</h2>
@@ -246,7 +251,7 @@ def privacy_body(updated):
     return f"""<div class="wrap">
 {nav()}
 <article class="prose">
-  <span class="eyebrow">Higher Study Info · কার্যকর: {updated}</span>
+  <span class="eyebrow">Higher Study Info · কার্যকর: {PRIVACY_EFFECTIVE}</span>
   <h1>Privacy Policy</h1>
   <p>এই পেজে বলা আছে higherstudyinfo.com ভিজিট করলে কোন তথ্য সংগ্রহ হয় আর তা কীভাবে ব্যবহার হয়।</p>
   <h2>আমরা যে তথ্য নিই না</h2>
@@ -339,7 +344,7 @@ def documents_body(updated):
 {nav("/guides/")}
 <article class="prose">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {GUIDES_CHECKED}</span>
   <h1>কাগজপত্র ও সত্যায়ন</h1>
   <p class="lede">বিদেশে ভর্তি, স্কলারশিপ বা ভিসার আবেদনে বাংলাদেশি সার্টিফিকেট সাধারণত সত্যায়িত করে দিতে হয়। কোন কাগজ কীভাবে সত্যায়ন করতে হবে তা প্রতিটি বিশ্ববিদ্যালয়, স্কলারশিপ বা দূতাবাস আলাদাভাবে বলে দেয় — নিচের ধাপগুলো সাধারণ ক্রম, আপনার প্রতিষ্ঠানের নির্দেশনা আগে দেখে নিন।</p>
   <h2>সাধারণত যেসব কাগজ লাগে</h2>
@@ -390,7 +395,7 @@ def english_tests_body(updated):
 {nav("/guides/")}
 <article class="prose" style="max-width:100%">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {GUIDES_CHECKED}</span>
   <h1>IELTS, TOEFL, Duolingo, PTE</h1>
   <p class="lede" style="max-width:68ch">বাংলাদেশ থেকে কোন পরীক্ষা কোথায় দেবেন, ফি কত — অফিসিয়াল সূত্র অনুযায়ী। প্রতিটি স্কলারশিপের নির্দিষ্ট স্কোর তার কার্ডে "IELTS / English" অংশে আছে।</p>
   <div class="tbl-wrap"><table class="t">
@@ -557,7 +562,7 @@ def visa_body(updated):
 {nav("/guides/")}
 <article class="prose" style="max-width:100%">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {GUIDES_CHECKED}</span>
   <h1>স্টুডেন্ট ভিসা — দেশভিত্তিক</h1>
   <p class="lede" style="max-width:68ch">প্রতিটি দেশের স্টুডেন্ট ভিসায় কত টাকা দেখাতে হয়, পড়ার সময় কত ঘণ্টা কাজ করা যায়, আর কোথায় আবেদন — সরকারের অফিসিয়াল পেজ অনুযায়ী। যে তথ্য অফিসিয়াল সূত্রে পাইনি, সেটা লেখা হয়নি। ভিসার নিয়ম ঘন ঘন বদলায় — আবেদনের আগে সূত্র লিংক খুলে মিলিয়ে নিন।</p>
   <p>{toc}</p>
@@ -590,7 +595,7 @@ def tuition_body(updated):
 {nav("/guides/")}
 <article class="prose">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {updated}</span>
+  <span class="eyebrow">গাইড · সর্বশেষ যাচাই {GUIDES_CHECKED}</span>
   <h1>টিউশন-ফ্রি ও কম খরচের দেশ</h1>
   <p class="lede">ইউরোপের কিছু দেশে সরকারি বিশ্ববিদ্যালয়ে টিউশন নেই বা খুব কম — তবে নিয়ম বদলাচ্ছে। টিউশন কম হলেও থাকা-খাওয়ার খরচ আর ভিসার জন্য টাকা দেখাতে হয়; সেটা <a href="/guides/visa/">ভিসা গাইডে</a> আর <a href="/tools/budget/">বাজেট ক্যালকুলেটরে</a> দেখুন।</p>
   {items}
@@ -634,7 +639,7 @@ def budget_body(updated):
 {nav("/guides/")}
 <article class="prose" style="max-width:100%">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">টুল · ভিসার অঙ্ক যাচাই {updated}</span>
+  <span class="eyebrow">টুল · ভিসার অঙ্ক যাচাই {GUIDES_CHECKED}</span>
   <h1>বাজেট ক্যালকুলেটর</h1>
   <p class="lede" style="max-width:68ch">প্রথম বছরে আনুমানিক কত টাকা লাগবে, আর ভিসার জন্য কত দেখাতে হবে। দেশ বাছলে সরকারের অফিসিয়াল ন্যূনতম জীবনযাত্রার অঙ্ক আর জানা ভিসা ফি বসে যাবে; টিউশন আর অন্যান্য খরচ নিজে দিন। টাকায় দেখতে আজকের বিনিময় হার লিখুন।</p>
   <div class="calc">

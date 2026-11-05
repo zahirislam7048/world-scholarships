@@ -101,7 +101,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="wrap">
 <nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/guides/">গাইড ও টুল</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/europe/">ইউরোপ</a></nav>
 <header>
-  <div class="eyebrow"><span class="dot"></span>Norway · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
+  <div class="eyebrow"><span class="dot"></span>Norway · প্রতি সপ্তাহে আপডেট · সর্বশেষ যাচাই: <span id="upd"></span></div>
   <h1>নরওয়ের স্কলারশিপ</h1>
   <p class="lede">এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
   <p class="notice">সব তথ্য এখনো যাচাই বাকি। এগুলো অফিসিয়াল ডোমেইনের সার্চ ফলাফল থেকে নেওয়া, পেজ খুলে মেলানো হয়নি। আবেদনের আগে সোর্স লিংক খুলে টাকা, শর্ত আর সময় মিলিয়ে নিন।</p>
@@ -119,7 +119,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · যোগাযোগ: <a href="mailto:higherstudyinfo30@gmail.com">higherstudyinfo30@gmail.com</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "Norway", "provider": "NTNU – Department of Marine Technology (A. Wilhelmsen Foundation)", "provider_type": "private", "scholarship_name": "A. Wilhelmsen Foundation scholarship (MSc Marine Technology)", "level": "PG", "coverage_amount": "NOK 100,000 per year for 5 students from outside Europe", "eligibility": "Admitted to MSN1 programme; scholarship letter requested after admission", "english_requirement": "TOEFL iBT 90 (4.5 new scale) / IELTS above 6.0 (programme pages: 6.5)", "english_source": "https://www.ntnu.edu/studies/admissions/languagereq", "session_year": "Autumn 2027", "deadline": "2026-12-01", "source_url": "https://www.ntnu.edu/imt/scolarship", "source_domain": "ntnu.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "1 Dec 2026 is NTNU's non-EU application deadline; NTNU/UiO have no tuition-covering scholarships", "apply_url": "https://www.ntnu.edu/studies/imp/how_to_apply"}];
+const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
+// Scholarships whose deadline has passed since the last data check are hidden.
+const DATA = ([{"country": "Norway", "provider": "NTNU – Department of Marine Technology (A. Wilhelmsen Foundation)", "provider_type": "private", "scholarship_name": "A. Wilhelmsen Foundation scholarship (MSc Marine Technology)", "level": "PG", "coverage_amount": "NOK 100,000 per year for 5 students from outside Europe", "eligibility": "Admitted to MSN1 programme; scholarship letter requested after admission", "english_requirement": "TOEFL iBT 90 (4.5 new scale) / IELTS above 6.0 (programme pages: 6.5)", "english_source": "https://www.ntnu.edu/studies/admissions/languagereq", "session_year": "Autumn 2027", "deadline": "2026-12-01", "source_url": "https://www.ntnu.edu/imt/scolarship", "source_domain": "ntnu.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "1 Dec 2026 is NTNU's non-EU application deadline; NTNU/UiO have no tuition-covering scholarships", "apply_url": "https://www.ntnu.edu/studies/imp/how_to_apply"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));

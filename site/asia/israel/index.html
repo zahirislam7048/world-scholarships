@@ -101,7 +101,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="wrap">
 <nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/">সব স্কলারশিপ খুঁজুন</a><a href="/guides/">গাইড ও টুল</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav><nav class="crumbs"><a href="/">হোম</a> / <a href="/asia/">এশিয়া</a></nav>
 <header>
-  <div class="eyebrow"><span class="dot"></span>Israel · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
+  <div class="eyebrow"><span class="dot"></span>Israel · প্রতি সপ্তাহে আপডেট · সর্বশেষ যাচাই: <span id="upd"></span></div>
   <h1>ইসরায়েলের স্কলারশিপ</h1>
   <p class="lede">এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
   <p class="notice">সব তথ্য এখনো যাচাই বাকি। এগুলো অফিসিয়াল ডোমেইনের সার্চ ফলাফল থেকে নেওয়া, পেজ খুলে মেলানো হয়নি। আবেদনের আগে সোর্স লিংক খুলে টাকা, শর্ত আর সময় মিলিয়ে নিন।</p>
@@ -119,7 +119,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a> · যোগাযোগ: <a href="mailto:higherstudyinfo30@gmail.com">higherstudyinfo30@gmail.com</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>
 </div>
 <script>
-const DATA = [{"country": "Israel", "provider": "Azrieli Foundation", "provider_type": "private", "scholarship_name": "Azrieli International Postdoctoral Fellowship 2027–28", "level": "Postdoc", "coverage_amount": "ILS 168,000 per year + ILS 20,000 research/travel, for 2 years", "eligibility": "PhD on or after 1 Nov 2023 (or defence by 1 Jun 2027); sponsor at an Israeli university; no Israeli degree", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027–28", "deadline": "2026-11-11", "source_url": "https://azrielifoundation.org/azrieli-fellows-news/call-for-applications-for-the-azrieli-international-postdoctoral-fellowship-2027-28/", "source_domain": "azrielifoundation.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Up to 24 fellowships; results by 31 Mar 2027", "apply_url": "https://azrielifoundation.org/fellows/internationalpostdoctoral/"}];
+const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
+// Scholarships whose deadline has passed since the last data check are hidden.
+const DATA = ([{"country": "Israel", "provider": "Azrieli Foundation", "provider_type": "private", "scholarship_name": "Azrieli International Postdoctoral Fellowship 2027–28", "level": "Postdoc", "coverage_amount": "ILS 168,000 per year + ILS 20,000 research/travel, for 2 years", "eligibility": "PhD on or after 1 Nov 2023 (or defence by 1 Jun 2027); sponsor at an Israeli university; no Israeli degree", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027–28", "deadline": "2026-11-11", "source_url": "https://azrielifoundation.org/azrieli-fellows-news/call-for-applications-for-the-azrieli-international-postdoctoral-fellowship-2027-28/", "source_domain": "azrielifoundation.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Up to 24 fellowships; results by 31 Mar 2027", "apply_url": "https://azrielifoundation.org/fellows/internationalpostdoctoral/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-04";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));

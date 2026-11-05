@@ -9,6 +9,9 @@ on:
     branches: [main]
     paths-ignore: ["site/**"]
   workflow_dispatch:
+  schedule:
+    # Daily rebuild (06:23 Asia/Dhaka) so passed deadlines drop off and counts stay current.
+    - cron: "23 0 * * *"
 
 permissions:
   contents: write

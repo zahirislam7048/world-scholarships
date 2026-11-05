@@ -65,7 +65,7 @@ footer{font-size:13px;color:var(--muted)}
 </style>
 <div class="wrap">
 <header>
-  <div class="eyebrow"><span class="dot"></span>__COUNTRY_EN__ · প্রতি সপ্তাহে আপডেট · সর্বশেষ: <span id="upd"></span></div>
+  <div class="eyebrow"><span class="dot"></span>__COUNTRY_EN__ · প্রতি সপ্তাহে আপডেট · সর্বশেষ যাচাই: <span id="upd"></span></div>
   <h1>__HEADING__</h1>
   <p class="lede">এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়। প্রতিটি কার্ডে প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক আছে।</p>
   <p class="notice">সব তথ্য এখনো যাচাই বাকি। এগুলো অফিসিয়াল ডোমেইনের সার্চ ফলাফল থেকে নেওয়া, পেজ খুলে মেলানো হয়নি। আবেদনের আগে সোর্স লিংক খুলে টাকা, শর্ত আর সময় মিলিয়ে নিন।</p>
@@ -83,7 +83,9 @@ footer{font-size:13px;color:var(--muted)}
 <footer>উৎস ফাইল: <span style="font-family:var(--mono)">data/__SLUG__/scholarships.csv</span>। কোনো তথ্য যাচাই হলে CSV-তে verification_status বদলে <code>verified</code> করুন।</footer>
 </div>
 <script>
-const DATA = __DATA__;
+const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
+// Scholarships whose deadline has passed since the last data check are hidden.
+const DATA = (__DATA__).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "__UPDATED__";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));

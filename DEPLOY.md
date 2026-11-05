@@ -17,6 +17,12 @@ The repository is public, so cPanel clones it over HTTPS with no key.
 3. **First deploy:** **Manage** → **Pull or Deploy** → **Update from Remote** → **Deploy HEAD Commit**. Open https://higherstudyinfo.com.
 4. **Google Search Console:** verify with the meta tag (already on every page), then submit `https://higherstudyinfo.com/sitemap.xml`.
 
+## Automatic updates
+
+- The GitHub Action also runs **daily** (06:23 Asia/Dhaka) and rebuilds `site/`, so deadlines that have passed drop off and the counts stay current.
+- Pages show “সর্বশেষ যাচাই” = the date in `data/LAST_CHECKED`, which the weekly update writes every time it checks the data (even if nothing changed).
+- Country and search pages also hide passed deadlines in the visitor's browser.
+
 ## Updating the live site
 
 A cPanel **Cron Job** (once per hour) pulls `main` and copies `site/` into the document root, so the weekly update reaches the live site within about an hour:

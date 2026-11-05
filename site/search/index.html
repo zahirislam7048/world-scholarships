@@ -130,7 +130,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <div class="wrap">
 <nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links"><a href="/deadlines/">শেষ তারিখ সামনে</a><a href="/search/" aria-current="page">সব স্কলারশিপ খুঁজুন</a><a href="/guides/">গাইড ও টুল</a><a href="/about/">আমাদের সম্পর্কে</a></span></nav>
 <header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">সব দেশ · সর্বশেষ আপডেট 2026-11-04</span>
+  <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই 2026-11-04</span>
   <h1>সব স্কলারশিপ খুঁজুন</h1>
   <p class="lede">সব দেশের স্কলারশিপ এক জায়গায়। নাম, দেশ, বিশ্ববিদ্যালয়, শর্ত বা IELTS স্কোর লিখে খুঁজুন; অঞ্চল আর লেভেল দিয়ে ছাঁকুন। যেগুলোর শেষ তারিখ আগে, সেগুলো উপরে দেখায়।</p>
 </header>
@@ -155,6 +155,7 @@ var DATA = [{"n": "Foreign government scholarship nominations (China/OIC, Brunei
   function render(){
     var s=q.value.trim().toLowerCase();
     var rows=DATA.filter(function(r){
+      if(r.d&&r.d<today)return false;
       if(sec.value&&r.s!==sec.value)return false;
       if(!lvl(r.l,lv.value))return false;
       if(dl.checked&&!(r.d&&r.d>=today))return false;

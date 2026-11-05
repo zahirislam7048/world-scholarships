@@ -11,6 +11,7 @@ import shutil
 import sys
 
 from build_preview import CONTINENTS, COUNTRIES, ROOT, load_rows, render
+import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
                         tuition_body, visa_body)
@@ -45,7 +46,7 @@ def page(title, description, path, head_extra, body):
 
 
 def country_page(slug, updated):
-    frag = render(slug, updated)
+    frag = render(slug, site_extra.CHECKED)
     head, body = frag.split('<div class="wrap">', 1)
     # <title> and the claude-only meta come from page(); keep fonts and styles.
     head = "\n".join(l for l in head.splitlines() if not l.startswith(("<title>", '<meta name="claude:')))
@@ -127,7 +128,7 @@ def home_page(updated):
 {nav("/")}
 <header class="hero">
   <div class="hero-text">
-    <span class="eyebrow">Higher Study Info · সর্বশেষ আপডেট {updated}</span>
+    <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
   </div>
@@ -154,7 +155,7 @@ def continent_page(cont, updated):
 {nav()}
 <nav class="crumbs"><a href="/">হোম</a></nav>
 <header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">{en} · সর্বশেষ আপডেট {updated}</span>
+  <span class="eyebrow">{en} · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
   <h1>{bn_of} স্কলারশিপ</h1>
 </header>
 <div class="grid">
@@ -182,7 +183,10 @@ REDIRECTS = {
 
 
 def main():
+    # `updated` is today's date: deadlines before it are dropped. The date shown on the
+    # pages is when the data was last checked (data/LAST_CHECKED, written by the weekly update).
     updated = sys.argv[1] if len(sys.argv) > 1 else datetime.date.today().isoformat()
+    site_extra.CHECKED = (ROOT / "data" / "LAST_CHECKED").read_text(encoding="utf-8").strip()
     shutil.rmtree(OUT, ignore_errors=True)
     OUT.mkdir()
     (OUT / "index.html").write_text(home_page(updated), encoding="utf-8")
@@ -214,7 +218,7 @@ def main():
     urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{updated}</lastmod></url>\n" for u in urls)
+        + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)
         + "</urlset>\n", encoding="utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     print(f"site/ built: {len(urls)} pages")
