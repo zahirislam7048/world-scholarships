@@ -49,7 +49,7 @@ def _footer():
     regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items())
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
-             '<li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
+             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
     return (f'<footer class="sitefoot"><nav class="fcols" aria-label="সাইটের লিংক">'
             f'<div><h4>অঞ্চলভিত্তিক</h4><ul>{regions}</ul></div><div><h4>টুল</h4><ul>{tools}</ul></div>'
@@ -340,6 +340,7 @@ table.t.fit{min-width:0;width:100%}
 </style>"""
 
 GUIDES = [
+    ("/tools/timeline/", "🗓️ আবেদনের টাইমলাইন প্ল্যানার", "শেষ তারিখ দিন — কোন মাসে পরীক্ষা, LOR, SOP, ভিসা, উল্টো দিক থেকে হিসাব।"),
     ("/guides/faq/", "❓ সচরাচর জিজ্ঞাসা (FAQ)", "IELTS ছাড়া, কম CGPA, স্টাডি গ্যাপ, বয়স, ব্যাংক ব্যালান্স — সবচেয়ে বেশি প্রশ্নের উত্তর।"),
     ("/guides/fraud/", "🚩 প্রতারণা থেকে সাবধান", "ভুয়া ভর্তির চিঠি, জাল কাগজ আর অসৎ এজেন্ট চেনার উপায় — সরকারি সূত্রে।"),
     ("/tools/eligibility/", "✅ কোন স্কলারশিপে আমি যোগ্য?", "লেভেল, IELTS, বয়স আর CGPA দিয়ে তালিকা ছেঁকে দেখুন কোনগুলো আপনার সাথে মেলে।"),
@@ -1673,3 +1674,108 @@ def post_study_body(updated):
     <li>স্থানীয় ভাষা জানা চাকরির সুযোগ অনেক বাড়ায় — দেখুন <a href="/guides/other-tests/">ভাষার পরীক্ষা</a>।</li>
   </ul>""", srcs,
         '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/guides/visa/">স্টুডেন্ট ভিসা — দেশভিত্তিক</a></li><li><a href="/guides/part-time-work/">পড়ার সময় কাজ</a></li><li><a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li></ul></section>')
+
+
+SL_CSS = """<style>
+.slbtn{font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:1px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:8px;padding:7px 12px}
+.slbtn[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+</style>"""
+
+
+def shortlist_body(updated):
+    script = """<script>
+(function(){
+  var K="hsi-shortlist",l=[];try{l=JSON.parse(localStorage.getItem(K)||"[]")}catch(e){}
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+  var t=new Date();t.setHours(0,0,0,0);
+  var out=document.getElementById("sl"),cnt=document.getElementById("sl-n");
+  function left(d){if(!d)return "";var x=Math.round((new Date(d+"T00:00:00")-t)/864e5);return x<0?"পেরিয়ে গেছে":x===0?"আজ শেষ":bn(x)+" দিন বাকি"}
+  function draw(all){
+    var rows=all.filter(function(r){return l.indexOf(r.id)>=0}).sort(function(a,b){return (a.d||"9999")<(b.d||"9999")?-1:1});
+    var gone=l.filter(function(id){return !all.some(function(r){return r.id===id})}).length;
+    cnt.textContent=bn(rows.length);
+    if(!rows.length){out.innerHTML='<p class="empty">শর্টলিস্ট খালি। যেকোনো স্কলারশিপের পেজে “☆ শর্টলিস্টে রাখুন” চাপুন — শুরু করতে পারেন <a href="/scholarships/">সব স্কলারশিপের তালিকা</a> বা <a href="/tools/eligibility/">যোগ্যতা যাচাই</a> থেকে।</p>'+(gone?'<p class="meta">'+bn(gone)+'টি আগের সেভ করা স্কলারশিপ আর তালিকায় নেই (মেয়াদ পেরিয়েছে)।</p>':'');return}
+    out.innerHTML='<div class="tbl-wrap"><table class="t"><tr><th>স্কলারশিপ</th><th>দেশ · লেভেল</th><th>সুবিধা</th><th>IELTS / English</th><th>শেষ তারিখ</th><th></th></tr>'+rows.map(function(r){
+      return '<tr><td><a href="/scholarship/'+r.id+'/">'+esc(r.n)+'</a>'+(r.w?'<br><small class="meta">⏳ পরের রাউন্ডের অপেক্ষায়</small>':'')+'</td><td>'+esc(r.c)+' · '+esc(r.l)+'</td><td>'+esc(r.cov)+'</td><td>'+esc(r.e)+'</td><td>'+(r.d?esc(r.d)+'<br><small class="meta">'+left(r.d)+'</small>'+(r.ics?'<br><a href="/scholarship/'+r.id+'/deadline.ics" download>📅 .ics</a>':''):'<span class="meta">—</span>')+'</td><td><button type="button" class="obtn rm" data-id="'+r.id+'" style="padding:4px 10px;font-size:13px">সরান</button></td></tr>';
+    }).join("")+'</table></div>'+(gone?'<p class="meta">'+bn(gone)+'টি সেভ করা স্কলারশিপ আর তালিকায় নেই (মেয়াদ পেরিয়েছে)।</p>':'');
+    out.querySelectorAll(".rm").forEach(function(b){b.onclick=function(){l.splice(l.indexOf(b.dataset.id),1);try{localStorage.setItem(K,JSON.stringify(l))}catch(e){}draw(all)}});
+  }
+  fetch("/data/scholarships.json").then(function(r){return r.json()}).then(draw).catch(function(){out.innerHTML='<p class="empty">তালিকা লোড করা যায়নি। পেজটি আবার খুলুন।</p>'});
+})();
+</script>"""
+    return f"""<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">টুল</span>
+  <h1>আমার শর্টলিস্ট (<span id="sl-n">০</span>)</h1>
+  <p class="lede">যেসব স্কলারশিপ পেজে “☆ শর্টলিস্টে রাখুন” চেপেছেন, সেগুলো এখানে পাশাপাশি — শেষ তারিখ অনুযায়ী সাজানো। তালিকা শুধু এই ব্রাউজারে থাকে, কোথাও পাঠানো হয় না।</p>
+</header>
+<section id="sl"><p class="empty">লোড হচ্ছে…</p></section>
+<p class="meta">আবেদনের পরিকল্পনা করতে <a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a> ব্যবহার করুন।</p>
+{FOOTER}
+</div>
+{script}"""
+
+
+TIMELINE = [  # (months before the application deadline, step, link)
+    (12, "লক্ষ্য দেশ, প্রোগ্রাম আর স্কলারশিপ বাছাই; শর্ত মিলিয়ে নিন", "/tools/eligibility/"),
+    (10, "IELTS/TOEFL বা GRE-র প্রস্তুতি শুরু; পরীক্ষার তারিখ বুক", "/guides/english-tests/"),
+    (8, "PhD/গবেষণা হলে সম্ভাব্য সুপারভাইজারদের ইমেইল", "/guides/professor-email/"),
+    (6, "পাসপোর্ট (মেয়াদ দেখে) আর সনদ সত্যায়নের কাজ শুরু", "/guides/documents/"),
+    (4, "ইংরেজি/অন্যান্য পরীক্ষা দেওয়া শেষ — স্কোর পাঠানোর সময় রাখুন", "/guides/other-tests/"),
+    (3, "রেফারিদের কাছে LOR চাওয়া (UCLA ২–৩ মাস আগে বলতে বলে)", "/guides/lor/"),
+    (2, "SOP/Motivation Letter আর Research Proposal-এর খসড়া, অন্যকে দিয়ে পড়ানো", "/guides/sop/"),
+    (1, "CV, স্ক্যান কপি, ফর্ম পূরণ; রেফারিদের মনে করিয়ে দেওয়া", "/guides/lor/"),
+    (0, "আবেদন জমা — শেষ দিনের আগেই", "/deadlines/"),
+]
+AFTER = [  # (months before the course starts, step, link)
+    (5, "ফলাফল/অফার এলে শর্ত মিলিয়ে গ্রহণ; স্কলারশিপ ইন্টারভিউর প্রস্তুতি", "/guides/interview/"),
+    (4, "স্টুডেন্ট ফাইল খুলে টিউশন/ব্লকড অ্যাকাউন্টে টাকা পাঠানো", "/guides/student-file/"),
+    (3, "ভিসার আবেদন ও ইন্টারভিউ", "/guides/visa/"),
+    (1, "যাওয়ার আগের চেকলিস্ট — টিকিট, বীমা, থাকার জায়গা", "/guides/pre-departure/"),
+]
+
+
+def timeline_body(updated):
+    data = json.dumps({"before": TIMELINE, "after": AFTER}, ensure_ascii=False)
+    script = """<script>
+(function(){
+  var T=__T__,$=function(i){return document.getElementById(i)};
+  var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+  var M=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+  function sub(d,m){var x=new Date(d.getFullYear(),d.getMonth()-m,Math.min(d.getDate(),28));return x}
+  function fmt(d){return M[d.getMonth()]+" "+bn(d.getFullYear())}
+  var now=new Date();now.setDate(1);now.setHours(0,0,0,0);
+  function li(d,s,h){var past=d<now;return '<li'+(past?' class="past"':'')+'><span class="when">'+fmt(d)+(past?' · দেরি হয়েছে — এখনই করুন':'')+'</span><a href="'+h+'">'+s+'</a></li>'}
+  function run(){
+    var dl=$("t-dl").value,st=$("t-start").value;
+    if(!dl){$("t-out").innerHTML='<p class="empty">আবেদনের শেষ তারিখ দিন।</p>';return}
+    var D=new Date(dl+"T00:00:00"),h='<h2>আবেদনের আগে</h2><ol class="tl">'+T.before.map(function(x){return li(sub(D,x[0]),x[1],x[2])}).join("")+'</ol>';
+    if(st){var S=new Date(st+"-01T00:00:00");h+='<h2>অফার পাওয়ার পর</h2><ol class="tl">'+T.after.map(function(x){return li(sub(S,x[0]),x[1],x[2])}).join("")+'</ol>'}
+    $("t-out").innerHTML=h;
+  }
+  ["t-dl","t-start"].forEach(function(i){$(i).addEventListener("input",run)});run();
+})();
+</script>""".replace("__T__", data)
+    return f"""<style>.tl{{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;border-left:3px solid var(--accent);padding-left:14px}}
+.tl li{{display:flex;flex-direction:column;gap:2px}}.tl .when{{font-family:var(--mono);font-size:13px;color:var(--muted)}}.tl a{{color:var(--fg);font-weight:600}}
+.tl li.past a{{color:var(--muted);font-weight:400}}</style>
+<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">টুল</span>
+  <h1>আবেদনের টাইমলাইন প্ল্যানার</h1>
+  <p class="lede" style="max-width:68ch">আপনার লক্ষ্য স্কলারশিপ বা প্রোগ্রামের শেষ তারিখ দিন — কোন মাসে কী করবেন, উল্টো দিক থেকে হিসাব করে দেখাবে। কোর্স শুরুর মাস দিলে অফারের পরের ধাপগুলোও দেখাবে। শেষ তারিখ খুঁজতে দেখুন <a href="/deadlines/">শেষ তারিখ সামনে</a>।</p>
+  <div class="calc">
+    <label>আবেদনের শেষ তারিখ<input id="t-dl" type="date"></label>
+    <label>কোর্স শুরুর মাস (ঐচ্ছিক)<input id="t-start" type="month"></label>
+  </div>
+  <div id="t-out"></div>
+  <p class="warn">সময়গুলো সাধারণ পরামর্শ — যেমন LOR-এর জন্য UCLA ২–৩ মাস আগে বলতে বলে, আর কিছু স্কলারশিপের শেষ তারিখ শুরুর ১৮ মাস আগেও হয় (EducationUSA)। নিজের প্রোগ্রাম, পরীক্ষার তারিখ আর ভিসার প্রসেসিং সময় অনুযায়ী সামঞ্জস্য করুন।</p>
+</article>
+{FOOTER}
+</div>
+{script}"""

@@ -19,7 +19,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
-                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, faq_body, post_study_body)
+                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -290,6 +290,7 @@ def scholarship_page(slug, i, r, updated):
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t">{table}</table></div>
   {cal}
+  <p class="vlinks"><button type="button" class="slbtn" data-id="{PAGES[(slug, i)]}" aria-pressed="false">☆ শর্টলিস্টে রাখুন</button> <a href="/shortlist/" class="meta">আমার শর্টলিস্ট →</a></p>
   <p class="vlinks"><a class="apply" href="{e(apply_url)}" target="_blank" rel="noopener">{"আবেদন করুন ↗" if direct else "অফিসিয়াল পেজ ↗"}</a></p>
   <p class="vsrc">সূত্র: <a href="{e(r["source_url"])}" target="_blank" rel="noopener">{e(r["source_domain"])}</a> · সংগ্রহ {e(r.get("collected_on", ""))}। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -299,12 +300,15 @@ def scholarship_page(slug, i, r, updated):
 {FOOTER}
 </div>
 <script>
+(function(){{var K="hsi-shortlist",b=document.querySelector(".slbtn"),l=[];try{{l=JSON.parse(localStorage.getItem(K)||"[]")}}catch(e){{}}
+function draw(){{var on=l.indexOf(b.dataset.id)>=0;b.setAttribute("aria-pressed",on);b.textContent=on?"★ শর্টলিস্টে আছে":"☆ শর্টলিস্টে রাখুন"}}
+b.onclick=function(){{var i=l.indexOf(b.dataset.id);if(i>=0)l.splice(i,1);else l.push(b.dataset.id);try{{localStorage.setItem(K,JSON.stringify(l))}}catch(e){{}}draw()}};draw()}})();
 (function(){{var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){{return String(x).replace(/\\d/g,function(c){{return "০১২৩৪৫৬৭৮৯"[c]}})}};
 if(n<0){{document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}}else{{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}}}})();
 </script>"""
     ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/"), (r["scholarship_name"], path)]))
-    return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS + LINK_CSS, body, ld)
+    return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS + LINK_CSS + SL_CSS, body, ld)
 
 
 def redirect_page(target):
@@ -342,6 +346,12 @@ def main():
             (OUT / "scholarship" / ps / "deadline.ics").write_bytes(ics([({**r, "_slug": slug}, f"/scholarship/{ps}/")], r["scholarship_name"]).encode("utf-8"))
     upcoming = sorted(((({**load_rows(sl)[i], "_slug": sl}), f"/scholarship/{ps}/") for (sl, i), ps in PAGES.items()
                        if load_rows(sl)[i].get("deadline")), key=lambda x: x[0]["deadline"])
+    (OUT / "data").mkdir()
+    (OUT / "data" / "scholarships.json").write_text(json.dumps([
+        {"id": ps, "n": r["scholarship_name"], "c": COUNTRIES[sl][0], "l": r["level"], "cov": r["coverage_amount"],
+         "e": r.get("english_requirement", ""), "d": r.get("deadline", ""), "s": r.get("session_year", ""),
+         "w": is_watch(r), "ics": bool(r.get("deadline"))}
+        for (sl, i), ps in PAGES.items() for r in [load_rows(sl)[i]]], ensure_ascii=False), encoding="utf-8")
     (OUT / "deadlines.ics").write_bytes(ics(upcoming, "স্কলারশিপের শেষ তারিখ — Higher Study Info").encode("utf-8"))
     (OUT / "index.html").write_text(home_page(updated), encoding="utf-8")
     for cont in CONTINENTS:
@@ -378,6 +388,8 @@ def main():
         "guides/fraud": ("প্রতারণা থেকে সাবধান — এজেন্ট, ভুয়া ভর্তি ও ভিসা | Higher Study Info", "বিদেশে পড়ার আবেদনে ভুয়া ভর্তির চিঠি, জাল কাগজ আর অসৎ এজেন্ট চেনার লক্ষণ ও নিজেকে রক্ষার উপায়।", fraud_body),
         "guides/faq": ("বিদেশে উচ্চশিক্ষা — সচরাচর জিজ্ঞাসা (FAQ) | Higher Study Info", "IELTS ছাড়া পড়া, কম CGPA, স্টাডি গ্যাপ, বয়সসীমা, ব্যাংক ব্যালান্স, এজেন্ট, পার্ট-টাইম কাজ — প্রশ্নোত্তর।", faq_body),
         "guides/post-study-work": ("পড়া শেষে কাজের ভিসা — দেশভিত্তিক | Higher Study Info", "জার্মানির ১৮ মাসের চাকরি-খোঁজার পারমিট, কানাডার PGWP, যুক্তরাষ্ট্রের OPT/STEM OPT, অস্ট্রেলিয়ার ৪৮৫, জাপান ও কোরিয়া — সরকারি সূত্রে।", post_study_body),
+        "shortlist": ("আমার শর্টলিস্ট | Higher Study Info", "পছন্দের স্কলারশিপগুলো পাশাপাশি তুলনা করুন — সুবিধা, IELTS আর শেষ তারিখ।", shortlist_body),
+        "tools/timeline": ("আবেদনের টাইমলাইন প্ল্যানার | Higher Study Info", "স্কলারশিপ বা প্রোগ্রামের শেষ তারিখ দিন — কোন মাসে IELTS, LOR, SOP, স্টুডেন্ট ফাইল আর ভিসা, তার পরিকল্পনা।", timeline_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -386,7 +398,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)
