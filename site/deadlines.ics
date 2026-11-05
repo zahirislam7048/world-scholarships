@@ -198,6 +198,33 @@ DESCRIPTION:কাল শেষ তারিখ — ISU Bocconi Scholarship
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:scholarship-excellence-scholarship-opportunity-programme-esop-switzerla
+ nd-20261130@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:শেষ তারিখ: Excellence Scholarship & Opportunity Pro
+ gramme (ESOP) (Switzerland)
+URL:https://higherstudyinfo.com/scholarship/excellence-scholarship-opportun
+ ity-programme-esop-switzerland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/e
+ xcellence-scholarship-opportunity-programme-esop-switzerland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Excellence Scholarship & Opportu
+ nity Programme (ESOP)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Excellence Scholarship 
+ & Opportunity Programme (ESOP)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:scholarship-hong-kong-phd-fellowship-scheme-2027-28-hong-kong-20261201@
  higherstudyinfo.com
 DTSTAMP:20261104T000000Z
@@ -222,6 +249,60 @@ ACTION:DISPLAY
 TRIGGER:-P1D
 DESCRIPTION:কাল শেষ তারিখ — Hong Kong PhD Fellowshi
  p Scheme 2027/28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-hku-presidential-phd-scholar-programme-2027-28-hong-kong-20
+ 261201@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: HKU Presidential PhD Scholar Programme 2
+ 027/28 (Hong Kong)
+URL:https://higherstudyinfo.com/scholarship/hku-presidential-phd-scholar-pr
+ ogramme-2027-28-hong-kong/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/h
+ ku-presidential-phd-scholar-programme-2027-28-hong-kong/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — HKU Presidential PhD Scholar Pro
+ gramme 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — HKU Presidential PhD Sc
+ holar Programme 2027/28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-justus-louise-van-effen-excellence-scholarships-netherlands
+ -20261201@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: Justus & Louise van Effen Excellence Sch
+ olarships (Netherlands)
+URL:https://higherstudyinfo.com/scholarship/justus-louise-van-effen-excelle
+ nce-scholarships-netherlands/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/j
+ ustus-louise-van-effen-excellence-scholarships-netherlands/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Justus & Louise van Effen Excell
+ ence Scholarships
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Justus & Louise van Eff
+ en Excellence Scholarships
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -654,6 +735,33 @@ DESCRIPTION:কাল শেষ তারিখ — Erasmus Mundus Master E
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:scholarship-tuition-fee-waiver-for-international-master-s-programmes-fi
+ nland-20270119@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:শেষ তারিখ: Tuition fee waiver for international mas
+ ter's programmes (Finland)
+URL:https://higherstudyinfo.com/scholarship/tuition-fee-waiver-for-internat
+ ional-master-s-programmes-finland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/t
+ uition-fee-waiver-for-international-master-s-programmes-finland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Tuition fee waiver for internati
+ onal master's programmes
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Tuition fee waiver for 
+ international master's programmes
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:scholarship-i-mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus-
  20270126@higherstudyinfo.com
 DTSTAMP:20261104T000000Z
@@ -678,6 +786,33 @@ ACTION:DISPLAY
 TRIGGER:-P1D
 DESCRIPTION:কাল শেষ তারিখ — i-MESC Erasmus Mundus J
  oint Master (Class #23)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-ntu-research-scholarship-phd-august-2027-intake-singapore-2
+ 0270131@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270131
+DTEND;VALUE=DATE:20270201
+SUMMARY:শেষ তারিখ: NTU Research Scholarship (PhD\, August 2
+ 027 intake) (Singapore)
+URL:https://higherstudyinfo.com/scholarship/ntu-research-scholarship-phd-au
+ gust-2027-intake-singapore/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ tu-research-scholarship-phd-august-2027-intake-singapore/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — NTU Research Scholarship (PhD\, 
+ August 2027 intake)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — NTU Research Scholarshi
+ p (PhD\, August 2027 intake)
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT

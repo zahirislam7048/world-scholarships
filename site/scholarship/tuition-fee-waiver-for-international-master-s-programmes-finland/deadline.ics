@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tuition fee waiver for international master's programmes
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-tuition-fee-waiver-for-international-master-s-programmes-fi
+ nland-20270119@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:শেষ তারিখ: Tuition fee waiver for international mas
+ ter's programmes (Finland)
+URL:https://higherstudyinfo.com/scholarship/tuition-fee-waiver-for-internat
+ ional-master-s-programmes-finland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/t
+ uition-fee-waiver-for-international-master-s-programmes-finland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Tuition fee waiver for internati
+ onal master's programmes
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Tuition fee waiver for 
+ international master's programmes
+END:VALARM
+END:VEVENT
+END:VCALENDAR

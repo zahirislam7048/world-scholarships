@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:HKU Presidential PhD Scholar Programme 2027/28
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-hku-presidential-phd-scholar-programme-2027-28-hong-kong-20
+ 261201@higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: HKU Presidential PhD Scholar Programme 2
+ 027/28 (Hong Kong)
+URL:https://higherstudyinfo.com/scholarship/hku-presidential-phd-scholar-pr
+ ogramme-2027-28-hong-kong/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/h
+ ku-presidential-phd-scholar-programme-2027-28-hong-kong/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — HKU Presidential PhD Scholar Pro
+ gramme 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — HKU Presidential PhD Sc
+ holar Programme 2027/28
+END:VALARM
+END:VEVENT
+END:VCALENDAR
