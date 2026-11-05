@@ -146,6 +146,7 @@ table.t th{font-weight:600;color:var(--muted)}
   
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t"><tr><th>প্রতিষ্ঠান</th><td>TICA – Ministry of Foreign Affairs <span class="meta">(সরকারি)</span></td></tr><tr><th>দেশ</th><td><a href="/asia/thailand/">Thailand</a></td></tr><tr><th>লেভেল</th><td>PG</td></tr><tr><th>সুবিধা</th><td>Tuition reimbursed by TICA (other benefits in guidelines)</td></tr><tr><th>শর্ত</th><td>Nominated by the national focal point of an eligible country</td></tr><tr><th>IELTS / English</th><td>Set by host university (examples: IELTS 5.0–6.0, TOEFL iBT 69–71); not needed if degree was taught in English <a href="https://image.mfa.go.th/mfa/0/GH2PYnujXi/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/Guidelines_for_TIPP_2026.pdf" target="_blank" rel="noopener">সূত্র ↗</a></td></tr><tr><th>সেশন</th><td>2027</td></tr><tr><th>নোট</th><td>Course list published; deadlines marked TBC</td></tr></table></div>
+  
   <p class="vlinks"><a class="apply" href="https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233" target="_blank" rel="noopener">অফিসিয়াল পেজ ↗</a></p>
   <p class="vsrc">সূত্র: <a href="https://tica-thaigov.mfa.go.th/en/content/tipp2027?cate=605b1025f07513674238a233" target="_blank" rel="noopener">tica-thaigov.mfa.go.th</a> · সংগ্রহ 2026-11-04। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -163,7 +164,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <script>
 (function(){var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){return String(x).replace(/\d/g,function(c){return "০১২৩৪৫৬৭৮৯"[c]})};
-if(n<0){document.getElementById("expired").hidden=false}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
+if(n<0){document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
 </script>
 </body>
 </html>

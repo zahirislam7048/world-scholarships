@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:HBKU graduate scholarships / tuition waivers
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-hbku-graduate-scholarships-tuition-waivers-qatar-20270201@h
+ igherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: HBKU graduate scholarships / tuition wai
+ vers (Qatar)
+URL:https://higherstudyinfo.com/scholarship/hbku-graduate-scholarships-tuit
+ ion-waivers-qatar/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/h
+ bku-graduate-scholarships-tuition-waivers-qatar/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — HBKU graduate scholarships / tui
+ tion waivers
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — HBKU graduate scholarsh
+ ips / tuition waivers
+END:VALARM
+END:VEVENT
+END:VCALENDAR

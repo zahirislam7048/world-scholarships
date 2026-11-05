@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:National Scholarship Programme of the Slovak Republic – stay
+ s in 2027/28
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-national-scholarship-programme-of-the-slovak-republic-stays
+ -in-2027-28-slovakia-20270430@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:শেষ তারিখ: National Scholarship Programme of the Sl
+ ovak Republic – stays in 2027/28 (Slovakia)
+URL:https://higherstudyinfo.com/scholarship/national-scholarship-programme-
+ of-the-slovak-republic-stays-in-2027-28-slovakia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ ational-scholarship-programme-of-the-slovak-republic-stays-in-2027-28-slov
+ akia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — National Scholarship Programme o
+ f the Slovak Republic – stays in 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — National Scholarship Pr
+ ogramme of the Slovak Republic – stays in 2027/28
+END:VALARM
+END:VEVENT
+END:VCALENDAR

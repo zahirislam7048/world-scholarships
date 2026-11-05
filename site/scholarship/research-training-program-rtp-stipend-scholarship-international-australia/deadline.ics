@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Research Training Program (RTP) Stipend Scholarship – Intern
+ ational
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-research-training-program-rtp-stipend-scholarship-internati
+ onal-australia-20261218@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:শেষ তারিখ: Research Training Program (RTP) Stipend 
+ Scholarship – International (Australia)
+URL:https://higherstudyinfo.com/scholarship/research-training-program-rtp-s
+ tipend-scholarship-international-australia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/r
+ esearch-training-program-rtp-stipend-scholarship-international-australia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Research Training Program (RTP) 
+ Stipend Scholarship – International
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Research Training Progr
+ am (RTP) Stipend Scholarship – International
+END:VALARM
+END:VEVENT
+END:VCALENDAR

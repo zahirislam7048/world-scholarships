@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:MBZUAI full scholarship (MSc / PhD in AI)
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-mbzuai-full-scholarship-msc-phd-in-ai-uae-20261215@higherst
+ udyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: MBZUAI full scholarship (MSc / PhD in AI
+ ) (United Arab Emirates)
+URL:https://higherstudyinfo.com/scholarship/mbzuai-full-scholarship-msc-phd
+ -in-ai-uae/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/m
+ bzuai-full-scholarship-msc-phd-in-ai-uae/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — MBZUAI full scholarship (MSc / P
+ hD in AI)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — MBZUAI full scholarship
+  (MSc / PhD in AI)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

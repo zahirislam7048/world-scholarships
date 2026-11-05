@@ -2,6 +2,7 @@
 import html
 import json
 import pathlib
+import re
 
 from build_preview import CONTINENTS, COUNTRIES, load_rows
 
@@ -153,6 +154,7 @@ def deadlines_body(updated):
   <h1>শেষ তারিখ সামনে</h1>
   <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে আবেদনের পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
 </header>
+<p class="warn">📅 <b>সব শেষ তারিখ নিজের ক্যালেন্ডারে:</b> <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fhigherstudyinfo.com%2Fdeadlines.ics" target="_blank" rel="noopener">Google Calendar-এ সাবস্ক্রাইব</a> · <a href="webcal://higherstudyinfo.com/deadlines.ics">iPhone / Outlook</a> · <a href="/deadlines.ics" download>.ics ফাইল</a>. সাবস্ক্রাইব করলে নতুন স্কলারশিপ যোগ হলে ক্যালেন্ডারও নিজে থেকে হালনাগাদ হবে, আর প্রতিটির ৭ দিন ও ১ দিন আগে রিমাইন্ডার পাবেন।</p>
 {chr(10).join(sections) if sections else '<p class="empty">এই মুহূর্তে শেষ তারিখসহ কোনো স্কলারশিপ নেই।</p>'}
 <p class="notice">শেষ তারিখ অফিসিয়াল সূত্র থেকে নেওয়া; সময় অঞ্চল আর ভেতরের আগের ডেডলাইন আলাদা হতে পারে। আবেদনের আগে সূত্র মিলিয়ে নিন।</p>
 {FOOTER}
@@ -321,6 +323,7 @@ table.t th{font-weight:600;color:var(--muted)}
 </style>"""
 
 GUIDES = [
+    ("/tools/eligibility/", "✅ কোন স্কলারশিপে আমি যোগ্য?", "লেভেল, IELTS, বয়স আর CGPA দিয়ে তালিকা ছেঁকে দেখুন কোনগুলো আপনার সাথে মেলে।"),
     ("/guides/documents/", "📄 কাগজপত্র ও সত্যায়ন", "বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।"),
     ("/guides/english-tests/", "🗣️ IELTS, TOEFL, Duolingo, PTE", "বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।"),
     ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
@@ -933,6 +936,106 @@ var DATA = __DATA__;
 <h2>পূর্ণ ফ্যাকাল্টি তালিকা (অফিসিয়াল)</h2>
 <ul class="src-list">{dir_list}</ul>
 <p class="vsrc">পদবি ও গবেষণার বিষয় অফিসিয়াল পেজের সার্চ-স্নিপেট থেকে নেওয়া, সংগ্রহ: {html.escape(rows[0]["collected_on"])}। পদবি বদলে যেতে পারে — যোগাযোগের আগে প্রোফাইলে মিলিয়ে নিন। স্প্যাম এড়াতে এখানে কোনো ইমেইল বা ফোন নম্বর রাখা হয়নি।</p>
+{FOOTER}
+</div>
+{script}"""
+
+
+def _ielts_min(t):
+    m = re.search(r"IELTS[^0-9;]{0,25}?(\d(?:\.\d)?)\b", t)
+    return float(m.group(1)) if m and 4 <= float(m.group(1)) <= 9 else None
+
+
+def _age_limits(t):
+    rng = re.findall(r"[Aa]ge[^0-9]{0,4}\d{2}\s*[–-]\s*(\d{2})", t)
+    caps = re.findall(r"(?:≤|<|under|not more than|up to|below)\s*(\d{2})\b", t, re.I)
+    return sorted({int(x) for x in rng + caps if 17 <= int(x) <= 60})
+
+
+def _cgpa_min(t):
+    m = re.search(r"(?:CGPA|GPA)[^0-9;]{0,12}?(\d\.\d{1,2})", t)
+    return float(m.group(1)) if m else None
+
+
+def eligibility_body(updated):
+    data = []
+    for r in all_rows():
+        e, el = r.get("english_requirement", ""), r.get("eligibility", "")
+        data.append({"n": r["scholarship_name"], "c": COUNTRIES[r["slug"]][0], "s": r["section"], "bd": r["slug"] == "asia/bangladesh",
+                     "l": r["level"], "d": r.get("deadline", ""), "u": r["page"], "e": e, "el": el,
+                     "im": _ielts_min(e), "wv": bool(re.search(WAIVER_RE, e, re.I)), "ag": _age_limits(el), "cg": _cgpa_min(el),
+                     "w": r.get("session_year", "").startswith("Next round")})
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    script = """<script>
+var DATA = __DATA__;
+(function(){
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+  var t=new Date();var today=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0");
+  function lvl(l,f){if(f==="UG")return /\\bUG\\b|Diploma/.test(l);if(f==="PG")return /PG|Masters|MS|MA|MPhil|MSc/.test(l);if(f==="PhD")return /PhD|Postdoc/.test(l);return true}
+  var $=function(id){return document.getElementById(id)};
+  function check(r,f){
+    var why=[];
+    if(r.d&&r.d<today)return null;
+    if(f.where==="abroad"&&r.bd||f.where==="bd"&&!r.bd)return null;
+    if(!lvl(r.l,f.lv))return null;
+    if(r.bd){}else if(f.ielts===null){
+      if(r.im!==null&&!r.wv)return null;
+      if(r.wv)why.push("IELTS ছাড়ের পথ আছে — শর্ত মিলিয়ে নিন");
+      else if(r.im===null)why.push("ইংরেজির শর্ত সূত্রে স্পষ্ট নয়");
+    }else if(r.im!==null&&f.ielts<r.im){
+      if(!r.wv)return null;
+      why.push("IELTS "+bn(r.im)+" লাগে, তবে ছাড়ের পথ আছে");
+    }else if(r.im===null&&!r.wv)why.push("ইংরেজির শর্ত সূত্রে স্পষ্ট নয়");
+    if(f.age&&r.ag.length){
+      if(f.age>Math.max.apply(null,r.ag))return null;
+      if(f.age>Math.min.apply(null,r.ag))why.push("বয়সসীমা লেভেলভেদে আলাদা — শর্ত দেখুন");
+    }
+    if(f.cg&&r.cg&&f.cg<r.cg)why.push("CGPA "+bn(r.cg)+" চাওয়া হতে পারে");
+    if(r.w)why.push("পরের রাউন্ড এখনো ঘোষণা হয়নি");
+    return why;
+  }
+  function run(){
+    var iv=$("e-ielts").value.trim(),f={where:$("e-where").value,lv:$("e-lvl").value,ielts:$("e-noielts").checked?null:(iv?+iv:9),
+      age:+$("e-age").value||0,cg:+$("e-cg").value||0};
+    $("e-ielts").disabled=$("e-noielts").checked;
+    var ok=[],maybe=[];
+    DATA.forEach(function(r){var w=check(r,f);if(w===null)return;(w.length?maybe:ok).push([r,w])});
+    function li(x){var r=x[0];return '<li><a href="'+r.u+'">'+esc(r.n)+'</a> <span class="meta">· '+esc(r.c)+' · '+esc(r.l)+(r.d?' · শেষ তারিখ '+esc(r.d):'')+'</span>'+(x[1].length?'<br><small class="why">'+x[1].map(esc).join(" · ")+'</small>':'')+'</li>'}
+    $("e-ok").innerHTML=ok.length?ok.map(li).join(""):'<li class="meta">এই তথ্যে সরাসরি মেলে এমন কিছু পাওয়া যায়নি।</li>';
+    $("e-maybe").innerHTML=maybe.length?maybe.map(li).join(""):'<li class="meta">—</li>';
+    $("e-n1").textContent=bn(ok.length);$("e-n2").textContent=bn(maybe.length);
+  }
+  ["e-where","e-lvl","e-ielts","e-noielts","e-age","e-cg"].forEach(function(id){$(id).addEventListener("input",run);$(id).addEventListener("change",run)});
+  run();
+})();
+</script>""".replace("__DATA__", payload)
+    return f"""<style>
+.elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}
+.why{{color:var(--muted)}}.calc select{{font:inherit;font-size:16px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}}
+.calc .chk{{flex-direction:row;align-items:center;justify-content:flex-start;gap:8px}}.calc .chk input{{width:auto}}
+</style>
+<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">টুল · সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>কোন স্কলারশিপে আমি যোগ্য?</h1>
+  <p class="lede">লেভেল, IELTS, বয়স আর CGPA দিন — তালিকার কোন স্কলারশিপগুলো আপনার সাথে মেলে তা দেখাবে। হিসাব হয় শুধু আপনার ব্রাউজারে; কিছুই পাঠানো বা সংরক্ষণ হয় না।</p>
+  <div class="calc">
+    <label>কোথায় পড়তে চান<select id="e-where"><option value="abroad">বিদেশে</option><option value="bd">বাংলাদেশে</option><option value="">দুটোই</option></select></label>
+    <label>লেভেল<select id="e-lvl"><option value="PG">মাস্টার্স</option><option value="PhD">PhD / Postdoc</option><option value="UG">স্নাতক (UG)</option></select></label>
+    <label>IELTS ওভারঅল স্কোর<input id="e-ielts" type="number" min="4" max="9" step="0.5" placeholder="যেমন 6.5"></label>
+    <label class="chk"><input id="e-noielts" type="checkbox"> IELTS নেই / দিইনি</label>
+    <label>বয়স (বছর)<input id="e-age" type="number" min="15" max="70" placeholder="যেমন 26"></label>
+    <label>CGPA (৪-এর মধ্যে)<input id="e-cg" type="number" min="0" max="4" step="0.01" placeholder="যেমন 3.40"></label>
+  </div>
+  <h2>✅ মিলছে (<span id="e-n1"></span>)</h2>
+  <ul class="elist" id="e-ok"></ul>
+  <h2>⚠️ শর্তসাপেক্ষে — যাচাই করুন (<span id="e-n2"></span>)</h2>
+  <ul class="elist" id="e-maybe"></ul>
+  <p class="warn">এটা প্রাথমিক ছাঁকনি মাত্র। শর্তগুলো অফিসিয়াল সূত্রের লেখা থেকে স্বয়ংক্রিয়ভাবে পড়া হয়েছে; নাগরিকত্ব, বিষয়, কাজের অভিজ্ঞতা, জন্মতারিখের মতো শর্ত এখানে ধরা হয়নি। IELTS ফাঁকা রাখলে ধরে নেওয়া হয় স্কোর কোনো বাধা নয়। আবেদনের আগে প্রতিটি স্কলারশিপের পেজ খুলে শর্ত মিলিয়ে নিন।</p>
+</article>
 {FOOTER}
 </div>
 {script}"""

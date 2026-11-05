@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:i-MESC Erasmus Mundus Joint Master (Class #23)
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-i-mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus-
+ 20270126@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270126
+DTEND;VALUE=DATE:20270127
+SUMMARY:শেষ তারিখ: i-MESC Erasmus Mundus Joint Master (Clas
+ s #23) (European Union)
+URL:https://higherstudyinfo.com/scholarship/i-mesc-erasmus-mundus-joint-mas
+ ter-class-23-erasmus-mundus/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ -mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — i-MESC Erasmus Mundus Joint Mast
+ er (Class #23)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — i-MESC Erasmus Mundus J
+ oint Master (Class #23)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

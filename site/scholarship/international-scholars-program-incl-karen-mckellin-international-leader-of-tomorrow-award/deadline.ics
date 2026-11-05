@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:International Scholars Program (incl. Karen McKellin Internati
+ onal Leader of Tomorrow Award)
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-international-scholars-program-incl-karen-mckellin-internat
+ ional-leader-of-tomorrow-award-20261115@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:শেষ তারিখ: International Scholars Program (incl. Ka
+ ren McKellin International Leader of Tomorrow Award) (Canada)
+URL:https://higherstudyinfo.com/scholarship/international-scholars-program-
+ incl-karen-mckellin-international-leader-of-tomorrow-award/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ nternational-scholars-program-incl-karen-mckellin-international-leader-of-
+ tomorrow-award/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — International Scholars Program (
+ incl. Karen McKellin International Leader of Tomorrow Award)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — International Scholars 
+ Program (incl. Karen McKellin International Leader of Tomorrow Award)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

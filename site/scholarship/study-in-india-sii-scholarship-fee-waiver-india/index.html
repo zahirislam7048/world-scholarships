@@ -146,6 +146,7 @@ table.t th{font-weight:600;color:var(--muted)}
   
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t"><tr><th>প্রতিষ্ঠান</th><td>Ministry of Education – Study in India <span class="meta">(সরকারি)</span></td></tr><tr><th>দেশ</th><td><a href="/asia/india/">India</a></td></tr><tr><th>লেভেল</th><td>UG / PG (not PhD)</td></tr><tr><th>সুবিধা</th><td>USD 3,200–3,500 per year (sources differ) or fee waiver</td></tr><tr><th>শর্ত</th><td>Apply on the SII portal and qualify in the PRAGATII exam</td></tr><tr><th>IELTS / English</th><td>Set by each institute; commonly IELTS 6.0–6.5 or TOEFL; often waived if previous degree was English-medium <a href="http://studyinindia.gov.in/FAQ" target="_blank" rel="noopener">সূত্র ↗</a></td></tr><tr><th>সেশন</th><td>ongoing</td></tr><tr><th>নোট</th><td>An older SII page says the scholarship ended after 2022-23; newer pages describe it as active — check the portal. ICCR 2027-28 call not yet announced (2024-25 ran 4 Apr–15 Jun).</td></tr></table></div>
+  
   <p class="vlinks"><a class="apply" href="https://studyinindia.gov.in/" target="_blank" rel="noopener">আবেদন করুন ↗</a></p>
   <p class="vsrc">সূত্র: <a href="https://studyinindia.gov.in/studyin_india_sii" target="_blank" rel="noopener">studyinindia.gov.in</a> · সংগ্রহ 2026-11-04। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -163,7 +164,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <script>
 (function(){var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){return String(x).replace(/\d/g,function(c){return "০১২৩৪৫৬৭৮৯"[c]})};
-if(n<0){document.getElementById("expired").hidden=false}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
+if(n<0){document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
 </script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Chinese Government Scholarship (Type B) – Tsinghua graduate 
+ programs
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-chinese-government-scholarship-type-b-tsinghua-graduate-pro
+ grams-china-20261215@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: Chinese Government Scholarship (Type B) 
+ – Tsinghua graduate programs (China)
+URL:https://higherstudyinfo.com/scholarship/chinese-government-scholarship-
+ type-b-tsinghua-graduate-programs-china/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/c
+ hinese-government-scholarship-type-b-tsinghua-graduate-programs-china/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Chinese Government Scholarship (
+ Type B) – Tsinghua graduate programs
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Chinese Government Scho
+ larship (Type B) – Tsinghua graduate programs
+END:VALARM
+END:VEVENT
+END:VCALENDAR

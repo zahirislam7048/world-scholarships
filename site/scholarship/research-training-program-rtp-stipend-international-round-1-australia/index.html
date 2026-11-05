@@ -146,6 +146,7 @@ table.t th{font-weight:600;color:var(--muted)}
   
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t"><tr><th>প্রতিষ্ঠান</th><td>Monash University <span class="meta">(পাবলিক বিশ্ববিদ্যালয়)</span></td></tr><tr><th>দেশ</th><td><a href="/oceania/australia/">Australia</a></td></tr><tr><th>লেভেল</th><td>PhD</td></tr><tr><th>সুবিধা</th><td>Not stated in source snippet</td></tr><tr><th>শর্ত</th><td>International graduate research applicants</td></tr><tr><th>IELTS / English</th><td>IELTS Academic 7.0 (each ≥6.5) for Arts, Business, Education, Law; 6.5 (each ≥6.0) for other faculties <a href="https://www.monash.edu/graduate-research/study/apply/english-language-proficiency-requirements-for-admission" target="_blank" rel="noopener">সূত্র ↗</a></td></tr><tr><th>সেশন</th><td>2027</td></tr><tr><th>শেষ তারিখ</th><td><b class="dl" data-d="2027-02-28">2027-02-28</b> <span id="left" class="meta"></span></td></tr><tr><th>নোট</th><td>Monash pages give 28 Feb or 31 Mar for Round 1 — confirm</td></tr></table></div>
+  <p class="vlinks cal" id="cal">📅 শেষ তারিখ মনে রাখুন: <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E0%A6%B6%E0%A7%87%E0%A6%B7+%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%3A+Research+Training+Program+%28RTP%29+Stipend+%E2%80%93+International+Round+1&amp;dates=20270228%2F20270301&amp;details=https%3A%2F%2Fhigherstudyinfo.com%2Fscholarship%2Fresearch-training-program-rtp-stipend-international-round-1-australia%2F" target="_blank" rel="noopener">Google Calendar-এ যোগ করুন</a> · <a href="deadline.ics" download>ফোন/Outlook ক্যালেন্ডার (.ics)</a> <span class="meta">— ৭ দিন ও ১ দিন আগে রিমাইন্ডার</span></p>
   <p class="vlinks"><a class="apply" href="https://www.monash.edu/study/fees-scholarships/scholarships/find-a-scholarship/research-training-program-scholarship" target="_blank" rel="noopener">অফিসিয়াল পেজ ↗</a></p>
   <p class="vsrc">সূত্র: <a href="https://www.monash.edu/study/fees-scholarships/scholarships/find-a-scholarship/research-training-program-scholarship" target="_blank" rel="noopener">monash.edu</a> · সংগ্রহ 2026-11-04। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -163,7 +164,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <script>
 (function(){var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){return String(x).replace(/\d/g,function(c){return "০১২৩৪৫৬৭৮৯"[c]})};
-if(n<0){document.getElementById("expired").hidden=false}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
+if(n<0){document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
 </script>
 </body>
 </html>

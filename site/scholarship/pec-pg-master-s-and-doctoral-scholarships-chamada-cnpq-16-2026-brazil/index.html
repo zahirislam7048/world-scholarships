@@ -146,6 +146,7 @@ table.t th{font-weight:600;color:var(--muted)}
   
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t"><tr><th>প্রতিষ্ঠান</th><td>CNPq / Ministry of Foreign Affairs <span class="meta">(সরকারি)</span></td></tr><tr><th>দেশ</th><td><a href="/latin-america/brazil/">Brazil</a></td></tr><tr><th>লেভেল</th><td>PG / PhD</td></tr><tr><th>সুবিধা</th><td>Up to 100 master&#x27;s + 100 doctoral; monthly stipend R$2,100 (MSc) / R$3,100 (PhD) per Itamaraty page; SUS health access; possible return airfare</td></tr><tr><th>শর্ত</th><td>Nationals and residents of participating countries; apply to the Brazilian programmes selected (final list Dec 2026)</td></tr><tr><th>IELTS / English</th><td>Portuguese: CELPE-Bras listed as requirement (some sources say it depends on the institution) <a href="https://www.gov.br/mre/pt-br/assuntos/cultura-e-educacao/temas-educacionais/programas-de-estudo-para-estrangeiros/pec-pg-pos-graduacao-1/processo-seletivo" target="_blank" rel="noopener">সূত্র ↗</a></td></tr><tr><th>সেশন</th><td>Start from March 2027</td></tr><tr><th>নোট</th><td>Stipend values differ between sources; check whether your country participates</td></tr></table></div>
+  
   <p class="vlinks"><a class="apply" href="https://www.gov.br/mre/pt-br/assuntos/cultura-e-educacao/temas-educacionais/programas-de-estudo-para-estrangeiros/pec-pg-pos-graduacao-1/processo-seletivo" target="_blank" rel="noopener">আবেদন করুন ↗</a></p>
   <p class="vsrc">সূত্র: <a href="https://www.gov.br/cnpq/pt-br/assuntos/defeso-eleitoral/programa-vai-investir-r-22-19-milhoes-em-bolsas-de-mestrado-e-doutorado-inscricoes-vao-ate-13-de-agosto" target="_blank" rel="noopener">gov.br</a> · সংগ্রহ 2026-11-04। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -163,7 +164,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <script>
 (function(){var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){return String(x).replace(/\d/g,function(c){return "০১২৩৪৫৬৭৮৯"[c]})};
-if(n<0){document.getElementById("expired").hidden=false}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
+if(n<0){document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
 </script>
 </body>
 </html>

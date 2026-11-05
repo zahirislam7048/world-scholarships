@@ -10,12 +10,13 @@ import json
 import pathlib
 import shutil
 import sys
+import urllib.parse
 
 from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, page_slugs, render
 import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
-                        tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body)
+                        tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -159,6 +160,7 @@ def home_page(updated):
     <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
+    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a></p>
   </div>
   <aside class="total" aria-label="মোট স্কলারশিপ">
     <b>{len(all_rows)}</b>
@@ -201,6 +203,50 @@ def continent_page(cont, updated):
     return page(f"{bn_of} স্কলারশিপ | Higher Study Info", f"{bn_of} দেশগুলোতে এখন চালু ও আসন্ন স্কলারশিপের তালিকা।", f"/{cont}/", LIST_HEAD, body)
 
 
+def _ics_text(t):
+    return t.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
+
+
+def _fold(line):
+    """RFC 5545: lines longer than 75 octets continue on the next line after a space."""
+    b, out = line.encode("utf-8"), []
+    while len(b) > (74 if out else 75):
+        cut = 74 if out else 75
+        while cut and (b[cut] & 0xC0) == 0x80:
+            cut -= 1
+        out.append(b[:cut].decode("utf-8"))
+        b = b[cut:]
+    out.append(b.decode("utf-8"))
+    return "\r\n ".join(out)
+
+
+def ics(events, name):
+    """events: [(row, page path)] with a deadline -> an iCalendar file with 7-day and 1-day reminders."""
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Higher Study Info//Scholarship deadlines//BN",
+             "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{_ics_text(name)}", "X-PUBLISHED-TTL:PT12H"]
+    for r, path in events:
+        d = datetime.date.fromisoformat(r["deadline"])
+        url = DOMAIN + path
+        summary = f"শেষ তারিখ: {r['scholarship_name']} ({COUNTRIES[r['_slug']][0]})"
+        lines += ["BEGIN:VEVENT", f"UID:{path.strip('/').replace('/', '-')}-{d:%Y%m%d}@higherstudyinfo.com", f"DTSTAMP:{stamp}",
+                  f"DTSTART;VALUE=DATE:{d:%Y%m%d}", f"DTEND;VALUE=DATE:{d + datetime.timedelta(days=1):%Y%m%d}",
+                  f"SUMMARY:{_ics_text(summary)}", f"URL:{url}",
+                  f"DESCRIPTION:{_ics_text('আবেদনের আগে অফিসিয়াল পেজে শেষ তারিখ আর সময় অঞ্চল মিলিয়ে নিন: ' + url)}"]
+        for trig, label in (("-P7D", "৭ দিন বাকি"), ("-P1D", "কাল শেষ তারিখ")):
+            lines += ["BEGIN:VALARM", "ACTION:DISPLAY", f"TRIGGER:{trig}", f"DESCRIPTION:{_ics_text(label + ' — ' + r['scholarship_name'])}", "END:VALARM"]
+        lines.append("END:VEVENT")
+    lines.append("END:VCALENDAR")
+    return "\r\n".join(_fold(l) for l in lines) + "\r\n"
+
+
+def gcal_link(r, path):
+    d = datetime.date.fromisoformat(r["deadline"])
+    q = {"action": "TEMPLATE", "text": f"শেষ তারিখ: {r['scholarship_name']}",
+         "dates": f"{d:%Y%m%d}/{d + datetime.timedelta(days=1):%Y%m%d}", "details": DOMAIN + path}
+    return "https://calendar.google.com/calendar/render?" + urllib.parse.urlencode(q)
+
+
 TYPE_BN = {"government": "সরকারি", "eu": "ইউরোপীয় ইউনিয়ন", "consortium": "কনসোর্টিয়াম", "public": "পাবলিক বিশ্ববিদ্যালয়",
            "private": "প্রাইভেট বিশ্ববিদ্যালয়", "international": "আন্তর্জাতিক সংস্থা"}
 
@@ -218,8 +264,11 @@ def scholarship_page(slug, i, r, updated):
             ("শর্ত", e(r.get("eligibility", ""))),
             ("IELTS / English", e(r.get("english_requirement", "")) + (f' <a href="{e(r["english_source"])}" target="_blank" rel="noopener">সূত্র ↗</a>' if r.get("english_source") else "")),
             ("সেশন", e(r.get("session_year", "")))]
+    cal = ""
     if r.get("deadline"):
         rows.append(("শেষ তারিখ", f'<b class="dl" data-d="{e(r["deadline"])}">{e(r["deadline"])}</b> <span id="left" class="meta"></span>'))
+        cal = (f'<p class="vlinks cal" id="cal">📅 শেষ তারিখ মনে রাখুন: <a href="{e(gcal_link(r, path))}" target="_blank" rel="noopener">Google Calendar-এ যোগ করুন</a>'
+               f' · <a href="deadline.ics" download>ফোন/Outlook ক্যালেন্ডার (.ics)</a> <span class="meta">— ৭ দিন ও ১ দিন আগে রিমাইন্ডার</span></p>')
     if r.get("notes"):
         rows.append(("নোট", e(r["notes"])))
     table = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
@@ -236,6 +285,7 @@ def scholarship_page(slug, i, r, updated):
   {badge}
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t">{table}</table></div>
+  {cal}
   <p class="vlinks"><a class="apply" href="{e(apply_url)}" target="_blank" rel="noopener">{"আবেদন করুন ↗" if direct else "অফিসিয়াল পেজ ↗"}</a></p>
   <p class="vsrc">সূত্র: <a href="{e(r["source_url"])}" target="_blank" rel="noopener">{e(r["source_domain"])}</a> · সংগ্রহ {e(r.get("collected_on", ""))}। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -253,7 +303,7 @@ def scholarship_page(slug, i, r, updated):
 <script>
 (function(){{var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){{return String(x).replace(/\\d/g,function(c){{return "০১২৩৪৫৬৭৮৯"[c]}})}};
-if(n<0){{document.getElementById("expired").hidden=false}}else{{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}}}})();
+if(n<0){{document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}}else{{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}}}})();
 </script>"""
     ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/"), (r["scholarship_name"], path)]))
     return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS, body, ld)
@@ -289,6 +339,12 @@ def main():
     for (slug, i), ps in PAGES.items():
         (OUT / "scholarship" / ps).mkdir(parents=True)
         (OUT / "scholarship" / ps / "index.html").write_text(scholarship_page(slug, i, load_rows(slug)[i], updated), encoding="utf-8")
+        r = load_rows(slug)[i]
+        if r.get("deadline"):
+            (OUT / "scholarship" / ps / "deadline.ics").write_bytes(ics([({**r, "_slug": slug}, f"/scholarship/{ps}/")], r["scholarship_name"]).encode("utf-8"))
+    upcoming = sorted(((({**load_rows(sl)[i], "_slug": sl}), f"/scholarship/{ps}/") for (sl, i), ps in PAGES.items()
+                       if load_rows(sl)[i].get("deadline")), key=lambda x: x[0]["deadline"])
+    (OUT / "deadlines.ics").write_bytes(ics(upcoming, "স্কলারশিপের শেষ তারিখ — Higher Study Info").encode("utf-8"))
     (OUT / "index.html").write_text(home_page(updated), encoding="utf-8")
     for cont in CONTINENTS:
         (OUT / cont).mkdir()
@@ -310,6 +366,7 @@ def main():
         "guides/sop": ("Statement of Purpose (SOP) লেখার গাইড | Higher Study Info", "SOP-এর কাঠামো, দৈর্ঘ্য, ভুলগুলো আর আউটলাইন বানানোর টুল — বিশ্ববিদ্যালয়ের অফিসিয়াল নির্দেশনা অনুযায়ী।", sop_body),
         "guides/motivation-letter": ("Motivation Letter লেখার গাইড | Higher Study Info", "DAAD ও ইউরোপীয় স্কলারশিপের Motivation Letter: প্রশ্ন, কাঠামো, দৈর্ঘ্য আর আউটলাইন টুল।", motivation_body),
         "professors": ("প্রফেসর সার্চ — বিষয় ও ডিপার্টমেন্ট অনুযায়ী | Higher Study Info", "MS/PhD সুপারভাইজার খুঁজুন: বিশ্ববিদ্যালয়, ডিপার্টমেন্ট ও গবেষণার বিষয় অনুযায়ী প্রফেসরদের তালিকা, অফিসিয়াল প্রোফাইল লিংকসহ।", professors_body),
+        "tools/eligibility": ("কোন স্কলারশিপে আমি যোগ্য? | Higher Study Info", "লেভেল, IELTS, বয়স আর CGPA দিয়ে দেখুন কোন স্কলারশিপের শর্তের সাথে আপনি মেলেন।", eligibility_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -318,7 +375,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

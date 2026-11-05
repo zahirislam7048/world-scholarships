@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:SI Scholarship for Global Professionals
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-si-scholarship-for-global-professionals-sweden-20270224@hig
+ herstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270224
+DTEND;VALUE=DATE:20270225
+SUMMARY:শেষ তারিখ: SI Scholarship for Global Professionals 
+ (Sweden)
+URL:https://higherstudyinfo.com/scholarship/si-scholarship-for-global-profe
+ ssionals-sweden/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/s
+ i-scholarship-for-global-professionals-sweden/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — SI Scholarship for Global Profes
+ sionals
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — SI Scholarship for Glob
+ al Professionals
+END:VALARM
+END:VEVENT
+END:VCALENDAR

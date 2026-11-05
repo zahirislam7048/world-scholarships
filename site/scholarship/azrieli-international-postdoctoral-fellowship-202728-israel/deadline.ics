@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Azrieli International Postdoctoral Fellowship 2027–28
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-azrieli-international-postdoctoral-fellowship-202728-israel
+ -20261111@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:শেষ তারিখ: Azrieli International Postdoctoral Fello
+ wship 2027–28 (Israel)
+URL:https://higherstudyinfo.com/scholarship/azrieli-international-postdocto
+ ral-fellowship-202728-israel/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/a
+ zrieli-international-postdoctoral-fellowship-202728-israel/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Azrieli International Postdoctor
+ al Fellowship 2027–28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Azrieli International P
+ ostdoctoral Fellowship 2027–28
+END:VALARM
+END:VEVENT
+END:VCALENDAR

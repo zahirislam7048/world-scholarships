@@ -1,0 +1,981 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:স্কলারশিপের শেষ তারিখ 
+ — Higher Study Info
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-lester-b-pearson-international-scholarship-canada-20261106@
+ higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261107
+SUMMARY:শেষ তারিখ: Lester B. Pearson International Scholars
+ hip (Canada)
+URL:https://higherstudyinfo.com/scholarship/lester-b-pearson-international-
+ scholarship-canada/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/l
+ ester-b-pearson-international-scholarship-canada/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Lester B. Pearson International 
+ Scholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Lester B. Pearson Inter
+ national Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-azrieli-international-postdoctoral-fellowship-202728-israel
+ -20261111@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:শেষ তারিখ: Azrieli International Postdoctoral Fello
+ wship 2027–28 (Israel)
+URL:https://higherstudyinfo.com/scholarship/azrieli-international-postdocto
+ ral-fellowship-202728-israel/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/a
+ zrieli-international-postdoctoral-fellowship-202728-israel/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Azrieli International Postdoctor
+ al Fellowship 2027–28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Azrieli International P
+ ostdoctoral Fellowship 2027–28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-padua-international-excellence-scholarship-italy-20261115@h
+ igherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:শেষ তারিখ: Padua International Excellence Scholarsh
+ ip (Italy)
+URL:https://higherstudyinfo.com/scholarship/padua-international-excellence-
+ scholarship-italy/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/p
+ adua-international-excellence-scholarship-italy/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Padua International Excellence S
+ cholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Padua International Exc
+ ellence Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-international-scholars-program-incl-karen-mckellin-internat
+ ional-leader-of-tomorrow-award-20261115@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:শেষ তারিখ: International Scholars Program (incl. Ka
+ ren McKellin International Leader of Tomorrow Award) (Canada)
+URL:https://higherstudyinfo.com/scholarship/international-scholars-program-
+ incl-karen-mckellin-international-leader-of-tomorrow-award/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ nternational-scholars-program-incl-karen-mckellin-international-leader-of-
+ tomorrow-award/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — International Scholars Program (
+ incl. Karen McKellin International Leader of Tomorrow Award)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — International Scholars 
+ Program (incl. Karen McKellin International Leader of Tomorrow Award)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-daad-study-scholarships-master-studies-for-all-academic-dis
+ ciplines-germany-20261116@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261117
+SUMMARY:শেষ তারিখ: DAAD Study Scholarships – Master Studi
+ es for All Academic Disciplines (Germany)
+URL:https://higherstudyinfo.com/scholarship/daad-study-scholarships-master-
+ studies-for-all-academic-disciplines-germany/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/d
+ aad-study-scholarships-master-studies-for-all-academic-disciplines-germany
+ /
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — DAAD Study Scholarships – Mast
+ er Studies for All Academic Disciplines
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — DAAD Study Scholarships
+  – Master Studies for All Academic Disciplines
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-merit-named-founder-dr-miyan-scholarships-bangladesh-202611
+ 25@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:শেষ তারিখ: Merit\, named & Founder Dr. Miyan Schola
+ rships (Bangladesh)
+URL:https://higherstudyinfo.com/scholarship/merit-named-founder-dr-miyan-sc
+ holarships-bangladesh/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/m
+ erit-named-founder-dr-miyan-scholarships-bangladesh/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Merit\, named & Founder Dr. Miya
+ n Scholarships
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Merit\, named & Founder
+  Dr. Miyan Scholarships
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-isu-bocconi-scholarship-need-based-international-early-sess
+ ion-italy-20261130@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:শেষ তারিখ: ISU Bocconi Scholarship (need-based) –
+  international early session (Italy)
+URL:https://higherstudyinfo.com/scholarship/isu-bocconi-scholarship-need-ba
+ sed-international-early-session-italy/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ su-bocconi-scholarship-need-based-international-early-session-italy/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — ISU Bocconi Scholarship (need-ba
+ sed) – international early session
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — ISU Bocconi Scholarship
+  (need-based) – international early session
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-hong-kong-phd-fellowship-scheme-2027-28-hong-kong-20261201@
+ higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: Hong Kong PhD Fellowship Scheme 2027/28 
+ (Hong Kong)
+URL:https://higherstudyinfo.com/scholarship/hong-kong-phd-fellowship-scheme
+ -2027-28-hong-kong/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/h
+ ong-kong-phd-fellowship-scheme-2027-28-hong-kong/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Hong Kong PhD Fellowship Scheme 
+ 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Hong Kong PhD Fellowshi
+ p Scheme 2027/28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-ernst-mach-grant-worldwide-austria-20261201@higherstudyinfo
+ .com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: Ernst Mach Grant – worldwide (Austria)
+URL:https://higherstudyinfo.com/scholarship/ernst-mach-grant-worldwide-aust
+ ria/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/e
+ rnst-mach-grant-worldwide-austria/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Ernst Mach Grant – worldwide
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Ernst Mach Grant – wo
+ rldwide
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-a-wilhelmsen-foundation-scholarship-msc-marine-technology-n
+ orway-20261201@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:শেষ তারিখ: A. Wilhelmsen Foundation scholarship (MS
+ c Marine Technology) (Norway)
+URL:https://higherstudyinfo.com/scholarship/a-wilhelmsen-foundation-scholar
+ ship-msc-marine-technology-norway/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/a
+ -wilhelmsen-foundation-scholarship-msc-marine-technology-norway/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — A. Wilhelmsen Foundation scholar
+ ship (MSc Marine Technology)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — A. Wilhelmsen Foundatio
+ n scholarship (MSc Marine Technology)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-commonwealth-shared-scholarships-master-s-united-kingdom-20
+ 261208@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261208
+DTEND;VALUE=DATE:20261209
+SUMMARY:শেষ তারিখ: Commonwealth Shared Scholarships (Master
+ 's) (United Kingdom)
+URL:https://higherstudyinfo.com/scholarship/commonwealth-shared-scholarship
+ s-master-s-united-kingdom/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/c
+ ommonwealth-shared-scholarships-master-s-united-kingdom/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Commonwealth Shared Scholarships
+  (Master's)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Commonwealth Shared Sch
+ olarships (Master's)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-chinese-government-scholarship-type-b-tsinghua-graduate-pro
+ grams-china-20261215@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: Chinese Government Scholarship (Type B) 
+ – Tsinghua graduate programs (China)
+URL:https://higherstudyinfo.com/scholarship/chinese-government-scholarship-
+ type-b-tsinghua-graduate-programs-china/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/c
+ hinese-government-scholarship-type-b-tsinghua-graduate-programs-china/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Chinese Government Scholarship (
+ Type B) – Tsinghua graduate programs
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Chinese Government Scho
+ larship (Type B) – Tsinghua graduate programs
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-mbzuai-full-scholarship-msc-phd-in-ai-uae-20261215@higherst
+ udyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: MBZUAI full scholarship (MSc / PhD in AI
+ ) (United Arab Emirates)
+URL:https://higherstudyinfo.com/scholarship/mbzuai-full-scholarship-msc-phd
+ -in-ai-uae/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/m
+ bzuai-full-scholarship-msc-phd-in-ai-uae/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — MBZUAI full scholarship (MSc / P
+ hD in AI)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — MBZUAI full scholarship
+  (MSc / PhD in AI)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-merit-based-international-scholarships-italy-20261215@highe
+ rstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: Merit-Based International Scholarships (
+ Italy)
+URL:https://higherstudyinfo.com/scholarship/merit-based-international-schol
+ arships-italy/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/m
+ erit-based-international-scholarships-italy/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Merit-Based International Schola
+ rships
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Merit-Based Internation
+ al Scholarships
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-research-training-program-rtp-stipend-scholarship-internati
+ onal-australia-20261218@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:শেষ তারিখ: Research Training Program (RTP) Stipend 
+ Scholarship – International (Australia)
+URL:https://higherstudyinfo.com/scholarship/research-training-program-rtp-s
+ tipend-scholarship-international-australia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/r
+ esearch-training-program-rtp-stipend-scholarship-international-australia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Research Training Program (RTP) 
+ Stipend Scholarship – International
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Research Training Progr
+ am (RTP) Stipend Scholarship – International
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-sigs-scholarships-for-international-students-china-20261231
+ @higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:শেষ তারিখ: SIGS scholarships for international stud
+ ents (China)
+URL:https://higherstudyinfo.com/scholarship/sigs-scholarships-for-internati
+ onal-students-china/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/s
+ igs-scholarships-for-international-students-china/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — SIGS scholarships for internatio
+ nal students
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — SIGS scholarships for i
+ nternational students
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-kaust-ms-phd-fellowship-saudi-arabia-20270103@higherstudyin
+ fo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270103
+DTEND;VALUE=DATE:20270104
+SUMMARY:শেষ তারিখ: KAUST MS / PhD fellowship (Saudi Arabia)
+URL:https://higherstudyinfo.com/scholarship/kaust-ms-phd-fellowship-saudi-a
+ rabia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/k
+ aust-ms-phd-fellowship-saudi-arabia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — KAUST MS / PhD fellowship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — KAUST MS / PhD fellowsh
+ ip
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-erasmus-mundus-master-in-international-law-of-security-peac
+ e-sustainable-development-erasm-20270104@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270104
+DTEND;VALUE=DATE:20270105
+SUMMARY:শেষ তারিখ: Erasmus Mundus Master in International L
+ aw of Security\, Peace & Sustainable Development (European Union)
+URL:https://higherstudyinfo.com/scholarship/erasmus-mundus-master-in-intern
+ ational-law-of-security-peace-sustainable-development-erasm/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/e
+ rasmus-mundus-master-in-international-law-of-security-peace-sustainable-de
+ velopment-erasm/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Erasmus Mundus Master in Interna
+ tional Law of Security\, Peace & Sustainable Development
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Erasmus Mundus Master i
+ n International Law of Security\, Peace & Sustainable Development
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-aalto-university-excellence-scholarship-finland-20270105@hi
+ gherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270105
+DTEND;VALUE=DATE:20270106
+SUMMARY:শেষ তারিখ: Aalto University Excellence Scholarship 
+ (Finland)
+URL:https://higherstudyinfo.com/scholarship/aalto-university-excellence-sch
+ olarship-finland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/a
+ alto-university-excellence-scholarship-finland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Aalto University Excellence Scho
+ larship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Aalto University Excell
+ ence Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-need-based-financial-aid-for-international-students-need-bl
+ ind-usa-20270105@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270105
+DTEND;VALUE=DATE:20270106
+SUMMARY:শেষ তারিখ: Need-based financial aid for internation
+ al students (need-blind) (United States)
+URL:https://higherstudyinfo.com/scholarship/need-based-financial-aid-for-in
+ ternational-students-need-blind-usa/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ eed-based-financial-aid-for-international-students-need-blind-usa/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Need-based financial aid for int
+ ernational students (need-blind)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Need-based financial ai
+ d for international students (need-blind)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-france-excellence-eiffel-scholarship-france-20270106@higher
+ studyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270106
+DTEND;VALUE=DATE:20270107
+SUMMARY:শেষ তারিখ: France Excellence Eiffel Scholarship (Fr
+ ance)
+URL:https://higherstudyinfo.com/scholarship/france-excellence-eiffel-schola
+ rship-france/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/f
+ rance-excellence-eiffel-scholarship-france/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — France Excellence Eiffel Scholar
+ ship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — France Excellence Eiffe
+ l Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-research-scholarships-incl-singa-graduate-by-research-singa
+ pore-20270115@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:শেষ তারিখ: Research scholarships incl. SINGA (gradu
+ ate by research) (Singapore)
+URL:https://higherstudyinfo.com/scholarship/research-scholarships-incl-sing
+ a-graduate-by-research-singapore/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/r
+ esearch-scholarships-incl-singa-graduate-by-research-singapore/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Research scholarships incl. SING
+ A (graduate by research)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Research scholarships i
+ ncl. SINGA (graduate by research)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-danish-government-scholarship-non-eu-eea-students-denmark-2
+ 0270115@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:শেষ তারিখ: Danish Government Scholarship (non-EU/EE
+ A students) (Denmark)
+URL:https://higherstudyinfo.com/scholarship/danish-government-scholarship-n
+ on-eu-eea-students-denmark/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/d
+ anish-government-scholarship-non-eu-eea-students-denmark/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Danish Government Scholarship (n
+ on-EU/EEA students)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Danish Government Schol
+ arship (non-EU/EEA students)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-erasmus-mundus-master-euroculture-erasmus-mundus-20270115@h
+ igherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:শেষ তারিখ: Erasmus Mundus Master Euroculture (Europ
+ ean Union)
+URL:https://higherstudyinfo.com/scholarship/erasmus-mundus-master-eurocultu
+ re-erasmus-mundus/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/e
+ rasmus-mundus-master-euroculture-erasmus-mundus/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Erasmus Mundus Master Eurocultur
+ e
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Erasmus Mundus Master E
+ uroculture
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-i-mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus-
+ 20270126@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270126
+DTEND;VALUE=DATE:20270127
+SUMMARY:শেষ তারিখ: i-MESC Erasmus Mundus Joint Master (Clas
+ s #23) (European Union)
+URL:https://higherstudyinfo.com/scholarship/i-mesc-erasmus-mundus-joint-mas
+ ter-class-23-erasmus-mundus/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ -mesc-erasmus-mundus-joint-master-class-23-erasmus-mundus/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — i-MESC Erasmus Mundus Joint Mast
+ er (Class #23)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — i-MESC Erasmus Mundus J
+ oint Master (Class #23)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-khalifa-university-graduate-scholarship-phd-fall-2027-uae-2
+ 0270201@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: Khalifa University graduate scholarship 
+ (PhD\, Fall 2027) (United Arab Emirates)
+URL:https://higherstudyinfo.com/scholarship/khalifa-university-graduate-sch
+ olarship-phd-fall-2027-uae/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/k
+ halifa-university-graduate-scholarship-phd-fall-2027-uae/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Khalifa University graduate scho
+ larship (PhD\, Fall 2027)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Khalifa University grad
+ uate scholarship (PhD\, Fall 2027)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-hbku-graduate-scholarships-tuition-waivers-qatar-20270201@h
+ igherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: HBKU graduate scholarships / tuition wai
+ vers (Qatar)
+URL:https://higherstudyinfo.com/scholarship/hbku-graduate-scholarships-tuit
+ ion-waivers-qatar/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/h
+ bku-graduate-scholarships-tuition-waivers-qatar/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — HBKU graduate scholarships / tui
+ tion waivers
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — HBKU graduate scholarsh
+ ips / tuition waivers
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-icp-connect-master-of-science-in-food-technology-belgium-20
+ 270201@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: ICP Connect – Master of Science in Foo
+ d Technology (Belgium)
+URL:https://higherstudyinfo.com/scholarship/icp-connect-master-of-science-i
+ n-food-technology-belgium/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ cp-connect-master-of-science-in-food-technology-belgium/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — ICP Connect – Master of Scienc
+ e in Food Technology
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — ICP Connect – Master 
+ of Science in Food Technology
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-ernst-mach-grant-universities-of-applied-sciences-austria-2
+ 0270201@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: Ernst Mach Grant – Universities of App
+ lied Sciences (Austria)
+URL:https://higherstudyinfo.com/scholarship/ernst-mach-grant-universities-o
+ f-applied-sciences-austria/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/e
+ rnst-mach-grant-universities-of-applied-sciences-austria/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Ernst Mach Grant – Universitie
+ s of Applied Sciences
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Ernst Mach Grant – Un
+ iversities of Applied Sciences
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-university-of-auckland-doctoral-scholarship-new-zealand-202
+ 70201@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:শেষ তারিখ: University of Auckland Doctoral Scholars
+ hip (New Zealand)
+URL:https://higherstudyinfo.com/scholarship/university-of-auckland-doctoral
+ -scholarship-new-zealand/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/u
+ niversity-of-auckland-doctoral-scholarship-new-zealand/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — University of Auckland Doctoral 
+ Scholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — University of Auckland 
+ Doctoral Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-need-based-financial-aid-for-international-students-need-bl
+ ind-usa-2-20270215@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:শেষ তারিখ: Need-based financial aid for internation
+ al students (need-blind) (United States)
+URL:https://higherstudyinfo.com/scholarship/need-based-financial-aid-for-in
+ ternational-students-need-blind-usa-2/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ eed-based-financial-aid-for-international-students-need-blind-usa-2/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Need-based financial aid for int
+ ernational students (need-blind)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Need-based financial ai
+ d for international students (need-blind)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-si-scholarship-for-global-professionals-sweden-20270224@hig
+ herstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270224
+DTEND;VALUE=DATE:20270225
+SUMMARY:শেষ তারিখ: SI Scholarship for Global Professionals 
+ (Sweden)
+URL:https://higherstudyinfo.com/scholarship/si-scholarship-for-global-profe
+ ssionals-sweden/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/s
+ i-scholarship-for-global-professionals-sweden/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — SI Scholarship for Global Profes
+ sionals
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — SI Scholarship for Glob
+ al Professionals
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-research-training-program-rtp-stipend-international-round-1
+ -australia-20270228@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:শেষ তারিখ: Research Training Program (RTP) Stipend 
+ – International Round 1 (Australia)
+URL:https://higherstudyinfo.com/scholarship/research-training-program-rtp-s
+ tipend-international-round-1-australia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/r
+ esearch-training-program-rtp-stipend-international-round-1-australia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Research Training Program (RTP) 
+ Stipend – International Round 1
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Research Training Progr
+ am (RTP) Stipend – International Round 1
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-taiwanicdf-international-higher-education-scholarship-taiwa
+ n-20270315@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270315
+DTEND;VALUE=DATE:20270316
+SUMMARY:শেষ তারিখ: TaiwanICDF International Higher Educatio
+ n Scholarship (Taiwan)
+URL:https://higherstudyinfo.com/scholarship/taiwanicdf-international-higher
+ -education-scholarship-taiwan/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/t
+ aiwanicdf-international-higher-education-scholarship-taiwan/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — TaiwanICDF International Higher 
+ Education Scholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — TaiwanICDF Internationa
+ l Higher Education Scholarship
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-latvian-state-scholarships-for-foreign-students-latvia-2027
+ 0401@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270401
+DTEND;VALUE=DATE:20270402
+SUMMARY:শেষ তারিখ: Latvian state scholarships for foreign s
+ tudents (Latvia)
+URL:https://higherstudyinfo.com/scholarship/latvian-state-scholarships-for-
+ foreign-students-latvia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/l
+ atvian-state-scholarships-for-foreign-students-latvia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Latvian state scholarships for f
+ oreign students
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Latvian state scholarsh
+ ips for foreign students
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-national-scholarship-programme-of-the-slovak-republic-stays
+ -in-2027-28-slovakia-20270430@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:শেষ তারিখ: National Scholarship Programme of the Sl
+ ovak Republic – stays in 2027/28 (Slovakia)
+URL:https://higherstudyinfo.com/scholarship/national-scholarship-programme-
+ of-the-slovak-republic-stays-in-2027-28-slovakia/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ ational-scholarship-programme-of-the-slovak-republic-stays-in-2027-28-slov
+ akia/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — National Scholarship Programme o
+ f the Slovak Republic – stays in 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — National Scholarship Pr
+ ogramme of the Slovak Republic – stays in 2027/28
+END:VALARM
+END:VEVENT
+END:VCALENDAR

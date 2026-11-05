@@ -146,6 +146,7 @@ table.t th{font-weight:600;color:var(--muted)}
   
   <p id="expired" class="warn" hidden>এই রাউন্ডের শেষ তারিখ পেরিয়ে গেছে। পরের সাপ্তাহিক আপডেটে তালিকা থেকে সরানো হবে।</p>
   <div class="tbl-wrap"><table class="t"><tr><th>প্রতিষ্ঠান</th><td>Prime Minister&#x27;s Education Assistance Trust (PMEAT) <span class="meta">(সরকারি)</span></td></tr><tr><th>দেশ</th><td><a href="/asia/bangladesh/">Bangladesh</a></td></tr><tr><th>লেভেল</th><td>Secondary / HSC / Degree</td></tr><tr><th>সুবিধা</th><td>Admission assistance (2026 guideline): Tk 4,000 secondary, Tk 6,000 HSC, Tk 8,000 degree</td></tr><tr><th>শর্ত</th><td>Students of govt and private institutions</td></tr><tr><th>সেশন</th><td>2025-26, 2026</td></tr><tr><th>নোট</th><td>Older page lists Tk 5,000 / 8,000 / 10,000 – sources conflict</td></tr></table></div>
+  
   <p class="vlinks"><a class="apply" href="https://www.eservice.pmeat.gov.bd/" target="_blank" rel="noopener">আবেদন করুন ↗</a></p>
   <p class="vsrc">সূত্র: <a href="https://pmeat.gov.bd/pages/static-pages/6922defe933eb65569e1f092" target="_blank" rel="noopener">pmeat.gov.bd</a> · সংগ্রহ 2026-10-27। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
@@ -163,7 +164,7 @@ table.t th{font-weight:600;color:var(--muted)}
 <script>
 (function(){var el=document.querySelector(".dl");if(!el)return;var t=new Date();t.setHours(0,0,0,0);
 var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x){return String(x).replace(/\d/g,function(c){return "০১২৩৪৫৬৭৮৯"[c]})};
-if(n<0){document.getElementById("expired").hidden=false}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
+if(n<0){document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}else{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}})();
 </script>
 </body>
 </html>

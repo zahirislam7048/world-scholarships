@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Merit-Based International Scholarships
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-merit-based-international-scholarships-italy-20261215@highe
+ rstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:শেষ তারিখ: Merit-Based International Scholarships (
+ Italy)
+URL:https://higherstudyinfo.com/scholarship/merit-based-international-schol
+ arships-italy/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/m
+ erit-based-international-scholarships-italy/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Merit-Based International Schola
+ rships
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Merit-Based Internation
+ al Scholarships
+END:VALARM
+END:VEVENT
+END:VCALENDAR

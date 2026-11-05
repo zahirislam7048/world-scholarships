@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:ISU Bocconi Scholarship (need-based) – international early s
+ ession
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-isu-bocconi-scholarship-need-based-international-early-sess
+ ion-italy-20261130@higherstudyinfo.com
+DTSTAMP:20261105T052725Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:শেষ তারিখ: ISU Bocconi Scholarship (need-based) –
+  international early session (Italy)
+URL:https://higherstudyinfo.com/scholarship/isu-bocconi-scholarship-need-ba
+ sed-international-early-session-italy/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ su-bocconi-scholarship-need-based-international-early-session-italy/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — ISU Bocconi Scholarship (need-ba
+ sed) – international early session
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — ISU Bocconi Scholarship
+  (need-based) – international early session
+END:VALARM
+END:VEVENT
+END:VCALENDAR
