@@ -331,6 +331,9 @@ GUIDES = [
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
     ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
     ("/guides/sop/", "✍️ Statement of Purpose (SOP)", "কাঠামো, দৈর্ঘ্য, কী করবেন না — আর নিজের তথ্য দিয়ে আউটলাইন বানানোর টুল।"),
+    ("/guides/lor/", "🤝 Recommendation Letter (LOR)", "কাকে বলবেন, কখন, কোন কাগজ দেবেন — আর কোন ভুল আবেদন বাতিল করাতে পারে।"),
+    ("/guides/research-proposal/", "🔬 Research Proposal", "PhD ও DAAD গবেষণা স্কলারশিপের জন্য প্রস্তাবের কাঠামো, দৈর্ঘ্য আর সময়সূচি।"),
+    ("/guides/professor-email/", "✉️ প্রফেসরকে ইমেইল", "সুপারভাইজার খোঁজা, ইমেইলের কাঠামো আর ফলো-আপের নিয়ম।"),
     ("/guides/motivation-letter/", "📝 Motivation Letter", "DAAD, Erasmus Mundus-এর মতো ইউরোপীয় আবেদনের জন্য — প্রশ্ন, কাঠামো আর আউটলাইন টুল।"),
 ]
 
@@ -926,7 +929,7 @@ var DATA = __DATA__;
   <span class="count" id="cnt"></span>
 </div>
 <section class="results" id="out"><p class="empty">তালিকা লোড হচ্ছে…</p></section>
-<h2>প্রফেসরকে ইমেইল করার আগে</h2>
+<h2>প্রফেসরকে ইমেইল করার আগে <small class="meta"><a href="/guides/professor-email/">— পূর্ণ গাইড</a></small></h2>
 <ul>
   <li>প্রোফাইল আর সাম্প্রতিক ২–৩টি পেপার পড়ুন; ইমেইলে নির্দিষ্ট করে লিখুন তাঁর কোন কাজের সঙ্গে আপনার আগ্রহ মেলে।</li>
   <li>ছোট রাখুন (১৫০–২৫০ শব্দ), CV সংযুক্ত করুন, বিষয়ের লাইনে লিখুন কোন প্রোগ্রাম/সেশনের জন্য।</li>
@@ -1039,3 +1042,124 @@ var DATA = __DATA__;
 {FOOTER}
 </div>
 {script}"""
+
+
+def _guide(path_title, h1, lede, inner, sources):
+    return f"""<div class="wrap">
+{nav("/guides/")}
+<article class="prose" style="max-width:100%">
+  <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
+  <span class="eyebrow">গাইড · সূত্র যাচাই 2026-11-05</span>
+  <h1>{h1}</h1>
+  <div style="max-width:68ch;display:flex;flex-direction:column;gap:14px">
+  <p class="lede">{lede}</p>
+  {inner}
+  </div>
+  {_sources(sources)}
+</article>
+{FOOTER}
+</div>"""
+
+
+def lor_body(updated):
+    return _guide("lor", "Recommendation Letter (LOR)",
+        "বেশিরভাগ মাস্টার্স/PhD আবেদন আর স্কলারশিপে ২–৩টি রেকমেন্ডেশন লেটার লাগে। চিঠিটা লেখেন শিক্ষক বা সুপারভাইজার — আপনার কাজ হলো ঠিক মানুষকে, ঠিক সময়ে, ঠিকভাবে অনুরোধ করা।",
+        """<h2>কাকে বলবেন</h2>
+  <ul>
+    <li>যিনি আপনাকে ভালোভাবে চেনেন এবং নির্দিষ্ট উদাহরণ দিতে পারবেন — থিসিস সুপারভাইজার, যাঁর কোর্সে ভালো করেছেন বা যাঁর সাথে প্রজেক্ট/গবেষণা করেছেন (UCLA)।</li>
+    <li>আপনি যে বিষয়ে পড়তে চান সেই বিষয়ের শিক্ষক হলে ভালো। বড় পদবির কিন্তু আপনাকে না চেনা কারও চেয়ে চেনা শিক্ষকের নির্দিষ্ট চিঠি বেশি কাজের।</li>
+    <li>চাকরি করলে একটি চিঠি সরাসরি সুপারভাইজারের কাছ থেকে নেওয়া যায় — প্রোগ্রাম কী চায় দেখে নিন।</li>
+    <li>শিক্ষকেরা সাধারণত চিঠিতে আপনার কোর্সের গ্রেড উল্লেখ করেন, তাই কাকে বলবেন সাবধানে ঠিক করুন (Berkeley)।</li>
+  </ul>
+  <h2>কীভাবে অনুরোধ করবেন</h2>
+  <ol class="steps">
+    <li><h3>আগেভাগে বলুন</h3><p>অন্তত কয়েক সপ্তাহ, সম্ভব হলে ২–৩ মাস আগে (Cornell, UCLA)। স্কলারশিপের শেষ তারিখের ঠিক আগে বললে ভালো চিঠি আশা করা কঠিন।</p></li>
+    <li><h3>সরাসরি দেখা করে জিজ্ঞেস করুন</h3><p>পরিকল্পনা বুঝিয়ে বলুন, আর জিজ্ঞেস করুন তিনি একটা <em>strong</em> চিঠি লিখতে পারবেন কিনা। দ্বিধা করলে বা "neutral" চিঠির কথা বললে ধন্যবাদ দিয়ে অন্য কাউকে বলুন (Berkeley, Cornell)।</p></li>
+    <li><h3>প্রয়োজনীয় কাগজ দিন</h3><p>CV, ট্রান্সক্রিপ্ট, SOP/Motivation Letter-এর খসড়া, প্রোগ্রাম ও স্কলারশিপের তালিকা — শেষ তারিখসহ, সবচেয়ে আগেরটা উপরে — আর তাঁর সাথে করা কাজের ছোট সারাংশ (Cornell, UCLA)।</p></li>
+    <li><h3>জমা দেওয়ার পদ্ধতি জানিয়ে দিন</h3><p>বেশিরভাগ পোর্টাল রেফারির ইমেইলে লিংক পাঠায়। তাঁর অফিসিয়াল (বিশ্ববিদ্যালয়ের) ইমেইল ঠিকানা দিন, আর জানিয়ে রাখুন কবে লিংক যাবে।</p></li>
+    <li><h3>ভদ্রভাবে মনে করিয়ে দিন, তারপর ধন্যবাদ</h3><p>শেষ তারিখের ১–২ সপ্তাহ আগে একবার মনে করিয়ে দিন, কিন্তু বারবার চাপ দেবেন না। ফলাফল পেলে জানিয়ে ধন্যবাদ দিন (Cornell, UCLA)।</p></li>
+  </ol>
+  <h2>জরুরি সতর্কতা</h2>
+  <ul>
+    <li><b>নিজে চিঠি লিখে শিক্ষকের সই নেবেন না।</b> অনেক প্রোগ্রাম রেফারির অফিসিয়াল ইমেইল থেকে সরাসরি চিঠি চায়; নিজের লেখা ধরা পড়লে আবেদন বাতিল হতে পারে।</li>
+    <li>আবেদন ফর্মে "চিঠি দেখার অধিকার ছেড়ে দেওয়া" (waive) অপশন থাকলে সাধারণত ছেড়ে দেওয়াই ভালো — কমিটি এমন চিঠিকে বেশি বিশ্বাসযোগ্য মনে করতে পারে (Harvard GSAS)।</li>
+    <li>রেফারিদের সাথে আগেই কথা বলে নিন যে তাঁদের ইমেইলে লিংক যাবে — না জানলে স্প্যাম ফোল্ডারে পড়ে থাকতে পারে।</li>
+  </ul>""",
+        [("Cornell Graduate School — Requesting letters of recommendation", "https://gradschool.cornell.edu/inclusion/recruitment/prospective-students/requesting-letters-of-recommendation/"),
+         ("UCLA — Asking your faculty for a letter of recommendation (PDF)", "https://grad.ucla.edu/asis/agep/advltrrec.pdf"),
+         ("UC Berkeley — Preparing your application for graduate school", "https://grad.berkeley.edu/graduate-diversity/prospective-grad-students/preparing-your-application-for-graduate-school/"),
+         ("Harvard GSAS — Right to inspect letters of recommendation", "https://gsas.harvard.edu/apply/degree-programs/completing-your-application/letters-recommendation/right-inspect-letters")])
+
+
+def proposal_body(updated):
+    return _guide("proposal", "Research Proposal লেখা",
+        "PhD আবেদন আর DAAD-এর মতো গবেষণা স্কলারশিপে Research Proposal সবচেয়ে গুরুত্বপূর্ণ কাগজ: কী গবেষণা করবেন, কেন, কীভাবে, আর কত সময়ে। মালয়েশিয়ার MIS-এর মতো কিছু স্কলারশিপ Master's by Research-এও এটা চায়।",
+        """<h2>দৈর্ঘ্য</h2>
+  <p>স্কলারশিপের ঘোষণাই আগে দেখুন। DAAD-এর ডক্টরাল ও রিসার্চ গ্রান্টে বিশেষ নির্দেশনা না থাকলে <b>সর্বোচ্চ ১০ পৃষ্ঠা</b>, আর সময়সূচি আলাদা পাতায়। MIS (মালয়েশিয়া) গবেষণা ডিগ্রির জন্য কমপক্ষে ১,০০০ শব্দ চায়। DAAD-এর একটি পুরোনো নির্দেশিকা বলে, সাধারণত প্রস্তাব ৪–১৫ পৃষ্ঠার হয়, আর ১,৫০০ শব্দের কমে পূর্ণাঙ্গ প্রস্তাব লেখা কঠিন।</p>
+  <h2>কাঠামো</h2>
+  <ol class="steps">
+    <li><h3>শিরোনাম ও সারাংশ</h3><p>নির্দিষ্ট, বর্ণনামূলক শিরোনাম; ১৫০–২৫০ শব্দে পুরো প্রস্তাবের সারকথা।</p></li>
+    <li><h3>গবেষণার ক্ষেত্র ও বর্তমান অবস্থা</h3><p>বিষয়টি নিয়ে এখন পর্যন্ত কী জানা আছে, কোন তত্ত্ব বা আগের কাজের উপর দাঁড়াবেন — DAAD এটা স্পষ্ট করে চায়।</p></li>
+    <li><h3>গবেষণার ফাঁক ও প্রশ্ন</h3><p>কী জানা নেই, আর আপনার ২–৩টি নির্দিষ্ট গবেষণা প্রশ্ন বা লক্ষ্য।</p></li>
+    <li><h3>পদ্ধতি (Methodology)</h3><p>ডেটা কোথা থেকে, কীভাবে সংগ্রহ ও বিশ্লেষণ করবেন, কোন যন্ত্র/সফটওয়্যার/ল্যাব লাগবে। DAAD বলে এটা খুব গুরুত্বপূর্ণ এবং প্রায়ই সবচেয়ে দীর্ঘ অংশ।</p></li>
+    <li><h3>সময়সূচি</h3><p>টেবিল আকারে ধাপ আর প্রতিটির সময় — DAAD আলাদা পাতায় চায়।</p></li>
+    <li><h3>প্রত্যাশিত ফল ও গুরুত্ব</h3><p>গবেষণা থেকে কী পাওয়া যাবে, বিজ্ঞান আর আপনার দেশের জন্য কেন গুরুত্বপূর্ণ।</p></li>
+    <li><h3>তথ্যসূত্র</h3><p>যেসব কাজ উল্লেখ করেছেন তার পূর্ণ তালিকা, একটি নির্দিষ্ট রেফারেন্স স্টাইলে।</p></li>
+  </ol>
+  <h2>যা মনে রাখবেন</h2>
+  <ul>
+    <li>প্রস্তাব নিজে লিখুন। DAAD বলে প্রস্তাবটি আবেদনকারীর নিজের তৈরি এবং জার্মানির সম্ভাব্য সুপারভাইজারের সাথে আলোচনা করা হতে হবে।</li>
+    <li>সম্ভাব্য সুপারভাইজারের সাম্প্রতিক কাজ পড়ে তাঁর গবেষণার সাথে মিল দেখান — <a href="/professors/">প্রফেসর সার্চ</a> আর <a href="/guides/professor-email/">প্রফেসরকে ইমেইল</a> গাইড দেখুন।</li>
+    <li>যা করতে পারবেন না তার প্রতিশ্রুতি দেবেন না; সময় ও সম্পদের মধ্যে বাস্তবসম্মত প্রশ্ন বাছুন।</li>
+    <li>বিজ্ঞান ও প্রকৌশলে অনেক সময় সুপারভাইজারের চলমান প্রজেক্টে যোগ দেওয়াই রীতি, সেখানে পূর্ণ প্রস্তাবের চেয়ে মিলটা বেশি গুরুত্বপূর্ণ; মানবিক ও সামাজিক বিজ্ঞানে পূর্ণাঙ্গ প্রস্তাব বেশি প্রত্যাশিত (UCL)।</li>
+  </ul>""",
+        [("DAAD — Doctoral Programmes in Germany (application requirements)", "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57135739"),
+         ("DAAD — Research Grants in Germany", "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57742121"),
+         ("DAAD — How to develop a research project and write a research proposal (PDF)", "https://static.daad.de/media/daad_de/der-daad/was-wir-tun/guideline_research_proposal_2015.pdf"),
+         ("MoHE Malaysia — MIS 2026 guidelines (PDF)", "https://biasiswa.mohe.gov.my/INTER/doc/MIS/Guidelines%20MIS%202026.pdf"),
+         ("UCL — Guidance on contacting potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")])
+
+
+def prof_email_body(updated):
+    skeleton = """Subject: Prospective PhD applicant — [your topic] ([intake, e.g. Fall 2027])
+
+Dear Prof. [Surname],
+
+[1–2 sentences] Who you are: degree, university, result.
+[2–3 sentences] Which of their papers/projects you read and the specific
+  link to your own interest or experience.
+[1–2 sentences] What you would like to work on, and your relevant skill.
+[1 sentence] Funding: the scholarship you are applying for (e.g. DAAD) or
+  whether you need a funded position.
+[1 sentence] Ask: are they taking new PhD students for [intake]?
+
+CV attached (and a short proposal, if you have one).
+
+Yours sincerely,
+[Full name] · [university email] · [profile/Google Scholar link]"""
+    return _guide("professor-email", "প্রফেসরকে ইমেইল করা",
+        "PhD আর অনেক গবেষণা-মাস্টার্সে আবেদনের আগে সম্ভাব্য সুপারভাইজারের সাথে যোগাযোগ করতে হয় — DAAD-এর কিছু স্কলারশিপে সুপারভাইজারের সম্মতিপত্রও লাগে। ভালো ইমেইল ছোট, নির্দিষ্ট আর একজনের জন্যই লেখা।",
+        f"""<h2>পাঠানোর আগে</h2>
+  <ul>
+    <li>ডিপার্টমেন্টের ওয়েবসাইট থেকে প্রফেসর খুঁজুন, দেখুন তিনি নতুন ছাত্র নিচ্ছেন কিনা, আর তাঁর সাম্প্রতিক ২–৩টি পেপার পড়ুন (Oxford, Cambridge)। শুরু করতে পারেন আমাদের <a href="/professors/">প্রফেসর সার্চ</a> থেকে।</li>
+    <li>প্রতিটি ইমেইল আলাদা করে লিখুন। একই ইমেইল অনেককে পাঠালে সাধারণত কাজ হয় না (Cambridge)।</li>
+    <li>সময় দিন: আবেদনের শেষ তারিখের অনেক আগে, সম্ভব হলে কয়েক মাস আগে যোগাযোগ করুন।</li>
+  </ul>
+  <h2>ইমেইলের কাঠামো</h2>
+  <pre class="ooutput">{html.escape(skeleton)}</pre>
+  <p class="meta">এটা কাঠামো মাত্র — নিজের ভাষায়, নিজের তথ্য দিয়ে লিখুন। ১৫০–২৫০ শব্দের মধ্যে রাখার চেষ্টা করুন।</p>
+  <h2>যা করবেন, যা করবেন না</h2>
+  <ul>
+    <li>বিষয়ের লাইনে উদ্দেশ্য স্পষ্ট করুন, যেমন "Enquiry about potential PhD application" (Cambridge)।</li>
+    <li>নাম, পদবি আর বানান দুবার মিলিয়ে নিন। "Dear Sir" নয়, "Dear Prof. [Surname]"।</li>
+    <li>CV আর থাকলে ছোট প্রস্তাব সংযুক্ত করুন; ফাইল ছোট রাখুন আর পরিষ্কার নাম দিন (যেমন <em>Rahman_CV.pdf</em>) — বড় বা অনেক ফাইল স্প্যামে যেতে পারে।</li>
+    <li>কীভাবে খরচ চালাবেন (কোন স্কলারশিপ, নাকি ফান্ডেড পজিশন খুঁজছেন) স্পষ্ট বলুন (Cambridge)।</li>
+    <li>অনেকে উত্তর দেন না — এটা স্বাভাবিক। Edinburgh ৩–৪ সপ্তাহ অপেক্ষা করে তারপর একবার ভদ্রভাবে ফলো-আপ করতে বলে।</li>
+    <li>না বললে ধন্যবাদ দিন, আর জিজ্ঞেস করতে পারেন অন্য কোনো সহকর্মী আপনার বিষয়ে আগ্রহী হতে পারেন কিনা।</li>
+    <li>অনেক মাস্টার্স প্রোগ্রামে (বিশেষ করে ইউরোপের কোর্সভিত্তিক মাস্টার্সে) প্রফেসরকে ইমেইল করার দরকার নেই — প্রোগ্রামের নির্দেশনা দেখুন।</li>
+  </ul>""",
+        [("University of Cambridge BBSRC DTP — Contacting a potential PhD supervisor", "https://bbsrcdtp.lifesci.cam.ac.uk/contacting-potential-phd-supervisor-quick-guide"),
+         ("University of Cambridge — Find a supervisor", "https://www.postgraduate.study.cam.ac.uk/apply/before/find-supervisor"),
+         ("University of Oxford — Research project and supervisor", "https://www.ox.ac.uk/admissions/graduate/application-guide/starting-your-application/research-project-and-supervisor"),
+         ("University of Edinburgh Business School — Find a supervisor", "https://www.business-school.ed.ac.uk/phd/find-a-supervisor"),
+         ("UCL — Guidance on how to contact potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")])

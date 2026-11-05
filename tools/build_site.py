@@ -16,7 +16,8 @@ from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, page
 import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
-                        tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body)
+                        tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
+                        lor_body, proposal_body, prof_email_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -367,6 +368,9 @@ def main():
         "guides/motivation-letter": ("Motivation Letter লেখার গাইড | Higher Study Info", "DAAD ও ইউরোপীয় স্কলারশিপের Motivation Letter: প্রশ্ন, কাঠামো, দৈর্ঘ্য আর আউটলাইন টুল।", motivation_body),
         "professors": ("প্রফেসর সার্চ — বিষয় ও ডিপার্টমেন্ট অনুযায়ী | Higher Study Info", "MS/PhD সুপারভাইজার খুঁজুন: বিশ্ববিদ্যালয়, ডিপার্টমেন্ট ও গবেষণার বিষয় অনুযায়ী প্রফেসরদের তালিকা, অফিসিয়াল প্রোফাইল লিংকসহ।", professors_body),
         "tools/eligibility": ("কোন স্কলারশিপে আমি যোগ্য? | Higher Study Info", "লেভেল, IELTS, বয়স আর CGPA দিয়ে দেখুন কোন স্কলারশিপের শর্তের সাথে আপনি মেলেন।", eligibility_body),
+        "guides/lor": ("Recommendation Letter (LOR) গাইড | Higher Study Info", "রেকমেন্ডেশন লেটার কাকে, কখন, কীভাবে চাইবেন — বিশ্ববিদ্যালয়ের অফিসিয়াল নির্দেশনা অনুযায়ী।", lor_body),
+        "guides/research-proposal": ("Research Proposal লেখার গাইড | Higher Study Info", "PhD ও DAAD গবেষণা স্কলারশিপের Research Proposal: কাঠামো, দৈর্ঘ্য, পদ্ধতি ও সময়সূচি।", proposal_body),
+        "guides/professor-email": ("প্রফেসরকে ইমেইল করার নিয়ম | Higher Study Info", "PhD সুপারভাইজারকে ইমেইল: কাঠামো, কী সংযুক্ত করবেন, কখন ফলো-আপ — বিশ্ববিদ্যালয়ের নির্দেশনা অনুযায়ী।", prof_email_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -375,7 +379,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)
