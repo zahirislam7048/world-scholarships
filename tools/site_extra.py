@@ -343,6 +343,7 @@ GUIDES = [
     ("/tools/eligibility/", "✅ কোন স্কলারশিপে আমি যোগ্য?", "লেভেল, IELTS, বয়স আর CGPA দিয়ে তালিকা ছেঁকে দেখুন কোনগুলো আপনার সাথে মেলে।"),
     ("/guides/documents/", "📄 কাগজপত্র ও সত্যায়ন", "বাংলাদেশ থেকে আবেদনের জন্য সার্টিফিকেট সত্যায়ন, e-Apostille আর পুলিশ ক্লিয়ারেন্স — ধাপে ধাপে।"),
     ("/guides/english-tests/", "🗣️ IELTS, TOEFL, Duolingo, PTE", "বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।"),
+    ("/guides/other-tests/", "📝 GRE, GMAT, SAT ও ভাষার পরীক্ষা", "GRE/GMAT/SAT-এর ফি ও তারিখ, আর ঢাকায় জার্মান (Goethe, TestDaF), জাপানি (JLPT), কোরিয়ান (TOPIK) পরীক্ষা।"),
     ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
     ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
@@ -1236,7 +1237,7 @@ def guide_links(country_en=None, level=""):
         g += [("/guides/funded-phd/", "ফান্ডেড PhD (TA/RA)"), ("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
     europe = country_en and any(s.startswith("europe/") and COUNTRIES[s][0] == country_en for s in COUNTRIES)
     g.append(("/guides/motivation-letter/", "Motivation Letter লেখা") if europe else ("/guides/sop/", "SOP লেখা"))
-    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/interview/", "ইন্টারভিউর প্রস্তুতি"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"),
+    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/interview/", "ইন্টারভিউর প্রস্তুতি"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"), ("/guides/other-tests/", "GRE / GMAT / ভাষার পরীক্ষা"),
           ("/guides/documents/", "কাগজপত্র ও সত্যায়ন"), ("/tools/cgpa/", "CGPA রূপান্তর"), ("/tools/eligibility/", "যোগ্যতা যাচাই")]
     seen, out = set(), []
     for h, t in g:
@@ -1513,3 +1514,40 @@ def pre_departure_body(updated):
          ("Study Australia — How to prepare for your flight", "https://www.studyaustralia.gov.au/en/tools-and-resources/tips-and-advice-for-students/how-to-prepare-for-your-flight-to-australia"),
          ("Bangladesh Bank — FE Circular No. 37 (student remittances)", "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302025fepd37e.pdf")],
         '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/guides/student-file/">স্টুডেন্ট ফাইল ও টাকা পাঠানো</a></li><li><a href="/guides/visa/">স্টুডেন্ট ভিসা</a></li><li><a href="/guides/part-time-work/">পড়ার সময় কাজ</a></li><li><a href="/guides/documents/">কাগজপত্র ও সত্যায়ন</a></li></ul></section>')
+
+
+def other_tests_body(updated):
+    return _guide("other-tests", "GRE, GMAT, SAT ও ভাষার পরীক্ষা",
+        "IELTS/TOEFL ছাড়াও কিছু প্রোগ্রাম আলাদা পরীক্ষা চায়: যুক্তরাষ্ট্রের অনেক গ্র্যাজুয়েট প্রোগ্রামে GRE বা GMAT, স্নাতকে SAT, আর জার্মান, জাপানি বা কোরিয়ান ভাষায় পড়লে সেই ভাষার সনদ। কোনটা লাগবে তা প্রোগ্রামের ভর্তির শর্তে দেখুন — অনেক প্রোগ্রাম এখন GRE/SAT ঐচ্ছিক রেখেছে।",
+        """<h2>ভর্তির পরীক্ষা</h2>
+  <div class="tbl-wrap"><table class="t fit">
+    <tr><th>পরীক্ষা</th><th>কাদের জন্য</th><th>ফি ও পদ্ধতি</th></tr>
+    <tr><td><b>GRE General</b><br><span class="meta">ETS</span></td><td>মাস্টার্স/PhD — বিশেষত যুক্তরাষ্ট্র, কিছু কানাডা ও ইউরোপ</td><td>সাধারণ ফি US$249 (১ আগস্ট ২০২৬ থেকে; আগের পেজে $220 দেখাতে পারে)। টেস্ট সেন্টারে বা বাসায় অনলাইনে (মানুষ পর্যবেক্ষক), সারা বছর।</td></tr>
+    <tr><td><b>GMAT Focus</b><br><span class="meta">GMAC</span></td><td>MBA ও বিজনেস মাস্টার্স</td><td>ফি দেশভেদে আলাদা; যুক্তরাষ্ট্রে সেন্টারে US$275, অনলাইনে US$300। ৬০ দিনের বেশি আগে তারিখ বদলালে US$55 থেকে; না গেলে পুরো ফি বাতিল।</td></tr>
+    <tr><td><b>SAT</b><br><span class="meta">College Board</span></td><td>যুক্তরাষ্ট্র ও কিছু অন্য দেশে স্নাতক ভর্তি</td><td>মূল ফি US$68 + আন্তর্জাতিক ফি US$43; দেরিতে নিবন্ধনে US$38। সামনের তারিখ: ৫ ডিসেম্বর ২০২৬ (নিবন্ধন ২০ নভেম্বর), ৬ মার্চ, ১ মে, ৫ জুন ২০২৭।</td></tr>
+  </table></div>
+  <h2>ভাষার পরীক্ষা — বাংলাদেশে</h2>
+  <div class="tbl-wrap"><table class="t fit">
+    <tr><th>ভাষা</th><th>পরীক্ষা ও কোথায়</th></tr>
+    <tr><td><b>জার্মান</b></td><td><b>Goethe-Zertifikat</b> A1–C2 আর <b>TestDaF</b> (B2–C1, বছরে ৬টি নির্দিষ্ট তারিখ) — Goethe-Institut Bangladesh, ঢাকা। B1, B2, C1 ডিজিটালেও দেওয়া যায়। শুধু পরীক্ষার সনদই প্রমাণ; কোর্সে অংশগ্রহণের সনদ নয়। Goethe C2 থাকলে জার্মান বিশ্ববিদ্যালয়ে TestDaF লাগে না।</td></tr>
+    <tr><td><b>জাপানি</b></td><td><b>JLPT</b> (N5–N1) — ঢাকায় আয়োজক Japanese Universities Alumni Association in Bangladesh (JUAAB); ২০২৬-এ ৫ জুলাই ও ৬ ডিসেম্বর। JASSO-র মতো স্কলারশিপে সাধারণত N2 চাওয়া হয়।</td></tr>
+    <tr><td><b>কোরিয়ান</b></td><td><b>TOPIK</b> — ঢাকায় কোরিয়ান দূতাবাস আয়োজন করে, ভেন্যু পরীক্ষাভেদে আলাদা। সময়সূচি দূতাবাসের নোটিশ বোর্ডে।</td></tr>
+  </table></div>
+  <h2>পরামর্শ</h2>
+  <ul>
+    <li>আগে লক্ষ্য প্রোগ্রামগুলোর শর্ত দেখুন — GRE "optional" হলে ভালো স্কোর তবু কাজে লাগতে পারে, তবে বাধ্যতামূলক না হলে খরচ বাঁচাতে পারেন।</li>
+    <li>স্কোর পাঠানোর সময় আর বৈধতার মেয়াদ (সাধারণত কয়েক বছর) দেখে পরীক্ষার তারিখ ঠিক করুন — আবেদনের শেষ তারিখের অন্তত ১–২ মাস আগে।</li>
+    <li>জার্মানি, জাপান, কোরিয়ায় ইংরেজিতে পড়লেও পার্ট-টাইম কাজ আর দৈনন্দিন জীবনের জন্য স্থানীয় ভাষা খুব কাজে লাগে — দেখুন <a href="/guides/part-time-work/">পড়ার সময় কাজ</a>।</li>
+    <li>ইংরেজি পরীক্ষার (IELTS, TOEFL, Duolingo, PTE) জন্য দেখুন <a href="/guides/english-tests/">ইংরেজি পরীক্ষার গাইড</a>।</li>
+  </ul>
+  <p class="meta">ফি আর তারিখ প্রায়ই বদলায় — নিবন্ধনের আগে নিচের অফিসিয়াল পেজে মিলিয়ে নিন।</p>""",
+        [("ETS — GRE General Test fees", "https://www.ets.org/gre/test-takers/general-test/register/fees.html"),
+         ("ETS — The GRE tests (at home and test centres)", "https://www.ets.org/gre.html"),
+         ("mba.com — GMAT exam payment", "https://www.mba.com/exams/gmat-exam/register/exam-payment"),
+         ("mba.com — GMAT fees, vouchers and fee waivers", "https://support.mba.com/hc/en-us/articles/6284241279771-GMAT-How-Much-Does-The-Exam-Cost"),
+         ("College Board — SAT international fees", "https://satsuite.collegeboard.org/sat/registration/international-testing/fees"),
+         ("College Board — SAT dates and deadlines", "https://satsuite.collegeboard.org/sat/dates-deadlines"),
+         ("Goethe-Institut Bangladesh — German exams", "https://www.goethe.de/ins/bd/en/spr/prf.html"),
+         ("Goethe-Institut Bangladesh — TestDaF", "https://www.goethe.de/ins/bd/en/m/spr/prf/testdaf.html"),
+         ("JLPT — Overseas test site cities", "https://www.jlpt.jp/e/application/overseas_list.html"),
+         ("Embassy of the Republic of Korea in Bangladesh — Notices (TOPIK)", "https://overseas.mofa.go.kr/bd-en/brd/m_2124/view.do?seq=760029")])
