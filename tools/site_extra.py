@@ -323,6 +323,7 @@ GUIDE_CSS = """<style>
 table.t{border-collapse:collapse;font-size:14px;min-width:420px}
 table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 table.t th{font-weight:600;color:var(--muted)}
+table.t.fit{min-width:0;width:100%}
 .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
 .calc label{display:flex;flex-direction:column;justify-content:space-between;gap:4px;font-size:14px;color:var(--muted)}
 .calc input{font:inherit;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
@@ -350,6 +351,8 @@ GUIDES = [
     ("/guides/lor/", "🤝 Recommendation Letter (LOR)", "কাকে বলবেন, কখন, কোন কাগজ দেবেন — আর কোন ভুল আবেদন বাতিল করাতে পারে।"),
     ("/guides/research-proposal/", "🔬 Research Proposal", "PhD ও DAAD গবেষণা স্কলারশিপের জন্য প্রস্তাবের কাঠামো, দৈর্ঘ্য আর সময়সূচি।"),
     ("/guides/professor-email/", "✉️ প্রফেসরকে ইমেইল", "সুপারভাইজার খোঁজা, ইমেইলের কাঠামো আর ফলো-আপের নিয়ম।"),
+    ("/guides/funded-phd/", "🎓 ফান্ডেড PhD — TA, RA, বেতনভুক্ত PhD", "যুক্তরাষ্ট্র-কানাডার Assistantship ও ন্যূনতম ফান্ডিং, ইউরোপে বেতনসহ PhD পদ।"),
+    ("/guides/part-time-work/", "💼 পড়ার সময় পার্ট-টাইম কাজ", "দেশভিত্তিক কাজের ঘণ্টার সীমা আর ভিসা বাঁচিয়ে কাজের সতর্কতা।"),
     ("/guides/motivation-letter/", "📝 Motivation Letter", "DAAD, Erasmus Mundus-এর মতো ইউরোপীয় আবেদনের জন্য — প্রশ্ন, কাঠামো আর আউটলাইন টুল।"),
 ]
 
@@ -545,15 +548,17 @@ VISA = [
              ("IRCC — Work off campus", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-off-campus.html")]},
     {"c": "Australia", "bn": "অস্ট্রেলিয়া", "visa": "Student visa (subclass 500)",
      "funds": "AUD 29,710 (12 মাসের জীবনযাত্রা) + প্রথম 12 মাসের কোর্স ফি + যাতায়াত; অথবা বার্ষিক আয় অন্তত AUD 60,000",
-     "work": "", "post": "", "fee": "",
+     "work": "কোর্স চলাকালীন প্রতি ১৪ দিনে (fortnight) সর্বোচ্চ 48 ঘণ্টা; কোর্সের ছুটিতে সীমা নেই; গবেষণা-মাস্টার্স ও PhD শিক্ষার্থীদের কোর্স শুরুর পর সীমা নেই", "post": "", "fee": "",
      "apply": ("Home Affairs — Student visa", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/changes-to-student-visa-application-rules-500-590"),
      "src": [("Study Australia — Change to evidence of financial capacity", "https://www.studyaustralia.gov.au/en_in/tools-and-resources/news/change-to-evidence-of-financial-capacity-for-student-visas"),
-             ("Home Affairs — Financial capacity evidence", "https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0185.aspx")]},
+             ("Home Affairs — Financial capacity evidence", "https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0185.aspx"),
+             ("Home Affairs — Work restrictions for student visa holders", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500/temporary-relaxation-of-working-hours-for-student-visa-holders")]},
     {"c": "Italy", "bn": "ইতালি", "visa": "Study visa (type D)",
      "funds": "বছরে €10,179.85 (মাসে প্রায় €848) — কিছু কনস্যুলেট ফেরার খরচও (প্রায় €500) চায়",
-     "work": "", "post": "", "fee": "",
+     "work": "সপ্তাহে সর্বোচ্চ 20 ঘণ্টা, বছরে 1,040 ঘণ্টা; বার্ষিক সীমা না ছাড়ালে ক্লাস বন্ধের সময় বেশি করা যায়", "post": "", "fee": "",
      "apply": ("Universitaly — pre-enrolment", "https://www.universitaly.it/"),
-     "src": [("Italian Consulate — Study visa checklist 2026/2027", "https://consdubai.esteri.it/wp-content/uploads/2026/05/StudyVisa_2026_2027.pdf")]},
+     "src": [("Italian Consulate — Study visa checklist 2026/2027", "https://consdubai.esteri.it/wp-content/uploads/2026/05/StudyVisa_2026_2027.pdf"),
+             ("Integrazione Migranti (Ministry of Labour) — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio")]},
     {"c": "Japan", "bn": "জাপান", "visa": "Student (College Student)",
      "funds": "",
      "work": "অনুমতি নিয়ে সপ্তাহে 28 ঘণ্টা (দীর্ঘ ছুটিতে দিনে 8 ঘণ্টা); অনুমতি বিমানবন্দরেই নেওয়া যায়",
@@ -1220,10 +1225,12 @@ def guide_links(country_en=None, level=""):
     g = []
     if country_en in VISA_IDS:
         g.append((f"/guides/visa/#{VISA_IDS[country_en]}", f"{country_en} স্টুডেন্ট ভিসা"))
+    if country_en in VISA_IDS or country_en == "France":
+        g.append(("/guides/part-time-work/", f"{country_en}-এ পড়ার সময় কাজ"))
     if country_en in TUITION_FREE:
         g.append(("/guides/tuition-free/", f"{country_en}-এ টিউশন ফি"))
     if re.search(r"PhD|Postdoc|MPhil", level):
-        g += [("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
+        g += [("/guides/funded-phd/", "ফান্ডেড PhD (TA/RA)"), ("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
     europe = country_en and any(s.startswith("europe/") and COUNTRIES[s][0] == country_en for s in COUNTRIES)
     g.append(("/guides/motivation-letter/", "Motivation Letter লেখা") if europe else ("/guides/sop/", "SOP লেখা"))
     g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"),
@@ -1298,3 +1305,94 @@ def scholarships_index_body(updated):
 <section class="rel idx">{"".join(parts)}</section>
 {FOOTER}
 </div>"""
+
+
+def funded_phd_body(updated):
+    return _guide("funded-phd", "ফান্ডেড PhD — TA, RA ও বেতনভুক্ত PhD",
+        "স্কলারশিপ ছাড়াও PhD-র খরচ চালানোর সবচেয়ে বড় পথ হলো বিশ্ববিদ্যালয়ের নিজস্ব ফান্ডিং: যুক্তরাষ্ট্র-কানাডায় Teaching/Research Assistantship আর ন্যূনতম ফান্ডিং প্যাকেজ, আর উত্তর ইউরোপে PhD মানেই বেতনসহ চাকরি। অনেক ক্ষেত্রে আলাদা স্কলারশিপের আবেদন লাগে না — ভর্তির সাথেই ফান্ডিং আসে।",
+        """<h2>শব্দগুলো চিনে নিন</h2>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>ধরন</th><th>কী পান</th><th>বদলে কী করতে হয়</th></tr>
+    <tr><td><b>Teaching Assistantship (TA)</b></td><td>টিউশন মওকুফ + জীবনযাত্রার ভাতা (stipend)</td><td>স্নাতক কোর্সে ক্লাস/ল্যাব নেওয়া, খাতা দেখা</td></tr>
+    <tr><td><b>Research Assistantship (RA)</b></td><td>টিউশন মওকুফ + ভাতা, সাধারণত প্রফেসরের গবেষণা অনুদান থেকে</td><td>প্রফেসরের প্রজেক্টে গবেষণা — প্রায়ই নিজের PhD-র কাজই</td></tr>
+    <tr><td><b>Fellowship</b></td><td>ভাতা (কখনো টিউশনসহ)</td><td>সাধারণত কোনো কাজ লাগে না</td></tr>
+    <tr><td><b>বেতনভুক্ত PhD পদ</b> (ইউরোপ)</td><td>মাসিক বেতন, ছুটি, পেনশন — কর্মচারী হিসেবে চুক্তি</td><td>গবেষণা, কখনো কিছু পড়ানো</td></tr>
+  </table></div>
+  <p class="meta">সংজ্ঞা: EducationUSA (U.S. Department of State)।</p>
+
+  <h2>🇺🇸 যুক্তরাষ্ট্র</h2>
+  <ul>
+    <li>PhD-তে assistantship খুবই প্রচলিত; বিনিময়ে টিউশন মওকুফ আর ভাতা পাওয়া যায় (EducationUSA)।</li>
+    <li>প্রতিযোগিতা বেশি; STEM আর গবেষণাভিত্তিক বিষয়ে ফান্ডিং বেশি।</li>
+    <li>ভাতার পরিমাণ বিশ্ববিদ্যালয়ভেদে আলাদা — উদাহরণ: Rice University বলে তাদের ডক্টরাল ও থিসিস-মাস্টার্স শিক্ষার্থীরা প্রায়ই বছরে $23,400–$40,000 ভাতা পান।</li>
+    <li>ডিপার্টমেন্টের প্রফেসররাই অনেক সময় ফান্ডিং কে পাবে ঠিক করেন — তাই আগে থেকে যোগাযোগ জরুরি (EducationUSA)।</li>
+    <li>কিছু ফান্ডিংয়ের শেষ তারিখ শুরুর ১৮ মাস আগেও হতে পারে — আগেভাগে শুরু করুন।</li>
+    <li>কোর্সভিত্তিক মাস্টার্সে ফান্ডিং কম; প্রথম বছরের বিদেশি শিক্ষার্থীরা অনেক সময় পান না।</li>
+  </ul>
+
+  <h2>🇨🇦 কানাডা — ন্যূনতম ফান্ডিং নীতি</h2>
+  <p>অনেক কানাডিয়ান বিশ্ববিদ্যালয় PhD শিক্ষার্থীদের (বিদেশিসহ) একটা ন্যূনতম ফান্ডিংয়ের নিশ্চয়তা দেয়। উদাহরণ:</p>
+  <div class="tbl-wrap"><table class="t fit">
+    <tr><th>বিশ্ববিদ্যালয়</th><th>ন্যূনতম ফান্ডিং</th></tr>
+    <tr><td>UBC (Vancouver)</td><td>সেপ্টেম্বর ২০২৬ থেকে প্রথম ৪ বছর বছরে CA$40,000; দেশি-বিদেশি সবার জন্য, সন্তোষজনক অগ্রগতি সাপেক্ষে</td></tr>
+    <tr><td>University of Waterloo</td><td>বছরে CA$29,145 (১ মে ২০২৬ থেকে), ৪ বছর পর্যন্ত; বিদেশিরা অতিরিক্ত International Doctoral Student Award পান, যা প্রায় দেশি-বিদেশি টিউশনের পার্থক্য</td></tr>
+    <tr><td>McGill — Biomedical Engineering (একটি ডিপার্টমেন্ট)</td><td>ভাতা বছরে CA$25,000; টিউশনসহ বিদেশি PhD1-এর মোট ন্যূনতম CA$44,163 (২০২৬–২৭)</td></tr>
+  </table></div>
+  <p class="meta">অঙ্কগুলো বিশ্ববিদ্যালয় বা ডিপার্টমেন্টের নির্দিষ্ট নীতি — আবেদনের আগে সেই প্রোগ্রামের পেজে মিলিয়ে নিন।</p>
+
+  <h2>🇪🇺 ইউরোপ — PhD মানে চাকরি</h2>
+  <ul>
+    <li><b>সুইডেন:</b> ভর্তি হওয়া ডক্টরাল শিক্ষার্থীরা একই সাথে ছাত্র ও বিশ্ববিদ্যালয়ের কর্মচারী — মাসিক বেতন, ছুটি, পেনশন (Study in Sweden)।</li>
+    <li><b>নেদারল্যান্ডস:</b> বেতন বিশ্ববিদ্যালয়ের সমষ্টিগত শ্রম চুক্তি (CAO) অনুযায়ী। উদাহরণ (একটি বিজ্ঞপ্তি): Radboud University-তে শুরু মাসে €3,059 গ্রস, চতুর্থ বছরে €3,881।</li>
+    <li><b>নরওয়ে:</b> উদাহরণ (২০২৪-এর একটি NTNU বিজ্ঞপ্তি): বছরে গ্রস NOK 532,200 থেকে, বেতন থেকে ২% পেনশনে কাটা হয়।</li>
+    <li><b>ডেনমার্ক:</b> বিশ্ববিদ্যালয়ের PhD পদে বেতন সরকারি AC চুক্তি অনুযায়ী; Industrial PhD-তে কোম্পানির চুক্তি অনুযায়ী (Study in Denmark)।</li>
+    <li>এসব পদ চাকরির বিজ্ঞপ্তির মতো দেওয়া হয় — খুঁজুন ইউরোপীয় কমিশনের <a href="https://euraxess.ec.europa.eu/jobs/search" target="_blank" rel="noopener">EURAXESS Jobs</a> আর বিশ্ববিদ্যালয়ের "vacancies" পেজে।</li>
+  </ul>
+
+  <h2>কীভাবে এগোবেন</h2>
+  <ol class="steps">
+    <li><h3>বিষয় আর প্রফেসর ঠিক করুন</h3><p>আপনার আগ্রহের সাথে মেলে এমন ল্যাব খুঁজুন — <a href="/professors/">প্রফেসর সার্চ</a> দিয়ে শুরু করুন।</p></li>
+    <li><h3>ফান্ডিং নিয়ে সরাসরি জিজ্ঞেস করুন</h3><p>ইমেইলে জানতে চান তিনি নতুন ছাত্র নিচ্ছেন কিনা আর RA ফান্ডিং আছে কিনা — দেখুন <a href="/guides/professor-email/">প্রফেসরকে ইমেইল</a>।</p></li>
+    <li><h3>অফারে কী আছে মিলিয়ে নিন</h3><p>টিউশন পুরো মওকুফ কিনা, ভাতা কত ও কত বছর নিশ্চিত, স্বাস্থ্যবীমা আর বাধ্যতামূলক ফি কে দেবে, কাজের ঘণ্টা কত।</p></li>
+    <li><h3>ভাতা দিয়ে জীবনযাত্রা চলবে কিনা হিসাব করুন</h3><p><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a> দিয়ে শহরের খরচের সাথে মিলিয়ে দেখুন; ভিসার জন্যও এই অফার লেটার আর্থিক প্রমাণ হিসেবে কাজে লাগে।</p></li>
+    <li><h3>ইউরোপের পদে চাকরির মতো আবেদন</h3><p>বিজ্ঞপ্তি অনুযায়ী CV, মোটিভেশন লেটার, রেফারেন্স — শেষ তারিখ কড়া, দেরিতে আবেদন নেওয়া হয় না।</p></li>
+  </ol>""",
+        [("EducationUSA — Graduate funding", "https://educationusa.state.gov/your-5-steps-us-study/finance-your-studies/graduate"),
+         ("EducationUSA — Glossary", "https://educationusa.state.gov/experience-studying-usa/us-educational-system/glossary"),
+         ("EducationUSA — Fully-funded doctoral programs", "https://educationusa.state.gov/scholarships/fully-funded-doctoral-programs"),
+         ("UBC — Minimum funding policy for PhD students", "https://www.grad.ubc.ca/awards/minimum-funding-policy-phd-students"),
+         ("University of Waterloo — Funding for research-based graduate programs", "https://uwaterloo.ca/future-graduate-students/funding/funding-research-based-graduate-programs"),
+         ("McGill — Biomedical Engineering funding", "https://www.mcgill.ca/bbme/programs/funding"),
+         ("Study in Sweden — PhD programmes", "https://studyinsweden.se/plan-your-studies/degree-programmes/phd-programmes/"),
+         ("Study in Denmark — PhD and research", "https://studyindenmark.dk/study-options/what-can-i-study/phd-and-research"),
+         ("EURAXESS — PhD position, Radboud University (salary example)", "https://euraxess.ec.europa.eu/worldwide/south-korea/news/phd-position-individual-dynamics-fatigue-nijmegen-netherlands")],
+        related_scholarships("PhD স্কলারশিপও দেখুন", lambda s_, r: bool(re.search(r"PhD|Postdoc", r["level"])), 15))
+
+
+def part_time_body(updated):
+    rows = "".join(f'<tr><td><a href="/guides/visa/#{VISA_IDS[v["c"]]}">{v["bn"]}</a></td><td>{html.escape(v["work"])}</td></tr>' for v in VISA if v["work"])
+    rows += ('<tr><td>ফ্রান্স</td><td>রেসিডেন্স পারমিট লাগবে; বছরে সর্বোচ্চ 964 ঘণ্টা (আইনি কর্মবছরের প্রায় 60%) — বার্ষিক হিসাব, তাই ছুটিতে ফুল-টাইম সম্ভব; '
+             'বিশ্ববিদ্যালয়ে কাজ করলে সেপ্টেম্বর–জুন 670 ও জুলাই–আগস্ট 300 ঘণ্টা (Campus France)</td></tr>')
+    srcs = [("Campus France — Working while studying in France", "https://www.campusfrance.org/en/working-student")]
+    for v in VISA:
+        if v["work"]:
+            srcs += [x for x in v["src"]]
+    seen, uniq = set(), []
+    for t, u in srcs:
+        if u not in seen:
+            seen.add(u)
+            uniq.append((t, u))
+    return _guide("part-time", "পড়ার সময় পার্ট-টাইম কাজ",
+        "বেশিরভাগ দেশে স্টুডেন্ট ভিসায় সীমিত ঘণ্টা কাজ করা যায়। এখানে দেশভিত্তিক নিয়ম সরকারের অফিসিয়াল সূত্র থেকে — আর কিছু জরুরি সতর্কতা।",
+        f"""<h2>দেশভিত্তিক কাজের সীমা</h2>
+  <div class="tbl-wrap"><table class="t fit"><tr><th>দেশ</th><th>পড়ার সময় কাজের নিয়ম</th></tr>{rows}</table></div>
+  <p class="meta">নিয়ম প্রায়ই বদলায়, আর কোর্সের ধরন (ফুল-টাইম, ভাষা কোর্স, গবেষণা) অনুযায়ী আলাদা হতে পারে। কাজ শুরুর আগে নিজের ভিসার শর্ত আর বিশ্ববিদ্যালয়ের ইন্টারন্যাশনাল অফিসে মিলিয়ে নিন।</p>
+  <h2>জরুরি সতর্কতা</h2>
+  <ul>
+    <li><b>সীমার বেশি কাজ করবেন না।</b> ভিসার শর্ত ভাঙলে ভিসা বাতিল ও দেশে ফেরত পাঠানোর ঝুঁকি থাকে; পরে অন্য দেশের ভিসাতেও সমস্যা হতে পারে।</li>
+    <li><b>পার্ট-টাইম আয় দিয়ে টিউশন চালানোর পরিকল্পনা করবেন না।</b> ভিসার আর্থিক প্রমাণ আলাদাভাবে দেখাতে হয় (<a href="/guides/visa/">ভিসা গাইড</a>), আর প্রথম কয়েক মাসে কাজ পাওয়া অনিশ্চিত।</li>
+    <li>লিখিত চুক্তি নিন, বেতন ব্যাংকে নিন, ট্যাক্স নম্বর বা দেশের নিয়ম অনুযায়ী নিবন্ধন করুন। নগদে "অফ দ্য বুক" কাজ এড়িয়ে চলুন।</li>
+    <li>ক্যাম্পাসের কাজ (লাইব্রেরি, ল্যাব, টিউটরিং) প্রায়ই সহজ শর্তে পাওয়া যায় আর পড়ার সাথে মেলে। PhD হলে দেখুন <a href="/guides/funded-phd/">TA/RA ফান্ডিং</a>।</li>
+    <li>কাজ পেতে প্রায়ই স্থানীয় ভাষা লাগে (যেমন জার্মানি, জাপান, কোরিয়া, ফ্রান্স) — ভাষা শেখা শুরু করুন দেশে থাকতেই।</li>
+  </ul>""", uniq,
+        '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li><li><a href="/guides/visa/">স্টুডেন্ট ভিসা</a></li><li><a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a></li><li><a href="/guides/funded-phd/">ফান্ডেড PhD</a></li></ul></section>')
