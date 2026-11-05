@@ -14,6 +14,7 @@ import urllib.parse
 
 from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, page_slugs, render
 import site_extra
+import site_en
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
@@ -36,9 +37,16 @@ def crumbs_ld(items):
         {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + p} for i, (n, p) in enumerate(items)]}
 
 
-def page(title, description, path, head_extra, body, ld=""):
+ALT = {}  # Bangla path -> English path, for pages that exist in both languages
+
+
+def page(title, description, path, head_extra, body, ld="", lang="bn"):
+    rev = {v: k for k, v in ALT.items()}
+    bn_p, en_p = (path, ALT.get(path)) if lang == "bn" else (rev.get(path), path)
+    alts = (f'<link rel="alternate" hreflang="bn" href="{DOMAIN}{bn_p}"><link rel="alternate" hreflang="en" href="{DOMAIN}{en_p}">'
+            f'<link rel="alternate" hreflang="x-default" href="{DOMAIN}{bn_p}">') if bn_p and en_p else ""
     return f"""<!doctype html>
-<html lang="bn">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -50,7 +58,8 @@ def page(title, description, path, head_extra, body, ld=""):
 <meta property="og:type" content="website">
 <meta property="og:url" content="{DOMAIN}{path}">
 <meta property="og:site_name" content="Higher Study Info">
-<meta property="og:locale" content="bn_BD">
+<meta property="og:locale" content="{"bn_BD" if lang == "bn" else "en_US"}">
+{alts}
 <meta property="og:image" content="{DOMAIN}/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -338,6 +347,10 @@ def main():
     PAGES.update((k, v) for k, v in page_slugs().items()
                  if not (load_rows(k[0])[k[1]].get("deadline") or "9999") < updated)
     site_extra.PAGES = PAGES
+    ALT.update({"/": "/en/", "/scholarships/": "/en/scholarships/", "/deadlines/": "/en/deadlines/", "/about/": "/en/about/"})
+    ALT.update({f"/{c}/": f"/en/{c}/" for c in CONTINENTS})
+    ALT.update({f"/{c}/": f"/en/{c}/" for c in COUNTRIES})
+    ALT.update({f"/scholarship/{ps}/": f"/en/scholarship/{ps}/" for ps in PAGES.values()})
     for (slug, i), ps in PAGES.items():
         (OUT / "scholarship" / ps).mkdir(parents=True)
         (OUT / "scholarship" / ps / "index.html").write_text(scholarship_page(slug, i, load_rows(slug)[i], updated), encoding="utf-8")
@@ -360,6 +373,27 @@ def main():
     for slug in COUNTRIES:
         (OUT / slug).mkdir(parents=True)
         (OUT / slug / "index.html").write_text(country_page(slug, updated), encoding="utf-8")
+    # English directory under /en/
+    en_head = LIST_HEAD + GUIDE_CSS + LINK_CSS + "<style>.elist{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}.elist a,.vcard h2 a{color:var(--accent)}</style>"
+    chk = site_extra.CHECKED
+    en_pages = {"/en/": ("Higher Study Info | Scholarships by country", "Current and upcoming scholarships by country, with deadlines, English requirements and official application links.", site_en.home_en(PAGES, chk)),
+                "/en/scholarships/": ("All scholarships (A–Z) | Higher Study Info", "Every current and upcoming scholarship in the directory, grouped by region and country.", site_en.index_en(PAGES, chk)),
+                "/en/deadlines/": ("Upcoming scholarship deadlines | Higher Study Info", "Scholarship deadlines sorted by date, with a subscribable calendar.", site_en.deadlines_en(PAGES, updated, chk)),
+                "/en/about/": ("About | Higher Study Info", "What Higher Study Info is, where the data comes from and how it is updated.", site_en.about_en(chk))}
+    for c, (en, _, _) in CONTINENTS.items():
+        en_pages[f"/en/{c}/"] = (f"Scholarships in {en} | Higher Study Info", f"Current and upcoming scholarships in {en}.", site_en.continent_en(c, PAGES, chk))
+    for c in COUNTRIES:
+        n = COUNTRIES[c][0]
+        en_pages[f"/en/{c}/"] = (f"{n} scholarships | Higher Study Info", f"Current and upcoming scholarships in {n}: benefits, eligibility, English requirements, deadlines and official links.", site_en.country_en(c, PAGES, chk))
+    for (sl, i), ps in PAGES.items():
+        r = load_rows(sl)[i]
+        en_pages[f"/en/scholarship/{ps}/"] = (f"{r['scholarship_name']} — {COUNTRIES[sl][0]} | Higher Study Info",
+                                              f"{r['scholarship_name']} ({COUNTRIES[sl][0]}, {r['level']}): benefits, eligibility, English requirement, deadline and official application link.",
+                                              site_en.scholarship_en(sl, i, r, ps, chk))
+    for path, (title, desc, body) in en_pages.items():
+        d = OUT / path.strip("/")
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.html").write_text(page(title, desc, path, en_head, body, lang="en"), encoding="utf-8")
     extra = {
         "deadlines": ("শেষ তারিখ সামনে | Higher Study Info", "সব দেশের স্কলারশিপ শেষ তারিখ অনুযায়ী সাজানো, আবেদনের লিংকসহ।", deadlines_body),
         "search": ("সব স্কলারশিপ খুঁজুন | Higher Study Info", "সব দেশের স্কলারশিপ এক জায়গায় খুঁজুন: দেশ, লেভেল, IELTS আর শেষ তারিখ দিয়ে।", search_body),
@@ -400,7 +434,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages)
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

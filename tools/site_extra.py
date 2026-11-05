@@ -26,7 +26,7 @@ NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/se
 def nav(current=""):
     cur = ' aria-current="page"'
     links = "".join(f'<a href="{href}"{cur if href == current else ""}>{label}</a>' for href, label in NAV_ITEMS)
-    return f'<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links">{links}</span></nav>'
+    return f'<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links">{links}<a href="/en/" lang="en" hreflang="en">English</a></span></nav>'
 
 
 EMAIL = "higherstudyinfo30@gmail.com"
