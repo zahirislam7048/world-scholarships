@@ -1005,6 +1005,33 @@ DESCRIPTION:কাল শেষ তারিখ — SI Scholarship for Glob
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:scholarship-ucd-global-excellence-scholarship-2027-28-ireland-20270228@
+ higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:শেষ তারিখ: UCD Global Excellence Scholarship 2027/2
+ 8 (Ireland)
+URL:https://higherstudyinfo.com/scholarship/ucd-global-excellence-scholarsh
+ ip-2027-28-ireland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/u
+ cd-global-excellence-scholarship-2027-28-ireland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — UCD Global Excellence Scholarshi
+ p 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — UCD Global Excellence S
+ cholarship 2027/28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:scholarship-research-training-program-rtp-stipend-international-round-1
  -australia-20270228@higherstudyinfo.com
 DTSTAMP:20261104T000000Z
@@ -1029,6 +1056,32 @@ ACTION:DISPLAY
 TRIGGER:-P1D
 DESCRIPTION:কাল শেষ তারিখ — Research Training Progr
  am (RTP) Stipend – International Round 1
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-wellington-doctoral-scholarship-new-zealand-20270301@higher
+ studyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:শেষ তারিখ: Wellington Doctoral Scholarship (New Zea
+ land)
+URL:https://higherstudyinfo.com/scholarship/wellington-doctoral-scholarship
+ -new-zealand/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/w
+ ellington-doctoral-scholarship-new-zealand/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Wellington Doctoral Scholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Wellington Doctoral Sch
+ olarship
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT

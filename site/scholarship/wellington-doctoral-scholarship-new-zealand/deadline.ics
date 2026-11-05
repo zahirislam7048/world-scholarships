@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Wellington Doctoral Scholarship
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-wellington-doctoral-scholarship-new-zealand-20270301@higher
+ studyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:শেষ তারিখ: Wellington Doctoral Scholarship (New Zea
+ land)
+URL:https://higherstudyinfo.com/scholarship/wellington-doctoral-scholarship
+ -new-zealand/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/w
+ ellington-doctoral-scholarship-new-zealand/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Wellington Doctoral Scholarship
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Wellington Doctoral Sch
+ olarship
+END:VALARM
+END:VEVENT
+END:VCALENDAR

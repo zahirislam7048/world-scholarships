@@ -4,7 +4,6 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 
 ## Watched (no current call; add once the next round is announced)
 
-- **India:** ICCR scholarships, A2A portal (2024-25 window was 4 Apr–15 Jun)
 - **China:** Chinese Government Scholarship Type A via embassy (usually Nov–Feb)
 - **Kazakhstan:** Government scholarship for foreign students (2026 round 30 Mar – 31 May)
 - **Azerbaijan:** Heydar Aliyev International Education Grant (2026-27 nominations 16 Feb – 15 Apr)

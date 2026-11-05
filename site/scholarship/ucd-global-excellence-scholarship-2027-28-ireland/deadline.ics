@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:UCD Global Excellence Scholarship 2027/28
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-ucd-global-excellence-scholarship-2027-28-ireland-20270228@
+ higherstudyinfo.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:শেষ তারিখ: UCD Global Excellence Scholarship 2027/2
+ 8 (Ireland)
+URL:https://higherstudyinfo.com/scholarship/ucd-global-excellence-scholarsh
+ ip-2027-28-ireland/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/u
+ cd-global-excellence-scholarship-2027-28-ireland/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — UCD Global Excellence Scholarshi
+ p 2027/28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — UCD Global Excellence S
+ cholarship 2027/28
+END:VALARM
+END:VEVENT
+END:VCALENDAR
