@@ -1712,6 +1712,7 @@ def shortlist_body(updated):
   <h1>আমার শর্টলিস্ট (<span id="sl-n">০</span>)</h1>
   <p class="lede">যেসব স্কলারশিপ পেজে “☆ শর্টলিস্টে রাখুন” চেপেছেন, সেগুলো এখানে পাশাপাশি — শেষ তারিখ অনুযায়ী সাজানো। তালিকা শুধু এই ব্রাউজারে থাকে, কোথাও পাঠানো হয় না।</p>
 </header>
+<style>#sl a{{color:var(--accent)}}#sl td:first-child{{min-width:170px}}</style>
 <section id="sl"><p class="empty">লোড হচ্ছে…</p></section>
 <p class="meta">আবেদনের পরিকল্পনা করতে <a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a> ব্যবহার করুন।</p>
 {FOOTER}
