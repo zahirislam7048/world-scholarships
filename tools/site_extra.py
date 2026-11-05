@@ -348,6 +348,7 @@ GUIDES = [
     ("/guides/other-tests/", "📝 GRE, GMAT, SAT ও ভাষার পরীক্ষা", "GRE/GMAT/SAT-এর ফি ও তারিখ, আর ঢাকায় জার্মান (Goethe, TestDaF), জাপানি (JLPT), কোরিয়ান (TOPIK) পরীক্ষা।"),
     ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
     ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
+    ("/guides/post-study-work/", "🧭 পড়া শেষে কাজের ভিসা", "জার্মানি ১৮ মাস, কানাডা PGWP, যুক্তরাষ্ট্র OPT, অস্ট্রেলিয়া ৪৮৫, জাপান, কোরিয়া — দেশভিত্তিক তুলনা।"),
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
     ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
     ("/guides/sop/", "✍️ Statement of Purpose (SOP)", "কাঠামো, দৈর্ঘ্য, কী করবেন না — আর নিজের তথ্য দিয়ে আউটলাইন বানানোর টুল।"),
@@ -524,10 +525,11 @@ VISA = [
     {"c": "Germany", "bn": "জার্মানি", "visa": "National Visa (Study)",
      "funds": "ব্লকড অ্যাকাউন্টে বছরে অন্তত €11,904 (মাসে €992 তোলা যায়) — বা স্কলারশিপ, ব্যাংক গ্যারান্টি, Verpflichtungserklärung",
      "work": "বছরে 140 পূর্ণ দিন বা 280 অর্ধ দিন (Federal Employment Agency-র অনুমতি ছাড়া); বিশ্ববিদ্যালয়ের সহকারী-কাজ এর বাইরে",
-     "post": "", "fee": "",
+     "post": "জার্মানিতে পড়া শেষ করা non-EU গ্র্যাজুয়েটরা যোগ্য চাকরি খুঁজতে সর্বোচ্চ 18 মাসের রেসিডেন্স পারমিট পান (নবায়নযোগ্য নয়); এই সময় যেকোনো কাজ করা যায়, জীবনযাত্রার খরচ চালানোর সামর্থ্য লাগে। চাকরি পেলে উপযুক্ত পারমিটে (যেমন EU Blue Card) বদলাতে হয়", "fee": "",
      "apply": ("German Embassy Dhaka — Study visa", "https://dhaka.diplo.de/bd-en/service/2685884-2685884"),
      "src": [("German Embassy Dhaka — Study visa checklist (June 2026)", "https://dhaka.diplo.de/resource/blob/2685888/1826aadb06dfc6b0224e91583b6836cb/p-01-checklist-students-data.pdf"),
-             ("DAAD — Side jobs", "https://www.daad.de/en/studying-in-germany/work-career/side-jobs/")]},
+             ("DAAD — Side jobs", "https://www.daad.de/en/studying-in-germany/work-career/side-jobs/"),
+             ("Make it in Germany — Seeking employment after graduation", "https://www.make-it-in-germany.com/en/study-training/study/prospects/seeking-employment")]},
     {"c": "United Kingdom", "bn": "যুক্তরাজ্য", "visa": "Student visa",
      "funds": "লন্ডনে মাসে £1,483, লন্ডনের বাইরে মাসে £1,136 (সর্বোচ্চ 9 মাস) + প্রথম বছরের বাকি টিউশন; টাকা টানা 28 দিন অ্যাকাউন্টে থাকতে হবে",
      "work": "ডিগ্রি-লেভেল ফুল-টাইম কোর্সে টার্মে সপ্তাহে 20 ঘণ্টা, ছুটিতে ফুল-টাইম",
@@ -540,43 +542,52 @@ VISA = [
     {"c": "United States", "bn": "যুক্তরাষ্ট্র", "visa": "F-1 student visa",
      "funds": "নির্দিষ্ট জাতীয় অঙ্ক নেই — বিশ্ববিদ্যালয়ের I-20-তে লেখা মোট খরচ দেখাতে হয়",
      "work": "ক্লাস চলাকালীন ক্যাম্পাসে সপ্তাহে সর্বোচ্চ 20 ঘণ্টা",
-     "post": "", "fee": "ভিসা (MRV) ফি $185 + SEVIS I-901 ফি $350",
+     "post": "OPT: প্রতিটি উচ্চতর ডিগ্রি লেভেলে সর্বোচ্চ 12 মাস; DHS-এর STEM তালিকাভুক্ত ডিগ্রি হলে E-Verify-তে থাকা নিয়োগকর্তার অধীনে আরও 24 মাস (STEM OPT)। বেকার থাকার সীমা: প্রথম OPT-তে 90 দিন, STEM-সহ মোট 150 দিন", "fee": "ভিসা (MRV) ফি $185 + SEVIS I-901 ফি $350",
      "apply": ("U.S. Embassy Dhaka", "https://bd.usembassy.gov/"),
      "src": [("travel.state.gov — Student visa", "https://travel.state.gov/content/travel/en/us-visas/study/student-visa.html"),
              ("ICE — I-901 SEVIS fee", "https://www.ice.gov/sevis/i901"),
-             ("Study in the States — Working in the US", "https://studyinthestates.dhs.gov/students/work/working-in-the-united-states")]},
+             ("Study in the States — Working in the US", "https://studyinthestates.dhs.gov/students/work/working-in-the-united-states"),
+             ("USCIS — STEM OPT extension", "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-extension-for-stem-students-stem-opt"),
+             ("Study in the States — F-1 OPT", "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-optional-practical-training-opt")]},
     {"c": "Canada", "bn": "কানাডা", "visa": "Study permit",
      "funds": "একক আবেদনকারী: জীবনযাত্রার জন্য CAD 22,895 (1 Sep 2025 থেকে) + প্রথম বছরের টিউশন + যাতায়াত",
      "work": "ক্যাম্পাসের বাইরে টার্মে সপ্তাহে 24 ঘণ্টা; নির্ধারিত ছুটিতে সীমাহীন",
-     "post": "", "fee": "",
+     "post": "PGWP: ২ বছর বা বেশি মেয়াদের প্রোগ্রামে 3 বছর পর্যন্ত; 8 মাস–2 বছরের প্রোগ্রামে প্রোগ্রামের সমান; 2 বছরের কম মাস্টার্সেও (অন্তত 8 মাস) 3 বছর। PGWP-যোগ্য DLI-তে পড়তে হবে, কোর্স শেষের নিশ্চয়তার 180 দিনের মধ্যে আবেদন; জীবনে একবারই", "fee": "",
      "apply": ("IRCC — Study permit", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/get-documents.html"),
      "src": [("IRCC — International students (CIMM, Apr 2026)", "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/committees/cimm-apr-22-2026/international-students.html"),
-             ("IRCC — Work off campus", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-off-campus.html")]},
+             ("IRCC — Work off campus", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-off-campus.html"),
+             ("IRCC — About the PGWP", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html"),
+             ("IRCC — PGWP: Who can apply", "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html")]},
     {"c": "Australia", "bn": "অস্ট্রেলিয়া", "visa": "Student visa (subclass 500)",
      "funds": "AUD 29,710 (12 মাসের জীবনযাত্রা) + প্রথম 12 মাসের কোর্স ফি + যাতায়াত; অথবা বার্ষিক আয় অন্তত AUD 60,000",
-     "work": "কোর্স চলাকালীন প্রতি ১৪ দিনে (fortnight) সর্বোচ্চ 48 ঘণ্টা; কোর্সের ছুটিতে সীমা নেই; গবেষণা-মাস্টার্স ও PhD শিক্ষার্থীদের কোর্স শুরুর পর সীমা নেই", "post": "", "fee": "",
+     "work": "কোর্স চলাকালীন প্রতি ১৪ দিনে (fortnight) সর্বোচ্চ 48 ঘণ্টা; কোর্সের ছুটিতে সীমা নেই; গবেষণা-মাস্টার্স ও PhD শিক্ষার্থীদের কোর্স শুরুর পর সীমা নেই", "post": "Temporary Graduate visa (subclass 485): যোগ্যতাভেদে 18 মাস থেকে 3 বছর থাকা যায় — নিজের ডিগ্রির জন্য Post-Higher Education Work stream পেজে মেয়াদ দেখুন", "fee": "",
      "apply": ("Home Affairs — Student visa", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/changes-to-student-visa-application-rules-500-590"),
      "src": [("Study Australia — Change to evidence of financial capacity", "https://www.studyaustralia.gov.au/en_in/tools-and-resources/news/change-to-evidence-of-financial-capacity-for-student-visas"),
              ("Home Affairs — Financial capacity evidence", "https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0185.aspx"),
-             ("Home Affairs — Work restrictions for student visa holders", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500/temporary-relaxation-of-working-hours-for-student-visa-holders")]},
+             ("Home Affairs — Work restrictions for student visa holders", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/student-500/temporary-relaxation-of-working-hours-for-student-visa-holders"),
+             ("Home Affairs — Temporary Graduate visa (subclass 485)", "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485")]},
     {"c": "Italy", "bn": "ইতালি", "visa": "Study visa (type D)",
      "funds": "বছরে €10,179.85 (মাসে প্রায় €848) — কিছু কনস্যুলেট ফেরার খরচও (প্রায় €500) চায়",
-     "work": "সপ্তাহে সর্বোচ্চ 20 ঘণ্টা, বছরে 1,040 ঘণ্টা; বার্ষিক সীমা না ছাড়ালে ক্লাস বন্ধের সময় বেশি করা যায়", "post": "", "fee": "",
+     "work": "সপ্তাহে সর্বোচ্চ 20 ঘণ্টা, বছরে 1,040 ঘণ্টা; বার্ষিক সীমা না ছাড়ালে ক্লাস বন্ধের সময় বেশি করা যায়", "post": "চাকরি খোঁজার পারমিট (ricerca di lavoro): 9–12 মাস, এই সময়ে সাপ্তাহিক 20 ঘণ্টার সীমা থাকে না; চাকরি পেলে কাজের পারমিটে রূপান্তর", "fee": "",
      "apply": ("Universitaly — pre-enrolment", "https://www.universitaly.it/"),
      "src": [("Italian Consulate — Study visa checklist 2026/2027", "https://consdubai.esteri.it/wp-content/uploads/2026/05/StudyVisa_2026_2027.pdf"),
-             ("Integrazione Migranti (Ministry of Labour) — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio")]},
+             ("Integrazione Migranti (Ministry of Labour) — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio"),
+             ("Integrazione Migranti — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio")]},
     {"c": "Japan", "bn": "জাপান", "visa": "Student (College Student)",
      "funds": "",
      "work": "অনুমতি নিয়ে সপ্তাহে 28 ঘণ্টা (দীর্ঘ ছুটিতে দিনে 8 ঘণ্টা); অনুমতি বিমানবন্দরেই নেওয়া যায়",
-     "post": "", "fee": "",
+     "post": "চাকরি না পেলে Designated Activities স্ট্যাটাসে চাকরি খোঁজা: 6 মাস, সাধারণত একবার 6 মাস নবায়ন (শর্তসাপেক্ষে দ্বিতীয় বছর); বিশ্ববিদ্যালয়ের সুপারিশপত্র লাগে", "fee": "",
      "apply": ("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
-     "src": [("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/")]},
+     "src": [("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
+             ("Study in Japan — For former international students", "https://www.studyinjapan.go.jp/en/faq/after/"),
+             ("Immigration Services Agency — Designated Activities", "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00208.html")]},
     {"c": "South Korea", "bn": "দক্ষিণ কোরিয়া", "visa": "D-2 student visa",
      "funds": "মাসে অন্তত KRW 900,000 × 6 মাস = প্রায় KRW 5,400,000",
      "work": "অনুমতি নিয়ে স্নাতকে সপ্তাহে 30, স্নাতকোত্তরে 35 ঘণ্টা (সূত্রভেদে আলাদা — বিশ্ববিদ্যালয়ে জেনে নিন); সাধারণত কোরিয়ান ভাষার দক্ষতা লাগে",
-     "post": "", "fee": "",
+     "post": "D-10-1 চাকরি-খোঁজার ভিসা: পেশাদার (E-1–E-7 ধরনের) চাকরির জন্য, চাকরির আগে ইন্টার্নশিপও করা যায়; D-2 থেকে প্রথমবার বদলালে আর্থিক প্রমাণ লাগে না", "fee": "",
      "apply": ("Study in Korea — Visa and stay", "https://www.studyinkorea.go.kr/ko/plan/visaAndStay.do"),
-     "src": [("Study in Korea — Residence and stay", "https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do")]},
+     "src": [("Study in Korea — Residence and stay", "https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do"),
+             ("Study in Korea — Residence eligibility and stay duration", "https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do")]},
     {"c": "Malaysia", "bn": "মালয়েশিয়া", "visa": "Student Pass (EMGS-এর মাধ্যমে)",
      "funds": "",
      "work": "অনুমোদিত জায়গায় সপ্তাহে 20 ঘণ্টা — EMGS বলে শুধু 7 দিনের বেশি ছুটিতে, Immigration বলে পড়ার সময়েও; প্রতিষ্ঠানে জেনে নিন",
@@ -1231,6 +1242,8 @@ def guide_links(country_en=None, level=""):
     g = []
     if country_en in VISA_IDS:
         g.append((f"/guides/visa/#{VISA_IDS[country_en]}", f"{country_en} স্টুডেন্ট ভিসা"))
+    if country_en in VISA_IDS and next(v for v in VISA if v["c"] == country_en)["post"]:
+        g.append(("/guides/post-study-work/", f"{country_en}-এ পড়া শেষে কাজ"))
     if country_en in VISA_IDS or country_en == "France":
         g.append(("/guides/part-time-work/", f"{country_en}-এ পড়ার সময় কাজ"))
     if country_en in TUITION_FREE:
@@ -1637,3 +1650,26 @@ def faq_body(updated):
 {FOOTER}
 </div>
 {script}"""
+
+
+def post_study_body(updated):
+    rows = "".join(f'<tr><td><a href="/guides/visa/#{VISA_IDS[v["c"]]}">{v["bn"]}</a></td><td>{html.escape(v["post"])}</td></tr>' for v in VISA if v["post"])
+    srcs, seen = [], set()
+    for v in VISA:
+        if v["post"]:
+            for t, u in v["src"]:
+                if u not in seen:
+                    seen.add(u)
+                    srcs.append((t, u))
+    return _guide("post-study-work", "পড়া শেষে কাজের ভিসা — দেশভিত্তিক",
+        "পড়া শেষ হলে অনেক দেশ চাকরি খুঁজতে বা কাজ করতে আলাদা ভিসা বা পারমিট দেয় — দেশ বাছাইয়ে এটা বড় বিষয়। এখানে প্রতিটি দেশের সরকারি সূত্রের তথ্য।",
+        f"""<div class="tbl-wrap"><table class="t fit"><tr><th>দেশ</th><th>পড়া শেষে থাকার ও কাজের সুযোগ</th></tr>{rows}</table></div>
+  <p class="meta">মালয়েশিয়ার জন্য অফিসিয়াল সূত্রে এমন ভিসার তথ্য পাইনি, তাই রাখা হয়নি। নিয়ম ঘন ঘন বদলায় — বিশেষ করে কানাডা, অস্ট্রেলিয়া আর যুক্তরাজ্যে। আবেদনের আগে সূত্র লিংকে মিলিয়ে নিন।</p>
+  <h2>যা মনে রাখবেন</h2>
+  <ul>
+    <li>এসব ভিসার শর্ত অনেক সময় পড়ার শুরুতেই ঠিক হয় — যেমন কানাডায় প্রতিষ্ঠান PGWP-যোগ্য কিনা, যুক্তরাষ্ট্রে ডিগ্রি STEM তালিকায় কিনা। ভর্তির আগেই দেখে নিন।</li>
+    <li>পুরো পড়ার সময় ফুল-টাইম স্ট্যাটাস আর ভিসার শর্ত (যেমন <a href="/guides/part-time-work/">কাজের ঘণ্টার সীমা</a>) মেনে চলুন — ভাঙলে পরে এই সুযোগ হারাতে পারেন।</li>
+    <li>পাসপোর্টের মেয়াদ আগেই বাড়িয়ে নিন; কানাডায় PGWP পাসপোর্টের মেয়াদের বেশি দেওয়া হয় না।</li>
+    <li>স্থানীয় ভাষা জানা চাকরির সুযোগ অনেক বাড়ায় — দেখুন <a href="/guides/other-tests/">ভাষার পরীক্ষা</a>।</li>
+  </ul>""", srcs,
+        '<section class="rel"><h2>সম্পর্কিত</h2><ul class="tags"><li><a href="/guides/visa/">স্টুডেন্ট ভিসা — দেশভিত্তিক</a></li><li><a href="/guides/part-time-work/">পড়ার সময় কাজ</a></li><li><a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li></ul></section>')
