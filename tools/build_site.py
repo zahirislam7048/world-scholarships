@@ -19,7 +19,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
-                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS)
+                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -390,6 +390,8 @@ def main():
         "guides/post-study-work": ("পড়া শেষে কাজের ভিসা — দেশভিত্তিক | Higher Study Info", "জার্মানির ১৮ মাসের চাকরি-খোঁজার পারমিট, কানাডার PGWP, যুক্তরাষ্ট্রের OPT/STEM OPT, অস্ট্রেলিয়ার ৪৮৫, জাপান ও কোরিয়া — সরকারি সূত্রে।", post_study_body),
         "shortlist": ("আমার শর্টলিস্ট | Higher Study Info", "পছন্দের স্কলারশিপগুলো পাশাপাশি তুলনা করুন — সুবিধা, IELTS আর শেষ তারিখ।", shortlist_body),
         "tools/timeline": ("আবেদনের টাইমলাইন প্ল্যানার | Higher Study Info", "স্কলারশিপ বা প্রোগ্রামের শেষ তারিখ দিন — কোন মাসে IELTS, LOR, SOP, স্টুডেন্ট ফাইল আর ভিসা, তার পরিকল্পনা।", timeline_body),
+        "guides/application-portals": ("আবেদন পোর্টাল — uni-assist, UCAS, Common App, Studielink | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, নেদারল্যান্ডস, ইতালি, ফ্রান্সে কোন পোর্টালে আবেদন, ফি আর শেষ তারিখ — অফিসিয়াল সূত্রে।", portals_body),
+        "guides/cv": ("একাডেমিক CV ও Europass CV লেখার গাইড | Higher Study Info", "মাস্টার্স, PhD ও স্কলারশিপের জন্য একাডেমিক CV: অংশ, ক্রম, কাঠামো আর Europass CV।", cv_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -398,7 +400,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

@@ -19,3 +19,9 @@ Every dataset uses the same columns and keep/remove rule; see [`data/asia/bangla
 Website: https://higherstudyinfo.com (home, `/deadlines/`, `/search/`, `/about/`, `/privacy/`, section and country pages; extra pages in `tools/site_extra.py`), deployed to cPanel on every push to `main` (see [`DEPLOY.md`](DEPLOY.md)).
 
 Rebuild a preview page: `python3 tools/build_preview.py <continent>/<country> <out.html> [YYYY-MM-DD]`. A new country also needs an entry in `COUNTRIES` in `tools/build_preview.py`.
+
+## Guide figure checks
+
+The weekly update re-checks about four guide figures against their official sources and records them here (date — what was checked — result).
+
+- 2026-11-05 — all guides written from official sources (visa ×14 countries, part-time work, post-study work, test fees, Bangladesh Bank student remittances, PhD funding, application portals).

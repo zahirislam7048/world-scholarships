@@ -353,6 +353,8 @@ GUIDES = [
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
     ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
     ("/guides/sop/", "✍️ Statement of Purpose (SOP)", "কাঠামো, দৈর্ঘ্য, কী করবেন না — আর নিজের তথ্য দিয়ে আউটলাইন বানানোর টুল।"),
+    ("/guides/application-portals/", "🖥️ আবেদন পোর্টাল — uni-assist, UCAS, Common App, Studielink", "কোন দেশে কোন পোর্টালে আবেদন, ফি আর শেষ তারিখ।"),
+    ("/guides/cv/", "📄 একাডেমিক CV ও Europass CV", "রিজিউম আর CV-র পার্থক্য, অংশগুলো, কাঠামো আর Europass।"),
     ("/guides/lor/", "🤝 Recommendation Letter (LOR)", "কাকে বলবেন, কখন, কোন কাগজ দেবেন — আর কোন ভুল আবেদন বাতিল করাতে পারে।"),
     ("/guides/research-proposal/", "🔬 Research Proposal", "PhD ও DAAD গবেষণা স্কলারশিপের জন্য প্রস্তাবের কাঠামো, দৈর্ঘ্য আর সময়সূচি।"),
     ("/guides/professor-email/", "✉️ প্রফেসরকে ইমেইল", "সুপারভাইজার খোঁজা, ইমেইলের কাঠামো আর ফলো-আপের নিয়ম।"),
@@ -1300,7 +1302,7 @@ def guide_links(country_en=None, level=""):
         g += [("/guides/funded-phd/", "ফান্ডেড PhD (TA/RA)"), ("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
     europe = country_en and any(s.startswith("europe/") and COUNTRIES[s][0] == country_en for s in COUNTRIES)
     g.append(("/guides/motivation-letter/", "Motivation Letter লেখা") if europe else ("/guides/sop/", "SOP লেখা"))
-    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/interview/", "ইন্টারভিউর প্রস্তুতি"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"), ("/guides/other-tests/", "GRE / GMAT / ভাষার পরীক্ষা"),
+    g += [("/guides/cv/", "একাডেমিক CV"), ("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/interview/", "ইন্টারভিউর প্রস্তুতি"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"), ("/guides/other-tests/", "GRE / GMAT / ভাষার পরীক্ষা"),
           ("/guides/documents/", "কাগজপত্র ও সত্যায়ন"), ("/tools/cgpa/", "CGPA রূপান্তর"), ("/tools/eligibility/", "যোগ্যতা যাচাই")]
     seen, out = set(), []
     for h, t in g:
@@ -1825,3 +1827,98 @@ def timeline_body(updated):
 {FOOTER}
 </div>
 {script}"""
+
+
+def portals_body(updated):
+    return _guide("application-portals", "দেশভিত্তিক আবেদন পোর্টাল",
+        "অনেক দেশে বিশ্ববিদ্যালয়ে সরাসরি নয়, একটা কেন্দ্রীয় পোর্টাল দিয়ে আবেদন করতে হয়। কোন দেশে কোন পোর্টাল, ফি কত আর সময়সীমা কখন — অফিসিয়াল সূত্র থেকে।",
+        """<div class="tbl-wrap"><table class="t fit">
+    <tr><th>পোর্টাল</th><th>কোথায়, কাদের জন্য</th><th>ফি ও সময়</th></tr>
+    <tr><td><b>uni-assist</b><br><span class="meta">জার্মানি</span></td><td>অনেক জার্মান বিশ্ববিদ্যালয় বিদেশি সনদ যাচাই uni-assist-কে দিয়ে করায়। কিছু বিশ্ববিদ্যালয় VPD পদ্ধতি ব্যবহার করে — uni-assist থেকে VPD নিয়ে তারপর নিজে বিশ্ববিদ্যালয়ে আবেদন করতে হয় (বেশি সময় রাখুন)।</td><td>প্রতি সেমিস্টারে প্রথম কোর্স €75, প্রতিটি অতিরিক্ত কোর্স €30 — কোর্সপ্রতি হিসাব, বিশ্ববিদ্যালয়প্রতি নয়; VPD-তেও একই ফি। কিছু বিশ্ববিদ্যালয় ফি নিজে দেয়।</td></tr>
+    <tr><td><b>UCAS</b><br><span class="meta">যুক্তরাজ্য — স্নাতক</span></td><td>এক আবেদনে সর্বোচ্চ ৫টি পছন্দ (কনজারভেটরিতে ৬)। মাস্টার্স/PhD-তে সাধারণত বিশ্ববিদ্যালয়ে সরাসরি আবেদন।</td><td>২০২৭ চক্রে ফি £34.50। ১৫ অক্টোবর: Oxford, Cambridge ও বেশিরভাগ মেডিসিন/ডেন্টিস্ট্রি; ১৩ জানুয়ারি ২০২৭: বেশিরভাগ কোর্সের সমান বিবেচনার শেষ দিন; চূড়ান্ত শেষ ২৩ সেপ্টেম্বর ২০২৭।</td></tr>
+    <tr><td><b>Common App</b><br><span class="meta">যুক্তরাষ্ট্র — স্নাতক</span></td><td>এক প্রোফাইল দিয়ে অনেক কলেজে আবেদন; প্রতিটি কলেজের নিজস্ব শেষ তারিখ, ফি ও শর্ত।</td><td>প্রয়োজনভিত্তিক Common App fee waiver বিদেশিরাও চাইতে পারেন, তবে কলেজভেদে গ্রহণ আলাদা (কেউ শুধু মার্কিন শিক্ষার্থীদের জন্য)। জমার সময় আপনার নিজের সময় অঞ্চলে রাত ১১:৫৯।</td></tr>
+    <tr><td><b>Studielink</b><br><span class="meta">নেদারল্যান্ডস</span></td><td>প্রথমে Studielink-এ ভর্তির অনুরোধ, তারপর বিশ্ববিদ্যালয়ের নিজস্ব পোর্টালে কাগজ। বিদেশ থেকে DigiD ছাড়াই লগইন করা যায়। কিছু প্রতিষ্ঠান বিদেশিদের জন্য আলাদা পদ্ধতি ব্যবহার করে।</td><td>২০২৭–২৮-এর আবেদন ১ অক্টোবর ২০২৬ থেকে। Numerus fixus প্রোগ্রাম ১৫ জানুয়ারি, বাকিগুলো ১ মে (রাত ১১:৫৯) — তবে non-EU শিক্ষার্থীদের জন্য বিশ্ববিদ্যালয় প্রায়ই আগের শেষ তারিখ দেয়।</td></tr>
+    <tr><td><b>Universitaly</b><br><span class="meta">ইতালি</span></td><td>ভিসার আগে প্রাক-নিবন্ধন (pre-enrolment); বিশ্ববিদ্যালয়ে আলাদাভাবে ভর্তির আবেদন।</td><td>দেখুন <a href="/guides/visa/#italy">ইতালির ভিসা</a>।</td></tr>
+    <tr><td><b>Campus France (Études en France)</b><br><span class="meta">ফ্রান্স</span></td><td>অনেক দেশের শিক্ষার্থীদের জন্য ভর্তি ও ভিসা প্রক্রিয়া এক প্ল্যাটফর্মে।</td><td>দেখুন <a href="/guides/visa/#france">ফ্রান্সের ভিসা</a>।</td></tr>
+  </table></div>
+  <h2>যা মনে রাখবেন</h2>
+  <ul>
+    <li>পোর্টালের শেষ তারিখ আর বিশ্ববিদ্যালয়ের নিজের (বিশেষত বিদেশিদের) শেষ তারিখ আলাদা হতে পারে — দুটোই দেখুন, আর আগেরটা মানুন।</li>
+    <li>স্কলারশিপের শেষ তারিখ প্রায়ই ভর্তির শেষ তারিখের আগে — দেখুন <a href="/deadlines/">শেষ তারিখ সামনে</a> আর <a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a>।</li>
+    <li>পোর্টালের অ্যাকাউন্ট নিজের ইমেইলে খুলুন, পাসওয়ার্ড কাউকে দেবেন না — দেখুন <a href="/guides/fraud/">প্রতারণা সতর্কতা</a>।</li>
+    <li>ফি অনলাইনে দিতে আন্তর্জাতিক লেনদেন চালু কার্ড লাগে; বাংলাদেশ থেকে আবেদন ফি পাঠানোর নিয়ম দেখুন <a href="/guides/student-file/">স্টুডেন্ট ফাইল</a> গাইডে।</li>
+  </ul>""",
+        [("uni-assist — Handling fees", "https://www.uni-assist.de/en/how-to-apply/pay-all-fees/handling-fees/"),
+         ("uni-assist — VPD (preliminary review documentation)", "https://www.uni-assist.de/en/tools/glossary-of-terms/description/term/vorpruefungsdokumentation-vpd-preliminary-review-documentation/"),
+         ("UCAS — Application fee for the 2027 cycle", "https://www.ucas.com/faqs/what-is-the-application-fee-for-the-2027-cycle"),
+         ("UCAS — Dates and deadlines", "https://www.ucas.com/applying/applying-to-university/dates-and-deadlines-for-uni-applications"),
+         ("Common App — Fee waiver", "https://appsupport.commonapp.org/applicantsupport/s/article/What-do-I-need-to-know-about-the-Common-App-fee-waiver"),
+         ("Common App — 2026–27 first-year requirements grid (PDF)", "https://content.commonapp.org/Files/ReqGrid.pdf"),
+         ("Studielink — Make sure you are on time", "https://info.studielink.nl/en/how-to-use-studielink/make-sure-you-are-on-time"),
+         ("Study in NL — How to apply", "https://www.studyinnl.org/plan-your-stay/how-to-apply"),
+         ("Universitaly", "https://www.universitaly.it/"),
+         ("Campus France — Student long-stay visa", "https://www.campusfrance.org/en/student-long-stay-visa")])
+
+
+def cv_body(updated):
+    skeleton = """[Full Name]
+[City, Country] · [email] · [phone] · [LinkedIn / Google Scholar / GitHub]
+
+EDUCATION
+BSc in [Subject], [University], [Year]  — CGPA [x.xx/4.00]
+  Thesis: "[Title]" — Supervisor: [Name]
+
+RESEARCH EXPERIENCE
+[Role], [Lab / Project], [Institution], [Month Year – Month Year]
+  - What you did and what came of it (method, result, paper)
+
+PUBLICATIONS & PRESENTATIONS
+[Authors] ([Year]). [Title]. [Journal / Conference].
+
+AWARDS & SCHOLARSHIPS
+[Award], [Awarding body], [Year]
+
+TEACHING / WORK EXPERIENCE  (relevant only)
+SKILLS  (lab techniques, software, programming, languages with test scores)
+REFERENCES  [Name, title, institution, official email] — or "Available on request\""""
+    return _guide("cv", "একাডেমিক CV ও Europass CV",
+        "মাস্টার্স, PhD আর স্কলারশিপের আবেদনে প্রায় সবসময় CV লাগে। চাকরির রিজিউমের চেয়ে একাডেমিক CV আলাদা: লক্ষ্য গবেষক ও শিক্ষার্থী হিসেবে আপনার পরিচয় তুলে ধরা। ইউরোপের অনেক আবেদনে Europass ফরম্যাট চাওয়া হয়।",
+        f"""<h2>রিজিউম আর একাডেমিক CV-র পার্থক্য</h2>
+  <ul>
+    <li><b>দৈর্ঘ্য:</b> শুরুর পর্যায়ের রিজিউম সাধারণত ১ পৃষ্ঠা; CV প্রায়ই দুই বা আরও বেশি পৃষ্ঠা (Purdue OWL)।</li>
+    <li><b>উদ্দেশ্য:</b> রিজিউম পেশাগত পরিচয় দেখায়; CV দেখায় গবেষণা, পড়ানো আর প্রকাশনা — একাডেমিক পরিচয়।</li>
+    <li><b>কাঠামো নমনীয়:</b> নির্দিষ্ট কোনো ফরম্যাট নেই — অংশগুলো আবেদন অনুযায়ী সাজান (Berkeley), প্রতিটি অংশে সাম্প্রতিকতমটা আগে (Cornell)।</li>
+  </ul>
+  <h2>অংশগুলো (সাধারণ ক্রম)</h2>
+  <ol class="steps">
+    <li><h3>যোগাযোগ</h3><p>নাম, ইমেইল, ফোন, প্রাসঙ্গিক প্রোফাইল লিংক। ছবি, জন্মতারিখ, ধর্ম, বৈবাহিক অবস্থা সাধারণত লাগে না — প্রোগ্রাম বা দেশ চাইলে তবেই দিন।</p></li>
+    <li><h3>শিক্ষা</h3><p>নতুন আবেদনকারীর জন্য সবার আগে (Berkeley): ডিগ্রি, বিশ্ববিদ্যালয়, সাল, CGPA, থিসিসের শিরোনাম ও সুপারভাইজার।</p></li>
+    <li><h3>গবেষণা অভিজ্ঞতা</h3><p>প্রজেক্ট, আপনার ভূমিকা, পদ্ধতি আর ফল — সংখ্যা দিয়ে।</p></li>
+    <li><h3>প্রকাশনা ও উপস্থাপনা</h3><p>জার্নাল, কনফারেন্স, পোস্টার — একটি নির্দিষ্ট রেফারেন্স স্টাইলে।</p></li>
+    <li><h3>পুরস্কার ও স্কলারশিপ</h3><p>মেধাবৃত্তি, ডিনস লিস্ট, প্রতিযোগিতা।</p></li>
+    <li><h3>পড়ানো ও প্রাসঙ্গিক কাজ</h3><p>TA, টিউটরিং, প্রাসঙ্গিক চাকরি। অপ্রাসঙ্গিক চাকরি আর স্কুলের অর্জন বাদ দিন (Purdue OWL)।</p></li>
+    <li><h3>দক্ষতা ও ভাষা</h3><p>ল্যাব টেকনিক, সফটওয়্যার, প্রোগ্রামিং; ভাষার দক্ষতা পরীক্ষার স্কোরসহ।</p></li>
+    <li><h3>রেফারেন্স</h3><p>নাম, পদবি, প্রতিষ্ঠান, অফিসিয়াল ইমেইল — দেখুন <a href="/guides/lor/">LOR গাইড</a>।</p></li>
+  </ol>
+  <h2>CV-র কাঠামো (ইংরেজিতে)</h2>
+  <pre class="ooutput">{html.escape(skeleton)}</pre>
+  <h2>Europass CV</h2>
+  <ul>
+    <li>ইউরোপীয় ইউনিয়নের বিনামূল্যের সেবা — কোনো লুকানো খরচ বা প্রিমিয়াম নেই।</li>
+    <li>প্রোফাইল ছাড়াও CV বানানো যায়; প্রোফাইল থাকলে সংরক্ষিত তথ্য থেকে বিভিন্ন CV আর কভার লেটার বানানো সহজ। ২৯টি ভাষা আর কয়েকটি টেমপ্লেট।</li>
+    <li>শুরু করুন <a href="https://europass.europa.eu/en" target="_blank" rel="noopener">europass.europa.eu</a>-তে "Create my Europass" চেপে।</li>
+    <li>প্রোগ্রাম Europass চাইলে তবেই ব্যবহার করুন; নইলে উপরের একাডেমিক CV ফরম্যাট সাধারণত বেশি পরিষ্কার।</li>
+  </ul>
+  <h2>সাধারণ ভুল</h2>
+  <ul>
+    <li>সব আবেদনে একই CV — প্রোগ্রাম অনুযায়ী অংশের ক্রম আর জোর বদলান।</li>
+    <li>দাবি কিন্তু প্রমাণ নেই — "hardworking" না লিখে কাজ আর ফল দেখান।</li>
+    <li>SOP-এ যা বলেছেন তার সাথে CV-র তারিখ বা তথ্য না মেলা।</li>
+    <li>PDF না করে Word ফাইল পাঠানো, বা ফাইলের নাম "CV final final.pdf" — "Rahman_CV.pdf" ধরনের নাম দিন।</li>
+  </ul>""",
+        [("Purdue OWL — Writing the curriculum vitae", "https://owl.purdue.edu/owl/job_search_writing/resumes_and_vitas/writing_the_cv.html"),
+         ("Purdue OWL — Graduate school applications: process and materials", "https://owl.purdue.edu/owl/general_writing/graduate_school_applications/graduate_school_applications_overview/overview_process_and_materials.html"),
+         ("UC Berkeley Career Engagement — The CV: elements", "https://career.berkeley.edu/grad-students-postdocs/academic-job-search/the-cv-part-2-elements/"),
+         ("Cornell Graduate School — Resumes and CVs", "https://gradschool.cornell.edu/career-and-professional-development/pathways-to-success/prepare-for-your-career/take-action/resumes-and-cvs/"),
+         ("Europass — The new Europass CV and cover letter tool", "https://europass.europa.eu/en/news/new-europass-cv-and-cover-letter-online-tool"),
+         ("Europass — How to complete my Europass profile", "https://europass.europa.eu/en/how-complete-my-europass-profile")])
