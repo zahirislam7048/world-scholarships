@@ -13,7 +13,8 @@ The collecting session cannot open `.gov.bd` or university sites directly (netwo
 ## Keep / remove rule
 
 - **Keep:** standing policies (`session_year` = ongoing), calls that are open, and calls announced for a future session.
-- **Remove:** a record whose deadline has passed, or whose only evidence is a past session with no current call.
+- **Watch:** a major recurring government programme whose next round is not announced yet may be listed with `session_year` = `Next round (…)`. The site shows it with a "next round awaited" badge and does not count it in totals. Update it to the real session and deadline once announced.
+- **Remove:** a record whose deadline has passed, or whose only evidence is a past session with no current call (other than the Watch case above).
 
 ## Columns
 

@@ -10,7 +10,7 @@ import pathlib
 import shutil
 import sys
 
-from build_preview import CONTINENTS, COUNTRIES, ROOT, load_rows, render
+from build_preview import CONTINENTS, COUNTRIES, ROOT, is_watch, load_rows, render
 import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
@@ -65,12 +65,14 @@ def country_page(slug, updated):
 def card(slug, updated):
     name_en, title, heading = COUNTRIES[slug]
     rows = load_rows(slug)
+    watch = sum(map(is_watch, rows))
+    rows = [r for r in rows if not is_watch(r)]
     upcoming = sorted(r["deadline"] for r in rows if r.get("deadline") and r["deadline"] >= updated)
     nxt = f"পরের শেষ তারিখ: {upcoming[0]}" if upcoming else "নিয়মিত চালু স্কলারশিপ"
     return f"""<a class="card" href="/{slug}/">
   <span class="eyebrow">{html.escape(name_en)}</span>
   <h2>{html.escape(heading)}</h2>
-  <span class="meta"><b>{len(rows)}</b> স্কলারশিপ · {html.escape(nxt)}</span>
+  <span class="meta"><b>{len(rows)}</b> স্কলারশিপ · {html.escape(nxt) if rows else ""}{f" · {watch}টি পরের রাউন্ডের অপেক্ষায়" if watch else ""}</span>
 </a>"""
 
 
@@ -123,6 +125,8 @@ def home_page(updated):
 </div>
 </section>""")
     all_rows = [r for s in COUNTRIES for r in load_rows(s)]
+    watch = sum(map(is_watch, all_rows))
+    all_rows = [r for r in all_rows if not is_watch(r)]
     upcoming = sum(1 for r in all_rows if r.get("deadline") and r["deadline"] >= updated)
     body = f"""<div class="wrap">
 {nav("/")}
@@ -138,6 +142,7 @@ def home_page(updated):
     <ul>
       <li><strong>{len(COUNTRIES)}</strong> দেশ/প্রোগ্রাম</li>
       <li><strong>{upcoming}</strong>টির শেষ তারিখ সামনে</li>
+      <li><strong>{watch}</strong>টি পরের রাউন্ডের অপেক্ষায়</li>
     </ul>
   </aside>
 </header>

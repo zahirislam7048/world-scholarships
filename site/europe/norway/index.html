@@ -84,6 +84,7 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .apply:hover{filter:brightness(1.08)}
 .empty{color:var(--muted);padding:24px 0}
 footer{font-size:13px;color:var(--muted)}
+.note.watch{font-weight:600;border:1px dashed currentColor}
 </style>
 <style>
 .topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
@@ -165,8 +166,9 @@ function render(){
       <dt>সেশন</dt><dd>${esc(d.session_year)}</dd>
       ${d.deadline?`<dt>শেষ তারিখ</dt><dd class="amt">${esc(d.deadline)}</dd>`:""}
     </dl>
+    ${/^Next round/.test(d.session_year)?`<div class="note watch">⏳ পরের রাউন্ডের অপেক্ষায় — নতুন রাউন্ড এখনো ঘোষণা হয়নি। নিচের তথ্য আগের রাউন্ডের, ঘোষণা হলে হালনাগাদ হবে।</div>`:""}
     ${d.notes?`<div class="note">${esc(d.notes)}</div>`:""}
-    ${d.apply_url?(d.apply_url!==d.source_url?`<a class="apply" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদন করুন ↗</a>`:`<a class="apply info" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদনের তথ্য ↗</a>`):""}
+    ${d.apply_url?(d.apply_url!==d.source_url&&!/^Next round/.test(d.session_year)?`<a class="apply" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদন করুন ↗</a>`:`<a class="apply info" href="${esc(d.apply_url)}" target="_blank" rel="noopener">আবেদনের তথ্য ↗</a>`):""}
     <div class="foot"><a class="src" href="${esc(d.source_url)}" target="_blank" rel="noopener">${esc(d.source_domain)} ↗</a><span class="status">যাচাই বাকি</span></div>
   </article>`).join("");
 }

@@ -33,6 +33,9 @@ COUNTRIES = {
     "asia/pakistan": ("Pakistan", "পাকিস্তান স্কলারশিপ তালিকা", "পাকিস্তানের স্কলারশিপ"),
     "asia/israel": ("Israel", "ইসরায়েল স্কলারশিপ তালিকা", "ইসরায়েলের স্কলারশিপ"),
     "asia/nepal": ("Nepal", "নেপাল স্কলারশিপ তালিকা", "নেপালের স্কলারশিপ"),
+    "asia/malaysia": ("Malaysia", "মালয়েশিয়া স্কলারশিপ তালিকা", "মালয়েশিয়ার স্কলারশিপ"),
+    "asia/indonesia": ("Indonesia", "ইন্দোনেশিয়া স্কলারশিপ তালিকা", "ইন্দোনেশিয়ার স্কলারশিপ"),
+    "asia/brunei": ("Brunei", "ব্রুনাই স্কলারশিপ তালিকা", "ব্রুনাইয়ের স্কলারশিপ"),
     "gcc/saudi-arabia": ("Saudi Arabia", "সৌদি আরব স্কলারশিপ তালিকা", "সৌদি আরবের স্কলারশিপ"),
     "gcc/uae": ("United Arab Emirates", "সংযুক্ত আরব আমিরাত স্কলারশিপ তালিকা", "সংযুক্ত আরব আমিরাতের স্কলারশিপ"),
     "gcc/qatar": ("Qatar", "কাতার স্কলারশিপ তালিকা", "কাতারের স্কলারশিপ"),
@@ -53,6 +56,9 @@ COUNTRIES = {
     "europe/norway": ("Norway", "নরওয়ে স্কলারশিপ তালিকা", "নরওয়ের স্কলারশিপ"),
     "europe/latvia": ("Latvia", "লাটভিয়া স্কলারশিপ তালিকা", "লাটভিয়ার স্কলারশিপ"),
     "europe/slovakia": ("Slovakia", "স্লোভাকিয়া স্কলারশিপ তালিকা", "স্লোভাকিয়ার স্কলারশিপ"),
+    "europe/turkiye": ("Türkiye", "তুরস্ক স্কলারশিপ তালিকা", "তুরস্কের স্কলারশিপ"),
+    "europe/hungary": ("Hungary", "হাঙ্গেরি স্কলারশিপ তালিকা", "হাঙ্গেরির স্কলারশিপ"),
+    "europe/ireland": ("Ireland", "আয়ারল্যান্ড স্কলারশিপ তালিকা", "আয়ারল্যান্ডের স্কলারশিপ"),
     "europe/erasmus-mundus": ("European Union", "Erasmus Mundus স্কলারশিপ", "Erasmus Mundus Joint Masters স্কলারশিপ"),
     "north-america/usa": ("United States", "যুক্তরাষ্ট্র স্কলারশিপ তালিকা", "যুক্তরাষ্ট্রের স্কলারশিপ"),
     "north-america/canada": ("Canada", "কানাডা স্কলারশিপ তালিকা", "কানাডার স্কলারশিপ"),
@@ -65,9 +71,14 @@ COUNTRIES = {
 }
 
 
+def is_watch(r):
+    """A recurring programme whose next round is not announced yet: shown with a badge, not counted."""
+    return r.get("session_year", "").startswith("Next round")
+
+
 def load_rows(slug):
     rows = list(csv.DictReader(open(ROOT / "data" / slug / "scholarships.csv", encoding="utf-8")))
-    rows.sort(key=lambda r: (ORDER.get(r["provider_type"], 9), r.get("deadline") or "9999"))
+    rows.sort(key=lambda r: (is_watch(r), ORDER.get(r["provider_type"], 9), r.get("deadline") or "9999"))
     return rows
 
 

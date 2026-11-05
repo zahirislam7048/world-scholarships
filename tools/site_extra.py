@@ -162,7 +162,7 @@ def search_body(updated):
         "n": r["scholarship_name"], "p": r["provider"], "c": COUNTRIES[r["slug"]][0], "s": r["section"],
         "l": r["level"], "cov": r["coverage_amount"], "e": r.get("english_requirement", ""),
         "d": r.get("deadline", ""), "a": r.get("apply_url") or r["source_url"], "src": r["source_url"],
-        "u": f'/{r["slug"]}/', "el": r.get("eligibility", ""),
+        "u": f'/{r["slug"]}/', "el": r.get("eligibility", ""), "w": r.get("session_year", "").startswith("Next round"),
     } for r in all_rows()]
     sections = "".join(f'<option value="{k}">{v[1]}</option>' for k, v in CONTINENTS.items())
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
@@ -182,16 +182,16 @@ var DATA = __DATA__;
       if(!lvl(r.l,lv.value))return false;
       if(dl.checked&&!(r.d&&r.d>=today))return false;
       return !s||[r.n,r.p,r.c,r.l,r.cov,r.e,r.el].join(" ").toLowerCase().indexOf(s)>=0;
-    }).sort(function(a,b){return (a.d&&a.d>=today?a.d:"9999")<(b.d&&b.d>=today?b.d:"9999")?-1:1});
+    }).sort(function(a,b){var ka=(a.w?"1":"0")+(a.d&&a.d>=today?a.d:"9999"),kb=(b.w?"1":"0")+(b.d&&b.d>=today?b.d:"9999");return ka<kb?-1:ka>kb?1:0});
     cnt.textContent=bn(rows.length)+"টি স্কলারশিপ";
     if(!rows.length){out.innerHTML='<p class="empty">কিছু পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন বা ফিল্টার সরান।</p>';return}
     out.innerHTML=rows.map(function(r){
-      var info=r.a===r.src;
+      var info=r.a===r.src||r.w;
       return '<article class="res"><span class="where">'+esc(r.c)+'</span><h3>'+esc(r.n)+'</h3>'+
         '<p>'+esc(r.p)+' · '+esc(r.l)+'</p>'+
         (r.cov?'<p><b>সুবিধা:</b> '+esc(r.cov)+'</p>':'')+
         (r.e?'<p><b>IELTS / English:</b> '+esc(r.e)+'</p>':'')+
-        (r.d&&r.d>=today?'<p><b>শেষ তারিখ:</b> '+esc(r.d)+'</p>':'')+
+        (r.d&&r.d>=today?'<p><b>শেষ তারিখ:</b> '+esc(r.d)+'</p>':'')+(r.w?'<p class="warn">⏳ পরের রাউন্ডের অপেক্ষায় — এখনো ঘোষণা হয়নি</p>':'')+
         '<div class="row"><a class="apply'+(info?' info':'')+'" href="'+esc(r.a)+'" target="_blank" rel="noopener">'+(info?'আবেদনের তথ্য ↗':'আবেদন করুন ↗')+'</a><a class="more" href="'+r.u+'">দেশের পেজ</a></div></article>';
     }).join("");
   }
