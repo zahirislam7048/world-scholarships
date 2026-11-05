@@ -681,16 +681,26 @@ def _outline_tool(kind):
                  ("Goals", "Where this degree leads: {goal}."),
                  ("Close", "One or two sentences tying interest, preparation and goals together.")]
     else:
-        fields = [("prog", "প্রোগ্রাম, বিশ্ববিদ্যালয় ও দেশ", "e.g. MSc Water Management, University of X, Germany"),
+        fields = [("name", "আপনার নাম", "e.g. Your full name"),
+                  ("to", "প্রাপক — নাম জানলে নাম, না জানলে কমিটি", "e.g. Prof. Dr. X / Selection Committee"),
+                  ("prog", "প্রোগ্রাম/স্কলারশিপ, বিশ্ববিদ্যালয় ও দেশ", "e.g. DAAD scholarship, MSc Water Management, University of X, Germany"),
+                  ("deg", "আপনার শেষ ডিগ্রি ও ফল", "e.g. BSc in Civil Engineering, University of Y, CGPA 3.6/4"),
                   ("why", "কেন এই বিষয় — কী থেকে আগ্রহ শুরু", "e.g. flood work in my district ..."),
-                  ("exp", "আগের পড়া/কাজের অভিজ্ঞতা, যা এই প্রোগ্রামে কাজে লাগবে", "e.g. 2 years at ..., project on ..."),
-                  ("fit", "কেন এই প্রোগ্রাম, বিশ্ববিদ্যালয় ও দেশ", "e.g. modules on ..., partner institutes ..."),
-                  ("back", "দেশে ফিরে কীভাবে কাজে লাগাবেন", "e.g. apply ... at my department / ministry")]
-        order = [("Motivation", "What draws you to this field and why now: {why}."),
-                 ("Background", "Studies and work that prepared you, and how: {exp}."),
+                  ("exp", "অভিজ্ঞতা: থিসিস/প্রজেক্ট/চাকরি/নেতৃত্ব — আপনার ভূমিকা ও ফল", "e.g. thesis on ..., 2 years at ..., led a team that ..."),
+                  ("fit", "কেন এই প্রোগ্রাম, বিশ্ববিদ্যালয় ও দেশ — নির্দিষ্ট মডিউল/গবেষণা/অধ্যাপক", "e.g. modules on ..., Prof. Z's group on ..."),
+                  ("back", "দেশে ফিরে কীভাবে কাজে লাগাবেন (প্রতিষ্ঠান, নীতি, SDG)", "e.g. join ... ministry, teach at ..., support SDG 6"),
+                  ("need", "কেন স্কলারশিপ দরকার (ঐচ্ছিক, সংক্ষেপে)", "e.g. cannot fund tuition and living costs myself")]
+        order = [("Header", "{name} · [email] · [phone]\n   [Date, e.g. 15 November 2026]\n   To: {to}, [Department / Admissions Office], [University, City]\n   Subject: Motivation letter — {prog}"),
+                 ("Salutation", "Dear {to},  (unknown name → \"Dear Selection Committee,\")"),
+                 ("Opening", "Which programme/scholarship you apply for, and who you are in one line: {deg}."),
+                 ("Motivation", "What draws you to this field and why now: {why}."),
+                 ("Background", "Studies and work that prepared you, with your role and results: {exp}."),
                  ("Choice", "Why {prog} — the programme, the university and the country: {fit}."),
-                 ("Goals during the stay", "What you want to learn or achieve while studying there."),
-                 ("After the degree", "How you will use the qualification, especially back home: {back}.")]
+                 ("Goals during the stay", "What you want to learn or achieve there; for a PhD, a short research plan."),
+                 ("After the degree", "How you will use the qualification, especially back home: {back}."),
+                 ("Why the scholarship", "Only if relevant, one or two honest sentences: {need}."),
+                 ("Closing", "Restate your interest, thank the committee for its time, and say you look forward to discussing your application (e.g. at an interview)."),
+                 ("Sign-off", "Yours sincerely,\n   [signature]\n   {name}")]
     inputs = "".join(
         f'<label for="o-{k}">{l}<textarea id="o-{k}" rows="2" placeholder="{html.escape(ph)}"></textarea></label>' for k, l, ph in fields)
     tpl = json.dumps(order, ensure_ascii=False)
@@ -783,6 +793,35 @@ def motivation_body(updated):
     <li><h3>থাকার সময় লক্ষ্য</h3><p>পড়ার সময় কী শিখতে বা করতে চান। ডক্টরাল আবেদনে গবেষণা-পরিকল্পনার সংক্ষিপ্ত রূপরেখা।</p></li>
     <li><h3>দেশে ফিরে কীভাবে কাজে লাগাবেন</h3><p>যোগ্যতাটা নিজের দেশে কোথায়, কীভাবে ব্যবহার করবেন — বাস্তব ও নির্দিষ্ট।</p></li>
   </ol>
+  <h2>চিঠির ফরম্যাট</h2>
+  <p>Motivation Letter একটা আনুষ্ঠানিক চিঠি, তাই চিঠির কাঠামো মেনে লিখুন। পোর্টালে শুধু লেখা পেস্ট করতে বললে হেডার বাদ দিন, তবে সম্বোধন আর শেষ অংশ রাখুন।</p>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>অংশ</th><th>কী লিখবেন</th></tr>
+    <tr><td>হেডার</td><td>আপনার নাম, ইমেইল, ফোন (চাইলে আবেদন নম্বর)</td></tr>
+    <tr><td>তারিখ</td><td>যেদিন জমা দিচ্ছেন, যেমন 15 November 2026। DAAD-এর কিছু প্রোগ্রামে তারিখ বাধ্যতামূলক।</td></tr>
+    <tr><td>প্রাপক</td><td>নাম ও পদবি (জানা থাকলে), Admissions Committee / Selection Committee, ডিপার্টমেন্ট, বিশ্ববিদ্যালয়, শহর</td></tr>
+    <tr><td>Subject</td><td>Motivation letter — [প্রোগ্রাম/স্কলারশিপের নাম]</td></tr>
+    <tr><td>সম্বোধন</td><td>নাম জানলে "Dear Prof. Müller," বা "Dear Dr. Rahman,"; না জানলে "Dear Selection Committee," — "Dear Sir/Madam" বা "To whom it may concern"-এর চেয়ে এটা ভালো</td></tr>
+    <tr><td>মূল অংশ</td><td>৪–৬টি অনুচ্ছেদ (নিচে দেখুন)</td></tr>
+    <tr><td>শেষ অংশ</td><td>"Yours sincerely," বা "Sincerely,", তারপর সই আর টাইপ করা পুরো নাম। চিঠিতে সবসময় সই করুন; PDF-এ স্ক্যান করা সই দিতে পারেন।</td></tr>
+  </table></div>
+  <h2>অনুচ্ছেদ ধরে ধরে কাঠামো</h2>
+  <ol class="steps">
+    <li><h3>শুরু</h3><p>কোন প্রোগ্রাম/স্কলারশিপে, কোন বিশ্ববিদ্যালয়ে আবেদন করছেন, আর এক লাইনে আপনি কে (শেষ ডিগ্রি, বিশ্ববিদ্যালয়, ফল)।</p></li>
+    <li><h3>আগ্রহ কোথা থেকে</h3><p>একটা নির্দিষ্ট ঘটনা, প্রজেক্ট বা সমস্যা দিয়ে দেখান আগ্রহ কেন তৈরি হলো। "ছোটবেলা থেকেই স্বপ্ন" ধরনের সাধারণ কথা নয়।</p></li>
+    <li><h3>প্রস্তুতি</h3><p>থিসিস, গবেষণা, চাকরি, ক্লাব বা প্রতিযোগিতায় নেতৃত্ব — আপনার ভূমিকা কী ছিল, ফল কী হলো।</p></li>
+    <li><h3>কেন এই বিশ্ববিদ্যালয়</h3><p>নির্দিষ্ট মডিউল, ল্যাব, অধ্যাপক বা গবেষণার ধারা, যা আপনার লক্ষ্যের সাথে মেলে। প্রয়োজনে <a href="/professors/">প্রফেসর সার্চ</a> দেখুন।</p></li>
+    <li><h3>ভবিষ্যৎ লক্ষ্য</h3><p>দেশে ফিরে কোথায়, কীভাবে কাজে লাগাবেন — বিশ্ববিদ্যালয়, সরকারি প্রতিষ্ঠান, নীতিনির্ধারণ বা কোনো নির্দিষ্ট SDG (যেমন SDG 2 Zero Hunger)। আন্তর্জাতিক পরিবেশে শেখা আর নেটওয়ার্কিং কীভাবে কাজে দেবে, তা-ও লিখতে পারেন।</p></li>
+    <li><h3>কেন স্কলারশিপ (প্রাসঙ্গিক হলে)</h3><p>নিজে খরচ চালাতে না পারলে এক–দুই বাক্যে সৎভাবে বলুন। পুরো চিঠি আর্থিক কষ্টের গল্প বানাবেন না।</p></li>
+    <li><h3>শেষ অনুচ্ছেদ</h3><p>আগ্রহ আবার বলুন, সময় দেওয়ার জন্য ধন্যবাদ দিন, আর ইন্টারভিউ বা আরও আলোচনার সুযোগের অপেক্ষায় আছেন বলে শেষ করুন।</p></li>
+  </ol>
+  <h2>ইন্টারনেটের নমুনা থেকে সাবধান</h2>
+  <ul>
+    <li>Template-এর <em>[Your Name]</em>, ভুল তারিখ বা অন্য প্রতিষ্ঠানের নাম থেকে গেলে আবেদন সরাসরি বাতিল হতে পারে — জমার আগে সব ঘর মিলিয়ে নিন।</li>
+    <li>"esteemed institution", "golden opportunity", "passionate since childhood" — এমন সাধারণ বাক্য সবাই লেখে; এর বদলে নির্দিষ্ট তথ্য দিন।</li>
+    <li>ছোট ব্যাকরণগত ভুল অর্থ উল্টে দেয় (যেমন "able" লিখতে গিয়ে "unable"-এর জায়গায়) — জোরে পড়ে দেখুন।</li>
+    <li>জমার পর ইমেইল/পোর্টাল নিয়মিত দেখুন; ফলাফলের নির্ধারিত তারিখ পেরোলে তবেই একবার ভদ্রভাবে খোঁজ নিন।</li>
+  </ul>
   <h2>যা করবেন, যা করবেন না</h2>
   <ul>
     <li>লেখার আগে প্রশ্নগুলো নিয়ে ভাবুন, নোট নিন, তারপর আউটলাইন বানান — DAAD এভাবেই বলে।</li>
