@@ -348,7 +348,7 @@ GUIDES = [
     ("/guides/english-tests/", "🗣️ IELTS, TOEFL, Duolingo, PTE", "বাংলাদেশে ফি, কোথায় বুক করবেন, আর কোন স্কলারশিপে IELTS ছাড়ের পথ আছে।"),
     ("/guides/other-tests/", "📝 GRE, GMAT, SAT ও ভাষার পরীক্ষা", "GRE/GMAT/SAT-এর ফি ও তারিখ, আর ঢাকায় জার্মান (Goethe, TestDaF), জাপানি (JLPT), কোরিয়ান (TOPIK) পরীক্ষা।"),
     ("/tools/cgpa/", "🧮 CGPA রূপান্তর", "বাংলাদেশের CGPA থেকে জার্মান গ্রেড (Bavarian formula) আর গ্রেড-ব্যান্ড।"),
-    ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "৯টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
+    ("/guides/visa/", "🛂 স্টুডেন্ট ভিসা — দেশভিত্তিক", "১৪টি দেশে কত টাকা দেখাতে হয়, পড়ার সময় কাজ, ভিসা ফি — অফিসিয়াল সূত্রে।"),
     ("/guides/post-study-work/", "🧭 পড়া শেষে কাজের ভিসা", "জার্মানি ১৮ মাস, কানাডা PGWP, যুক্তরাষ্ট্র OPT, অস্ট্রেলিয়া ৪৮৫, জাপান, কোরিয়া — দেশভিত্তিক তুলনা।"),
     ("/guides/tuition-free/", "💶 টিউশন-ফ্রি ও কম খরচের দেশ", "জার্মানি, অস্ট্রিয়া, ফ্রান্স, নরওয়ে — EU-র বাইরের শিক্ষার্থীদের টিউশন।"),
     ("/tools/budget/", "💰 বাজেট ক্যালকুলেটর", "প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত দেখাতে হবে — টাকায়।"),
@@ -596,6 +596,53 @@ VISA = [
      "apply": ("EMGS — Student Pass", "https://visa.educationmalaysia.gov.my/"),
      "src": [("Immigration Malaysia — Student Pass", "https://www.imi.gov.my/index.php/en/main-services/pass/student-pass/"),
              ("EMGS — FAQ", "https://educationmalaysia.gov.my/get-in-touch/faq")]},
+    {"c": "France", "bn": "ফ্রান্স", "visa": "Long-stay student visa (VLS-TS) — প্রথম বছর রেসিডেন্স পারমিট হিসেবেও কাজ করে; পৌঁছানোর ৩ মাসের মধ্যে অনলাইনে validate করতে হয়",
+     "funds": "১ আগস্ট ২০২৬ থেকে মাসে অন্তত €877.50 (আগে €615) — টিউশন বাদ দিয়ে, পুরো থাকার সময়ের জন্য",
+     "work": "বছরে 964 ঘণ্টা (প্রায় সপ্তাহে 20 ঘণ্টা); বার্ষিক হিসাব",
+     "post": "মাস্টার্স বা সমমানের ডিগ্রির পর চাকরি খুঁজতে বা ব্যবসা শুরু করতে 12 মাসের APS / \"recherche d'emploi\" পারমিট (সাধারণত নবায়নযোগ্য নয়); কোনটা প্রযোজ্য তা জাতীয়তাভেদে আলাদা — প্রিফেকচারে জেনে নিন",
+     "fee": "ভিসা আবেদন ফি €50 (Campus France USA-র উল্লেখ; দেশভেদে আলাদা হতে পারে) + Campus France ও VFS/TLS ফি",
+     "apply": ("Campus France — Student long-stay visa", "https://www.campusfrance.org/en/student-long-stay-visa"),
+     "src": [("Campus France — VLS-TS", "https://www.campusfrance.org/en/student-long-stay-visa"),
+             ("Campus France — Student visa changes from 1 Aug 2026", "https://www.singapour.campusfrance.org/student-visa-changes-effective-from-01-august-2026"),
+             ("Campus France — Working while studying", "https://www.campusfrance.org/en/working-student"),
+             ("Campus France — Temporary resident permit (APS)", "https://www.campusfrance.org/en/temporary-resident-permit-aps"),
+             ("Campus France USA — Student visa guide 2026-27 (PDF)", "https://www.usa.campusfrance.org/system/files/medias/documents/2026-07/Campus%20France%20USA%20Student%20Visa%20Guide%20(2026-2027).pdf")]},
+    {"c": "Netherlands", "bn": "নেদারল্যান্ডস", "visa": "MVV + study residence permit — আবেদন করে বিশ্ববিদ্যালয় (recognised sponsor); মেয়াদ কোর্স + 3 মাস, সর্বোচ্চ 5 বছর",
+     "funds": "IND-এর \"study norm\" অনুযায়ী ১ বছরের খরচ (12 × study norm) সাধারণত বিশ্ববিদ্যালয়ের অ্যাকাউন্টে জমা দিতে হয় — বর্তমান অঙ্ক IND-এর Income requirements study পেজে",
+     "work": "সপ্তাহে সর্বোচ্চ 16 ঘণ্টা, অথবা শুধু জুন–আগস্টে ফুল-টাইম (একই বছরে দুটো নয়); নিয়োগকর্তাকে UWV থেকে ওয়ার্ক পারমিট (TWV) নিতে হয়",
+     "post": "Orientation year: নেদারল্যান্ডসে ব্যাচেলর/মাস্টার্স শেষের 3 বছরের মধ্যে আবেদনে 1 বছর চাকরি খোঁজা, এ সময় ওয়ার্ক পারমিট ছাড়াই কাজ; নবায়নযোগ্য নয়, ফি €254 (২০২৬)",
+     "fee": "",
+     "apply": ("IND — Study", "https://ind.nl/en/income-requirements-study"),
+     "src": [("IND — Income requirements study", "https://ind.nl/en/income-requirements-study"),
+             ("IND — Coming to study in the Netherlands (PDF)", "https://ind.nl/en/forms/3087.pdf"),
+             ("IND — Looking for work after study (form 7523)", "https://ind.nl/en/forms/7523.pdf")]},
+    {"c": "Ireland", "bn": "আয়ারল্যান্ড", "visa": "Long-term study visa (D) → Stamp 2 immigration permission",
+     "funds": "প্রতি বছরের জন্য €10,000 তাৎক্ষণিক প্রাপ্য (৬–৮ মাসের কোর্সে মাসে €833); ৬ মাসের ব্যাংক স্টেটমেন্ট, ক্রেডিট কার্ড গ্রহণযোগ্য নয়। ফি €6,000-এর বেশি হলে ভিসার আগে অন্তত €6,000, কম হলে পুরো ফি পরিশোধ",
+     "work": "টার্মে সপ্তাহে 20 ঘণ্টা, ছুটিতে (জুন–সেপ্টেম্বর ও ১৫ ডিসেম্বর–১৫ জানুয়ারি) সপ্তাহে 40 ঘণ্টা",
+     "post": "Stamp 1G (Third Level Graduate Programme): ফুল-টাইম কাজ করা যায়, ব্যবসা নয়; মেয়াদ ডিগ্রির লেভেল অনুযায়ী (লেভেল ৮-এ 12 মাস পর্যন্ত)",
+     "fee": "",
+     "apply": ("Irish Immigration — How to apply for a long-term study visa", "https://www.irishimmigration.ie/coming-to-study-in-ireland/what-are-my-study-visa-options/how-to-apply-for-long-term-study-visa/"),
+     "src": [("Irish Immigration — Student finance requirements (from 30 June 2025)", "https://www.irishimmigration.ie/reminder-on-student-finance-requirements-from-30-june-2025/"),
+             ("Irish Immigration — Immigration permission / stamps", "https://www.irishimmigration.ie/registering-your-immigration-permission/information-on-registering/immigration-permission-stamps/"),
+             ("Irish Immigration — Third Level Graduate Programme (PDF)", "https://www.irishimmigration.ie/wp-content/uploads/2024/03/third-level-graduate-programme.pdf")]},
+    {"c": "Türkiye", "bn": "তুরস্ক", "visa": "Student residence permit (ikamet) — e-İkamet-এ আবেদন; পুরো মেয়াদের স্বাস্থ্যবীমা বাধ্যতামূলক (দেশের ভেতরের বীমা কোম্পানির বা সরকারি General Health Insurance — ভর্তির ৩ মাসের মধ্যে আবেদন)",
+     "funds": "",
+     "work": "স্টুডেন্ট রেসিডেন্স পারমিট কাজের অনুমতি দেয় না — কাজ করতে আলাদা ওয়ার্ক পারমিট লাগে",
+     "post": "",
+     "fee": "",
+     "apply": ("Presidency of Migration Management — e-İkamet", "https://e-ikamet.goc.gov.tr/"),
+     "src": [("Göç İdaresi — Documents required for student residence permit", "https://e-ikamet.goc.gov.tr/Ikamet/BasvuruIstenenBelgeler/BasvuruFormuIstenenBelgeler?tur=5"),
+             ("Göç İdaresi — General health insurance for foreigners (PDF)", "https://en.goc.gov.tr/kurumlar/goc.gov.tr/files/SGK_KITAPCIK_ing.pdf"),
+             ("Ministry of Labour — Documents issued to foreigners", "https://csgb.gov.tr/uigm/en/general-information/yabancilara-duzenlenen-belgeler/")]},
+    {"c": "Hungary", "bn": "হাঙ্গেরি", "visa": "Residence permit for the purpose of studies",
+     "funds": "",
+     "work": "পড়ার সময় সপ্তাহে সর্বোচ্চ 30 ঘণ্টা; পড়ার বাইরের সময়ে বছরে সর্বোচ্চ 90 দিন ফুল-টাইম (Act XC of 2023)",
+     "post": "পড়া শেষে চাকরি খোঁজা বা ব্যবসা শুরুর রেসিডেন্স পারমিট — স্টুডেন্ট পারমিটের মেয়াদ থাকতে থাকতেই আবেদন করতে হয়",
+     "fee": "",
+     "apply": ("Immigration and Asylum Office (OIF) — Residence of the student", "https://oif.gov.hu/factsheets/residence-of-the-student-pupil"),
+     "src": [("OIF — Residence of the student", "https://oif.gov.hu/factsheets/residence-of-the-student-pupil"),
+             ("Study in Hungary — Work in Hungary", "https://studyinhungary.hu/living-in-hungary/menu/formalities/work-in-hungary.html"),
+             ("Stipendium Hungaricum — Employment conditions for foreign students", "https://stipendiumhungaricum.hu/faq/are-the-employment-conditions-for-foreign-students-regulated-in-hungary/")]},
 ]
 
 
@@ -1391,9 +1438,7 @@ def funded_phd_body(updated):
 
 def part_time_body(updated):
     rows = "".join(f'<tr><td><a href="/guides/visa/#{VISA_IDS[v["c"]]}">{v["bn"]}</a></td><td>{html.escape(v["work"])}</td></tr>' for v in VISA if v["work"])
-    rows += ('<tr><td>ফ্রান্স</td><td>রেসিডেন্স পারমিট লাগবে; বছরে সর্বোচ্চ 964 ঘণ্টা (আইনি কর্মবছরের প্রায় 60%) — বার্ষিক হিসাব, তাই ছুটিতে ফুল-টাইম সম্ভব; '
-             'বিশ্ববিদ্যালয়ে কাজ করলে সেপ্টেম্বর–জুন 670 ও জুলাই–আগস্ট 300 ঘণ্টা (Campus France)</td></tr>')
-    srcs = [("Campus France — Working while studying in France", "https://www.campusfrance.org/en/working-student")]
+    srcs = []
     for v in VISA:
         if v["work"]:
             srcs += [x for x in v["src"]]
