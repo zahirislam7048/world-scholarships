@@ -17,7 +17,8 @@ import site_extra
 from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget_body, cgpa_body, deadlines_body,
                         documents_body, english_tests_body, guides_index_body, nav, privacy_body, search_body,
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
-                        lor_body, proposal_body, prof_email_body)
+                        lor_body, proposal_body, prof_email_body,
+                        LINK_CSS, country_links, scholarship_links, scholarships_index_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -80,8 +81,8 @@ def country_page(slug, updated):
     body = '<div class="wrap">\n' + nav() + crumbs + body
     # The repo-maintenance footer is for the preview pages only.
     start = body.index("<footer>")
-    body = body[:start] + FOOTER + body[body.index("</footer>") + 9:]
-    head += "\n" + NAV_CSS + "\n<style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>"
+    body = body[:start] + country_links(slug) + FOOTER + body[body.index("</footer>") + 9:]
+    head += "\n" + NAV_CSS + LINK_CSS + "\n<style>.crumbs a{color:var(--accent);text-decoration:none;font-size:14px}.crumbs a:hover{text-decoration:underline}</style>"
     name_en, title, heading = COUNTRIES[slug]
     desc = f"{heading}: এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর অফিসিয়াল সোর্স লিংকসহ।"
     ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/")]))
@@ -161,7 +162,7 @@ def home_page(updated):
     <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
-    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a></p>
+    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a></p>
   </div>
   <aside class="total" aria-label="মোট স্কলারশিপ">
     <b>{len(all_rows)}</b>
@@ -274,7 +275,8 @@ def scholarship_page(slug, i, r, updated):
         rows.append(("নোট", e(r["notes"])))
     table = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
     others = [(j, o) for j, o in enumerate(load_rows(slug)) if j != i and (slug, j) in PAGES]
-    related = "".join(f'<li><a href="/scholarship/{PAGES[(slug, j)]}/">{e(o["scholarship_name"])}</a> <span class="meta">· {e(o["level"])}</span></li>' for j, o in others[:8])
+    related = "".join(f'<li><a href="/scholarship/{PAGES[(slug, j)]}/">{e(o["scholarship_name"])}</a> <span class="meta">· {e(o["level"])}</span></li>' for j, o in others)
+    related = f'<section class="rel"><h2>{e(heading)} — আরও স্কলারশিপ</h2><ul>{related}</ul></section>' if related else ""
     badge = '<p class="warn">⏳ <b>পরের রাউন্ডের অপেক্ষায়</b> — নতুন রাউন্ড এখনো ঘোষণা হয়নি। নিচের তথ্য আগের রাউন্ডের; ঘোষণা হলে এখানে হালনাগাদ হবে।</p>' if watch else ""
     desc = f"{r['scholarship_name']} ({name_en}): {r['level']} লেভেলের স্কলারশিপ — সুবিধা, শর্ত, IELTS, শেষ তারিখ আর অফিসিয়াল আবেদনের লিংক।"
     body = f"""<div class="wrap">
@@ -290,14 +292,8 @@ def scholarship_page(slug, i, r, updated):
   <p class="vlinks"><a class="apply" href="{e(apply_url)}" target="_blank" rel="noopener">{"আবেদন করুন ↗" if direct else "অফিসিয়াল পেজ ↗"}</a></p>
   <p class="vsrc">সূত্র: <a href="{e(r["source_url"])}" target="_blank" rel="noopener">{e(r["source_domain"])}</a> · সংগ্রহ {e(r.get("collected_on", ""))}। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
-<section style="max-width:820px;display:flex;flex-direction:column;gap:8px">
-  <h2>আবেদনের প্রস্তুতি</h2>
-  <ul>
-    <li><a href="/guides/documents/">কাগজপত্র ও সত্যায়ন</a> · <a href="/guides/english-tests/">IELTS / TOEFL / Duolingo</a> · <a href="/tools/cgpa/">CGPA রূপান্তর</a></li>
-    <li><a href="/guides/sop/">SOP লেখা</a> · <a href="/guides/motivation-letter/">Motivation Letter</a> · <a href="/professors/">প্রফেসর সার্চ</a></li>
-  </ul>
-  {f'<h2>{e(name_en)}-এর অন্যান্য স্কলারশিপ</h2><ul>{related}</ul>' if related else ""}
-</section>
+{related}
+{scholarship_links(slug, i, r)}
 {NOTICE}
 {FOOTER}
 </div>
@@ -307,7 +303,7 @@ var d=new Date(el.dataset.d+"T00:00:00"),n=Math.round((d-t)/864e5),bn=function(x
 if(n<0){{document.getElementById("expired").hidden=false;document.getElementById("cal").hidden=true}}else{{document.getElementById("left").textContent="(আর "+bn(n)+" দিন)"}}}})();
 </script>"""
     ld = jsonld(crumbs_ld([("হোম", "/"), (CONTINENTS[cont][1], f"/{cont}/"), (name_en, f"/{slug}/"), (r["scholarship_name"], path)]))
-    return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS, body, ld)
+    return page(f"{r['scholarship_name']} — {name_en} | Higher Study Info", desc, path, LIST_HEAD + GUIDE_CSS + LINK_CSS, body, ld)
 
 
 def redirect_page(target):
@@ -371,15 +367,16 @@ def main():
         "guides/lor": ("Recommendation Letter (LOR) গাইড | Higher Study Info", "রেকমেন্ডেশন লেটার কাকে, কখন, কীভাবে চাইবেন — বিশ্ববিদ্যালয়ের অফিসিয়াল নির্দেশনা অনুযায়ী।", lor_body),
         "guides/research-proposal": ("Research Proposal লেখার গাইড | Higher Study Info", "PhD ও DAAD গবেষণা স্কলারশিপের Research Proposal: কাঠামো, দৈর্ঘ্য, পদ্ধতি ও সময়সূচি।", proposal_body),
         "guides/professor-email": ("প্রফেসরকে ইমেইল করার নিয়ম | Higher Study Info", "PhD সুপারভাইজারকে ইমেইল: কাঠামো, কী সংযুক্ত করবেন, কখন ফলো-আপ — বিশ্ববিদ্যালয়ের নির্দেশনা অনুযায়ী।", prof_email_body),
+        "scholarships": ("সব স্কলারশিপের তালিকা (A–Z) | Higher Study Info", "অঞ্চল ও দেশ অনুযায়ী সাজানো সব চালু ও আসন্ন স্কলারশিপের তালিকা, প্রতিটির আলাদা পেজসহ।", scholarships_index_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
         (OUT / name).mkdir(parents=True)
-        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS + OUTLINE_CSS, body_fn(updated)), encoding="utf-8")
+        (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS + OUTLINE_CSS + LINK_CSS, body_fn(updated)), encoding="utf-8")
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
+    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

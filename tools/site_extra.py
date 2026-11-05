@@ -14,6 +14,9 @@ NAV_CSS = """<style>
 .topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
 .sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 .sitefoot a{color:var(--muted)}
+.fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;margin-bottom:12px}
+.fcols h4{font-size:13px;margin:0 0 6px;color:var(--fg)}.fcols ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.fbase{margin:0;padding-top:10px;border-top:1px solid var(--line)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
@@ -37,9 +40,21 @@ PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_s
 GUIDES_CHECKED = "2026-11-04"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
 
-FOOTER = ('<footer class="sitefoot"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
-          f' · যোগাযোগ: <a href="mailto:{EMAIL}">{EMAIL}</a>'
-          ' · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</footer>')
+FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
+               f' · যোগাযোগ: <a href="mailto:{EMAIL}">{EMAIL}</a> · তথ্য অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে আপডেট হয়</p>')
+
+
+def _footer():
+    """Site-wide footer hub: every page links to each region, the main tools and the guides."""
+    regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items())
+    tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li>'
+             '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
+             '<li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
+    guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
+    return (f'<footer class="sitefoot"><nav class="fcols" aria-label="সাইটের লিংক">'
+            f'<div><h4>অঞ্চলভিত্তিক</h4><ul>{regions}</ul></div><div><h4>টুল</h4><ul>{tools}</ul></div>'
+            f'<div><h4>গাইড</h4><ul>{guides}</ul></div></nav>{FOOTER_CORE}</footer>')
+
 
 BN_MONTHS = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"]
 BN_DIGITS = str.maketrans("0123456789", "০১২৩৪৫৬৭৮৯")
@@ -121,8 +136,8 @@ def deadlines_body(updated):
             name_en = COUNTRIES[r["slug"]][0]
             items.append(f"""<li data-d="{d}">
   <span class="date">{bn(day)} {BN_MONTHS[int(m) - 1]}<small>{bn(y)}</small></span>
-  <span class="what"><a href="{html.escape(apply)}" target="_blank" rel="noopener">{html.escape(r["scholarship_name"])}</a>
-  <span>{html.escape(name_en)} · {html.escape(r["provider"])} · {html.escape(r["level"])} · <a href="{r["page"]}">বিস্তারিত</a></span></span>
+  <span class="what"><a href="{r["page"]}">{html.escape(r["scholarship_name"])}</a>
+  <span><a href="/{r["slug"]}/">{html.escape(name_en)}</a> · {html.escape(r["provider"])} · {html.escape(r["level"])} · <a href="{html.escape(apply)}" target="_blank" rel="noopener">আবেদন ↗</a></span></span>
   <span class="left"></span>
 </li>""")
         sections.append(f"""<section class="month" data-month="{key}">
@@ -152,7 +167,7 @@ def deadlines_body(updated):
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই {CHECKED}</span>
   <h1>শেষ তারিখ সামনে</h1>
-  <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে আবেদনের পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
+  <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে স্কলারশিপের বিস্তারিত পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
 </header>
 <p class="warn">📅 <b>সব শেষ তারিখ নিজের ক্যালেন্ডারে:</b> <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fhigherstudyinfo.com%2Fdeadlines.ics" target="_blank" rel="noopener">Google Calendar-এ সাবস্ক্রাইব</a> · <a href="webcal://higherstudyinfo.com/deadlines.ics">iPhone / Outlook</a> · <a href="/deadlines.ics" download>.ics ফাইল</a>. সাবস্ক্রাইব করলে নতুন স্কলারশিপ যোগ হলে ক্যালেন্ডারও নিজে থেকে হালনাগাদ হবে, আর প্রতিটির ৭ দিন ও ১ দিন আগে রিমাইন্ডার পাবেন।</p>
 {chr(10).join(sections) if sections else '<p class="empty">এই মুহূর্তে শেষ তারিখসহ কোনো স্কলারশিপ নেই।</p>'}
@@ -220,6 +235,7 @@ var DATA = __DATA__;
   <span class="count" id="cnt"></span>
 </div>
 <section class="results" id="out"><p class="empty">স্কলারশিপের তালিকা লোড হচ্ছে…</p></section>
+<p class="meta">সব স্কলারশিপ একসাথে দেশ অনুযায়ী দেখতে: <a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></p>
 {FOOTER}
 </div>
 {script}"""
@@ -338,6 +354,9 @@ GUIDES = [
 ]
 
 
+FOOTER = _footer()
+
+
 def guides_index_body(updated):
     cards = "".join(f'<a class="card" href="{h}"><h2>{t}</h2><span class="meta">{d}</span></a>' for h, t, d in GUIDES)
     return f"""<div class="wrap">
@@ -402,7 +421,7 @@ def english_tests_body(updated):
     import re
     rows = [r for r in all_rows() if r.get("english_requirement") and re.search(WAIVER_RE, r["english_requirement"], re.I)]
     trs = "".join(
-        f'<tr><td>{html.escape(COUNTRIES[r["slug"]][0])}</td><td><a href="/{r["slug"]}/">{html.escape(r["scholarship_name"])}</a></td>'
+        f'<tr><td>{html.escape(COUNTRIES[r["slug"]][0])}</td><td><a href="{r["page"]}">{html.escape(r["scholarship_name"])}</a></td>'
         f'<td>{html.escape(r["english_requirement"])}</td></tr>' for r in rows)
     return f"""<div class="wrap">
 {nav("/guides/")}
@@ -773,6 +792,7 @@ def sop_body(updated):
   </ul>
   </div>
   {_outline_tool("sop")}
+  {related_scholarships("SOP লাগে এমন স্কলারশিপ — যুক্তরাষ্ট্র, কানাডা, অস্ট্রেলিয়া, নিউজিল্যান্ড", lambda s_, r: s_.startswith(("north-america/", "oceania/")), 15)}
   {_sources([
       ("UC Berkeley Graduate Division — Writing your statements", "https://grad.berkeley.edu/admissions/application-process/writing-your-statements/"),
       ("Cornell Graduate School — Academic statement of purpose", "https://gradschool.cornell.edu/admissions/application-steps/statements-of-purpose/"),
@@ -842,6 +862,7 @@ def motivation_body(updated):
   </ul>
   </div>
   {_outline_tool("motivation")}
+  {related_scholarships("Motivation Letter লাগে এমন ইউরোপীয় স্কলারশিপ", lambda s_, r: s_.startswith("europe/") and r["provider_type"] in ("government", "eu", "consortium"), 15)}
   {_sources([
       ("DAAD — Letter of motivation (instruction sheet)", "https://www2.daad.de/medien/letter_of_motivation_nawam.pdf"),
       ("DAAD — Study scholarships for STEM disciplines", "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57742130"),
@@ -1044,7 +1065,7 @@ var DATA = __DATA__;
 {script}"""
 
 
-def _guide(path_title, h1, lede, inner, sources):
+def _guide(path_title, h1, lede, inner, sources, extra=""):
     return f"""<div class="wrap">
 {nav("/guides/")}
 <article class="prose" style="max-width:100%">
@@ -1055,6 +1076,7 @@ def _guide(path_title, h1, lede, inner, sources):
   <p class="lede">{lede}</p>
   {inner}
   </div>
+  {extra}
   {_sources(sources)}
 </article>
 {FOOTER}
@@ -1088,7 +1110,8 @@ def lor_body(updated):
         [("Cornell Graduate School — Requesting letters of recommendation", "https://gradschool.cornell.edu/inclusion/recruitment/prospective-students/requesting-letters-of-recommendation/"),
          ("UCLA — Asking your faculty for a letter of recommendation (PDF)", "https://grad.ucla.edu/asis/agep/advltrrec.pdf"),
          ("UC Berkeley — Preparing your application for graduate school", "https://grad.berkeley.edu/graduate-diversity/prospective-grad-students/preparing-your-application-for-graduate-school/"),
-         ("Harvard GSAS — Right to inspect letters of recommendation", "https://gsas.harvard.edu/apply/degree-programs/completing-your-application/letters-recommendation/right-inspect-letters")])
+         ("Harvard GSAS — Right to inspect letters of recommendation", "https://gsas.harvard.edu/apply/degree-programs/completing-your-application/letters-recommendation/right-inspect-letters")],
+        related_scholarships("রেফারেন্স লেটার লাগে এমন সরকারি স্কলারশিপ", lambda s_, r: r["provider_type"] == "government" and not s_.startswith("asia/bangladesh"), 15))
 
 
 def proposal_body(updated):
@@ -1117,7 +1140,8 @@ def proposal_body(updated):
          ("DAAD — Research Grants in Germany", "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=57742121"),
          ("DAAD — How to develop a research project and write a research proposal (PDF)", "https://static.daad.de/media/daad_de/der-daad/was-wir-tun/guideline_research_proposal_2015.pdf"),
          ("MoHE Malaysia — MIS 2026 guidelines (PDF)", "https://biasiswa.mohe.gov.my/INTER/doc/MIS/Guidelines%20MIS%202026.pdf"),
-         ("UCL — Guidance on contacting potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")])
+         ("UCL — Guidance on contacting potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")],
+        related_scholarships("Research Proposal লাগতে পারে এমন PhD / গবেষণা স্কলারশিপ", lambda s_, r: bool(re.search(r"PhD|Postdoc", r["level"])), 15))
 
 
 def prof_email_body(updated):
@@ -1162,4 +1186,115 @@ Yours sincerely,
          ("University of Cambridge — Find a supervisor", "https://www.postgraduate.study.cam.ac.uk/apply/before/find-supervisor"),
          ("University of Oxford — Research project and supervisor", "https://www.ox.ac.uk/admissions/graduate/application-guide/starting-your-application/research-project-and-supervisor"),
          ("University of Edinburgh Business School — Find a supervisor", "https://www.business-school.ed.ac.uk/phd/find-a-supervisor"),
-         ("UCL — Guidance on how to contact potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")])
+         ("UCL — Guidance on how to contact potential supervisors (PDF)", "https://www.ucl.ac.uk/arts-humanities/sites/arts_humanities/files/2025-12/guidance_on_how_to_contact_potential_supervisors_for_phd%20(1).pdf")],
+        related_scholarships("সুপারভাইজারের সাথে যোগাযোগ কাজে লাগবে এমন PhD স্কলারশিপ", lambda s_, r: bool(re.search(r"PhD|Postdoc", r["level"])), 15))
+
+
+# ---- Internal links -------------------------------------------------------------------------
+VISA_IDS = {v["c"]: v["c"].lower().replace(" ", "-") for v in VISA}
+TUITION_FREE = {"Germany", "Austria", "France", "Norway"}
+LINK_CSS = """<style>
+.rel{display:flex;flex-direction:column;gap:10px;max-width:820px}
+.rel h2{font-size:20px;margin:6px 0 0}.rel ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.rel a{color:var(--accent)}.rel .tags{list-style:none;padding:0;flex-direction:row;flex-wrap:wrap;gap:8px}
+.rel .tags a{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;text-decoration:none;background:var(--surface);font-size:14px}
+</style>"""
+
+
+def _rows_with_pages(pred=lambda slug, r: True):
+    out = []
+    for slug in COUNTRIES:
+        for i, r in enumerate(load_rows(slug)):
+            if (slug, i) in PAGES and pred(slug, r):
+                out.append((slug, i, r))
+    return out
+
+
+def sch_link(slug, i, r, extra=True):
+    meta = f' <span class="meta">· {html.escape(COUNTRIES[slug][0])} · {html.escape(r["level"])}</span>' if extra else ""
+    return f'<li><a href="/scholarship/{PAGES[(slug, i)]}/">{html.escape(r["scholarship_name"])}</a>{meta}</li>'
+
+
+def guide_links(country_en=None, level=""):
+    """Guides that fit a country and level, most specific first."""
+    g = []
+    if country_en in VISA_IDS:
+        g.append((f"/guides/visa/#{VISA_IDS[country_en]}", f"{country_en} স্টুডেন্ট ভিসা"))
+    if country_en in TUITION_FREE:
+        g.append(("/guides/tuition-free/", f"{country_en}-এ টিউশন ফি"))
+    if re.search(r"PhD|Postdoc|MPhil", level):
+        g += [("/guides/research-proposal/", "Research Proposal লেখা"), ("/guides/professor-email/", "প্রফেসরকে ইমেইল"), ("/professors/", "প্রফেসর সার্চ")]
+    europe = country_en and any(s.startswith("europe/") and COUNTRIES[s][0] == country_en for s in COUNTRIES)
+    g.append(("/guides/motivation-letter/", "Motivation Letter লেখা") if europe else ("/guides/sop/", "SOP লেখা"))
+    g += [("/guides/lor/", "রেকমেন্ডেশন লেটার (LOR)"), ("/guides/english-tests/", "IELTS / TOEFL / Duolingo"),
+          ("/guides/documents/", "কাগজপত্র ও সত্যায়ন"), ("/tools/cgpa/", "CGPA রূপান্তর"), ("/tools/eligibility/", "যোগ্যতা যাচাই")]
+    seen, out = set(), []
+    for h, t in g:
+        if h not in seen:
+            seen.add(h)
+            out.append(f'<li><a href="{h}">{t}</a></li>')
+    return '<ul class="tags">' + "".join(out) + "</ul>"
+
+
+def neighbours(slug):
+    cont = slug.split("/")[0]
+    items = "".join(f'<li><a href="/{s}/">{html.escape(COUNTRIES[s][2])}</a></li>' for s in COUNTRIES if s.startswith(cont + "/") and s != slug)
+    return f'<h2>{CONTINENTS[cont][2]} অন্য দেশের স্কলারশিপ</h2><ul class="tags">{items}</ul>' if items else ""
+
+
+def country_links(slug):
+    name_en = COUNTRIES[slug][0]
+    rows = _rows_with_pages(lambda s, r: s == slug)
+    levels = " ".join(r["level"] for _, _, r in rows)
+    lst = "".join(sch_link(s, i, r, extra=False) + "" for s, i, r in rows)
+    return f"""<section class="rel">
+{f'<h2>{html.escape(COUNTRIES[slug][2])} — সব স্কলারশিপের পেজ</h2><ul>{lst}</ul>' if lst else ""}
+<h2>{html.escape(name_en)}-এ আবেদনের প্রস্তুতি</h2>{guide_links(name_en, levels)}
+{neighbours(slug)}
+</section>"""
+
+
+def scholarship_links(slug, i, r):
+    name_en = COUNTRIES[slug][0]
+    lv = r["level"]
+    key = "PhD" if re.search(r"PhD|Postdoc", lv) else "PG" if re.search(r"PG|Master|MS|MPhil", lv) else "UG"
+    same_level = [x for x in _rows_with_pages(lambda s, o: s != slug and (key in o["level"] or (key == "PG" and "Master" in o["level"])))
+                  if x[0].split("/")[0] == slug.split("/")[0]][:6]
+    sl = "".join(sch_link(*x) for x in same_level)
+    lvl_bn = {"PhD": "PhD / গবেষণা", "PG": "মাস্টার্স", "UG": "স্নাতক"}[key]
+    return f"""<section class="rel">
+<h2>এই স্কলারশিপের জন্য প্রস্তুতি</h2>{guide_links(name_en, lv)}
+{f'<h2>{CONTINENTS[slug.split("/")[0]][2]} অন্য {lvl_bn} স্কলারশিপ</h2><ul>{sl}</ul>' if sl else ""}
+{neighbours(slug)}
+<p><a href="/deadlines/">সব স্কলারশিপের শেষ তারিখ</a> · <a href="/scholarships/">সব স্কলারশিপের তালিকা</a></p>
+</section>"""
+
+
+def related_scholarships(title, pred, limit=12):
+    rows = _rows_with_pages(pred)[:limit]
+    return f'<section class="rel"><h2>{title}</h2><ul>{"".join(sch_link(*x) for x in rows)}</ul></section>' if rows else ""
+
+
+def scholarships_index_body(updated):
+    parts = []
+    for cont, (en, bn_name, bn_of) in CONTINENTS.items():
+        blocks = []
+        for slug in COUNTRIES:
+            if not slug.startswith(cont + "/"):
+                continue
+            rows = _rows_with_pages(lambda s, r: s == slug)
+            if rows:
+                blocks.append(f'<h3><a href="/{slug}/">{html.escape(COUNTRIES[slug][0])}</a></h3><ul>{"".join(sch_link(s, i, r, extra=False) for s, i, r in rows)}</ul>')
+        parts.append(f'<h2><a href="/{cont}/">{bn_of} স্কলারশিপ</a></h2>' + "".join(blocks))
+    n = len(_rows_with_pages())
+    return f"""<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>সব স্কলারশিপের তালিকা</h1>
+  <p class="lede">{bn(n)}টি স্কলারশিপ, অঞ্চল আর দেশ অনুযায়ী সাজানো। ফিল্টার দিয়ে খুঁজতে <a href="/search/">স্কলারশিপ সার্চ</a>, শেষ তারিখ অনুযায়ী দেখতে <a href="/deadlines/">শেষ তারিখ সামনে</a>।</p>
+</header>
+<section class="rel idx">{"".join(parts)}</section>
+{FOOTER}
+</div>"""
