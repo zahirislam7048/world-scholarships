@@ -391,6 +391,13 @@ def main():
         en_pages[f"/en/scholarship/{ps}/"] = (f"{r['scholarship_name']} — {COUNTRIES[sl][0]} | Higher Study Info",
                                               f"{r['scholarship_name']} ({COUNTRIES[sl][0]}, {r['level']}): benefits, eligibility, English requirement, deadline and official application link.",
                                               site_en.scholarship_en(sl, i, r, ps, chk))
+    en_pages["/en/guides/"] = ("Guides | Higher Study Info", "Guides for applying abroad: student visas, funded PhD, avoiding fraud and FAQ.", site_en.guides_index_en())
+    en_pages["/en/guides/visa/"] = ("Student visas by country | Higher Study Info", "Funds to show, work rules and post-study options for student visas in 14 countries, from official sources.", site_en.visa_en())
+    en_pages["/en/guides/funded-phd/"] = ("Funded PhD — TA, RA and salaried PhD | Higher Study Info", "Assistantships and minimum funding in the US and Canada, salaried PhD positions in Europe.", site_en.funded_phd_en())
+    en_pages["/en/guides/fraud/"] = ("Avoiding fraud — agents, fake admissions and visas | Higher Study Info", "Warning signs of fake admission letters, forged documents and dishonest agents.", site_en.fraud_en())
+    en_pages["/en/guides/faq/"] = ("Studying abroad — FAQ | Higher Study Info", "Studying without IELTS, low CGPA, study gaps, age limits, bank balance, agents and more.", site_en.faq_en())
+    ALT.update({"/guides/": "/en/guides/", "/guides/visa/": "/en/guides/visa/", "/guides/funded-phd/": "/en/guides/funded-phd/",
+                "/guides/fraud/": "/en/guides/fraud/", "/guides/faq/": "/en/guides/faq/"})
     for path, (title, desc, body) in en_pages.items():
         d = OUT / path.strip("/")
         d.mkdir(parents=True, exist_ok=True)
