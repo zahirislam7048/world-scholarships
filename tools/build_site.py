@@ -20,7 +20,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
-                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body)
+                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, whats_new_body, report_link, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -172,7 +172,7 @@ def home_page(updated):
     <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
-    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a></p>
+    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a> · <a href="/whats-new/" style="color:var(--accent)">🆕 এই সপ্তাহে নতুন কী →</a></p>
   </div>
   <aside class="total" aria-label="মোট স্কলারশিপ">
     <b>{len(all_rows)}</b>
@@ -301,6 +301,7 @@ def scholarship_page(slug, i, r, updated):
   {cal}
   <p class="vlinks"><button type="button" class="slbtn" data-id="{PAGES[(slug, i)]}" aria-pressed="false">☆ শর্টলিস্টে রাখুন</button> <a href="/shortlist/" class="meta">আমার শর্টলিস্ট →</a></p>
   <p class="vlinks"><a class="apply" href="{e(apply_url)}" target="_blank" rel="noopener">{"আবেদন করুন ↗" if direct else "অফিসিয়াল পেজ ↗"}</a></p>
+  <p class="vsrc">{report_link(r["scholarship_name"], path)}</p>
   <p class="vsrc">সূত্র: <a href="{e(r["source_url"])}" target="_blank" rel="noopener">{e(r["source_domain"])}</a> · সংগ্রহ {e(r.get("collected_on", ""))}। "Not stated in source snippet" মানে সূত্রে এ তথ্য পাওয়া যায়নি — অফিসিয়াল পেজে মিলিয়ে নিন।</p>
 </article>
 {related}
@@ -426,6 +427,7 @@ def main():
         "tools/timeline": ("আবেদনের টাইমলাইন প্ল্যানার | Higher Study Info", "স্কলারশিপ বা প্রোগ্রামের শেষ তারিখ দিন — কোন মাসে IELTS, LOR, SOP, স্টুডেন্ট ফাইল আর ভিসা, তার পরিকল্পনা।", timeline_body),
         "guides/application-portals": ("আবেদন পোর্টাল — uni-assist, UCAS, Common App, Studielink | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, নেদারল্যান্ডস, ইতালি, ফ্রান্সে কোন পোর্টালে আবেদন, ফি আর শেষ তারিখ — অফিসিয়াল সূত্রে।", portals_body),
         "guides/cv": ("একাডেমিক CV ও Europass CV লেখার গাইড | Higher Study Info", "মাস্টার্স, PhD ও স্কলারশিপের জন্য একাডেমিক CV: অংশ, ক্রম, কাঠামো আর Europass CV।", cv_body),
+        "whats-new": ("এই সপ্তাহে নতুন কী — স্কলারশিপ আপডেট | Higher Study Info", "প্রতি সপ্তাহে নতুন যোগ হওয়া, হালনাগাদ আর সরানো স্কলারশিপের তালিকা।", whats_new_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
     for name, (title, desc, body_fn) in extra.items():
@@ -434,7 +436,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages)
+    urls = ["/", "/whats-new/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages)
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

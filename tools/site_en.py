@@ -142,6 +142,7 @@ def scholarship_en(s, i, r, ps, checked):
   <div class="tbl-wrap"><table class="t">{tbl}</table></div>
   {cal}
   <p class="vlinks"><a class="apply" href="{E(apply_url)}" target="_blank" rel="noopener">{"Apply ↗" if direct else "Official page ↗"}</a></p>
+  <p class="vsrc">{site_extra.report_link(r["scholarship_name"], f"/en/scholarship/{ps}/", "en")}</p>
   <p class="vsrc">Source: <a href="{E(r["source_url"])}" target="_blank" rel="noopener">{E(r["source_domain"])}</a> · collected {E(r.get("collected_on", ""))}. "Not stated in source snippet" means the source did not state it — check the official page.</p>
 </article>
 {f'<section class="rel"><h2>More scholarships in {E(name)}</h2><ul>{sib}</ul></section>' if sib else ""}

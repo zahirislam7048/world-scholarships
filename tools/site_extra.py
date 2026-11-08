@@ -20,7 +20,7 @@ NAV_CSS = """<style>
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
-NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
+NAV_ITEMS = [("/whats-new/", "নতুন কী"), ("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
 
 
 def nav(current=""):
@@ -47,7 +47,7 @@ FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্
 def _footer():
     """Site-wide footer hub: every page links to each region, the main tools and the guides."""
     regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items())
-    tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li>'
+    tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
              '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
@@ -336,6 +336,7 @@ table.t.fit{min-width:0;width:100%}
 .vcard table.t{min-width:0;width:100%}.vcard table.t th{width:30%;min-width:110px}
 .vlinks{margin:0}.vlinks .apply{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:var(--surface)}
 .vsrc{font-size:13px;color:var(--muted);margin:0}
+.report{font-size:13px;color:var(--muted)}.report:hover{color:var(--accent)}
 .vcard td a,.vsrc a{color:var(--accent)}
 </style>"""
 
@@ -1954,3 +1955,49 @@ REFERENCES  [Name, title, institution, official email] — or "Available on requ
          ("Cornell Graduate School — Resumes and CVs", "https://gradschool.cornell.edu/career-and-professional-development/pathways-to-success/prepare-for-your-career/take-action/resumes-and-cvs/"),
          ("Europass — The new Europass CV and cover letter tool", "https://europass.europa.eu/en/news/new-europass-cv-and-cover-letter-online-tool"),
          ("Europass — How to complete my Europass profile", "https://europass.europa.eu/en/how-complete-my-europass-profile")])
+
+
+def whats_new_body(updated):
+    import datetime as _dt
+    log = json.load(open(pathlib.Path(__file__).resolve().parent.parent / "data" / "changes.json", encoding="utf-8"))
+    rows = [r for r in all_rows() if r.get("collected_on") and not (r.get("deadline") and r["deadline"] < updated)]
+    weeks = {}
+    for r in rows:
+        weeks.setdefault(_dt.date.fromisoformat(r["collected_on"]), []).append(r)
+    recent = sorted(weeks.items(), reverse=True)[:6]
+    blocks = []
+    for wk, rs in recent:
+        rs.sort(key=lambda r: (r.get("deadline") or "9999"))
+        items = "".join(
+            f'<li><a href="{r["page"]}">{html.escape(r["scholarship_name"])}</a> <span class="meta">· {html.escape(COUNTRIES[r["slug"]][0])} · {html.escape(r["level"])}'
+            + (f' · শেষ তারিখ {html.escape(r["deadline"])}' if r.get("deadline") else "")
+            + (" · ⏳ পরের রাউন্ডের অপেক্ষায়" if r.get("session_year", "").startswith("Next round") else "") + "</span></li>" for r in rs)
+        blocks.append(f'<h2>{bn(wk.day)} {BN_MONTHS[wk.month - 1]} {bn(wk.year)} <small class="meta">· {bn(len(rs))}টি যোগ/হালনাগাদ</small></h2><ul class="elist">{items}</ul>')
+    logs = "".join(
+        f'<li><b>{html.escape(e["date"])}:</b> {html.escape(e["summary"])}'
+        + ("".join(f'<br><span class="meta">সরানো হয়েছে: {html.escape(x["name"])} ({html.escape(x["country"])}) — {html.escape(x["reason"])}</span>' for x in e.get("removed", [])))
+        + "</li>" for e in log)
+    return f"""<style>.elist{{display:flex;flex-direction:column;gap:8px;padding-left:20px;margin:0}}.elist a,.wlog a{{color:var(--accent)}}.wlog{{display:flex;flex-direction:column;gap:10px}}</style>
+<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>এই সপ্তাহে নতুন কী</h1>
+  <p class="lede">প্রতি সপ্তাহের আপডেটে যেসব স্কলারশিপ নতুন যোগ বা হালনাগাদ হয়েছে, আর যেগুলো সরানো হয়েছে। শেষ তারিখ ক্যালেন্ডারে পেতে <a href="/deadlines/">শেষ তারিখ সামনে</a> পেজ থেকে সাবস্ক্রাইব করুন।</p>
+</header>
+<section class="rel"><h2>সাপ্তাহিক আপডেটের সারাংশ</h2><ul class="wlog">{logs}</ul></section>
+<section class="rel">{"".join(blocks)}</section>
+{FOOTER}
+</div>"""
+
+
+def report_link(name, path, lang="bn"):
+    """mailto link prefilled with the scholarship name and page, so readers can flag wrong information."""
+    import urllib.parse as _u
+    subj = ("ভুল তথ্য: " if lang == "bn" else "Correction: ") + name
+    body = (("পেজ: " if lang == "bn" else "Page: ") + "https://higherstudyinfo.com" + path + "\n\n"
+            + ("কোন তথ্যটা ভুল, আর সঠিক তথ্যের অফিসিয়াল লিংক:" if lang == "bn" else "What is wrong, and the official link with the correct information:") + "\n")
+    href = f"mailto:{EMAIL}?subject={_u.quote(subj)}&body={_u.quote(body)}"
+    label = "⚠️ ভুল তথ্য জানান" if lang == "bn" else "⚠️ Report wrong information"
+    return f'<a class="report" href="{html.escape(href)}">{label}</a>'
