@@ -359,6 +359,8 @@ GUIDES = [
     ("/guides/lor/", "🤝 Recommendation Letter (LOR)", "কাকে বলবেন, কখন, কোন কাগজ দেবেন — আর কোন ভুল আবেদন বাতিল করাতে পারে।"),
     ("/guides/research-proposal/", "🔬 Research Proposal", "PhD ও DAAD গবেষণা স্কলারশিপের জন্য প্রস্তাবের কাঠামো, দৈর্ঘ্য আর সময়সূচি।"),
     ("/guides/professor-email/", "✉️ প্রফেসরকে ইমেইল", "সুপারভাইজার খোঁজা, ইমেইলের কাঠামো আর ফলো-আপের নিয়ম।"),
+    ("/guides/research-internships/", "🔬 গবেষণা ইন্টার্নশিপ ও সামার প্রোগ্রাম", "KAUST VSRP, OIST, CERN — ভাতাসহ বিদেশের ল্যাবে ২–৬ মাস; কোনগুলো বাংলাদেশিদের জন্য নয়।"),
+    ("/guides/education-loan/", "🏦 শিক্ষা ঋণ (বাংলাদেশ)", "City, Prime, EBL, BRAC, DBBL — বিদেশে পড়ার ঋণের অঙ্ক, মেয়াদ আর সতর্কতা।"),
     ("/guides/funded-phd/", "🎓 ফান্ডেড PhD — TA, RA, বেতনভুক্ত PhD", "যুক্তরাষ্ট্র-কানাডার Assistantship ও ন্যূনতম ফান্ডিং, ইউরোপে বেতনসহ PhD পদ।"),
     ("/guides/part-time-work/", "💼 পড়ার সময় পার্ট-টাইম কাজ", "দেশভিত্তিক কাজের ঘণ্টার সীমা আর ভিসা বাঁচিয়ে কাজের সতর্কতা।"),
     ("/guides/interview/", "🎤 ভিসা ও স্কলারশিপ ইন্টারভিউ", "Chevening-ধরনের স্কলারশিপ ইন্টারভিউ আর ঢাকায় US F-1 ভিসা ইন্টারভিউর প্রস্তুতি।"),
@@ -2001,3 +2003,62 @@ def report_link(name, path, lang="bn"):
     href = f"mailto:{EMAIL}?subject={_u.quote(subj)}&body={_u.quote(body)}"
     label = "⚠️ ভুল তথ্য জানান" if lang == "bn" else "⚠️ Report wrong information"
     return f'<a class="report" href="{html.escape(href)}">{label}</a>'
+
+
+def internships_body(updated):
+    return _guide("research-internships", "গবেষণা ইন্টার্নশিপ ও সামার প্রোগ্রাম",
+        "স্নাতক বা মাস্টার্সে পড়ার সময় বিদেশের ল্যাবে ২–৬ মাসের গবেষণা ইন্টার্নশিপ পরে PhD আর স্কলারশিপ আবেদনে বড় শক্তি হয় — প্রকাশনা, রেফারেন্স লেটার আর সুপারভাইজারের পরিচিতি তিনটাই আসে। নিচে অফিসিয়াল সূত্র অনুযায়ী কোনটা বাংলাদেশি শিক্ষার্থীরা পেতে পারেন আর কোনটা পারেন না।",
+        """<h2>বাংলাদেশি শিক্ষার্থীরা আবেদন করতে পারেন</h2>
+  <div class="tbl-wrap"><table class="t fit">
+    <tr><th>প্রোগ্রাম</th><th>কাদের জন্য</th><th>সুবিধা ও সময়</th></tr>
+    <tr><td><b>KAUST Visiting Student Research Program (VSRP)</b><br><span class="meta">সৌদি আরব</span></td><td>STEM-এ ৩য় বর্ষ বা তার উপরের স্নাতক ও মাস্টার্স শিক্ষার্থী, GPA ন্যূনতম ৩.৫/৪ (কিছু প্রজেক্টে ৩.৬); PhD শিক্ষার্থী নয়। ১০০-র বেশি ফ্যাকাল্টি প্রজেক্ট থেকে একটা বেছে আবেদন; এক সময়ে একটাই আবেদন।</td><td>২–৬ মাস; মাসে US$১,০০০ ভাতা, থাকার জায়গা আর যাওয়া-আসার বিমান টিকিট; সারা বছর আবেদন; আবেদন ফি নেই। ইংরেজি স্কোর ছাড়াই আবেদন করা যায়, নির্বাচিত হলে ন্যূনতম শর্ত পূরণ করতে হয়।</td></tr>
+    <tr><td><b>OIST Research Internship</b><br><span class="meta">জাপান</span></td><td>দেশ-বিদেশের স্নাতক/মাস্টার্স শিক্ষার্থী বা সদ্য পাস — PhD-তে আগ্রহী</td><td>৪–৬ মাস; কর্মদিবসে ¥২,৪০০ ভাতা, ক্যাম্পাসে থাকা, বিমান টিকিট, বীমা, ভিসা সহায়তা। সর্বশেষ শেষ তারিখ ১৫ অক্টোবর ২০২৬ — বছরে একাধিক রাউন্ড হয়, অফিসিয়াল পেজে পরেরটা দেখুন। প্রথম দুই মাসের খরচ নিজের কাছে রাখার পরামর্শ দেয় OIST।</td></tr>
+    <tr><td><b>CERN Summer Student Programme</b><br><span class="meta">সুইজারল্যান্ড</span></td><td>সদস্য নয় এমন দেশের শিক্ষার্থীরাও পারেন; পদার্থবিজ্ঞান, ইঞ্জিনিয়ারিং, কম্পিউটার সায়েন্স বা গণিতে অন্তত ৬ সেমিস্টার শেষ করা স্নাতক/মাস্টার্স শিক্ষার্থী (PhD নয়)</td><td>৮–১৩ সপ্তাহ; দিনে CHF ৯৪ ভাতা আর স্বাস্থ্যবীমা। ২০২৭-এর বিজ্ঞপ্তি (SUMM-2027) প্রকাশিত — শেষ তারিখ careers.cern-এ দেখুন।</td></tr>
+  </table></div>
+  <h2>বাংলাদেশ থেকে সরাসরি পারবেন না</h2>
+  <ul>
+    <li><b>DAAD RISE Germany:</b> শুধু যুক্তরাষ্ট্র, কানাডা, যুক্তরাজ্য বা আয়ারল্যান্ডের বিশ্ববিদ্যালয়ে পড়া স্নাতক শিক্ষার্থীদের জন্য (বিদেশিরা হলে সেখানে অন্তত ১২ মাস পড়তে হবে)। RISE Worldwide শুধু জার্মান শিক্ষার্থীদের জন্য।</li>
+    <li><b>Mitacs Globalink Research Internship (কানাডা):</b> অফিসিয়াল দেশ-তালিকায় বাংলাদেশ পাইনি; ২০২৭-এর আবেদনও বন্ধ।</li>
+  </ul>
+  <h2>ইন্টার্নশিপ পাওয়ার পরামর্শ</h2>
+  <ul>
+    <li>প্রজেক্টের সাথে মেলে এমন নির্দিষ্ট দক্ষতা (প্রোগ্রামিং, ল্যাব টেকনিক, থিসিসের কাজ) CV-তে স্পষ্ট করুন — দেখুন <a href="/guides/cv/">একাডেমিক CV</a>।</li>
+    <li>স্টেটমেন্ট অফ পারপাসে প্রজেক্ট আর ফ্যাকাল্টির কাজ ধরে লিখুন — দেখুন <a href="/guides/sop/">SOP গাইড</a>।</li>
+    <li>রেফারেন্স লেটার আগেভাগে চান — দেখুন <a href="/guides/lor/">LOR গাইড</a>।</li>
+    <li>কোনো ল্যাবে সরাসরি ইন্টার্নশিপ চাইতে <a href="/guides/professor-email/">প্রফেসরকে ইমেইল</a> গাইড আর <a href="/professors/">প্রফেসর সার্চ</a> ব্যবহার করুন।</li>
+  </ul>""",
+        [("KAUST — Visiting Student Research Program", "https://vsrp.kaust.edu.sa/about-vsrp"),
+         ("KAUST Admissions — Internships", "https://admissions.kaust.edu.sa/study/internships"),
+         ("OIST — Research Internship Program description", "https://www.oist.jp/admissions/research-internship/program-description"),
+         ("CERN — Summer Studentship", "https://careers.cern/programmes/summer-studentship/"),
+         ("CERN — Eligibility criteria", "https://careers.cern/eligibility-criteria/"),
+         ("DAAD — RISE Germany: what applicants need to know", "https://www.daad.de/rise/en/rise-germany/find-an-internship/what-applicants-need-to-know/"),
+         ("DAAD — RISE Worldwide", "https://www.daad.de/rise/en/rise-worldwide/"),
+         ("Mitacs — Globalink Research Internship", "https://www.mitacs.ca/our-programs/globalink-research-internship-students/")])
+
+
+def loan_body(updated):
+    return _guide("education-loan", "বিদেশে পড়ার জন্য শিক্ষা ঋণ (বাংলাদেশ)",
+        "স্কলারশিপ না পেলে বা আংশিক পেলে বাকি খরচের জন্য বাংলাদেশের কয়েকটি ব্যাংক শিক্ষা ঋণ দেয়। নিচের তথ্য ব্যাংকগুলোর নিজস্ব ওয়েবসাইট থেকে — সুদের হার, জামানত আর কাগজের তালিকা প্রায়ই বদলায়, তাই আবেদনের আগে শাখায় জেনে নিন।",
+        """<div class="tbl-wrap"><table class="t fit">
+    <tr><th>ব্যাংক ও প্রোডাক্ট</th><th>যা জানা গেছে (ব্যাংকের ওয়েবসাইট)</th></tr>
+    <tr><td><b>City Bank</b> — Student Loan</td><td>দেশে বা বিদেশে পড়ার টিউশন, জীবনযাত্রা, বিমান টিকিট ও বীমা; ১ লাখ থেকে ২০ লাখ টাকা; মেয়াদ ১–৫ বছর; ৩ মাস পর টপ-আপ</td></tr>
+    <tr><td><b>Prime Bank</b> — Student File / ঋণ</td><td>২০ লাখ টাকা পর্যন্ত, সর্বোচ্চ ৫ বছর; বিদেশি প্রতিষ্ঠানের ভর্তির চিঠি থাকা বাংলাদেশি শিক্ষার্থী; স্নাতক, স্নাতকোত্তর ও স্বীকৃত পেশাগত ডিপ্লোমা</td></tr>
+    <tr><td><b>Eastern Bank (EBL)</b> — Edu Finance</td><td>জামানতহীন ১ লাখ–২০ লাখ টাকা; জামানতসহ ২৫ লাখ পর্যন্ত বা FD-র ৯০%; Edu Line (ওভারড্রাফট ধরনের); প্রসেসিং ফি ঋণের ১%</td></tr>
+    <tr><td><b>BRAC Bank</b> — Agami Personal Loan</td><td>অভিভাবকের জন্য, সন্তানের বিশ্ববিদ্যালয় শিক্ষার খরচে; ন্যূনতম মাসিক আয় ২০,০০০ টাকা (পেজটি প্রায় এক বছর পুরোনো)</td></tr>
+    <tr><td><b>Dutch-Bangla Bank</b> — Education Line</td><td>টিউশন বা অন্যান্য শিক্ষা খরচ, কম্পিউটার কেনা; নগদ জামানত বা ব্যক্তিগত গ্যারান্টি লাগে না বলে উল্লেখ</td></tr>
+  </table></div>
+  <h2>যা মনে রাখবেন</h2>
+  <ul>
+    <li><b>ঋণ আর স্টুডেন্ট ফাইল আলাদা:</b> বিদেশে টাকা পাঠাতে বাংলাদেশ ব্যাংকের নিয়মে ব্যাংকে স্টুডেন্ট ফাইল লাগে (যেমন সোনালী ব্যাংকের Student File — এটা ঋণ নয়)। দেখুন <a href="/guides/student-file/">স্টুডেন্ট ফাইল ও টাকা পাঠানো</a>।</li>
+    <li><b>ভিসার আর্থিক প্রমাণ:</b> ঋণের টাকা দেশভেদে আর্থিক প্রমাণ হিসেবে গ্রহণ হয় কিনা আলাদা — দূতাবাসের নিয়ম দেখুন (<a href="/guides/visa/">ভিসা গাইড</a>)। জার্মানির মতো দেশে ব্লকড অ্যাকাউন্টে নির্দিষ্ট অঙ্ক জমা দিতে হয়।</li>
+    <li><b>মোট খরচ হিসাব করুন:</b> সুদের হার, প্রসেসিং ফি, কিস্তি শুরুর সময় আর আগাম পরিশোধের চার্জ লিখিতভাবে নিন। <a href="/tools/budget/">বাজেট ক্যালকুলেটর</a> দিয়ে আগে মোট দরকার হিসাব করুন।</li>
+    <li><b>আগে বিনা খরচের পথ দেখুন:</b> <a href="/scholarships/">স্কলারশিপ</a>, <a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a> আর PhD-তে <a href="/guides/funded-phd/">TA/RA ফান্ডিং</a>।</li>
+  </ul>""",
+        [("City Bank — Student loan", "https://www.citybankplc.com/p/student-loan"),
+         ("Prime Bank — Student file", "https://www.primebank.com.bd/conventional/student-file"),
+         ("Eastern Bank — Retail loans", "https://mail.ebl.com.bd/retail/retail-loan"),
+         ("BRAC Bank — Agami student banking", "https://www.legacy.bracbank.com/en/agami-student-banking"),
+         ("Dutch-Bangla Bank — Life Line", "https://dutchbanglabank.com/personal-banking/life-line.html"),
+         ("Sonali Bank — Student File", "https://studentfile.sonalibank.com.bd/studentfile/"),
+         ("Bangladesh Bank — FE circular (30 Sep 2026)", "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302026fepd-140e.pdf")])
