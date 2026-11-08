@@ -958,12 +958,13 @@ SUBJECT_BN = {
     "Environmental Engineering / Water": "এনভায়রনমেন্টাল ইঞ্জিনিয়ারিং / পানি", "Public Health": "পাবলিক হেলথ",
     "Economics / Business": "অর্থনীতি / বিজনেস", "Mechanical Engineering": "মেকানিক্যাল ইঞ্জিনিয়ারিং",
     "Civil / Geotechnical Engineering": "সিভিল / জিওটেকনিক্যাল ইঞ্জিনিয়ারিং", "Agriculture / Food": "কৃষি / খাদ্য",
-    "Pharmacy / Pharmaceutical Sciences": "ফার্মেসি / ফার্মাসিউটিক্যাল সায়েন্স", "Energy": "এনার্জি / নবায়নযোগ্য শক্তি",
+    "Pharmacy / Pharmaceutical Sciences": "ফার্মেসি / ফার্মাসিউটিক্যাল সায়েন্স", "Chemistry": "রসায়ন", "Energy": "এনার্জি / নবায়নযোগ্য শক্তি",
 }
 COUNTRY_BN = {"Australia": "অস্ট্রেলিয়া", "Canada": "কানাডা", "China": "চীন", "Finland": "ফিনল্যান্ড", "Germany": "জার্মানি",
               "Italy": "ইতালি", "Japan": "জাপান", "Malaysia": "মালয়েশিয়া", "Netherlands": "নেদারল্যান্ডস", "Saudi Arabia": "সৌদি আরব",
               "Singapore": "সিঙ্গাপুর", "South Korea": "দক্ষিণ কোরিয়া", "Sweden": "সুইডেন", "UAE": "সংযুক্ত আরব আমিরাত",
-              "United Kingdom": "যুক্তরাজ্য", "United States": "যুক্তরাষ্ট্র"}
+              "United Kingdom": "যুক্তরাজ্য", "United States": "যুক্তরাষ্ট্র", "France": "ফ্রান্স", "Türkiye": "তুরস্ক",
+              "Ireland": "আয়ারল্যান্ড", "Norway": "নরওয়ে", "Denmark": "ডেনমার্ক", "Hong Kong": "হংকং"}
 SUPERVISOR_TIPS = [  # (countries, tip, source link) — how supervision works, from guides already on the site
     ("যুক্তরাষ্ট্র", "PhD-তে ভর্তি হয় প্রোগ্রামে, তবে ফান্ডিং (RA) প্রায়ই প্রফেসরের অনুদান থেকে আসে — ডিপার্টমেন্টের প্রফেসররাই অনেক সময় ঠিক করেন কে ফান্ডিং পাবে (EducationUSA)।", "/guides/funded-phd/"),
     ("যুক্তরাজ্য", "PhD আবেদনে গবেষণা প্রকল্প আর সম্ভাব্য সুপারভাইজার ঠিক করা আবেদনের অংশ — আগে যোগাযোগ করুন (Oxford, Cambridge)।", "/guides/professor-email/"),
