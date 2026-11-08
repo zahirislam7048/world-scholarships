@@ -146,7 +146,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
 const DATA = ([{"country": "Latvia", "provider": "State Education Development Agency (VIAA)", "provider_type": "government", "scholarship_name": "Latvian state scholarships for foreign students", "level": "UG / PG / research", "coverage_amount": "Not stated in source snippet", "eligibility": "Citizens of 40+ countries with bilateral agreements or reciprocal scholarships; max two terms per study cycle", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027/28", "deadline": "2027-04-01", "source_url": "https://www.viaa.gov.lv/en/latvian-state-scholarships", "source_domain": "viaa.gov.lv", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Next call 1 Feb – 1 Apr 2027; check your country is eligible", "apply_url": "https://www.viaa.gov.lv/en/latvian-state-scholarships", "page": "/scholarship/latvian-state-scholarships-for-foreign-students-latvia/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
-const UPDATED = "2026-11-04";
+const UPDATED = "2026-11-08";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
 const bn = n => String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);

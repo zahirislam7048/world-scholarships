@@ -25,3 +25,4 @@ Rebuild a preview page: `python3 tools/build_preview.py <continent>/<country> <o
 The weekly update re-checks about four guide figures against their official sources and records them here (date — what was checked — result).
 
 - 2026-11-05 — all guides written from official sources (visa ×14 countries, part-time work, post-study work, test fees, Bangladesh Bank student remittances, PhD funding, application portals).
+- 2026-11-08 — Germany blocked account €11,904/yr (€992/month) confirmed (DAAD, Make it in Germany); Netherlands study norm filled: €1,130.77/month for 2026 (IND); Norway: NTNU/UiO confirm no general tuition scholarships for non-EU degree students; UGC Bangladesh PhD fellowship 2026-27 amount added.

@@ -18,10 +18,11 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Checked — no current scholarship for international students found
 
+- **Bulgaria:** no 2026/27 government scholarship for foreign students found on mon.bg / studyinbulgaria.bg (checked 2026-11-08)
 - **Spain:** no 2027-28 national or university excellence scholarship found for non-EU students (UC3M 2026-27 calls closed; AUIP for Latin Americans)
 - **Portugal:** FCT studentships require residence in Portugal
 - **Greece:** IKY foreign-national scholarships not currently open (IKY-Fulbright for US citizens only)
 
 ## Not yet added (not individually searched)
 
-Albania, Andorra, Belarus, Bosnia and Herzegovina, Bulgaria, Croatia, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, San Marino, Ukraine, Vatican City — plus the watched countries above.
+Albania, Andorra, Belarus, Bosnia and Herzegovina, Croatia, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, San Marino, Ukraine, Vatican City — plus the watched countries above.

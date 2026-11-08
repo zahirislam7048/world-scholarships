@@ -146,7 +146,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
 const DATA = ([{"country": "Slovakia", "provider": "SAIA (National Scholarship Programme)", "provider_type": "government", "scholarship_name": "National Scholarship Programme of the Slovak Republic – stays in 2027/28", "level": "PG / PhD / research (short stays)", "coverage_amount": "Not stated in source snippet", "eligibility": "Most foreign students, PhD students and researchers", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027/28", "deadline": "2027-04-30", "source_url": "https://www.scholarships.sk/en/news/call-sum-sem-acad-yr-26/27-apply-now", "source_domain": "scholarships.sk", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "16:00 CET; full-degree Government scholarships usually close late May", "apply_url": "https://www.scholarships.sk/en/news/call-sum-sem-acad-yr-26/27-apply-now", "page": "/scholarship/national-scholarship-programme-of-the-slovak-republic-stays-in-2027-28-slovakia/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
-const UPDATED = "2026-11-04";
+const UPDATED = "2026-11-08";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
 const bn = n => String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);

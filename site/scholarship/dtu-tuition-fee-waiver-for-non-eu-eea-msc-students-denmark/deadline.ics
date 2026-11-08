@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:DTU tuition fee waiver for non-EU/EEA MSc students
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-dtu-tuition-fee-waiver-for-non-eu-eea-msc-students-denmark-
+ 20270115@higherstudyinfo.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:শেষ তারিখ: DTU tuition fee waiver for non-EU/EEA MS
+ c students (Denmark)
+URL:https://higherstudyinfo.com/scholarship/dtu-tuition-fee-waiver-for-non-
+ eu-eea-msc-students-denmark/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/d
+ tu-tuition-fee-waiver-for-non-eu-eea-msc-students-denmark/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — DTU tuition fee waiver for non-E
+ U/EEA MSc students
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — DTU tuition fee waiver 
+ for non-EU/EEA MSc students
+END:VALARM
+END:VEVENT
+END:VCALENDAR

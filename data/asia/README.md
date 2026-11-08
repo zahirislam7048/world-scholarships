@@ -11,9 +11,11 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 
 ## Checked — no current scholarship for international students found
 
+- **Cyprus:** CyprusAid (Foreign Ministry) awards at CUT closed 12 Jun 2026 and are limited to listed nationalities; UCY postgraduate awards are 50% departmental waivers for 2026/27 (checked 2026-11-08)
+- **Uzbekistan:** no government scholarship call for foreign students found on gov.uz / edu.uz (checked 2026-11-08)
 - **Sri Lanka:** foreign-student places capped at 0.5%; UGC says no government scholarship for them
 - **Philippines:** DOST programme only for Cambodia, Lao PDR, Myanmar; no 2027 intake found
 
 ## Not yet added (not individually searched)
 
-GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Cyprus, Georgia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, North Korea, Palestine, Syria, Tajikistan, Timor-Leste, Turkmenistan, Uzbekistan, Yemen — plus the watched countries above.
+GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Georgia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Mongolia, Myanmar, North Korea, Palestine, Syria, Tajikistan, Timor-Leste, Turkmenistan, Yemen — plus the watched countries above.

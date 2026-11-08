@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Aarhus University scholarships for non-EU/EEA master's applica
+ nts
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-aarhus-university-scholarships-for-non-eu-eea-master-s-appl
+ icants-denmark-20270115@higherstudyinfo.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:শেষ তারিখ: Aarhus University scholarships for non-E
+ U/EEA master's applicants (Denmark)
+URL:https://higherstudyinfo.com/scholarship/aarhus-university-scholarships-
+ for-non-eu-eea-master-s-applicants-denmark/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/a
+ arhus-university-scholarships-for-non-eu-eea-master-s-applicants-denmark/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Aarhus University scholarships f
+ or non-EU/EEA master's applicants
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Aarhus University schol
+ arships for non-EU/EEA master's applicants
+END:VALARM
+END:VEVENT
+END:VCALENDAR

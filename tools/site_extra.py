@@ -37,7 +37,7 @@ CONTACT_HTML = (f'<ul><li>ইমেইল: <a href="mailto:{EMAIL}">{EMAIL}</a><
 
 CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
 PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_site.main
-GUIDES_CHECKED = "2026-11-04"  # when the guide and tool figures were last verified
+GUIDES_CHECKED = "2026-11-08"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
 
 FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
@@ -610,13 +610,14 @@ VISA = [
              ("Campus France — Temporary resident permit (APS)", "https://www.campusfrance.org/en/temporary-resident-permit-aps"),
              ("Campus France USA — Student visa guide 2026-27 (PDF)", "https://www.usa.campusfrance.org/system/files/medias/documents/2026-07/Campus%20France%20USA%20Student%20Visa%20Guide%20(2026-2027).pdf")]},
     {"c": "Netherlands", "bn": "নেদারল্যান্ডস", "visa": "MVV + study residence permit — আবেদন করে বিশ্ববিদ্যালয় (recognised sponsor); মেয়াদ কোর্স + 3 মাস, সর্বোচ্চ 5 বছর",
-     "funds": "IND-এর \"study norm\" অনুযায়ী ১ বছরের খরচ (12 × study norm) সাধারণত বিশ্ববিদ্যালয়ের অ্যাকাউন্টে জমা দিতে হয় — বর্তমান অঙ্ক IND-এর Income requirements study পেজে",
+     "funds": "IND-এর study norm: বিশ্ববিদ্যালয়/hbo-র জন্য মাসে €1,130.77 (১ জানুয়ারি–৩১ ডিসেম্বর ২০২৬; প্রতি বছর ১ জানুয়ারি বদলায়) — সাধারণত ১ বছরের অঙ্ক (12 × study norm) বিশ্ববিদ্যালয়ের অ্যাকাউন্টে জমা দিতে হয়",
      "work": "সপ্তাহে সর্বোচ্চ 16 ঘণ্টা, অথবা শুধু জুন–আগস্টে ফুল-টাইম (একই বছরে দুটো নয়); নিয়োগকর্তাকে UWV থেকে ওয়ার্ক পারমিট (TWV) নিতে হয়",
      "post": "Orientation year: নেদারল্যান্ডসে ব্যাচেলর/মাস্টার্স শেষের 3 বছরের মধ্যে আবেদনে 1 বছর চাকরি খোঁজা, এ সময় ওয়ার্ক পারমিট ছাড়াই কাজ; নবায়নযোগ্য নয়, ফি €254 (২০২৬)",
      "fee": "",
      "apply": ("IND — Study", "https://ind.nl/en/income-requirements-study"),
      "src": [("IND — Income requirements study", "https://ind.nl/en/income-requirements-study"),
              ("IND — Coming to study in the Netherlands (PDF)", "https://ind.nl/en/forms/3087.pdf"),
+             ("IND — Required amounts income requirements", "https://ind.nl/en/required-amounts-income-requirements"),
              ("IND — Looking for work after study (form 7523)", "https://ind.nl/en/forms/7523.pdf")]},
     {"c": "Ireland", "bn": "আয়ারল্যান্ড", "visa": "Long-term study visa (D) → Stamp 2 immigration permission",
      "funds": "প্রতি বছরের জন্য €10,000 তাৎক্ষণিক প্রাপ্য (৬–৮ মাসের কোর্সে মাসে €833); ৬ মাসের ব্যাংক স্টেটমেন্ট, ক্রেডিট কার্ড গ্রহণযোগ্য নয়। ফি €6,000-এর বেশি হলে ভিসার আগে অন্তত €6,000, কম হলে পুরো ফি পরিশোধ",

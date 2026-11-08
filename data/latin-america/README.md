@@ -4,7 +4,7 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Watched (add once the next call is published)
 
-- **Mexico:** Mexican Government Excellence Scholarships for Foreigners 2027 (AMEXCID; 2026 call current, past windows closed mid-year)
+- **Mexico:** Mexican Government Excellence Scholarships for Foreigners 2027 (AMEXCID; 2027 call not yet published as of 2026-11-08 — usually May–June, via SIGCA)
 - **Chile:** AGCID master's scholarships for foreigners 2028 (2027 focal-point deadline was 30 Oct 2026)
 - **Regional:** OAS Academic Scholarship Program 2027 (OAS member-state citizens; usually opens December)
 - **Brazil:** PEC-G 2027 undergraduate programme (details not yet confirmed)
@@ -14,4 +14,4 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Not yet added (not individually searched)
 
-Bolivia, Costa Rica, Cuba, Dominican Republic, Ecuador, El Salvador, Guatemala, Honduras, Mexico, Nicaragua, Panama, Paraguay, Peru, Uruguay, Venezuela.
+Bolivia, Costa Rica, Cuba, Dominican Republic, Ecuador, El Salvador, Guatemala, Honduras, Nicaragua, Panama, Paraguay, Peru, Uruguay, Venezuela.
