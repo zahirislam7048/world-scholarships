@@ -20,7 +20,7 @@ NAV_CSS = """<style>
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
-NAV_ITEMS = [("/whats-new/", "নতুন কী"), ("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
+NAV_ITEMS = [("/whats-new/", "নতুন কী"), ("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/opportunities/", "ফেলোশিপ ও ট্রেনিং"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
 
 
 def nav(current=""):
@@ -52,7 +52,7 @@ def _footer():
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
              '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
-             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
+             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/opportunities/">ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
     return (f'<footer class="sitefoot"><nav class="fcols" aria-label="সাইটের লিংক">'
             f'<div><h4>অঞ্চলভিত্তিক</h4><ul>{regions}</ul></div><div><h4>টুল</h4><ul>{tools}</ul></div>'
@@ -2000,6 +2000,11 @@ def whats_new_body(updated):
   <p class="lede">প্রতি সপ্তাহের আপডেটে যেসব স্কলারশিপ নতুন যোগ বা হালনাগাদ হয়েছে, আর যেগুলো সরানো হয়েছে। শেষ তারিখ ক্যালেন্ডারে পেতে <a href="/deadlines/">শেষ তারিখ সামনে</a> পেজ থেকে সাবস্ক্রাইব করুন।</p>
 </header>
 <section class="rel"><h2>সাপ্তাহিক আপডেটের সারাংশ</h2><ul class="wlog">{logs}</ul></section>
+<section class="rel"><h2>শেয়ার করার লেখা (Facebook / Telegram)</h2>
+<p class="meta">এই সপ্তাহের আপডেট থেকে নিজে থেকে তৈরি — কপি করে পোস্ট করুন। <a href="/roundup.txt">টেক্সট ফাইল</a></p>
+<pre class="ooutput" id="rtext">{html.escape(roundup_text(updated))}</pre>
+<p><button type="button" class="obtn" onclick="var t=document.getElementById('rtext').textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){{this.textContent='কপি হয়েছে'}}.bind(this))">লেখাটা কপি করুন</button></p>
+</section>
 <section class="rel">{"".join(blocks)}</section>
 {FOOTER}
 </div>"""
@@ -2127,7 +2132,7 @@ HUB_EXTRA = {"phd": ' <a href="/guides/funded-phd/">ফান্ডেড PhD �
 
 def hub_links(current=""):
     items = "".join(f'<li><a href="/scholarships/{s}/">{t.format(y="").strip()}</a></li>' for s, t, _, _ in HUBS if s != current)
-    return f'<section class="rel"><h2>আরও তালিকা</h2><ul class="tags">{items}<li><a href="/scholarships/">সব স্কলারশিপ (A–Z)</a></li></ul></section>'
+    return f'<section class="rel"><h2>আরও তালিকা</h2><ul class="tags">{items}<li><a href="/scholarships/">সব স্কলারশিপ (A–Z)</a></li><li><a href="/opportunities/">ফেলোশিপ ও ট্রেনিং</a></li></ul></section>'
 
 
 def hub_body(slug, updated):
@@ -2230,3 +2235,68 @@ def programs_body(updated):
          ("Study in Finland — English-taught degree programmes", "http://www.studyinfinland.fi/what_to_study/english_taught_degree_programmes"),
          ("Study in Denmark — Study in English", "https://studyindenmark.dk/study-in-denmark/education-in-denmark/study-in-english"),
          ("Erasmus+ — Erasmus Mundus Joint Masters", "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters")])
+
+
+OPP_TYPE_BN = {"Professional fellowship": "পেশাজীবী ফেলোশিপ", "Short training course": "শর্ট কোর্স / ট্রেনিং",
+               "Government officials' fellowship": "সরকারি কর্মকর্তাদের ফেলোশিপ", "Research internship": "গবেষণা ইন্টার্নশিপ"}
+
+
+def opportunities_body(updated):
+    import csv as _csv
+    rows = list(_csv.DictReader(open(pathlib.Path(__file__).resolve().parent.parent / "data" / "opportunities" / "opportunities.csv", encoding="utf-8")))
+    rows = [r for r in rows if not (r.get("deadline") and r["deadline"] < updated)]
+    groups = {}
+    for r in rows:
+        groups.setdefault(r["type"], []).append(r)
+    blocks = []
+    for t in OPP_TYPE_BN:
+        if t not in groups:
+            continue
+        cards = "".join(
+            f'<article class="vcard"><h2 style="font-size:19px">{html.escape(r["name"])}</h2>'
+            f'<span class="meta">{html.escape(r["provider"])}</span>'
+            f'<div class="tbl-wrap"><table class="t fit">'
+            + "".join(f"<tr><th>{k}</th><td>{html.escape(v)}</td></tr>" for k, v in
+                      [("কারা", r["who"]), ("সুবিধা", r["benefits"]), ("সেশন", r["session"]), ("শেষ তারিখ", r["deadline"]),
+                       ("অবস্থা", {"Next round": "⏳ পরের রাউন্ডের অপেক্ষায়", "Open": "খোলা", "Open (rolling)": "সারা বছর খোলা",
+                                  "Open (course-wise)": "কোর্সভেদে খোলা"}.get(r["status"], r["status"])), ("নোট", r["notes"])] if v)
+            + f'</table></div><p class="vlinks"><a class="apply" href="{html.escape(r["apply_url"])}" target="_blank" rel="noopener">অফিসিয়াল পেজ ↗</a></p>'
+            f'<p class="vsrc">সূত্র: <a href="{html.escape(r["source_url"])}" target="_blank" rel="noopener">{html.escape(r["source_url"].split("/")[2])}</a> · সংগ্রহ {html.escape(r["collected_on"])}</p></article>'
+            for r in groups[t])
+        blocks.append(f'<h2>{OPP_TYPE_BN[t]}</h2><div style="display:flex;flex-direction:column;gap:14px;max-width:820px">{cards}</div>')
+    return f"""<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">{bn(len(rows))}টি সুযোগ · সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>শর্ট কোর্স, ট্রেনিং, ফেলোশিপ ও ইন্টার্নশিপ</h1>
+  <p class="lede">ডিগ্রির স্কলারশিপের বাইরে বাংলাদেশিরা আবেদন করতে পারেন এমন সুযোগ — পেশাজীবীদের ফেলোশিপ, সরকারি ট্রেনিং কোর্স আর ভাতাসহ গবেষণা ইন্টার্নশিপ। সব তথ্য অফিসিয়াল সূত্র থেকে; প্রতি সপ্তাহে হালনাগাদ। ইন্টার্নশিপের বিস্তারিত: <a href="/guides/research-internships/">গবেষণা ইন্টার্নশিপ গাইড</a>।</p>
+</header>
+{"".join(blocks)}
+<p class="notice">সরকারি মনোনয়নের প্রোগ্রামে (KOICA, অনেক JICA ও ITEC কোর্স) আবেদন সাধারণত নিজের প্রতিষ্ঠান বা মন্ত্রণালয়ের মাধ্যমে যায় — সরাসরি ব্যক্তিগত আবেদন গ্রহণ হয় না। কেউ টাকার বিনিময়ে "মনোনয়ন" দিতে চাইলে সাবধান: <a href="/guides/fraud/">প্রতারণা সতর্কতা</a>।</p>
+{hub_links()}
+{FOOTER}
+</div>"""
+
+
+def roundup_text(updated):
+    """Plain-text weekly post for Facebook / Telegram: deadlines in the next 30 days + latest additions."""
+    import datetime as _dt
+    today = _dt.date.fromisoformat(updated)
+    soon = [r for r in all_rows() if r.get("deadline") and today <= _dt.date.fromisoformat(r["deadline"]) <= today + _dt.timedelta(days=30)]
+    soon.sort(key=lambda r: r["deadline"])
+    latest = max((r.get("collected_on", "") for r in all_rows()), default="")
+    new = [r for r in all_rows() if r.get("collected_on") == latest and not (r.get("deadline") and r["deadline"] < updated)]
+    def line(r):
+        d = f" — শেষ তারিখ {bn(int(r['deadline'][8:10]))} {BN_MONTHS[int(r['deadline'][5:7]) - 1]}" if r.get("deadline") else ""
+        f = " (ফুল ফান্ডেড)" if r.get("funding_type") == "full" else ""
+        return f"• {r['scholarship_name']} — {COUNTRIES[r['slug']][0]}{f}{d}\n  https://higherstudyinfo.com{r['page']}"
+    parts = [f"🎓 এই সপ্তাহের স্কলারশিপ আপডেট ({bn(today.day)} {BN_MONTHS[today.month - 1]} {bn(today.year)})", ""]
+    if soon:
+        parts += [f"⏰ আগামী ৩০ দিনে শেষ তারিখ ({bn(len(soon))}টি):"] + [line(r) for r in soon[:12]] + [""]
+    if new:
+        parts += [f"🆕 নতুন যোগ/হালনাগাদ ({bn(len(new))}টি):"] + [line(r) for r in new[:8]] + [""]
+    parts += ["📋 সব স্কলারশিপ: https://higherstudyinfo.com/scholarships/", "✅ ফুল ফান্ডেড: https://higherstudyinfo.com/scholarships/fully-funded/",
+              "📅 শেষ তারিখ ক্যালেন্ডারে: https://higherstudyinfo.com/deadlines/", "",
+              "সব তথ্য অফিসিয়াল সূত্র থেকে। আবেদনের আগে লিংকে শর্ত মিলিয়ে নিন।"]
+    return "\n".join(parts)
