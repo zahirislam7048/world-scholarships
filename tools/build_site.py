@@ -20,7 +20,8 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         tuition_body, visa_body, sop_body, motivation_body, OUTLINE_CSS, professors_body, eligibility_body,
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
-                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, whats_new_body, report_link, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body, internships_body, loan_body)
+                        funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, whats_new_body, report_link, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body, internships_body, loan_body,
+                        HUBS, hub_body, month_hubs, month_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -441,13 +442,24 @@ def main():
         "guides/education-loan": ("বিদেশে পড়ার শিক্ষা ঋণ — বাংলাদেশের ব্যাংক | Higher Study Info", "City Bank, Prime Bank, Eastern Bank, BRAC Bank, Dutch-Bangla Bank-এর শিক্ষা ঋণ: অঙ্ক, মেয়াদ আর যা জানা জরুরি।", loan_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
+    hub_urls = []
+    for hs, _, _, _ in HUBS:
+        t, body = hub_body(hs, updated)
+        (OUT / "scholarships" / hs).mkdir(parents=True, exist_ok=True)
+        (OUT / "scholarships" / hs / "index.html").write_text(page(f"{t} | Higher Study Info", t + " — অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে হালনাগাদ, শেষ তারিখ ও আবেদনের লিংকসহ।", f"/scholarships/{hs}/", LIST_HEAD + GUIDE_CSS + LINK_CSS, body), encoding="utf-8")
+        hub_urls.append(f"/scholarships/{hs}/")
+    for ym, rows_m in month_hubs(updated).items():
+        t, body = month_body(ym, rows_m)
+        (OUT / "deadlines" / ym).mkdir(parents=True, exist_ok=True)
+        (OUT / "deadlines" / ym / "index.html").write_text(page(f"{t} | Higher Study Info", t + " — তারিখ অনুযায়ী, আবেদনের লিংকসহ।", f"/deadlines/{ym}/", LIST_HEAD + GUIDE_CSS + LINK_CSS, body), encoding="utf-8")
+        hub_urls.append(f"/deadlines/{ym}/")
     for name, (title, desc, body_fn) in extra.items():
-        (OUT / name).mkdir(parents=True)
+        (OUT / name).mkdir(parents=True, exist_ok=True)
         (OUT / name / "index.html").write_text(page(title, desc, f"/{name}/", LIST_HEAD + GUIDE_CSS + OUTLINE_CSS + LINK_CSS, body_fn(updated)), encoding="utf-8")
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/whats-new/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/guides/research-internships/", "/guides/education-loan/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages)
+    urls = ["/", "/whats-new/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/guides/research-internships/", "/guides/education-loan/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages) + hub_urls
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

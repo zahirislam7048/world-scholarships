@@ -49,7 +49,8 @@ FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্
 def _footer():
     """Site-wide footer hub: every page links to each region, the main tools and the guides."""
     regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items())
-    tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
+    tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
+             '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
              '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
@@ -173,6 +174,7 @@ def deadlines_body(updated):
   <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে স্কলারশিপের বিস্তারিত পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
 </header>
 <p class="warn">📅 <b>সব শেষ তারিখ নিজের ক্যালেন্ডারে:</b> <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fhigherstudyinfo.com%2Fdeadlines.ics" target="_blank" rel="noopener">Google Calendar-এ সাবস্ক্রাইব</a> · <a href="webcal://higherstudyinfo.com/deadlines.ics">iPhone / Outlook</a> · <a href="/deadlines.ics" download>.ics ফাইল</a>. সাবস্ক্রাইব করলে নতুন স্কলারশিপ যোগ হলে ক্যালেন্ডারও নিজে থেকে হালনাগাদ হবে, আর প্রতিটির ৭ দিন ও ১ দিন আগে রিমাইন্ডার পাবেন।</p>
+<p class="meta">মাস অনুযায়ী আলাদা পাতা: {' · '.join(f'<a href="/deadlines/{k}/">{BN_MONTHS[int(k[5:]) - 1]} {bn(k[:4])}</a>' for k in order)}</p>
 {chr(10).join(sections) if sections else '<p class="empty">এই মুহূর্তে শেষ তারিখসহ কোনো স্কলারশিপ নেই।</p>'}
 <p class="notice">শেষ তারিখ অফিসিয়াল সূত্র থেকে নেওয়া; সময় অঞ্চল আর ভেতরের আগের ডেডলাইন আলাদা হতে পারে। আবেদনের আগে সূত্র মিলিয়ে নিন।</p>
 {FOOTER}
@@ -1413,6 +1415,7 @@ def scholarships_index_body(updated):
   <h1>সব স্কলারশিপের তালিকা</h1>
   <p class="lede">{bn(n)}টি স্কলারশিপ, অঞ্চল আর দেশ অনুযায়ী সাজানো। ফিল্টার দিয়ে খুঁজতে <a href="/search/">স্কলারশিপ সার্চ</a>, শেষ তারিখ অনুযায়ী দেখতে <a href="/deadlines/">শেষ তারিখ সামনে</a>।</p>
 </header>
+{hub_links()}
 <section class="rel idx">{"".join(parts)}</section>
 {FOOTER}
 </div>"""
@@ -2069,3 +2072,110 @@ def loan_body(updated):
          ("Dutch-Bangla Bank — Life Line", "https://dutchbanglabank.com/personal-banking/life-line.html"),
          ("Sonali Bank — Student File", "https://studentfile.sonalibank.com.bd/studentfile/"),
          ("Bangladesh Bank — FE circular (30 Sep 2026)", "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302026fepd-140e.pdf")])
+
+
+# ---- Auto-generated hub pages (rebuilt from the data on every build) ----
+def _hub_rows(updated, pred):
+    rows = [r for r in all_rows() if not (r.get("deadline") and r["deadline"] < updated) and pred(r)]
+    rows.sort(key=lambda r: (r.get("session_year", "").startswith("Next round"), r.get("deadline") or "9999", r["scholarship_name"]))
+    return rows
+
+
+def _hub_item(r):
+    tag = r.get("funding_type", "unknown")
+    meta = [html.escape(COUNTRIES[r["slug"]][0]), html.escape(r["level"])]
+    if r.get("deadline"):
+        meta.append("শেষ তারিখ " + html.escape(r["deadline"]))
+    if r.get("session_year", "").startswith("Next round"):
+        meta.append("⏳ পরের রাউন্ডের অপেক্ষায়")
+    return (f'<li><a href="{r["page"]}">{html.escape(r["scholarship_name"])}</a> '
+            + (f'<span class="ftag f-{tag}">{FUND_BN[tag]}</span>' if tag != "unknown" else "")
+            + f'<br><span class="meta">{" · ".join(meta)}</span></li>')
+
+
+def _year_label(updated):
+    y = int(updated[:4])
+    return f"{bn(y)}–{bn(y + 1)}"
+
+
+HUBS = [  # slug, title template, intro, predicate
+    ("fully-funded", "বাংলাদেশিদের জন্য ফুল ফান্ডেড স্কলারশিপ {y}",
+     "যেসব স্কলারশিপে অফিসিয়াল সূত্র অনুযায়ী টিউশন আর জীবনযাত্রার ভাতা দুটোই দেওয়া হয়। কিছু স্কলারশিপ বাস্তবে ফুল ফান্ডেড হলেও সূত্রে স্পষ্ট লেখা না থাকলে এখানে রাখা হয়নি।",
+     lambda r: r.get("funding_type") == "full"),
+    ("without-ielts", "IELTS ছাড়া আবেদনের সুযোগ আছে এমন স্কলারশিপ {y}",
+     "অফিসিয়াল শর্তে IELTS ছাড়ের পথ আছে — যেমন ইংরেজি মাধ্যমে আগের ডিগ্রি, বিশ্ববিদ্যালয়ের প্রত্যয়নপত্র, বা অন্য পরীক্ষা গ্রহণ। প্রতিটির শর্ত পেজে মিলিয়ে নিন।",
+     lambda r: bool(r.get("english_requirement")) and bool(re.search(WAIVER_RE, r["english_requirement"], re.I))),
+    ("government", "সরকারি স্কলারশিপ {y} — দেশভিত্তিক তালিকা",
+     "বিভিন্ন দেশের সরকার, মন্ত্রণালয় আর সরকারি সংস্থার দেওয়া স্কলারশিপ — যেমন DAAD, Chevening, MEXT, Türkiye Bursları, Stipendium Hungaricum।",
+     lambda r: r.get("provider_type") == "government" and r["slug"] != "asia/bangladesh"),
+    ("masters", "মাস্টার্সের স্কলারশিপ {y}",
+     "বিদেশে মাস্টার্স (স্নাতকোত্তর) পড়ার জন্য এখন খোলা ও আসন্ন স্কলারশিপ।",
+     lambda r: r["slug"] != "asia/bangladesh" and bool(re.search(r"PG|Master|MS\b|MSc|MPhil", r["level"]))),
+    ("phd", "PhD স্কলারশিপ ও ফেলোশিপ {y}",
+     "PhD আর পোস্টডক্টরাল গবেষণার জন্য এখন খোলা ও আসন্ন স্কলারশিপ। ফান্ডেড PhD পদের জন্য আরও দেখুন ফান্ডেড PhD গাইড।",
+     lambda r: r["slug"] != "asia/bangladesh" and bool(re.search(r"PhD|Postdoc", r["level"]))),
+    ("undergraduate", "স্নাতক (Bachelor's) পর্যায়ের স্কলারশিপ {y}",
+     "বিদেশে স্নাতক পড়ার জন্য এখন খোলা ও আসন্ন স্কলারশিপ।",
+     lambda r: r["slug"] != "asia/bangladesh" and bool(re.search(r"\bUG\b|Diploma", r["level"]))),
+    ("bangladesh", "বাংলাদেশে পড়ার স্কলারশিপ, বৃত্তি ও টিউশন মওকুফ {y}",
+     "সরকারি ফেলোশিপ (UGC, NST, ICT), পাবলিক ও প্রাইভেট বিশ্ববিদ্যালয়ের বৃত্তি আর টিউশন মওকুফ — এক পাতায়।",
+     lambda r: r["slug"] == "asia/bangladesh"),
+]
+HUB_EXTRA = {"phd": ' <a href="/guides/funded-phd/">ফান্ডেড PhD গাইড →</a>', "without-ielts": ' <a href="/guides/english-tests/">ইংরেজি পরীক্ষার গাইড →</a>'}
+
+
+def hub_links(current=""):
+    items = "".join(f'<li><a href="/scholarships/{s}/">{t.format(y="").strip()}</a></li>' for s, t, _, _ in HUBS if s != current)
+    return f'<section class="rel"><h2>আরও তালিকা</h2><ul class="tags">{items}<li><a href="/scholarships/">সব স্কলারশিপ (A–Z)</a></li></ul></section>'
+
+
+def hub_body(slug, updated):
+    s_, title, intro, pred = next(h for h in HUBS if h[0] == slug)
+    rows = _hub_rows(updated, pred)
+    title = title.format(y=_year_label(updated))
+    items = "".join(_hub_item(r) for r in rows)
+    ld = {"@context": "https://schema.org", "@type": "ItemList", "name": title, "numberOfItems": len(rows),
+          "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": "https://higherstudyinfo.com" + r["page"], "name": r["scholarship_name"]} for i, r in enumerate(rows)]}
+    script = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+    return title, f"""<style>.elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}</style>
+<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a> / <a href="/scholarships/">সব স্কলারশিপ</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">{bn(len(rows))}টি স্কলারশিপ · সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>{title}</h1>
+  <p class="lede">{intro}{HUB_EXTRA.get(slug, "")}</p>
+</header>
+<ul class="elist">{items or '<li class="meta">এই মুহূর্তে কিছু নেই।</li>'}</ul>
+<p class="notice">তালিকা প্রতি সপ্তাহে অফিসিয়াল সূত্র থেকে হালনাগাদ হয়; মেয়াদ পেরোনো স্কলারশিপ নিজে থেকেই সরে যায়। আবেদনের আগে প্রতিটির সূত্র লিংকে শর্ত মিলিয়ে নিন। নিজের যোগ্যতা দেখতে: <a href="/tools/eligibility/">যোগ্যতা যাচাই</a>।</p>
+{hub_links(slug)}
+{FOOTER}
+</div>
+{script}"""
+
+
+def month_hubs(updated):
+    """{ 'YYYY-MM': rows } for upcoming deadline months."""
+    out = {}
+    for r in _hub_rows(updated, lambda r: bool(r.get("deadline"))):
+        out.setdefault(r["deadline"][:7], []).append(r)
+    return out
+
+
+def month_body(ym, rows):
+    y, m = int(ym[:4]), int(ym[5:])
+    title = f"{BN_MONTHS[m - 1]} {bn(y)}-এ শেষ তারিখ এমন স্কলারশিপ"
+    items = "".join(_hub_item(r) for r in rows)
+    return title, f"""<style>.elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}</style>
+<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a> / <a href="/deadlines/">শেষ তারিখ সামনে</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">{bn(len(rows))}টি স্কলারশিপ · সর্বশেষ যাচাই {CHECKED}</span>
+  <h1>{title}</h1>
+  <p class="lede">{BN_MONTHS[m - 1]} মাসে আবেদনের শেষ তারিখ — তারিখ অনুযায়ী সাজানো। সব শেষ তারিখ ক্যালেন্ডারে পেতে <a href="/deadlines/">শেষ তারিখ সামনে</a> পেজ থেকে সাবস্ক্রাইব করুন।</p>
+</header>
+<ul class="elist">{items}</ul>
+{hub_links()}
+{FOOTER}
+</div>"""
