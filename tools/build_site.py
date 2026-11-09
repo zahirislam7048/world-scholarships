@@ -399,6 +399,23 @@ def main():
     en_pages["/en/guides/funded-phd/"] = ("Funded PhD — TA, RA and salaried PhD | Higher Study Info", "Assistantships and minimum funding in the US and Canada, salaried PhD positions in Europe.", site_en.funded_phd_en())
     en_pages["/en/guides/fraud/"] = ("Avoiding fraud — agents, fake admissions and visas | Higher Study Info", "Warning signs of fake admission letters, forged documents and dishonest agents.", site_en.fraud_en())
     en_pages["/en/guides/faq/"] = ("Studying abroad — FAQ | Higher Study Info", "Studying without IELTS, low CGPA, study gaps, age limits, bank balance, agents and more.", site_en.faq_en())
+    for hs, _, _ in site_en.HUBS_EN:
+        t_, b_ = site_en.hub_en(hs, PAGES, updated, chk)
+        en_pages[f"/en/scholarships/{hs}/"] = (f"{t_} | Higher Study Info", t_ + " — from official sources, updated weekly, with deadlines and application links.", b_)
+        ALT[f"/scholarships/{hs}/"] = f"/en/scholarships/{hs}/"
+    for c_ in site_en.STUDY_EN:
+        t_, d_, b_ = site_en.study_in_en(c_, PAGES, updated, chk)
+        sl_ = site_extra.STUDY_IN[c_][0]
+        en_pages[f"/en/study-in/{sl_}/"] = (f"{t_} | Higher Study Info", d_, b_)
+        ALT[f"/study-in/{sl_}/"] = f"/en/study-in/{sl_}/"
+    en_pages["/en/study-in/"] = ("Study abroad — country guides | Higher Study Info", "Country guides for 14 study destinations: scholarships, visa funds, work and post-study rules.", site_en.study_in_index_en(PAGES, updated))
+    ALT["/study-in/"] = "/en/study-in/"
+    en_pages["/en/guides/part-time-work/"] = ("Part-time work while studying — rules by country | Higher Study Info", "Work-hour limits on student visas in 12+ countries, from official sources.", site_en.work_rules_en("work"))
+    en_pages["/en/guides/post-study-work/"] = ("Post-study work visas by country | Higher Study Info", "Job-seeker permits, OPT, PGWP, graduate visas — what each country allows after graduation.", site_en.work_rules_en("post"))
+    for k_, t_ in [("sop", "How to write a Statement of Purpose (SOP)"), ("motivation-letter", "How to write a motivation letter"), ("lor", "Letters of recommendation — how to ask"), ("professor-email", "How to email a potential PhD supervisor")]:
+        en_pages[f"/en/guides/{k_}/"] = (f"{t_} | Higher Study Info", t_ + " — practical guidance from university and scholarship sources.", site_en.writing_guide_en(k_))
+        ALT[f"/guides/{k_}/"] = f"/en/guides/{k_}/"
+    ALT.update({"/guides/part-time-work/": "/en/guides/part-time-work/", "/guides/post-study-work/": "/en/guides/post-study-work/"})
     ALT.update({"/guides/": "/en/guides/", "/guides/visa/": "/en/guides/visa/", "/guides/funded-phd/": "/en/guides/funded-phd/",
                 "/guides/fraud/": "/en/guides/fraud/", "/guides/faq/": "/en/guides/faq/"})
     for path, (title, desc, body) in en_pages.items():

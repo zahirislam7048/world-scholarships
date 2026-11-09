@@ -23,7 +23,7 @@ def footer_en():
     regions = "".join(f'<li><a href="/en/{k}/">{v[0]}</a></li>' for k, v in CONTINENTS.items())
     return (f'<footer class="sitefoot"><nav class="fcols" aria-label="Site links">'
             f'<div><h4>Regions</h4><ul>{regions}</ul></div>'
-            f'<div><h4>Directory</h4><ul><li><a href="/en/scholarships/">All scholarships (A–Z)</a></li><li><a href="/en/deadlines/">Upcoming deadlines</a></li>'
+            f'<div><h4>Directory</h4><ul><li><a href="/en/scholarships/">All scholarships (A–Z)</a></li><li><a href="/en/scholarships/fully-funded/">Fully funded scholarships</a></li><li><a href="/en/study-in/">Study abroad by country</a></li><li><a href="/en/deadlines/">Upcoming deadlines</a></li>'
             f'<li><a href="/deadlines.ics">Deadline calendar (.ics)</a></li><li><a href="/en/about/">About this site</a></li></ul></div>'
             f'<div><h4>Guides</h4><ul><li><a href="/en/guides/visa/">Student visas</a></li><li><a href="/en/guides/funded-phd/">Funded PhD</a></li>'
             f'<li><a href="/en/guides/fraud/">Avoiding fraud</a></li><li><a href="/en/guides/faq/">FAQ</a></li><li><a href="/guides/" lang="bn">More guides (Bangla)</a></li></ul></div></nav>'
@@ -275,7 +275,14 @@ def _en_guide(h1, lede, inner, sources, bn_path):
 </div>"""
 
 
-EN_GUIDES = [("/en/guides/visa/", "Student visas by country", "Funds to show, work rules and post-study options in 14 countries."),
+EN_GUIDES = [("/en/study-in/", "Study abroad — country guides", "14 destinations: scholarships, visa funds, work and post-study rules on one page each."),
+             ("/en/guides/visa/", "Student visas by country", "Funds to show, work rules and post-study options in 14 countries."),
+             ("/en/guides/part-time-work/", "Part-time work while studying", "Work-hour limits on student visas, country by country."),
+             ("/en/guides/post-study-work/", "Post-study work visas", "Job-seeker permits, OPT, PGWP and graduate visas by country."),
+             ("/en/guides/sop/", "Statement of Purpose (SOP)", "Structure, length and common mistakes, from university guidance."),
+             ("/en/guides/motivation-letter/", "Motivation letter", "What DAAD and European programmes expect."),
+             ("/en/guides/lor/", "Letters of recommendation", "Whom to ask, when and how."),
+             ("/en/guides/professor-email/", "Emailing a potential supervisor", "Structure, attachments and follow-up."),
              ("/en/guides/funded-phd/", "Funded PhD — TA, RA and salaried PhD", "Assistantships in the US and Canada, minimum funding policies and salaried PhD posts in Europe."),
              ("/en/guides/fraud/", "Avoiding fraud", "Fake admission letters, forged documents and dishonest agents — warning signs from government sources."),
              ("/en/guides/faq/", "Frequently asked questions", "Studying without IELTS, low CGPA, study gaps, age limits, bank balance, agents and more.")]
@@ -391,3 +398,155 @@ def faq_en():
            '.faq p{margin:10px 0 0}.faq a{color:var(--accent)}.faqs{display:flex;flex-direction:column;gap:10px}</style>')
     return css + _en_guide("Frequently asked questions", "The questions students from Bangladesh ask most about studying abroad — with links to detailed guides and official sources.",
                            f'<div class="faqs">{items}</div>', [], "/guides/faq/") + script
+
+
+# ---- English hub lists, study-in pages, work guides, writing guides ----
+HUBS_EN = [("fully-funded", "Fully funded scholarships for Bangladeshi students {y}", "Scholarships where the official source states both tuition and a living stipend. Some awards that are fully funded in practice are left out when the source does not say so."),
+           ("without-ielts", "Scholarships you can apply for without IELTS {y}", "The official English requirement allows a waiver — e.g. a previous English-medium degree, a university letter or another test."),
+           ("government", "Government scholarships {y} by country", "Scholarships from governments, ministries and public agencies — DAAD, Chevening, MEXT, Türkiye Bursları, Stipendium Hungaricum and more."),
+           ("masters", "Master's scholarships {y}", "Current and upcoming scholarships for master's study abroad."),
+           ("phd", "PhD scholarships and fellowships {y}", "Current and upcoming scholarships for PhD and postdoctoral research."),
+           ("undergraduate", "Undergraduate scholarships {y}", "Current and upcoming scholarships for bachelor's study abroad.")]
+FUND_TAG_EN = {"full": "Fully funded", "tuition": "Tuition waiver", "stipend": "Stipend", "partial": "Partial"}
+
+
+def _en_item(r, ps):
+    meta = [E(COUNTRIES[r["_slug"]][0]), E(r["level"])] + ([f'deadline {E(r["deadline"])}'] if r.get("deadline") else []) + (["⏳ next round awaited"] if is_watch(r) else [])
+    tag = r.get("funding_type", "unknown")
+    return (f'<li><a href="/en/scholarship/{ps}/">{E(r["scholarship_name"])}</a> ' + (f'<span class="ftag f-{tag}">{FUND_TAG_EN[tag]}</span>' if tag in FUND_TAG_EN else "")
+            + f'<br><span class="meta">{" · ".join(meta)}</span></li>')
+
+
+def _en_rows(pages, updated, pred):
+    out = []
+    for (s, i), ps in pages.items():
+        r = dict(load_rows(s)[i], _slug=s)
+        if not (r.get("deadline") and r["deadline"] < updated) and pred(s, r):
+            out.append((r, ps))
+    out.sort(key=lambda x: (is_watch(x[0]), x[0].get("deadline") or "9999", x[0]["scholarship_name"]))
+    return out
+
+
+def hub_en(slug, pages, updated, checked):
+    import re as _re
+    preds = {"fully-funded": lambda s, r: r.get("funding_type") == "full",
+             "without-ielts": lambda s, r: bool(r.get("english_requirement")) and bool(_re.search(site_extra.WAIVER_RE, r["english_requirement"], _re.I)),
+             "government": lambda s, r: r.get("provider_type") == "government" and s != "asia/bangladesh",
+             "masters": lambda s, r: s != "asia/bangladesh" and bool(_re.search(r"PG|Master|MS\b|MSc|MPhil", r["level"])),
+             "phd": lambda s, r: s != "asia/bangladesh" and bool(_re.search(r"PhD|Postdoc", r["level"])),
+             "undergraduate": lambda s, r: s != "asia/bangladesh" and bool(_re.search(r"\bUG\b|Diploma", r["level"]))}
+    sl, title, intro = next(h for h in HUBS_EN if h[0] == slug)
+    y = int(updated[:4])
+    title = title.format(y=f"{y}–{y + 1}")
+    rows = _en_rows(pages, updated, preds[slug])
+    others = "".join(f'<li><a href="/en/scholarships/{s}/">{E(t.format(y="").strip())}</a></li>' for s, t, _ in HUBS_EN if s != slug)
+    return title, f"""<style>.elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}</style>
+<div class="wrap">
+{nav_en("", f"/scholarships/{slug}/")}
+<nav class="crumbs"><a href="/en/">Home</a> / <a href="/en/scholarships/">All scholarships</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px"><span class="eyebrow">{len(rows)} scholarships · last checked {checked}</span><h1>{E(title)}</h1><p class="lede">{E(intro)}</p></header>
+<ul class="elist">{"".join(_en_item(r, ps) for r, ps in rows)}</ul>
+<p class="notice">Updated weekly from official sources; expired calls are removed automatically. Check each source link before applying.</p>
+<section class="rel"><h2>More lists</h2><ul class="tags">{others}<li><a href="/en/scholarships/">All scholarships (A–Z)</a></li></ul></section>
+{footer_en()}
+</div>"""
+
+
+STUDY_EN = {"Germany": "Germany", "United Kingdom": "the UK", "United States": "the USA", "Canada": "Canada", "Australia": "Australia", "Italy": "Italy", "Japan": "Japan",
+            "South Korea": "South Korea", "Malaysia": "Malaysia", "France": "France", "Netherlands": "the Netherlands", "Ireland": "Ireland", "Türkiye": "Türkiye", "Hungary": "Hungary"}
+
+
+def study_in_en(c, pages, updated, checked):
+    v = next(x for x in site_extra.VISA if x["c"] == c)
+    url_slug = site_extra.STUDY_IN[c][0]
+    slug = site_extra._country_slug(c)
+    name = STUDY_EN[c]
+    y = int(updated[:4])
+    title = f"Study in {name} {y}–{y + 1} — scholarships, costs, visa and work rules"
+    rows = _en_rows(pages, updated, lambda s, r: s == slug)
+    f, w, p, fee = VISA_EN.get(c, ("", "", "", ""))
+    facts = "".join(f"<tr><th>{k}</th><td>{E(x)}</td></tr>" for k, x in [("Visa", _en_visa_name(v["visa"])), ("Funds to show", f), ("Work while studying", w), ("After graduation", p), ("Visa fee", fee)] if x)
+    dbs = "".join(f'<li><a href="{E(u)}" target="_blank" rel="noopener">{E(n)} ↗</a></li>' for cn, n, u, d, h in site_extra.PROGRAM_DBS if h == f"/{slug}/")
+    faq = [(q, a) for q, a in [(f"How much money must I show to study in {name}?", f), (f"Can I work while studying in {name}?", w), (f"Can I stay to work after graduating in {name}?", p)] if a]
+    if rows:
+        faq.append((f"Which scholarships are available for {name}?", "Currently listed: " + "; ".join(r["scholarship_name"] for r, _ in rows[:6]) + "."))
+    import json as _j
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
+    others = "".join(f'<li><a href="/en/study-in/{site_extra.STUDY_IN[o][0]}/">Study in {STUDY_EN[o]}</a></li>' for o in STUDY_EN if o != c)
+    full = sum(r.get("funding_type") == "full" for r, _ in rows)
+    inner = f"""<div class="kpis"><div><b>{len(rows)}</b><span>current &amp; upcoming scholarships</span></div><div><b>{full}</b><span>fully funded</span></div></div>
+  <h2>At a glance: visa, money and work</h2><div class="tbl-wrap"><table class="t fit">{facts}</table></div>
+  <p class="meta">Full details with sources: <a href="/en/guides/visa/#{site_extra.VISA_IDS[c]}">Student visas by country</a></p>
+  <h2>Scholarships for {name}</h2>
+  {f'<ul class="elist">{"".join(_en_item(r, ps) for r, ps in rows)}</ul>' if rows else '<p class="meta">No current scholarship listed — updated weekly.</p>'}
+  <p><a href="/en/{slug}/">All {E(COUNTRIES[slug][0])} scholarships →</a> · <a href="/en/scholarships/fully-funded/">Fully funded scholarships in all countries →</a></p>
+  {f'<h2>Find programmes</h2><ul>{dbs}</ul>' if dbs else ""}
+  <h2>Frequently asked questions</h2>
+  {"".join(f'<details class="faq"><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faq)}
+  <style>.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}}.kpis div{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}}
+  .kpis b{{display:block;font-family:var(--display);font-size:30px;color:var(--accent);line-height:1.1}}.kpis span{{font-size:13px;color:var(--muted)}}
+  .elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}
+  .faq{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}}.faq summary{{cursor:pointer;font-weight:600}}</style>
+  <script type="application/ld+json">{_j.dumps(ld, ensure_ascii=False)}</script>
+  <section class="rel"><h2>Study in other countries</h2><ul class="tags">{others}</ul></section>"""
+    body = _en_guide(E(title), f"Everything for studying in {name} from Bangladesh on one page — current scholarships, the money to show for the visa, work rules during and after studies, and official programme databases. From official sources, updated weekly (last checked {checked}).",
+                     inner, list(v["src"]), f"/study-in/{url_slug}/")
+    body = body.replace('<a href="/en/guides/">Guides</a></nav>', '<a href="/en/study-in/">Study by country</a></nav>', 1)
+    return title, f"Study in {name}: {len(rows)} current scholarships, visa funds, work while studying, post-study work and programme search — from official sources.", body
+
+
+def study_in_index_en(pages, updated):
+    cards = "".join(f'<a class="card" href="/en/study-in/{site_extra.STUDY_IN[c][0]}/"><h2>Study in {STUDY_EN[c]}</h2><span class="meta">Scholarships · visa · work · costs</span></a>' for c in STUDY_EN)
+    return f"""<div class="wrap">
+{nav_en("", "/study-in/")}
+<nav class="crumbs"><a href="/en/">Home</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px"><h1>Study abroad — country guides</h1><p class="lede">{len(STUDY_EN)} popular destinations, one page each: scholarships, visa funds, work rules, post-study options and programme search.</p></header>
+<div class="guides">{cards}</div>
+{footer_en()}
+</div>"""
+
+
+def work_rules_en(kind):
+    idx = 1 if kind == "work" else 2
+    rows = "".join(f'<tr><td><a href="/en/guides/visa/#{site_extra.VISA_IDS[v["c"]]}">{E(v["c"])}</a></td><td>{E(VISA_EN.get(v["c"], ("", "", "", ""))[idx])}</td></tr>'
+                   for v in site_extra.VISA if VISA_EN.get(v["c"], ("", "", "", ""))[idx])
+    if kind == "work":
+        return _en_guide("Part-time work while studying — rules by country", "How many hours a student visa allows you to work in each country, from official government sources.",
+                         f'<div class="tbl-wrap"><table class="t fit"><tr><th>Country</th><th>Work while studying</th></tr>{rows}</table></div><p class="warn">Never work beyond the limit — breaching visa conditions can lead to cancellation. Do not plan to pay tuition from part-time work; visa funds must be shown separately.</p>', [], "/guides/part-time-work/")
+    return _en_guide("Post-study work visas — by country", "What each country allows after you graduate: job-seeker permits, OPT, PGWP, graduate visas — from official government sources.",
+                     f'<div class="tbl-wrap"><table class="t fit"><tr><th>Country</th><th>After graduation</th></tr>{rows}</table></div><p class="meta">Conditions are often set at the start of your studies (e.g. whether your Canadian institution is PGWP-eligible, or your US degree is on the STEM list) — check before you enrol.</p>', [], "/guides/post-study-work/")
+
+
+def writing_guide_en(kind):
+    if kind == "sop":
+        return _en_guide("How to write a Statement of Purpose (SOP)", "An SOP is an academic letter: what you want to study or research, how you prepared, why this programme, and your goals. US, Canadian and Australian master's/PhD applications usually ask for one.",
+            """<h2>Length</h2><p>Follow the programme's limit. Examples: UC Berkeley suggests roughly 500–1,000 words, Cornell usually 1–2 pages, UCLA's prompt 500 words maximum.</p>
+  <h2>Structure</h2><ol><li><b>Interest and question</b> — the problem that drives you; avoid starting with a life story.</li><li><b>Preparation</b> — thesis, projects, research or work: your role and results.</li>
+  <li><b>Why this programme</b> — name faculty, labs or courses that fit.</li><li><b>Goals</b> — specific and realistic.</li></ol>
+  <h2>Do and don't</h2><ul><li>Write a different SOP for each programme (Purdue OWL).</li><li>Show qualities with examples, don't just claim them (Berkeley).</li><li>Explain a low CGPA or a gap briefly and positively.</li><li>Never copy samples — universities check for plagiarism.</li></ul>""",
+            [("UC Berkeley — Writing your statements", "https://grad.berkeley.edu/admissions/application-process/writing-your-statements/"),
+             ("Cornell — Statement of purpose", "https://gradschool.cornell.edu/admissions/application-steps/statements-of-purpose/"),
+             ("Purdue OWL — Statement of purpose", "https://owl.purdue.edu/owl/general_writing/graduate_school_applications/graduate_school_applications_statements_of_purpose/statements_of_purpose_drafting_your_statement.html")], "/guides/sop/")
+    if kind == "motivation-letter":
+        return _en_guide("How to write a motivation letter (DAAD, Erasmus Mundus)", "European universities and scholarships usually ask for a motivation letter: why this subject, programme and country, how you prepared, and how you will use the degree — especially back home.",
+            """<h2>Length</h2><p>DAAD examples: 1–3 pages for STEM study scholarships; usually 1–2 pages for doctoral and research grants; maximum 2 pages, dated, for the Helmut Schmidt Programme.</p>
+  <h2>Questions DAAD expects you to answer</h2><ol><li>What you want to gain, personally and professionally.</li><li>How previous study and work prepare you.</li><li>Why this programme and university.</li><li>Your goals during the stay (for a PhD, a short research plan).</li><li>How you will use the qualification at home.</li></ol>
+  <h2>Format</h2><p>Name and contact, date, recipient (named person or "Selection Committee"), subject line, salutation, 4–6 paragraphs, "Yours sincerely" and your signature.</p>
+  <h2>Avoid</h2><ul><li>Repeating your CV or flowery language (DAAD).</li><li>Leftover template text, generic phrases ("esteemed institution").</li><li>AI-generated answers — Chevening prohibits them.</li></ul>""",
+            [("DAAD — Letter of motivation", "https://www2.daad.de/medien/letter_of_motivation_nawam.pdf"), ("Chevening — Application advice", "https://www.chevening.org/news/application-advice/")], "/guides/motivation-letter/")
+    if kind == "lor":
+        return _en_guide("Letters of recommendation (LOR) — how to ask", "Most master's and PhD applications need 2–3 recommendation letters. Your job is to ask the right people, at the right time, in the right way.",
+            """<ul><li><b>Who:</b> people who know your work well and can give specific examples — thesis supervisor, a course teacher, a research or work supervisor (UCLA).</li>
+  <li><b>When:</b> at least several weeks, ideally 2–3 months ahead (Cornell, UCLA).</li><li><b>Ask in person</b> whether they can write a <em>strong</em> letter; if they hesitate, ask someone else (Berkeley).</li>
+  <li><b>Give them:</b> CV, transcript, draft SOP, list of programmes with deadlines.</li><li><b>Never</b> write the letter yourself for a signature — portals send links to the referee's official email.</li>
+  <li>Waiving your right to see the letter can make it more credible (Harvard GSAS).</li></ul>""",
+            [("Cornell — Requesting letters of recommendation", "https://gradschool.cornell.edu/inclusion/recruitment/prospective-students/requesting-letters-of-recommendation/"),
+             ("UCLA — Asking for a letter (PDF)", "https://grad.ucla.edu/asis/agep/advltrrec.pdf"), ("Harvard GSAS — Right to inspect letters", "https://gsas.harvard.edu/apply/degree-programs/completing-your-application/letters-recommendation/right-inspect-letters")], "/guides/lor/")
+    return _en_guide("How to email a potential PhD supervisor", "For a PhD and many research master's you contact a potential supervisor before applying. A good email is short, specific and written for one person.",
+        """<ul><li>Read their recent papers and check they take new students (Oxford, Cambridge).</li><li>Never send the same email to many people (Cambridge).</li>
+  <li>Subject line with a clear purpose, e.g. "Enquiry about potential PhD application".</li><li>150–250 words: who you are, the link between their work and yours, what you want to work on, how you will fund it, and whether they take students.</li>
+  <li>Attach a CV (and a short proposal if you have one); keep files small and clearly named.</li><li>Wait 3–4 weeks before one polite follow-up (Edinburgh).</li></ul>
+  <p>Find supervisors: <a href="/professors/" lang="bn">professor search</a>.</p>""",
+        [("Cambridge — Contacting a potential PhD supervisor", "https://bbsrcdtp.lifesci.cam.ac.uk/contacting-potential-phd-supervisor-quick-guide"),
+         ("Oxford — Research project and supervisor", "https://www.ox.ac.uk/admissions/graduate/application-guide/starting-your-application/research-project-and-supervisor"),
+         ("Edinburgh Business School — Find a supervisor", "https://www.business-school.ed.ac.uk/phd/find-a-supervisor")], "/guides/professor-email/")
