@@ -186,7 +186,6 @@ def deadlines_body(updated):
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই {CHECKED}</span>
   <h1>শেষ তারিখ সামনে</h1>
-  <p class="lede">যেসব স্কলারশিপের শেষ তারিখ জানা আছে, সেগুলো তারিখ অনুযায়ী সাজানো। নাম চাপলে স্কলারশিপের বিস্তারিত পেজ খুলবে। ১৪ দিনের কম বাকি থাকলে লাল চিহ্ন দেখাবে। শেষ তারিখ নেই এমন স্কলারশিপ দেখতে <a href="/search/">সব স্কলারশিপ খুঁজুন</a>।</p>
 </header>
 <p class="warn">📅 <b>সব শেষ তারিখ নিজের ক্যালেন্ডারে:</b> <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fhigherstudyinfo.com%2Fdeadlines.ics" target="_blank" rel="noopener">Google Calendar-এ সাবস্ক্রাইব</a> · <a href="webcal://higherstudyinfo.com/deadlines.ics">iPhone / Outlook</a> · <a href="/deadlines.ics" download>.ics ফাইল</a>. সাবস্ক্রাইব করলে নতুন স্কলারশিপ যোগ হলে ক্যালেন্ডারও নিজে থেকে হালনাগাদ হবে, আর প্রতিটির ৭ দিন ও ১ দিন আগে রিমাইন্ডার পাবেন।</p>
 <p class="meta">মাস অনুযায়ী আলাদা পাতা: {' · '.join(f'<a href="/deadlines/{k}/">{BN_MONTHS[int(k[5:]) - 1]} {bn(k[:4])}</a>' for k in order)}</p>
@@ -247,7 +246,6 @@ var FB = __FB__;
 <header style="display:flex;flex-direction:column;gap:10px">
   <span class="eyebrow">সব দেশ · সর্বশেষ যাচাই {CHECKED}</span>
   <h1>সব স্কলারশিপ খুঁজুন</h1>
-  <p class="lede">সব দেশের স্কলারশিপ এক জায়গায়। নাম, দেশ, বিশ্ববিদ্যালয়, শর্ত বা IELTS স্কোর লিখে খুঁজুন; অঞ্চল আর লেভেল দিয়ে ছাঁকুন। যেগুলোর শেষ তারিখ আগে, সেগুলো উপরে দেখায়।</p>
 </header>
 <div class="filters" role="search">
   <input id="q" type="search" placeholder="যেমন: PhD, Germany, IELTS 6.5, fully funded" aria-label="খুঁজুন">
