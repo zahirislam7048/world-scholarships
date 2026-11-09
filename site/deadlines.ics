@@ -358,6 +358,33 @@ DESCRIPTION:কাল শেষ তারিখ — Commonwealth Shared Sch
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:scholarship-gates-cambridge-scholarship-2027-28-united-kingdom-20261208
+ @higherstudyinfo.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20261208
+DTEND;VALUE=DATE:20261209
+SUMMARY:শেষ তারিখ: Gates Cambridge Scholarship 2027/28 (Uni
+ ted Kingdom)
+URL:https://higherstudyinfo.com/scholarship/gates-cambridge-scholarship-202
+ 7-28-united-kingdom/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/g
+ ates-cambridge-scholarship-2027-28-united-kingdom/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Gates Cambridge Scholarship 2027
+ /28
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Gates Cambridge Scholar
+ ship 2027/28
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:scholarship-chinese-government-scholarship-type-b-tsinghua-graduate-pro
  grams-china-20261215@higherstudyinfo.com
 DTSTAMP:20261108T000000Z
@@ -1057,6 +1084,34 @@ ACTION:DISPLAY
 TRIGGER:-P1D
 DESCRIPTION:কাল শেষ তারিখ — SI Scholarship for Glob
  al Professionals
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:scholarship-joint-japan-world-bank-graduate-scholarship-program-jj-wbgs
+ p-2027-organisations-20270226@higherstudyinfo.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:শেষ তারিখ: Joint Japan/World Bank Graduate Scholars
+ hip Program (JJ/WBGSP) 2027 (International organisations)
+URL:https://higherstudyinfo.com/scholarship/joint-japan-world-bank-graduate
+ -scholarship-program-jj-wbgsp-2027-organisations/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/j
+ oint-japan-world-bank-graduate-scholarship-program-jj-wbgsp-2027-organisat
+ ions/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Joint Japan/World Bank Graduate 
+ Scholarship Program (JJ/WBGSP) 2027
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Joint Japan/World Bank 
+ Graduate Scholarship Program (JJ/WBGSP) 2027
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT

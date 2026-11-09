@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Joint Japan/World Bank Graduate Scholarship Program (JJ/WBGSP)
+  2027
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-joint-japan-world-bank-graduate-scholarship-program-jj-wbgs
+ p-2027-organisations-20270226@higherstudyinfo.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:শেষ তারিখ: Joint Japan/World Bank Graduate Scholars
+ hip Program (JJ/WBGSP) 2027 (International organisations)
+URL:https://higherstudyinfo.com/scholarship/joint-japan-world-bank-graduate
+ -scholarship-program-jj-wbgsp-2027-organisations/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/j
+ oint-japan-world-bank-graduate-scholarship-program-jj-wbgsp-2027-organisat
+ ions/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — Joint Japan/World Bank Graduate 
+ Scholarship Program (JJ/WBGSP) 2027
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — Joint Japan/World Bank 
+ Graduate Scholarship Program (JJ/WBGSP) 2027
+END:VALARM
+END:VEVENT
+END:VCALENDAR

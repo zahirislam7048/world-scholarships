@@ -21,6 +21,7 @@ CONTINENTS = {
     "latin-america": ("Latin America", "লাতিন আমেরিকা", "লাতিন আমেরিকার"),
     "oceania": ("Oceania", "ওশেনিয়া", "ওশেনিয়ার"),
     "africa": ("Africa", "আফ্রিকা", "আফ্রিকার"),
+    "international": ("International", "আন্তর্জাতিক সংস্থা", "আন্তর্জাতিক সংস্থার"),
 }
 COUNTRIES = {
     "asia/bangladesh": ("Bangladesh", "বাংলাদেশ স্কলারশিপ তালিকা", "বাংলাদেশের স্কলারশিপ ও টিউশন ওয়েভার"),
@@ -70,6 +71,7 @@ COUNTRIES = {
     "oceania/new-zealand": ("New Zealand", "নিউজিল্যান্ড স্কলারশিপ তালিকা", "নিউজিল্যান্ডের স্কলারশিপ"),
     "africa/mauritius": ("Mauritius", "মরিশাস স্কলারশিপ তালিকা", "মরিশাসের স্কলারশিপ"),
     "africa/nigeria": ("Nigeria", "নাইজেরিয়া স্কলারশিপ তালিকা", "নাইজেরিয়ার স্কলারশিপ"),
+    "international/organisations": ("International organisations", "আন্তর্জাতিক সংস্থার স্কলারশিপ তালিকা", "World Bank, ADB, IsDB — আন্তর্জাতিক সংস্থার স্কলারশিপ"),
 }
 
 
