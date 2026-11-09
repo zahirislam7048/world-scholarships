@@ -12,6 +12,15 @@ NAV_CSS = """<style>
 .topnav .links{display:flex;flex-wrap:wrap;gap:4px 18px}
 .topnav .links a{color:var(--muted);text-decoration:none;font-size:15px}
 .topnav .links a:hover,.topnav .links a[aria-current]{color:var(--accent)}
+.gsearch{position:relative;flex:1 1 260px;max-width:420px;margin:0}
+.gsearch input{width:100%;font:inherit;font-size:15px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+.gsearch input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.gsearch ul{position:absolute;z-index:50;left:0;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:70vh;overflow:auto}
+.gsearch li a{display:block;padding:8px 10px;border-radius:8px;color:var(--fg);text-decoration:none;font-size:14px;line-height:1.35}
+.gsearch li a:hover,.gsearch li a.on{background:var(--accent-soft,#e3f1ea)}
+.gsearch li small{display:block;color:var(--muted);font-size:12px}
+.gsearch .k{display:inline-block;font-size:11px;font-weight:600;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:0 7px;margin-right:6px}
+.gsearch li.none{padding:8px 10px;color:var(--muted);font-size:14px}.gsearch li.all a{color:var(--accent);font-weight:600}
 .sitefoot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 .sitefoot a{color:var(--muted)}
 .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;margin-bottom:12px}
@@ -26,7 +35,13 @@ NAV_ITEMS = [("/whats-new/", "নতুন কী"), ("/deadlines/", "শেষ 
 def nav(current=""):
     cur = ' aria-current="page"'
     links = "".join(f'<a href="{href}"{cur if href == current else ""}>{label}</a>' for href, label in NAV_ITEMS)
-    return f'<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a><span class="links">{links}<a href="/en/" lang="en" hreflang="en">English</a></span></nav>'
+    return (f'<nav class="topnav" aria-label="মেনু"><a class="brand" href="/">Higher Study Info</a>{SEARCH_BOX_BN}'
+            f'<span class="links">{links}<a href="/en/" lang="en" hreflang="en">English</a></span></nav>')
+
+
+SEARCH_BOX_BN = ('<form class="gsearch" role="search" action="/search/" method="get"><input type="search" name="q" autocomplete="off" '
+                 'placeholder="স্কলারশিপ, দেশ, গাইড, প্রফেসর খুঁজুন…" aria-label="সাইটে খুঁজুন"><ul hidden></ul></form>'
+                 '<script src="/search.js" defer></script>')
 
 
 EMAIL = "higherstudyinfo30@gmail.com"
@@ -1036,6 +1051,7 @@ var DATA = __DATA__;
         '<a class="'+(r.p?'more':'apply info')+'" href="'+esc(r.x)+'" target="_blank" rel="noopener">ফ্যাকাল্টি তালিকা ↗</a>'+(r.cs?'<a class="more" href="'+r.cs+'">এই দেশের স্কলারশিপ</a>':'')+'</div></article>';
     }).join("");
   }
+  var UQ=new URLSearchParams(location.search).get("q");if(UQ)q.value=UQ;
   [q,sj,un,ct].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
   document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){sj.value=sj.value===b.dataset.s?"":b.dataset.s;render()})});
   render();
@@ -2135,7 +2151,7 @@ HUB_EXTRA = {"phd": ' <a href="/guides/funded-phd/">ফান্ডেড PhD �
 
 
 def hub_links(current=""):
-    items = "".join(f'<li><a href="/scholarships/{s}/">{t.format(y="").strip()}</a></li>' for s, t, _, _ in HUBS if s != current)
+    items = "".join(f'<li><a href="/scholarships/{s}/">{re.sub(r"\s+", " ", t.format(y="")).strip()}</a></li>' for s, t, _, _ in HUBS if s != current)
     return f'<section class="rel"><h2>আরও তালিকা</h2><ul class="tags">{items}<li><a href="/scholarships/">সব স্কলারশিপ (A–Z)</a></li><li><a href="/opportunities/">ফেলোশিপ ও ট্রেনিং</a></li></ul></section>'
 
 
@@ -2476,3 +2492,68 @@ def visa_status_body(updated):
          ("VFS Global — FAQ", "https://www.vfsglobal.com/en/individuals/faq.html"),
          ("anabin (KMK) — How to check a foreign university", "https://anabin.kmk.org/rechercheanleitung-hochschule"),
          ("Make it in Germany — anabin manual (PDF)", "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/1_Arbeiten_in_DE/2023_Jan_MiiG_Anleitung_anabin-Datenbank_EN.pdf")])
+
+
+GUIDE_KW = {"/guides/visa/": "visa student visa funds", "/guides/english-tests/": "ielts toefl duolingo pte english", "/tools/cgpa/": "cgpa gpa grade convert german",
+            "/guides/sop/": "sop statement of purpose", "/guides/lor/": "lor recommendation letter reference", "/guides/documents/": "attestation apostille documents certificate",
+            "/tools/budget/": "budget cost living", "/guides/funded-phd/": "phd funding ta ra assistantship", "/guides/part-time-work/": "part time job work",
+            "/guides/post-study-work/": "post study work visa psw opt pgwp", "/guides/other-tests/": "gre gmat sat jlpt topik testdaf goethe",
+            "/guides/application-portals/": "uni-assist ucas common app studielink portal", "/guides/cv/": "cv resume europass",
+            "/guides/education-loan/": "loan bank", "/guides/student-file/": "student file remittance bank", "/guides/interview/": "interview visa interview chevening",
+            "/tools/visa-check/": "visa check eligibility readiness", "/tools/visa-funds/": "visa funds bank balance money calculator",
+            "/guides/visa-status/": "visa status tracking verify anabin recognition", "/guides/fraud/": "fraud scam agent fake", "/guides/faq/": "faq questions",
+            "/programs/": "programme program course university database", "/tools/eligibility/": "eligibility eligible check", "/tools/timeline/": "timeline plan"}
+HUB_KW = {"fully-funded": "full scholarship", "without-ielts": "ielts waiver no ielts moi", "government": "govt government", "masters": "masters ms msc pg",
+          "phd": "phd doctoral postdoc", "undergraduate": "bachelor ug", "bangladesh": "bd local"}
+
+
+def search_index(lang="bn"):
+    """Entries for the site-wide search box: y=kind, t=title, d=detail, k=extra keywords, u=url."""
+    import csv as _csv
+    root = pathlib.Path(__file__).resolve().parent.parent
+    en = lang == "en"
+    out = []
+    for r in all_rows():
+        u = r["page"]
+        if en and u.startswith("/scholarship/"):
+            u = "/en" + u
+        out.append({"y": "s", "t": r["scholarship_name"], "u": u,
+                    "d": f'{COUNTRIES[r["slug"]][0]} · {r["level"]}' + (f' · {r["deadline"]}' if r.get("deadline") else ""),
+                    "k": " ".join([COUNTRIES[r["slug"]][0], COUNTRIES[r["slug"]][1], r["provider"], r["level"], r.get("fields", ""),
+                                   "fully funded ফুল ফান্ডেড" if r.get("funding_type") == "full" else "", r.get("english_requirement", "")[:80]])})
+    for slug, (name_en, title, heading) in COUNTRIES.items():
+        out.append({"y": "c", "t": (f"{name_en} scholarships" if en else heading), "u": (f"/en/{slug}/" if en else f"/{slug}/"),
+                    "k": f"{name_en} {title} {heading} {slug.split('/')[1].replace('-', ' ')}"})
+    for k, (en_name, bn_name, bn_of) in CONTINENTS.items():
+        out.append({"y": "c", "t": (en_name if en else f"{bn_of} স্কলারশিপ"), "u": (f"/en/{k}/" if en else f"/{k}/"), "k": f"{en_name} {bn_name}"})
+    if en:
+        out += [{"y": "g", "t": "Student visas by country", "u": "/en/guides/visa/", "k": "visa funds work"},
+                {"y": "g", "t": "Funded PhD — TA, RA and salaried PhD", "u": "/en/guides/funded-phd/", "k": "phd funding assistantship"},
+                {"y": "g", "t": "Avoiding fraud", "u": "/en/guides/fraud/", "k": "agent scam fake"},
+                {"y": "g", "t": "Frequently asked questions", "u": "/en/guides/faq/", "k": "faq ielts cgpa gap age"},
+                {"y": "h", "t": "All scholarships (A–Z)", "u": "/en/scholarships/", "k": "list"},
+                {"y": "h", "t": "Upcoming deadlines", "u": "/en/deadlines/", "k": "deadline calendar"}]
+    else:
+        for h, t, d in GUIDES:
+            out.append({"y": "t" if h.startswith("/tools/") else "g", "t": re.sub(r"^\S+\s", "", t), "u": h, "d": d,
+                        "k": h.strip("/").replace("/", " ").replace("-", " ") + " " + GUIDE_KW.get(h, "")})
+        for s_, t, intro, _ in HUBS:
+            out.append({"y": "h", "t": re.sub(r"\s+", " ", t.format(y="")).strip(), "u": f"/scholarships/{s_}/", "k": s_.replace("-", " ") + " " + HUB_KW.get(s_, "")})
+        out += [{"y": "t", "t": "সব স্কলারশিপ খুঁজুন (ফিল্টারসহ)", "u": "/search/", "k": "search filter"},
+                {"y": "h", "t": "শেষ তারিখ সামনে", "u": "/deadlines/", "k": "deadline calendar ক্যালেন্ডার"},
+                {"y": "h", "t": "এই সপ্তাহে নতুন কী", "u": "/whats-new/", "k": "new update"},
+                {"y": "t", "t": "প্রফেসর সার্চ", "u": "/professors/", "k": "professor supervisor সুপারভাইজার"},
+                {"y": "t", "t": "আমার শর্টলিস্ট", "u": "/shortlist/", "k": "shortlist saved"},
+                {"y": "h", "t": "ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ", "u": "/opportunities/", "k": "fellowship training internship"},
+                {"y": "h", "t": "সব স্কলারশিপের তালিকা (A–Z)", "u": "/scholarships/", "k": "list all"}]
+    for r in _csv.DictReader(open(root / "data" / "professors" / "professors.csv", encoding="utf-8")):
+        out.append({"y": "p", "t": r["name"], "u": "/professors/?q=" + urllib_quote(r["name"]), "d": f'{r["university"]} · {r["subject"]}',
+                    "k": f'{r["country"]} {r["department"]} {r["research_interests"]}'})
+    for r in _csv.DictReader(open(root / "data" / "opportunities" / "opportunities.csv", encoding="utf-8")):
+        out.append({"y": "o", "t": r["name"], "u": "/opportunities/", "d": r["provider"], "k": r["type"]})
+    return out
+
+
+def urllib_quote(s):
+    import urllib.parse
+    return urllib.parse.quote(s)

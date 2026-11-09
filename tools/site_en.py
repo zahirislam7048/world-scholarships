@@ -14,6 +14,8 @@ def nav_en(current="", bn_path="/"):
     cur = ' aria-current="page"'
     links = "".join(f'<a href="{h}"{cur if h == current else ""}>{t}</a>' for h, t in NAV_EN)
     return (f'<nav class="topnav" aria-label="Menu"><a class="brand" href="/en/">Higher Study Info</a>'
+            '<form class="gsearch" role="search" action="/search/" method="get"><input type="search" name="q" autocomplete="off" '
+            'placeholder="Search scholarships, countries, guides…" aria-label="Search the site"><ul hidden></ul></form><script src="/search.js" defer></script>'
             f'<span class="links">{links}<a href="{bn_path}" lang="bn" hreflang="bn">বাংলা</a></span></nav>')
 
 

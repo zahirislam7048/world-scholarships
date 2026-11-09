@@ -21,7 +21,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
                         funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, whats_new_body, report_link, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body, internships_body, loan_body,
-                        HUBS, hub_body, month_hubs, month_body, programs_body, opportunities_body, roundup_text, visa_funds_body, visa_check_body, visa_status_body)
+                        HUBS, hub_body, month_hubs, month_body, programs_body, opportunities_body, roundup_text, visa_funds_body, visa_check_body, visa_status_body, search_index)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -447,6 +447,8 @@ def main():
         "guides/visa-status": ("ভিসা আবেদনের অবস্থা দেখা ও ভিসা আসল কিনা যাচাই | Higher Study Info", "CEAC, IRCC Application Status Tracker, ImmiAccount, VEVO, VFS ট্র্যাকিং আর জার্মানির anabin-এ বিশ্ববিদ্যালয় ও ডিগ্রির স্বীকৃতি যাচাই।", visa_status_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
+    for lg, fn in (("bn", "search-index.json"), ("en", "search-index-en.json")):
+        (OUT / "data" / fn).write_text(json.dumps(search_index(lg), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (OUT / "roundup.txt").write_text(roundup_text(updated) + "\n", encoding="utf-8")
     hub_urls = []
     for hs, _, _, _ in HUBS:
