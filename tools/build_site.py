@@ -173,7 +173,7 @@ def home_page(updated):
     <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
-    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a> · <a href="/whats-new/" style="color:var(--accent)">🆕 এই সপ্তাহে নতুন কী →</a> · <a href="/study-in/" style="color:var(--accent)">🌍 দেশভিত্তিক গাইড →</a></p>
+    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a> · <a href="/study-in/" style="color:var(--accent)">🌍 দেশভিত্তিক গাইড →</a></p>
   </div>
   <aside class="total" aria-label="মোট স্কলারশিপ">
     <b>{len(all_rows)}</b>
@@ -334,6 +334,7 @@ def redirect_page(target):
 
 # Pages that moved when the site was grouped by continent.
 REDIRECTS = {
+    "whats-new": "/",
     "bangladesh": "/asia/bangladesh/", "italy": "/europe/italy/", "erasmus-mundus": "/europe/erasmus-mundus/",
     "asia/saudi-arabia": "/gcc/saudi-arabia/", "asia/uae": "/gcc/uae/", "asia/qatar": "/gcc/qatar/",
 }
@@ -454,7 +455,6 @@ def main():
         "tools/timeline": ("আবেদনের টাইমলাইন প্ল্যানার | Higher Study Info", "স্কলারশিপ বা প্রোগ্রামের শেষ তারিখ দিন — কোন মাসে IELTS, LOR, SOP, স্টুডেন্ট ফাইল আর ভিসা, তার পরিকল্পনা।", timeline_body),
         "guides/application-portals": ("আবেদন পোর্টাল — uni-assist, UCAS, Common App, Studielink | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, নেদারল্যান্ডস, ইতালি, ফ্রান্সে কোন পোর্টালে আবেদন, ফি আর শেষ তারিখ — অফিসিয়াল সূত্রে।", portals_body),
         "guides/cv": ("একাডেমিক CV ও Europass CV লেখার গাইড | Higher Study Info", "মাস্টার্স, PhD ও স্কলারশিপের জন্য একাডেমিক CV: অংশ, ক্রম, কাঠামো আর Europass CV।", cv_body),
-        "whats-new": ("এই সপ্তাহে নতুন কী — স্কলারশিপ আপডেট | Higher Study Info", "প্রতি সপ্তাহে নতুন যোগ হওয়া, হালনাগাদ আর সরানো স্কলারশিপের তালিকা।", whats_new_body),
         "guides/research-internships": ("গবেষণা ইন্টার্নশিপ ও সামার প্রোগ্রাম | Higher Study Info", "KAUST VSRP, OIST Research Internship, CERN Summer Student — ভাতাসহ বিদেশে গবেষণা ইন্টার্নশিপ, বাংলাদেশিদের যোগ্যতাসহ।", internships_body),
         "guides/education-loan": ("বিদেশে পড়ার শিক্ষা ঋণ — বাংলাদেশের ব্যাংক | Higher Study Info", "City Bank, Prime Bank, Eastern Bank, BRAC Bank, Dutch-Bangla Bank-এর শিক্ষা ঋণ: অঙ্ক, মেয়াদ আর যা জানা জরুরি।", loan_body),
         "programs": ("প্রোগ্রাম ও বিশ্ববিদ্যালয় খুঁজুন — দেশভিত্তিক অফিসিয়াল ডেটাবেস | Higher Study Info", "জার্মানি, ফ্রান্স, কানাডা, অস্ট্রেলিয়া, সুইডেন, ফিনল্যান্ডসহ ১৮টি দেশের সরকারি প্রোগ্রাম-ডেটাবেস — কোথায়, কীভাবে খুঁজবেন।", programs_body),
@@ -495,7 +495,7 @@ def main():
     for old, target in REDIRECTS.items():
         (OUT / old).mkdir(parents=True)
         (OUT / old / "index.html").write_text(redirect_page(target), encoding="utf-8")
-    urls = ["/", "/tools/visa-check/", "/tools/visa-funds/", "/guides/visa-status/", "/opportunities/", "/programs/", "/whats-new/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/guides/research-internships/", "/guides/education-loan/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages) + hub_urls
+    urls = ["/", "/tools/visa-check/", "/tools/visa-funds/", "/guides/visa-status/", "/opportunities/", "/programs/", "/scholarships/", "/deadlines/", "/search/", "/guides/", "/guides/documents/", "/guides/english-tests/", "/tools/cgpa/", "/guides/visa/", "/guides/tuition-free/", "/tools/budget/", "/guides/sop/", "/guides/motivation-letter/", "/professors/", "/tools/eligibility/", "/guides/lor/", "/guides/research-proposal/", "/guides/professor-email/", "/guides/funded-phd/", "/guides/part-time-work/", "/guides/interview/", "/guides/student-file/", "/guides/pre-departure/", "/guides/other-tests/", "/guides/fraud/", "/guides/faq/", "/guides/post-study-work/", "/tools/timeline/", "/guides/application-portals/", "/guides/cv/", "/guides/research-internships/", "/guides/education-loan/", "/about/", "/privacy/"] + [f"/{c}/" for c in CONTINENTS] + [f"/{s}/" for s in COUNTRIES] + [f"/scholarship/{ps}/" for ps in PAGES.values()] + list(en_pages) + hub_urls
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{site_extra.CHECKED}</lastmod></url>\n" for u in urls)

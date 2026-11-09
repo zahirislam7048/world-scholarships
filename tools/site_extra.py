@@ -29,7 +29,7 @@ NAV_CSS = """<style>
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>"""
 
-NAV_ITEMS = [("/whats-new/", "নতুন কী"), ("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/opportunities/", "ফেলোশিপ ও ট্রেনিং"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
+NAV_ITEMS = [("/deadlines/", "শেষ তারিখ সামনে"), ("/search/", "সব স্কলারশিপ খুঁজুন"), ("/opportunities/", "ফেলোশিপ ও ট্রেনিং"), ("/guides/", "গাইড ও টুল"), ("/professors/", "প্রফেসর সার্চ"), ("/about/", "আমাদের সম্পর্কে")]
 
 
 def nav(current=""):
@@ -65,7 +65,7 @@ def _footer():
     """Site-wide footer hub: every page links to each region, the main tools and the guides."""
     regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items()) + '<li><a href="/study-in/">দেশভিত্তিক উচ্চশিক্ষা গাইড</a></li>'
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
-             '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
+             '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
              '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/tools/visa-check/">স্টুডেন্ট ভিসা চেক</a></li><li><a href="/tools/visa-funds/">ভিসায় কত টাকা দেখাতে হবে</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/opportunities/">ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
@@ -2544,7 +2544,6 @@ def search_index(lang="bn"):
             out.append({"y": "h", "t": re.sub(r"\s+", " ", t.format(y="")).strip(), "u": f"/scholarships/{s_}/", "k": s_.replace("-", " ") + " " + HUB_KW.get(s_, "")})
         out += [{"y": "t", "t": "সব স্কলারশিপ খুঁজুন (ফিল্টারসহ)", "u": "/search/", "k": "search filter"},
                 {"y": "h", "t": "শেষ তারিখ সামনে", "u": "/deadlines/", "k": "deadline calendar ক্যালেন্ডার"},
-                {"y": "h", "t": "এই সপ্তাহে নতুন কী", "u": "/whats-new/", "k": "new update"},
                 {"y": "t", "t": "প্রফেসর সার্চ", "u": "/professors/", "k": "professor supervisor সুপারভাইজার"},
                 {"y": "t", "t": "আমার শর্টলিস্ট", "u": "/shortlist/", "k": "shortlist saved"},
                 {"y": "h", "t": "ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ", "u": "/opportunities/", "k": "fellowship training internship"},
