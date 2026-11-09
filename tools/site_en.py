@@ -120,7 +120,8 @@ def scholarship_en(s, i, r, ps, checked):
     apply_url = r.get("apply_url") or r["source_url"]
     direct = apply_url != r["source_url"] and not is_watch(r)
     rows = [("Provider", f'{E(r["provider"])} <span class="meta">({TYPE_EN.get(r["provider_type"], "")})</span>'), ("Country", f'<a href="/en/{s}/">{E(name)}</a>'),
-            ("Level", E(r["level"])), ("Benefits", E(r["coverage_amount"])), ("Eligibility", E(r.get("eligibility", ""))),
+            ("Level", E(r["level"])), ("Funding", f'<span class="ftag f-{E(r.get("funding_type", "unknown"))}">{site_extra.FUND_EN.get(r.get("funding_type", "unknown"), "")}</span>'),
+            ("Subjects", E(r.get("fields", ""))), ("Benefits", E(r["coverage_amount"])), ("Eligibility", E(r.get("eligibility", ""))),
             ("English", E(r.get("english_requirement", "")) + (f' <a href="{E(r["english_source"])}" target="_blank" rel="noopener">source ↗</a>' if r.get("english_source") else "")),
             ("Session", E(r.get("session_year", ""))),
             ("Deadline", f'<b class="dl" data-d="{E(r["deadline"])}">{E(r["deadline"])}</b> <span id="left" class="meta"></span>' if r.get("deadline") else ""),

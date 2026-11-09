@@ -36,6 +36,8 @@ CONTACT_HTML = (f'<ul><li>ইমেইল: <a href="mailto:{EMAIL}">{EMAIL}</a><
                 f'<li>ফোন: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li></ul>')
 
 CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
+FUND_BN = {"full": "ফুল ফান্ডেড (টিউশন + ভাতা)", "tuition": "টিউশন মওকুফ", "stipend": "ভাতা / অনুদান", "partial": "আংশিক সহায়তা", "unknown": "সূত্রে উল্লেখ নেই"}
+FUND_EN = {"full": "Fully funded (tuition + stipend)", "tuition": "Tuition waiver", "stipend": "Stipend / grant", "partial": "Partial support", "unknown": "Not stated in source"}
 PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_site.main
 GUIDES_CHECKED = "2026-11-08"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
@@ -76,6 +78,7 @@ def all_rows():
 
 
 PAGE_CSS = """<style>
+.ftag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;border:1px solid var(--line)}.ftag.f-full{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 .month{display:flex;flex-direction:column;gap:8px}
 .month h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0}
 .dl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -180,7 +183,7 @@ def deadlines_body(updated):
 def search_body(updated):
     data = [{
         "n": r["scholarship_name"], "p": r["provider"], "c": COUNTRIES[r["slug"]][0], "s": r["section"],
-        "l": r["level"], "cov": r["coverage_amount"], "e": r.get("english_requirement", ""),
+        "l": r["level"], "cov": r["coverage_amount"], "e": r.get("english_requirement", ""), "f": r.get("funding_type", "unknown"),
         "d": r.get("deadline", ""), "a": r.get("apply_url") or r["source_url"], "src": r["source_url"],
         "u": r["page"], "el": r.get("eligibility", ""), "w": r.get("session_year", "").startswith("Next round"),
     } for r in all_rows()]
@@ -188,12 +191,13 @@ def search_body(updated):
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     script = """<script>
 var DATA = __DATA__;
+var FB = __FB__;
 (function(){
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
   var bn=function(n){return String(n).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
   var t=new Date();var today=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0");
   function lvl(l,f){if(!f)return true;if(f==="UG")return /\\bUG\\b/.test(l);if(f==="PG")return /PG|Masters|MS|MA|MPhil|MSc/.test(l);if(f==="PhD")return /PhD|Postdoc/.test(l);if(f==="School")return /Secondary|HSC|Degree/.test(l);return true}
-  var q=document.getElementById("q"),sec=document.getElementById("sec"),lv=document.getElementById("lvl"),dl=document.getElementById("hasdl"),out=document.getElementById("out"),cnt=document.getElementById("cnt");
+  var q=document.getElementById("q"),sec=document.getElementById("sec"),lv=document.getElementById("lvl"),dl=document.getElementById("hasdl"),fd=document.getElementById("fund"),out=document.getElementById("out"),cnt=document.getElementById("cnt");
   function render(){
     var s=q.value.trim().toLowerCase();
     var rows=DATA.filter(function(r){
@@ -201,6 +205,7 @@ var DATA = __DATA__;
       if(sec.value&&r.s!==sec.value)return false;
       if(!lvl(r.l,lv.value))return false;
       if(dl.checked&&!(r.d&&r.d>=today))return false;
+      if(fd.value&&r.f!==fd.value)return false;
       return !s||[r.n,r.p,r.c,r.l,r.cov,r.e,r.el].join(" ").toLowerCase().indexOf(s)>=0;
     }).sort(function(a,b){var ka=(a.w?"1":"0")+(a.d&&a.d>=today?a.d:"9999"),kb=(b.w?"1":"0")+(b.d&&b.d>=today?b.d:"9999");return ka<kb?-1:ka>kb?1:0});
     cnt.textContent=bn(rows.length)+"টি স্কলারশিপ";
@@ -209,17 +214,17 @@ var DATA = __DATA__;
       var info=r.a===r.src||r.w;
       return '<article class="res"><span class="where">'+esc(r.c)+'</span><h3>'+esc(r.n)+'</h3>'+
         '<p>'+esc(r.p)+' · '+esc(r.l)+'</p>'+
-        (r.cov?'<p><b>সুবিধা:</b> '+esc(r.cov)+'</p>':'')+
+        (r.f&&r.f!=="unknown"?'<p><span class="ftag f-'+r.f+'">'+FB[r.f]+'</span></p>':'')+(r.cov?'<p><b>সুবিধা:</b> '+esc(r.cov)+'</p>':'')+
         (r.e?'<p><b>IELTS / English:</b> '+esc(r.e)+'</p>':'')+
         (r.d&&r.d>=today?'<p><b>শেষ তারিখ:</b> '+esc(r.d)+'</p>':'')+(r.w?'<p class="warn">⏳ পরের রাউন্ডের অপেক্ষায় — এখনো ঘোষণা হয়নি</p>':'')+
         '<div class="row"><a class="apply'+(info?' info':'')+'" href="'+esc(r.a)+'" target="_blank" rel="noopener">'+(info?'আবেদনের তথ্য ↗':'আবেদন করুন ↗')+'</a><a class="more" href="'+r.u+'">বিস্তারিত</a></div></article>';
     }).join("");
   }
-  [q,sec,lv,dl].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
-  var h=new URLSearchParams(location.search).get("q");if(h)q.value=h;
+  [q,sec,lv,dl,fd].forEach(function(el){el.addEventListener("input",render);el.addEventListener("change",render)});
+  var U=new URLSearchParams(location.search),h=U.get("q");if(h)q.value=h;if(U.get("fund"))fd.value=U.get("fund");if(U.get("lvl"))lv.value=U.get("lvl");
   render();
 })();
-</script>""".replace("__DATA__", payload)
+</script>""".replace("__DATA__", payload).replace("__FB__", json.dumps(FUND_BN, ensure_ascii=False))
     return f"""<div class="wrap">
 {nav("/search/")}
 <header style="display:flex;flex-direction:column;gap:10px">
@@ -230,6 +235,7 @@ var DATA = __DATA__;
 <div class="filters" role="search">
   <input id="q" type="search" placeholder="যেমন: PhD, Germany, IELTS 6.5, fully funded" aria-label="খুঁজুন">
   <select id="sec" aria-label="অঞ্চল"><option value="">সব অঞ্চল</option>{sections}</select>
+  <select id="fund" aria-label="সুবিধার ধরন"><option value="">সব ধরনের সুবিধা</option><option value="full">ফুল ফান্ডেড</option><option value="tuition">টিউশন মওকুফ</option><option value="stipend">ভাতা / অনুদান</option><option value="partial">আংশিক</option></select>
   <select id="lvl" aria-label="লেভেল"><option value="">সব লেভেল</option><option value="UG">স্নাতক (UG)</option><option value="PG">স্নাতকোত্তর / Master's</option><option value="PhD">PhD / Postdoc</option><option value="School">স্কুল / কলেজ</option></select>
   <label><input id="hasdl" type="checkbox"> শুধু শেষ তারিখ সামনে</label>
   <span class="count" id="cnt"></span>

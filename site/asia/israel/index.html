@@ -96,6 +96,7 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 footer{font-size:13px;color:var(--muted)}
 .note.watch{font-weight:600;border:1px dashed currentColor}
 .more-link{font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}.more-link:hover{text-decoration:underline}
+.ftag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid var(--line)}.ftag.f-full{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 </style>
 <style>
 .topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
@@ -145,7 +146,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <script>
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
-const DATA = ([{"country": "Israel", "provider": "Azrieli Foundation", "provider_type": "private", "scholarship_name": "Azrieli International Postdoctoral Fellowship 2027–28", "level": "Postdoc", "coverage_amount": "ILS 168,000 per year + ILS 20,000 research/travel, for 2 years", "eligibility": "PhD on or after 1 Nov 2023 (or defence by 1 Jun 2027); sponsor at an Israeli university; no Israeli degree", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027–28", "deadline": "2026-11-11", "source_url": "https://azrielifoundation.org/azrieli-fellows-news/call-for-applications-for-the-azrieli-international-postdoctoral-fellowship-2027-28/", "source_domain": "azrielifoundation.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Up to 24 fellowships; results by 31 Mar 2027", "apply_url": "https://azrielifoundation.org/fellows/internationalpostdoctoral/", "page": "/scholarship/azrieli-international-postdoctoral-fellowship-202728-israel/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
+const FUNDS = {full:"ফুল ফান্ডেড",tuition:"টিউশন মওকুফ",stipend:"ভাতা / অনুদান",partial:"আংশিক"};
+const DATA = ([{"country": "Israel", "provider": "Azrieli Foundation", "provider_type": "private", "scholarship_name": "Azrieli International Postdoctoral Fellowship 2027–28", "level": "Postdoc", "coverage_amount": "ILS 168,000 per year + ILS 20,000 research/travel, for 2 years", "eligibility": "PhD on or after 1 Nov 2023 (or defence by 1 Jun 2027); sponsor at an Israeli university; no Israeli degree", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "2027–28", "deadline": "2026-11-11", "source_url": "https://azrielifoundation.org/azrieli-fellows-news/call-for-applications-for-the-azrieli-international-postdoctoral-fellowship-2027-28/", "source_domain": "azrielifoundation.org", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "Up to 24 fellowships; results by 31 Mar 2027", "apply_url": "https://azrielifoundation.org/fellows/internationalpostdoctoral/", "funding_type": "stipend", "fields": "All subjects (research)", "page": "/scholarship/azrieli-international-postdoctoral-fellowship-202728-israel/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-08";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -182,6 +184,7 @@ function render(){
     <div class="top"><span class="prov">${esc(d.provider)}</span><span class="tag t-${d.provider_type}">${TYPES[d.provider_type]}</span></div>
     <h2>${esc(d.scholarship_name)}</h2>
     <dl>
+      ${d.funding_type&&d.funding_type!=="unknown"?`<dt>ধরন</dt><dd><span class="ftag f-${d.funding_type}">${FUNDS[d.funding_type]}</span></dd>`:""}
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}

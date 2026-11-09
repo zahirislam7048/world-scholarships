@@ -96,6 +96,7 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 footer{font-size:13px;color:var(--muted)}
 .note.watch{font-weight:600;border:1px dashed currentColor}
 .more-link{font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}.more-link:hover{text-decoration:underline}
+.ftag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid var(--line)}.ftag.f-full{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 </style>
 <style>
 .topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
@@ -145,7 +146,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <script>
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
-const DATA = ([{"country": "Nepal", "provider": "Kathmandu University", "provider_type": "public", "scholarship_name": "NOMA scholarship – M.E. in Electrical Power Engineering", "level": "PG", "coverage_amount": "Full tuition + stipend NRS 18,000 per month", "eligibility": "5 Nepalese and 5 foreign students", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "ongoing", "deadline": "", "source_url": "https://ku.edu.np/scholarships-aid", "source_domain": "ku.edu.np", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "No intake date in source snippet; KU School of Arts also reserves 10% of seats for foreign students", "apply_url": "https://ku.edu.np/scholarships-aid", "page": "/scholarship/noma-scholarship-m-e-in-electrical-power-engineering-nepal/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
+const FUNDS = {full:"ফুল ফান্ডেড",tuition:"টিউশন মওকুফ",stipend:"ভাতা / অনুদান",partial:"আংশিক"};
+const DATA = ([{"country": "Nepal", "provider": "Kathmandu University", "provider_type": "public", "scholarship_name": "NOMA scholarship – M.E. in Electrical Power Engineering", "level": "PG", "coverage_amount": "Full tuition + stipend NRS 18,000 per month", "eligibility": "5 Nepalese and 5 foreign students", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "ongoing", "deadline": "", "source_url": "https://ku.edu.np/scholarships-aid", "source_domain": "ku.edu.np", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "No intake date in source snippet; KU School of Arts also reserves 10% of seats for foreign students", "apply_url": "https://ku.edu.np/scholarships-aid", "funding_type": "full", "fields": "Engineering", "page": "/scholarship/noma-scholarship-m-e-in-electrical-power-engineering-nepal/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-08";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -182,6 +184,7 @@ function render(){
     <div class="top"><span class="prov">${esc(d.provider)}</span><span class="tag t-${d.provider_type}">${TYPES[d.provider_type]}</span></div>
     <h2>${esc(d.scholarship_name)}</h2>
     <dl>
+      ${d.funding_type&&d.funding_type!=="unknown"?`<dt>ধরন</dt><dd><span class="ftag f-${d.funding_type}">${FUNDS[d.funding_type]}</span></dd>`:""}
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}

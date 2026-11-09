@@ -16,6 +16,11 @@ The collecting session cannot open `.gov.bd` or university sites directly (netwo
 - **Watch:** a major recurring government programme whose next round is not announced yet may be listed with `session_year` = `Next round (…)`. The site shows it with a "next round awaited" badge and does not count it in totals. Update it to the real session and deadline once announced.
 - **Remove:** a record whose deadline has passed, or whose only evidence is a past session with no current call (other than the Watch case above).
 
+## Funding type and fields
+
+- `funding_type`: `full` (tuition and a living stipend both stated by the source), `tuition` (tuition waiver only, full or partial), `stipend` (a stipend/grant, tuition not stated), `partial` (a fixed partial amount), `unknown` (source does not say). Classify only from what the official source states.
+- `fields`: `All subjects`, or the subject area when the scholarship is limited to one (e.g. `Engineering`, `Computer Science / AI`, `Agriculture / Food`, `Law`, `Humanities / Social Sciences`, `Science & Technology`).
+
 ## Change log
 
 `data/changes.json` lists each weekly update (newest first): date, a one-line Bangla summary and the removed items with the reason. The site's "এই সপ্তাহে নতুন" page shows it together with every row whose `collected_on` is recent.

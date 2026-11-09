@@ -272,7 +272,9 @@ def scholarship_page(slug, i, r, updated):
     apply_url = r.get("apply_url") or r["source_url"]
     direct = apply_url != r["source_url"] and not watch
     rows = [("প্রতিষ্ঠান", e(r["provider"]) + f' <span class="meta">({TYPE_BN.get(r["provider_type"], e(r["provider_type"]))})</span>'),
-            ("দেশ", f'<a href="/{slug}/">{e(name_en)}</a>'), ("লেভেল", e(r["level"])), ("সুবিধা", e(r["coverage_amount"])),
+            ("দেশ", f'<a href="/{slug}/">{e(name_en)}</a>'), ("লেভেল", e(r["level"])),
+            ("সুবিধার ধরন", f'<span class="ftag f-{e(r.get("funding_type", "unknown"))}">{site_extra.FUND_BN.get(r.get("funding_type", "unknown"), "")}</span>'),
+            ("বিষয়", e(r.get("fields", "")).replace("All subjects", "সব বিষয়")), ("সুবিধা", e(r["coverage_amount"])),
             ("শর্ত", e(r.get("eligibility", ""))),
             ("IELTS / English", e(r.get("english_requirement", "")) + (f' <a href="{e(r["english_source"])}" target="_blank" rel="noopener">সূত্র ↗</a>' if r.get("english_source") else "")),
             ("সেশন", e(r.get("session_year", "")))]

@@ -96,6 +96,7 @@ dt{color:var(--muted)} dd{margin:0;min-width:0;overflow-wrap:anywhere}
 footer{font-size:13px;color:var(--muted)}
 .note.watch{font-weight:600;border:1px dashed currentColor}
 .more-link{font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}.more-link:hover{text-decoration:underline}
+.ftag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid var(--line)}.ftag.f-full{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 </style>
 <style>
 .topnav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:14px;border-bottom:1px solid var(--line)}
@@ -145,7 +146,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <script>
 const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))(new Date());
 // Scholarships whose deadline has passed since the last data check are hidden.
-const DATA = ([{"country": "Norway", "provider": "NTNU – Department of Marine Technology (A. Wilhelmsen Foundation)", "provider_type": "private", "scholarship_name": "A. Wilhelmsen Foundation scholarship (MSc Marine Technology)", "level": "PG", "coverage_amount": "NOK 100,000 per year for 5 students from outside Europe", "eligibility": "Admitted to MSN1 programme; scholarship letter requested after admission", "english_requirement": "TOEFL iBT 90 (4.5 new scale) / IELTS above 6.0 (programme pages: 6.5)", "english_source": "https://www.ntnu.edu/studies/admissions/languagereq", "session_year": "Autumn 2027", "deadline": "2026-12-01", "source_url": "https://www.ntnu.edu/imt/scolarship", "source_domain": "ntnu.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "1 Dec 2026 is NTNU's non-EU application deadline; NTNU/UiO have no tuition-covering scholarships", "apply_url": "https://www.ntnu.edu/studies/imp/how_to_apply", "page": "/scholarship/a-wilhelmsen-foundation-scholarship-msc-marine-technology-norway/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
+const FUNDS = {full:"ফুল ফান্ডেড",tuition:"টিউশন মওকুফ",stipend:"ভাতা / অনুদান",partial:"আংশিক"};
+const DATA = ([{"country": "Norway", "provider": "NTNU – Department of Marine Technology (A. Wilhelmsen Foundation)", "provider_type": "private", "scholarship_name": "A. Wilhelmsen Foundation scholarship (MSc Marine Technology)", "level": "PG", "coverage_amount": "NOK 100,000 per year for 5 students from outside Europe", "eligibility": "Admitted to MSN1 programme; scholarship letter requested after admission", "english_requirement": "TOEFL iBT 90 (4.5 new scale) / IELTS above 6.0 (programme pages: 6.5)", "english_source": "https://www.ntnu.edu/studies/admissions/languagereq", "session_year": "Autumn 2027", "deadline": "2026-12-01", "source_url": "https://www.ntnu.edu/imt/scolarship", "source_domain": "ntnu.edu", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "1 Dec 2026 is NTNU's non-EU application deadline; NTNU/UiO have no tuition-covering scholarships", "apply_url": "https://www.ntnu.edu/studies/imp/how_to_apply", "funding_type": "stipend", "fields": "Engineering", "page": "/scholarship/a-wilhelmsen-foundation-scholarship-msc-marine-technology-norway/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
 const UPDATED = "2026-11-08";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
@@ -182,6 +184,7 @@ function render(){
     <div class="top"><span class="prov">${esc(d.provider)}</span><span class="tag t-${d.provider_type}">${TYPES[d.provider_type]}</span></div>
     <h2>${esc(d.scholarship_name)}</h2>
     <dl>
+      ${d.funding_type&&d.funding_type!=="unknown"?`<dt>ধরন</dt><dd><span class="ftag f-${d.funding_type}">${FUNDS[d.funding_type]}</span></dd>`:""}
       <dt>সুবিধা</dt><dd class="amt">${esc(d.coverage_amount)}</dd>
       <dt>লেভেল</dt><dd>${esc(d.level)}</dd>
       ${d.eligibility?`<dt>শর্ত</dt><dd>${esc(d.eligibility)}</dd>`:""}
