@@ -21,7 +21,7 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
                         lor_body, proposal_body, prof_email_body,
                         LINK_CSS, country_links, scholarship_links, scholarships_index_body,
                         funded_phd_body, part_time_body, interview_body, student_file_body, pre_departure_body, other_tests_body, fraud_body, whats_new_body, report_link, faq_body, post_study_body, shortlist_body, timeline_body, SL_CSS, portals_body, cv_body, internships_body, loan_body,
-                        HUBS, hub_body, month_hubs, month_body, programs_body, opportunities_body, roundup_text, visa_funds_body, visa_check_body, visa_status_body, search_index)
+                        HUBS, hub_body, month_hubs, month_body, programs_body, opportunities_body, roundup_text, visa_funds_body, visa_check_body, visa_status_body, search_index, STUDY_IN, study_in_body, study_in_index_body)
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
@@ -173,7 +173,7 @@ def home_page(updated):
     <span class="eyebrow">Higher Study Info · সর্বশেষ যাচাই {site_extra.CHECKED}</span>
     <h1>দেশভিত্তিক স্কলারশিপের তালিকা</h1>
     <p class="lede">প্রতিটি দেশে এখন চালু আছে বা সামনে আসছে এমন স্কলারশিপ, শেষ তারিখ আর প্রতিষ্ঠানের অফিসিয়াল সাইটের লিংক। মেয়াদ পেরোনো স্কলারশিপ বাদ দেওয়া হয়, তালিকা প্রতি সপ্তাহে আপডেট হয়।</p>
-    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a> · <a href="/whats-new/" style="color:var(--accent)">🆕 এই সপ্তাহে নতুন কী →</a></p>
+    <p style="margin:0;font-weight:600"><a href="/tools/eligibility/" style="color:var(--accent)">✅ কোনগুলোতে আপনি যোগ্য, দেখুন →</a> · <a href="/deadlines/" style="color:var(--accent)">📅 শেষ তারিখ ক্যালেন্ডারে নিন →</a> · <a href="/scholarships/" style="color:var(--accent)">📋 সব স্কলারশিপের তালিকা →</a> · <a href="/whats-new/" style="color:var(--accent)">🆕 এই সপ্তাহে নতুন কী →</a> · <a href="/study-in/" style="color:var(--accent)">🌍 দেশভিত্তিক গাইড →</a></p>
   </div>
   <aside class="total" aria-label="মোট স্কলারশিপ">
     <b>{len(all_rows)}</b>
@@ -447,10 +447,19 @@ def main():
         "guides/visa-status": ("ভিসা আবেদনের অবস্থা দেখা ও ভিসা আসল কিনা যাচাই | Higher Study Info", "CEAC, IRCC Application Status Tracker, ImmiAccount, VEVO, VFS ট্র্যাকিং আর জার্মানির anabin-এ বিশ্ববিদ্যালয় ও ডিগ্রির স্বীকৃতি যাচাই।", visa_status_body),
         "tools/budget": ("বাজেট ক্যালকুলেটর | Higher Study Info", "বিদেশে পড়ার প্রথম বছরের আনুমানিক খরচ আর ভিসার জন্য কত টাকা দেখাতে হবে — হিসাব করুন।", budget_body),
     }
+    hub_urls = []
+    for c_ in STUDY_IN:
+        t_, d_, b_ = study_in_body(c_, updated)
+        sp = f"/study-in/{STUDY_IN[c_][0]}/"
+        (OUT / sp.strip("/")).mkdir(parents=True, exist_ok=True)
+        (OUT / sp.strip("/") / "index.html").write_text(page(f"{t_} | Higher Study Info", d_, sp, LIST_HEAD + GUIDE_CSS + LINK_CSS, b_,
+            jsonld(crumbs_ld([("হোম", "/"), ("দেশভিত্তিক গাইড", "/study-in/"), (t_.split(" — ")[0], sp)]))), encoding="utf-8")
+        hub_urls.append(sp)
+    (OUT / "study-in" / "index.html").write_text(page("দেশভিত্তিক উচ্চশিক্ষা গাইড | Higher Study Info", "জার্মানি, যুক্তরাজ্য, যুক্তরাষ্ট্র, কানাডা, অস্ট্রেলিয়া, জাপান, কোরিয়াসহ ১৪টি দেশে উচ্চশিক্ষা — স্কলারশিপ, ভিসা, খরচ, কাজ।", "/study-in/", LIST_HEAD + GUIDE_CSS + LINK_CSS, study_in_index_body(updated)), encoding="utf-8")
+    hub_urls.append("/study-in/")
     for lg, fn in (("bn", "search-index.json"), ("en", "search-index-en.json")):
         (OUT / "data" / fn).write_text(json.dumps(search_index(lg), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (OUT / "roundup.txt").write_text(roundup_text(updated) + "\n", encoding="utf-8")
-    hub_urls = []
     for hs, _, _, _ in HUBS:
         t, body = hub_body(hs, updated)
         (OUT / "scholarships" / hs).mkdir(parents=True, exist_ok=True)

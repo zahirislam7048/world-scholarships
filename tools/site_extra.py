@@ -63,7 +63,7 @@ FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্
 
 def _footer():
     """Site-wide footer hub: every page links to each region, the main tools and the guides."""
-    regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items())
+    regions = "".join(f'<li><a href="/{k}/">{v[2]} স্কলারশিপ</a></li>' for k, v in CONTINENTS.items()) + '<li><a href="/study-in/">দেশভিত্তিক উচ্চশিক্ষা গাইড</a></li>'
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
              '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
@@ -1207,7 +1207,7 @@ def _guide(path_title, h1, lede, inner, sources, extra=""):
 {nav("/guides/")}
 <article class="prose" style="max-width:100%">
   <nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>
-  <span class="eyebrow">গাইড · সূত্র যাচাই 2026-11-05</span>
+  <span class="eyebrow">গাইড · সূত্র যাচাই {GUIDES_CHECKED}</span>
   <h1>{h1}</h1>
   <div style="max-width:68ch;display:flex;flex-direction:column;gap:14px">
   <p class="lede">{lede}</p>
@@ -1390,6 +1390,7 @@ def country_links(slug):
     lst = "".join(sch_link(s, i, r, extra=False) + "" for s, i, r in rows)
     return f"""<section class="rel">
 {f'<h2>{html.escape(COUNTRIES[slug][2])} — সব স্কলারশিপের পেজ</h2><ul>{lst}</ul>' if lst else ""}
+{f'<p class="warn">📘 <a href="/study-in/{STUDY_IN[name_en][0]}/">{STUDY_IN[name_en][1]} উচ্চশিক্ষা — পূর্ণ গাইড (ভিসা, খরচ, কাজ, প্রোগ্রাম)</a></p>' if name_en in STUDY_IN else ""}
 <h2>{html.escape(name_en)}-এ আবেদনের প্রস্তুতি</h2>{guide_links(name_en, levels)}
 {neighbours(slug)}
 </section>"""
@@ -2537,6 +2538,8 @@ def search_index(lang="bn"):
         for h, t, d in GUIDES:
             out.append({"y": "t" if h.startswith("/tools/") else "g", "t": re.sub(r"^\S+\s", "", t), "u": h, "d": d,
                         "k": h.strip("/").replace("/", " ").replace("-", " ") + " " + GUIDE_KW.get(h, "")})
+        for c_, (sl_, loc_, _, _) in STUDY_IN.items():
+            out.append({"y": "g", "t": f"{loc_} উচ্চশিক্ষা", "u": f"/study-in/{sl_}/", "d": "স্কলারশিপ, ভিসা, খরচ, কাজ — এক পাতায়", "k": f"study in {c_} {sl_.replace('-', ' ')}"})
         for s_, t, intro, _ in HUBS:
             out.append({"y": "h", "t": re.sub(r"\s+", " ", t.format(y="")).strip(), "u": f"/scholarships/{s_}/", "k": s_.replace("-", " ") + " " + HUB_KW.get(s_, "")})
         out += [{"y": "t", "t": "সব স্কলারশিপ খুঁজুন (ফিল্টারসহ)", "u": "/search/", "k": "search filter"},
@@ -2557,3 +2560,113 @@ def search_index(lang="bn"):
 def urllib_quote(s):
     import urllib.parse
     return urllib.parse.quote(s)
+
+
+# ---- "Study in <country>" hub pages (built from the data on every build) ----
+STUDY_IN = {  # VISA country -> (url slug, Bangla locative "…তে", application portal (name, url), language test note)
+    "Germany": ("germany", "জার্মানিতে", ("uni-assist / বিশ্ববিদ্যালয়ের নিজস্ব পোর্টাল", "/guides/application-portals/"), "জার্মান ভাষার কোর্সে Goethe-Zertifikat / TestDaF"),
+    "United Kingdom": ("uk", "যুক্তরাজ্যে", ("UCAS (স্নাতক) / বিশ্ববিদ্যালয়ে সরাসরি (মাস্টার্স)", "/guides/application-portals/"), ""),
+    "United States": ("usa", "যুক্তরাষ্ট্রে", ("Common App (স্নাতক) / বিশ্ববিদ্যালয়ে সরাসরি (গ্র্যাজুয়েট)", "/guides/application-portals/"), "অনেক প্রোগ্রামে GRE/GMAT, স্নাতকে SAT"),
+    "Canada": ("canada", "কানাডায়", ("বিশ্ববিদ্যালয়ে সরাসরি", "/programs/"), ""),
+    "Australia": ("australia", "অস্ট্রেলিয়ায়", ("বিশ্ববিদ্যালয়ে সরাসরি", "/programs/"), ""),
+    "Italy": ("italy", "ইতালিতে", ("Universitaly প্রাক-নিবন্ধন + বিশ্ববিদ্যালয়", "/guides/application-portals/"), ""),
+    "Japan": ("japan", "জাপানে", ("বিশ্ববিদ্যালয়ে সরাসরি / MEXT", "/programs/"), "জাপানি ভাষায় পড়লে JLPT"),
+    "South Korea": ("south-korea", "দক্ষিণ কোরিয়ায়", ("বিশ্ববিদ্যালয়ে সরাসরি / GKS", "/programs/"), "কোরিয়ান ভাষায় পড়লে TOPIK"),
+    "Malaysia": ("malaysia", "মালয়েশিয়ায়", ("বিশ্ববিদ্যালয়ে সরাসরি; Student Pass EMGS-এর মাধ্যমে", "/programs/"), ""),
+    "France": ("france", "ফ্রান্সে", ("Campus France (Études en France)", "/guides/application-portals/"), "ফরাসি ভাষায় পড়লে DELF/DALF/TCF"),
+    "Netherlands": ("netherlands", "নেদারল্যান্ডসে", ("Studielink + বিশ্ববিদ্যালয়", "/guides/application-portals/"), ""),
+    "Ireland": ("ireland", "আয়ারল্যান্ডে", ("বিশ্ববিদ্যালয়ে সরাসরি", "/programs/"), ""),
+    "Türkiye": ("turkiye", "তুরস্কে", ("Türkiye Bursları পোর্টাল / বিশ্ববিদ্যালয়", "/europe/turkiye/"), "তুর্কি ভাষার কোর্সে Türkiye Bursları ১ বছরের ভাষা কোর্স দেয়"),
+    "Hungary": ("hungary", "হাঙ্গেরিতে", ("Stipendium Hungaricum পোর্টাল / বিশ্ববিদ্যালয়", "/europe/hungary/"), ""),
+}
+TUITION_BY_EN = {"Germany": "জার্মানি", "France": "ফ্রান্স"}
+
+
+def _country_slug(en):
+    return next((k for k, v in COUNTRIES.items() if v[0] == en), None)
+
+
+def study_in_body(c, updated):
+    import csv as _csv
+    v = next(x for x in VISA if x["c"] == c)
+    url_slug, loc, portal, lang_note = STUDY_IN[c]
+    slug = _country_slug(c)
+    y = int(updated[:4])
+    title = f"{loc} উচ্চশিক্ষা {bn(y)}–{bn(y + 1)} — স্কলারশিপ, খরচ, ভিসা ও কাজের নিয়ম"
+    rows = [r for r in all_rows() if r["slug"] == slug and not (r.get("deadline") and r["deadline"] < updated)] if slug else []
+    rows.sort(key=lambda r: (r.get("session_year", "").startswith("Next round"), r.get("deadline") or "9999"))
+    full = sum(r.get("funding_type") == "full" for r in rows)
+    sch = "".join(_hub_item(r) for r in rows)
+    facts = [("ভিসা", v["visa"]), ("কত টাকা দেখাতে হয়", v["funds"]), ("পড়ার সময় কাজ", v["work"]), ("পড়া শেষে কাজের ভিসা", v["post"]), ("ভিসা ফি", v["fee"])]
+    ftab = "".join(f"<tr><th>{k}</th><td>{html.escape(x)}</td></tr>" for k, x in facts if x)
+    tu = next((t for t in TUITION if t[0] == TUITION_BY_EN.get(c)), None)
+    dbs = "".join(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(n)} ↗</a> <span class="meta">— {d}</span></li>'
+                  for cn, n, u, d, h in PROGRAM_DBS if h == f"/{slug}/")
+    profs = list(_csv.DictReader(open(pathlib.Path(__file__).resolve().parent.parent / "data" / "professors" / "professors.csv", encoding="utf-8")))
+    np_ = sum(p["country"] == c for p in profs)
+    unis = sorted({p["university"] for p in profs if p["country"] == c})
+    tools = [("/tools/visa-check/", "ভিসা প্রস্তুতি যাচাই")] + ([("/tools/visa-funds/", "কত টাকা দেখাতে হবে — ক্যালকুলেটর")] if c in FUNDS_RULES else []) + [
+        ("/tools/budget/", "বাজেট ক্যালকুলেটর"), ("/tools/eligibility/", "স্কলারশিপের যোগ্যতা যাচাই"), ("/tools/timeline/", "আবেদনের টাইমলাইন")]
+    faq = []
+    if v["funds"]:
+        faq.append((f"{loc} পড়তে ব্যাংকে কত টাকা দেখাতে হয়?", v["funds"]))
+    if v["work"]:
+        faq.append((f"{loc} পড়ার সময় কি কাজ করা যায়?", v["work"]))
+    if v["post"]:
+        faq.append((f"{loc} পড়া শেষে কি কাজের জন্য থাকা যায়?", v["post"]))
+    if rows:
+        faq.append((f"{loc} পড়ার জন্য কী কী স্কলারশিপ আছে?", "এখন তালিকায় আছে: " + "; ".join(r["scholarship_name"] for r in rows[:6]) + (" ইত্যাদি।" if len(rows) > 6 else "।")))
+    if tu:
+        faq.append((f"{loc} টিউশন ফি কেমন?", tu[1]))
+    ld = [{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}]
+    src = list(v["src"]) + (tu[2] if tu else [])
+    inner = f"""<div class="kpis"><div><b>{bn(len(rows))}</b><span>চালু ও আসন্ন স্কলারশিপ</span></div><div><b>{bn(full)}</b><span>ফুল ফান্ডেড</span></div><div><b>{bn(np_)}</b><span>প্রফেসর (প্রফেসর সার্চে)</span></div></div>
+  <h2>এক নজরে: ভিসা, টাকা আর কাজ</h2>
+  <div class="tbl-wrap"><table class="t fit">{ftab}</table></div>
+  <p class="meta">সূত্রসহ পূর্ণ তথ্য: <a href="/guides/visa/#{VISA_IDS[c]}">ভিসা গাইড</a> · <a href="/guides/part-time-work/">পড়ার সময় কাজ</a> · <a href="/guides/post-study-work/">পড়া শেষে কাজ</a></p>
+  {f'<h2>টিউশন ফি</h2><p>{html.escape(tu[1])}</p><p class="meta"><a href="/guides/tuition-free/">টিউশন-ফ্রি দেশের গাইড</a></p>' if tu else ""}
+  <h2>{loc} পড়ার স্কলারশিপ</h2>
+  {f'<ul class="elist">{sch}</ul>' if sch else '<p class="meta">এই মুহূর্তে তালিকায় চালু স্কলারশিপ নেই — প্রতি সপ্তাহে হালনাগাদ হয়।</p>'}
+  <p><a href="/{slug}/">{html.escape(COUNTRIES[slug][2]) if slug else ""} — পূর্ণ পেজ →</a> · <a href="/scholarships/fully-funded/">সব দেশের ফুল ফান্ডেড স্কলারশিপ →</a></p>
+  <h2>প্রোগ্রাম ও বিশ্ববিদ্যালয় খুঁজুন</h2>
+  {f'<ul>{dbs}</ul>' if dbs else ""}
+  <p>আবেদন: <a href="{portal[1]}">{portal[0]}</a>{f" · ভাষা: {lang_note}" if lang_note else ""} · ইংরেজি: <a href="/guides/english-tests/">IELTS / TOEFL / Duolingo গাইড</a></p>
+  {f'<h2>সুপারভাইজার খুঁজুন</h2><p>প্রফেসর সার্চে {loc} {bn(len(unis))}টি বিশ্ববিদ্যালয়ের {bn(np_)} জন প্রফেসর: {html.escape(", ".join(unis))}। <a href="/professors/?q={urllib_quote(c)}">তালিকা দেখুন →</a></p>' if np_ else ""}
+  <h2>দরকারি টুল</h2>
+  <ul class="tags">{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in tools)}</ul>
+  <h2>আবেদনের ধাপ</h2>
+  <ol class="steps">
+    <li><h3>প্রোগ্রাম ও স্কলারশিপ বাছাই</h3><p>উপরের ডেটাবেস আর স্কলারশিপ তালিকা থেকে; শর্ত মিলিয়ে নিন <a href="/tools/eligibility/">যোগ্যতা যাচাই</a> দিয়ে।</p></li>
+    <li><h3>কাগজপত্র</h3><p><a href="/guides/documents/">সত্যায়ন</a>, <a href="/guides/cv/">CV</a>, <a href="/guides/sop/">SOP</a> / <a href="/guides/motivation-letter/">Motivation Letter</a>, <a href="/guides/lor/">LOR</a>।</p></li>
+    <li><h3>ভর্তির চিঠি পাওয়ার পর</h3><p><a href="/guides/student-file/">স্টুডেন্ট ফাইল ও টাকা পাঠানো</a>, তারপর ভিসা — <a href="/tools/visa-check/">প্রস্তুতি যাচাই</a> আর <a href="/guides/interview/">ইন্টারভিউ</a>।</p></li>
+    <li><h3>যাওয়ার আগে</h3><p><a href="/guides/pre-departure/">যাওয়ার আগের চেকলিস্ট</a>।</p></li>
+  </ol>
+  <h2>সচরাচর প্রশ্ন</h2>
+  {"".join(f'<details class="faq"><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in faq)}
+  <style>.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}}.kpis div{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}}
+  .kpis b{{display:block;font-family:var(--display);font-size:30px;color:var(--accent);line-height:1.1}}.kpis span{{font-size:13px;color:var(--muted)}}
+  .elist{{display:flex;flex-direction:column;gap:10px;padding-left:20px;margin:0}}.elist a{{color:var(--accent);font-weight:600}}
+  .faq{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}}.faq summary{{cursor:pointer;font-weight:600}}</style>
+  <script type="application/ld+json">{json.dumps(ld[0], ensure_ascii=False)}</script>"""
+    others = "".join(f'<li><a href="/study-in/{STUDY_IN[o][0]}/">{STUDY_IN[o][1]} উচ্চশিক্ষা</a></li>' for o in STUDY_IN if o != c)
+    body = _guide("study-in", title,
+                  f"বাংলাদেশ থেকে {loc} পড়তে যাওয়ার সব তথ্য এক পাতায় — চালু স্কলারশিপ, টিউশন, ভিসায় কত টাকা দেখাতে হয়, পড়ার সময় ও পড়া শেষে কাজের নিয়ম, প্রোগ্রাম খোঁজার অফিসিয়াল ডেটাবেস আর প্রফেসর। সব তথ্য সরকারি ও অফিসিয়াল সূত্র থেকে, প্রতি সপ্তাহে হালনাগাদ (সর্বশেষ যাচাই {CHECKED})।",
+                  inner, src, f'<section class="rel"><h2>অন্য দেশে উচ্চশিক্ষা</h2><ul class="tags">{others}</ul></section>')
+    body = body.replace('<nav class="crumbs"><a href="/guides/">গাইড ও টুল</a></nav>', f'<nav class="crumbs"><a href="/">হোম</a> / <a href="/study-in/">দেশভিত্তিক গাইড</a></nav>', 1)
+    desc = f"{loc} উচ্চশিক্ষা: {bn(len(rows))}টি চালু স্কলারশিপ, ভিসায় কত টাকা দেখাতে হয়, পড়ার সময় কাজ, পড়া শেষে ভিসা, টিউশন ও প্রোগ্রাম খোঁজা — অফিসিয়াল সূত্রে।"
+    return title, desc, body
+
+
+def study_in_index_body(updated):
+    cards = "".join(
+        f'<a class="card" href="/study-in/{s}/"><h2>{loc} উচ্চশিক্ষা</h2><span class="meta">{bn(sum(1 for r in all_rows() if r["slug"] == _country_slug(c) and not (r.get("deadline") and r["deadline"] < updated)))}টি স্কলারশিপ · ভিসা · কাজ · খরচ</span></a>'
+        for c, (s, loc, _, _) in STUDY_IN.items())
+    return f"""<div class="wrap">
+{nav()}
+<nav class="crumbs"><a href="/">হোম</a></nav>
+<header style="display:flex;flex-direction:column;gap:10px"><span class="eyebrow">দেশভিত্তিক গাইড · সর্বশেষ যাচাই {CHECKED}</span>
+<h1>দেশভিত্তিক উচ্চশিক্ষা গাইড</h1>
+<p class="lede">{bn(len(STUDY_IN))}টি জনপ্রিয় দেশে পড়তে যাওয়ার সব তথ্য — প্রতিটি দেশের জন্য এক পাতায়: স্কলারশিপ, ভিসার টাকা, কাজের নিয়ম, পড়া শেষে ভিসা, প্রোগ্রাম খোঁজা।</p></header>
+<div class="guides">{cards}</div>
+{FOOTER}
+</div>"""
