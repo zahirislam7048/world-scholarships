@@ -52,7 +52,7 @@ def _footer():
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
              '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
-             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
+             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
     return (f'<footer class="sitefoot"><nav class="fcols" aria-label="সাইটের লিংক">'
             f'<div><h4>অঞ্চলভিত্তিক</h4><ul>{regions}</ul></div><div><h4>টুল</h4><ul>{tools}</ul></div>'
@@ -349,6 +349,7 @@ table.t.fit{min-width:0;width:100%}
 </style>"""
 
 GUIDES = [
+    ("/programs/", "🔎 প্রোগ্রাম ও বিশ্ববিদ্যালয় খুঁজুন", "১৮টি দেশের সরকারি প্রোগ্রাম-ডেটাবেস — DAAD, Campus France, EduCanada, Study Australia, Studyinfo…"),
     ("/tools/timeline/", "🗓️ আবেদনের টাইমলাইন প্ল্যানার", "শেষ তারিখ দিন — কোন মাসে পরীক্ষা, LOR, SOP, ভিসা, উল্টো দিক থেকে হিসাব।"),
     ("/guides/faq/", "❓ সচরাচর জিজ্ঞাসা (FAQ)", "IELTS ছাড়া, কম CGPA, স্টাডি গ্যাপ, বয়স, ব্যাংক ব্যালান্স — সবচেয়ে বেশি প্রশ্নের উত্তর।"),
     ("/guides/fraud/", "🚩 প্রতারণা থেকে সাবধান", "ভুয়া ভর্তির চিঠি, জাল কাগজ আর অসৎ এজেন্ট চেনার উপায় — সরকারি সূত্রে।"),
@@ -2179,3 +2180,53 @@ def month_body(ym, rows):
 {hub_links()}
 {FOOTER}
 </div>"""
+
+
+PROGRAM_DBS = [  # country, portal name, url, what it lets you do (from the official pages)
+    ("জার্মানি", "DAAD International Programmes", "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/",
+     "জার্মান বিশ্ববিদ্যালয়ের আন্তর্জাতিক (বেশিরভাগ ইংরেজিতে) Bachelor's, Master's, PhD প্রোগ্রাম; বিষয়, ভাষা, শহর আর টিউশন ফি দিয়ে ছাঁকা; ওয়াচলিস্ট", "/europe/germany/"),
+    ("জার্মানি", "DAAD — Language and short courses", "https://www2.daad.de/deutschland/studienangebote/sommerkurse/en/", "জার্মানিতে ভাষা ও শর্ট কোর্স, সামার স্কুল", "/europe/germany/"),
+    ("ফ্রান্স", "Campus France — Programs taught in English", "https://www.campusfrance.org/en/resource/programs-taught-in-english",
+     "ইংরেজিতে পড়ানো ১,৬০০-র বেশি প্রোগ্রাম; লেভেল, বিষয় আর ইংরেজির অংশ দিয়ে ছাঁকা", "/europe/france/"),
+    ("নেদারল্যান্ডস", "Study in NL — Find your study programme", "https://www.studyinnl.org/", "ডাচ বিশ্ববিদ্যালয়ের প্রোগ্রাম, non-EU শিক্ষার্থীদের শেষ তারিখসহ", "/europe/netherlands/"),
+    ("সুইডেন", "University Admissions in Sweden — Search", "https://www.universityadmissions.se/intl/search", "ইংরেজিতে পড়ানো Bachelor's ও Master's কোর্স ও প্রোগ্রাম — আবেদনও এখানেই", "/europe/sweden/"),
+    ("ফিনল্যান্ড", "Studyinfo.fi", "https://studyinfo.fi/", "জাতীয় আবেদন পোর্টাল; প্রায় ৬০০ ইংরেজি প্রোগ্রাম; মূল যৌথ আবেদন সাধারণত জানুয়ারিতে", "/europe/finland/"),
+    ("ডেনমার্ক", "Study in Denmark — Find your study programme", "https://studyindenmark.dk/study-in-denmark/education-in-denmark/study-in-english", "৫০০-র বেশি ইংরেজি প্রোগ্রাম; বিষয়, লেভেল, প্রতিষ্ঠান দিয়ে ছাঁকা", "/europe/denmark/"),
+    ("ইতালি", "Universitaly", "https://www.universitaly.it/", "ইতালীয় বিশ্ববিদ্যালয়ের কোর্স; ভিসার আগে প্রাক-নিবন্ধনও এখানে", "/europe/italy/"),
+    ("আয়ারল্যান্ড", "Education in Ireland", "https://www.educationinireland.com/", "আইরিশ প্রতিষ্ঠান ও কোর্সের তথ্য", "/europe/ireland/"),
+    ("হাঙ্গেরি", "Study in Hungary", "https://studyinhungary.hu/", "হাঙ্গেরির বিশ্ববিদ্যালয় ও প্রোগ্রাম", "/europe/hungary/"),
+    ("ইউরোপ (কনসোর্টিয়াম)", "Erasmus Mundus Joint Masters — catalogue", "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters",
+     "৩টি দেশের অন্তত ৩টি প্রতিষ্ঠানের যৌথ মাস্টার্স; আবেদন সরাসরি প্রোগ্রামে, সাধারণত অক্টোবর–জানুয়ারিতে", "/europe/erasmus-mundus/"),
+    ("যুক্তরাষ্ট্র", "College Navigator (NCES)", "https://nces.ed.gov/collegenavigator/", "মার্কিন শিক্ষা বিভাগের তথ্যে কলেজ ও বিশ্ববিদ্যালয়, মেজর অনুযায়ী খোঁজা", "/north-america/usa/"),
+    ("কানাডা", "EduCanada — Search programs", "https://www.educanada.ca/programs-programmes/template-gabarit/programsearch-rechercheprogramme.aspx?lang=eng",
+     "কলেজ ও বিশ্ববিদ্যালয়ের প্রোগ্রাম, টিউশন তুলনা, জীবনযাত্রার খরচের হিসাব (তথ্য জুলাই ২০২৬ পর্যন্ত, নতুন সিস্টেমে যাওয়ার কারণে)", "/north-america/canada/"),
+    ("অস্ট্রেলিয়া", "Study Australia — Course Search", "https://search.studyaustralia.gov.au/courses", "CRICOS-নিবন্ধিত প্রতিষ্ঠানের হাজারো কোর্স; বিষয়, শহর, লেভেল দিয়ে ছাঁকা; শর্টলিস্ট; বিশ্ববিদ্যালয়ের স্কলারশিপও খোঁজা যায়", "/oceania/australia/"),
+    ("যুক্তরাজ্য", "UCAS — course search", "https://www.ucas.com/", "স্নাতক কোর্স (আবেদনও UCAS দিয়ে); মাস্টার্সের জন্য বিশ্ববিদ্যালয়ের নিজস্ব পেজ", "/europe/united-kingdom/"),
+    ("জাপান", "Study in Japan (JASSO)", "https://www.studyinjapan.go.jp/en/", "জাপানের বিশ্ববিদ্যালয় ও ইংরেজিতে পড়ানো প্রোগ্রামের তথ্য", "/asia/japan/"),
+    ("দক্ষিণ কোরিয়া", "Study in Korea (NIIED)", "https://www.studyinkorea.go.kr/", "কোরিয়ার বিশ্ববিদ্যালয়, প্রোগ্রাম আর GKS স্কলারশিপ", "/asia/south-korea/"),
+    ("মালয়েশিয়া", "Education Malaysia", "https://educationmalaysia.gov.my/", "মালয়েশিয়ার প্রতিষ্ঠান, কোর্স আর স্কলারশিপের তালিকা", "/asia/malaysia/"),
+]
+
+
+def programs_body(updated):
+    rows = "".join(f'<tr><td><b>{c}</b><br><a href="{h}">স্কলারশিপ →</a></td><td><a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(n)} ↗</a><br><span class="meta">{d}</span></td></tr>'
+                   for c, n, u, d, h in PROGRAM_DBS)
+    return _guide("programs", "প্রোগ্রাম ও বিশ্ববিদ্যালয় খুঁজুন — দেশভিত্তিক অফিসিয়াল ডেটাবেস",
+        "কোন বিষয়ে কোন বিশ্ববিদ্যালয়ে পড়বেন খুঁজতে প্রতিটি দেশের সরকার বা সরকারি সংস্থার নিজস্ব প্রোগ্রাম-ডেটাবেস সবচেয়ে নির্ভরযোগ্য — বাণিজ্যিক সাইটের বদলে এগুলো দিয়ে খুঁজুন, তারপর বিশ্ববিদ্যালয়ের নিজের পেজে শর্ত মিলিয়ে নিন।",
+        f"""<div class="tbl-wrap"><table class="t fit"><tr><th>দেশ</th><th>অফিসিয়াল ডেটাবেস</th></tr>{rows}</table></div>
+  <h2>প্রোগ্রাম বাছাইয়ের সময় যা দেখবেন</h2>
+  <ul>
+    <li><b>পড়ানোর ভাষা আর ইংরেজির শর্ত:</b> প্রোগ্রাম পুরোটা ইংরেজিতে কিনা, IELTS/TOEFL কত — দেখুন <a href="/guides/english-tests/">ইংরেজি পরীক্ষার গাইড</a>।</li>
+    <li><b>টিউশন আর মোট খরচ:</b> <a href="/guides/tuition-free/">টিউশন-ফ্রি দেশ</a> আর <a href="/tools/budget/">বাজেট ক্যালকুলেটর</a>।</li>
+    <li><b>আবেদনের শেষ তারিখ:</b> non-EU শিক্ষার্থীদের জন্য প্রায়ই আগের তারিখ; স্কলারশিপের শেষ তারিখ আরও আগে হতে পারে — <a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a>।</li>
+    <li><b>আবেদন কোথায়:</b> কিছু দেশে কেন্দ্রীয় পোর্টাল (uni-assist, UCAS, Studielink, Studyinfo) — দেখুন <a href="/guides/application-portals/">আবেদন পোর্টাল</a>।</li>
+    <li><b>পড়া শেষে কাজের সুযোগ:</b> <a href="/guides/post-study-work/">দেশভিত্তিক তুলনা</a>।</li>
+    <li><b>গবেষণা ডিগ্রি হলে সুপারভাইজার:</b> <a href="/professors/">প্রফেসর সার্চ</a>।</li>
+  </ul>""",
+        [("DAAD — International Programmes in Germany", "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/"),
+         ("Campus France — Programs taught in English", "https://www.campusfrance.org/en/resource/programs-taught-in-english"),
+         ("EduCanada — Find programs and costs", "https://www.educanada.ca/programs-programmes/index.aspx?lang=eng"),
+         ("Study Australia — Find a course", "https://www.studyaustralia.gov.au/en/plan-your-studies/find-a-course"),
+         ("Study in Finland — English-taught degree programmes", "http://www.studyinfinland.fi/what_to_study/english_taught_degree_programmes"),
+         ("Study in Denmark — Study in English", "https://studyindenmark.dk/study-in-denmark/education-in-denmark/study-in-english"),
+         ("Erasmus+ — Erasmus Mundus Joint Masters", "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters")])
