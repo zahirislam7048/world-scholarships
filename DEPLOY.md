@@ -32,3 +32,7 @@ cd ~/repositories/world-scholarships && git pull -q origin main && /bin/cp -R si
 ```
 
 To update right away instead: cPanel → **Git™ Version Control** → **Manage** → **Pull or Deploy** → **Update from Remote** → **Deploy HEAD Commit**.
+
+## .htaccess and 404 page
+
+The build copies `tools/static/.htaccess` into `site/`, so every deploy overwrites `~/higherstudyinfo.com/.htaccess`. It sets the custom 404 page (`/404.html`), redirects http and www to `https://higherstudyinfo.com`, and turns on compression and browser caching. Every block is wrapped in `<IfModule>`. If the site ever shows a 500 error or a redirect loop after a deploy, rename `~/higherstudyinfo.com/.htaccess` in cPanel File Manager and report it — then fix `tools/static/.htaccess`. Put any cPanel-specific directives in `tools/static/.htaccess`, not in the live file.

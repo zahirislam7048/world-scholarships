@@ -2670,3 +2670,19 @@ def study_in_index_body(updated):
 <div class="guides">{cards}</div>
 {FOOTER}
 </div>"""
+
+
+
+def notfound_body(updated):
+    links = [("/scholarships/", "সব স্কলারশিপের তালিকা"), ("/scholarships/fully-funded/", "ফুল ফান্ডেড স্কলারশিপ"), ("/deadlines/", "শেষ তারিখ সামনে"),
+             ("/study-in/", "দেশভিত্তিক উচ্চশিক্ষা গাইড"), ("/guides/", "গাইড ও টুল"), ("/tools/visa-check/", "স্টুডেন্ট ভিসা চেক"), ("/professors/", "প্রফেসর সার্চ")]
+    return f"""<div class="wrap">
+{nav()}
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">৪০৪ · পেজটি পাওয়া যায়নি</span>
+  <h1>দুঃখিত, এই পেজটি নেই</h1>
+  <p class="lede">লিংকটি পুরোনো হতে পারে — মেয়াদ পেরোনো স্কলারশিপের পেজ তালিকা থেকে সরিয়ে দেওয়া হয়। উপরের সার্চ বক্সে খুঁজুন, অথবা নিচের পেজগুলো দেখুন। Page not found — <a href="/en/">English version</a>.</p>
+</header>
+<ul class="tags">{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in links)}</ul>
+{FOOTER}
+</div>"""
