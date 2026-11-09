@@ -52,7 +52,7 @@ def _footer():
     tools = ('<li><a href="/scholarships/">সব স্কলারশিপের তালিকা (A–Z)</a></li><li><a href="/scholarships/fully-funded/">ফুল ফান্ডেড স্কলারশিপ</a></li>'
              '<li><a href="/scholarships/without-ielts/">IELTS ছাড়া স্কলারশিপ</a></li><li><a href="/deadlines/">শেষ তারিখ সামনে</a></li><li><a href="/whats-new/">এই সপ্তাহে নতুন কী</a></li>'
              '<li><a href="/search/">স্কলারশিপ খুঁজুন</a></li><li><a href="/tools/eligibility/">কোন স্কলারশিপে আমি যোগ্য?</a></li>'
-             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/opportunities/">ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
+             '<li><a href="/shortlist/">আমার শর্টলিস্ট</a></li><li><a href="/tools/timeline/">টাইমলাইন প্ল্যানার</a></li><li><a href="/tools/visa-check/">স্টুডেন্ট ভিসা চেক</a></li><li><a href="/tools/visa-funds/">ভিসায় কত টাকা দেখাতে হবে</a></li><li><a href="/programs/">প্রোগ্রাম খুঁজুন</a></li><li><a href="/opportunities/">ফেলোশিপ, ট্রেনিং ও ইন্টার্নশিপ</a></li><li><a href="/professors/">প্রফেসর সার্চ</a></li><li><a href="/tools/cgpa/">CGPA রূপান্তর</a></li><li><a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></li>')
     guides = "".join(f'<li><a href="{h}">{t.split(" ", 1)[1]}</a></li>' for h, t, _ in GUIDES if h.startswith("/guides/"))
     return (f'<footer class="sitefoot"><nav class="fcols" aria-label="সাইটের লিংক">'
             f'<div><h4>অঞ্চলভিত্তিক</h4><ul>{regions}</ul></div><div><h4>টুল</h4><ul>{tools}</ul></div>'
@@ -349,6 +349,9 @@ table.t.fit{min-width:0;width:100%}
 </style>"""
 
 GUIDES = [
+    ("/tools/visa-check/", "🛂 স্টুডেন্ট ভিসা চেক", "দেশ বেছে ১০টি প্রশ্নে টিক দিন — প্রস্তুতির শতাংশ, ঘাটতি আর অফিসিয়াল নিয়ম।"),
+    ("/tools/visa-funds/", "💵 ভিসায় কত টাকা দেখাতে হবে", "১০টি দেশের অফিসিয়াল নিয়মে আনুমানিক অঙ্ক — টাকায়ও।"),
+    ("/guides/visa-status/", "🔍 ভিসা স্ট্যাটাস, যাচাই ও ডিগ্রির স্বীকৃতি", "CEAC, IRCC, ImmiAccount, VEVO, VFS ট্র্যাকিং আর জার্মানির anabin।"),
     ("/programs/", "🔎 প্রোগ্রাম ও বিশ্ববিদ্যালয় খুঁজুন", "১৮টি দেশের সরকারি প্রোগ্রাম-ডেটাবেস — DAAD, Campus France, EduCanada, Study Australia, Studyinfo…"),
     ("/tools/timeline/", "🗓️ আবেদনের টাইমলাইন প্ল্যানার", "শেষ তারিখ দিন — কোন মাসে পরীক্ষা, LOR, SOP, ভিসা, উল্টো দিক থেকে হিসাব।"),
     ("/guides/faq/", "❓ সচরাচর জিজ্ঞাসা (FAQ)", "IELTS ছাড়া, কম CGPA, স্টাডি গ্যাপ, বয়স, ব্যাংক ব্যালান্স — সবচেয়ে বেশি প্রশ্নের উত্তর।"),
@@ -682,6 +685,7 @@ def visa_body(updated):
   <span class="eyebrow">গাইড · সর্বশেষ যাচাই {GUIDES_CHECKED}</span>
   <h1>স্টুডেন্ট ভিসা — দেশভিত্তিক</h1>
   <p class="lede" style="max-width:68ch">প্রতিটি দেশের স্টুডেন্ট ভিসায় কত টাকা দেখাতে হয়, পড়ার সময় কত ঘণ্টা কাজ করা যায়, আর কোথায় আবেদন — সরকারের অফিসিয়াল পেজ অনুযায়ী। যে তথ্য অফিসিয়াল সূত্রে পাইনি, সেটা লেখা হয়নি। ভিসার নিয়ম ঘন ঘন বদলায় — আবেদনের আগে সূত্র লিংক খুলে মিলিয়ে নিন।</p>
+  <p class="warn">🛠️ <a href="/tools/visa-check/">ভিসা চেক</a> দিয়ে প্রস্তুতি যাচাই করুন · <a href="/tools/visa-funds/">কত টাকা দেখাতে হবে হিসাব করুন</a> · <a href="/guides/visa-status/">আবেদনের অবস্থা ও ভিসা যাচাই</a></p>
   <p>{toc}</p>
   {''.join(blocks)}
 </article>
@@ -2300,3 +2304,175 @@ def roundup_text(updated):
               "📅 শেষ তারিখ ক্যালেন্ডারে: https://higherstudyinfo.com/deadlines/", "",
               "সব তথ্য অফিসিয়াল সূত্র থেকে। আবেদনের আগে লিংকে শর্ত মিলিয়ে নিন।"]
     return "\n".join(parts)
+
+
+# ---- Visa tools ----
+FUNDS_RULES = {  # country -> (currency, rule kind, numbers, explanation) — figures from VISA (official sources)
+    "United Kingdom": ("GBP", "uk", (1483, 1136), "জীবনযাত্রা: লন্ডনে মাসে £1,483, বাইরে £1,136 (সর্বোচ্চ ৯ মাস) + প্রথম বছরের বাকি টিউশন; টানা ২৮ দিন অ্যাকাউন্টে"),
+    "Australia": ("AUD", "plus_tuition", (29710,), "১২ মাসের জীবনযাত্রা AUD 29,710 + প্রথম ১২ মাসের কোর্স ফি (+ যাতায়াত)"),
+    "Canada": ("CAD", "plus_tuition", (22895,), "জীবনযাত্রা CAD 22,895 (একক আবেদনকারী) + প্রথম বছরের টিউশন (+ যাতায়াত)"),
+    "Germany": ("EUR", "fixed", (11904,), "ব্লকড অ্যাকাউন্টে বছরে €11,904 (মাসে €992)"),
+    "France": ("EUR", "monthly", (877.5,), "মাসে €877.50 × থাকার মাস (টিউশন বাদে)"),
+    "Italy": ("EUR", "fixed", (10179.85,), "বছরে €10,179.85"),
+    "Ireland": ("EUR", "fixed", (10000,), "প্রতি বছরের জন্য €10,000 (আর ভিসার আগে অন্তত €6,000 বা পুরো টিউশন পরিশোধ)"),
+    "Netherlands": ("EUR", "monthly12", (1130.77,), "study norm মাসে €1,130.77 × ১২ (২০২৬), সাধারণত বিশ্ববিদ্যালয়ে জমা"),
+    "South Korea": ("KRW", "fixed", (5400000,), "মাসে KRW 900,000 × ৬ = প্রায় KRW 5,400,000"),
+    "United States": ("USD", "i20", (), "নির্দিষ্ট জাতীয় অঙ্ক নেই — I-20-তে লেখা মোট খরচ"),
+}
+
+
+def visa_funds_body(updated):
+    rules = {c: {"cur": cur, "k": k, "n": list(n), "t": t} for c, (cur, k, n, t) in FUNDS_RULES.items()}
+    bnname = {v["c"]: v["bn"] for v in VISA}
+    opts = "".join(f'<option value="{html.escape(c)}">{bnname.get(c, c)}</option>' for c in FUNDS_RULES)
+    nofig = "، ".join(v["bn"] for v in VISA if v["c"] not in FUNDS_RULES)
+    table = "".join(f'<tr><td><a href="/guides/visa/#{VISA_IDS[c]}">{bnname.get(c, c)}</a></td><td>{html.escape(t)}</td></tr>' for c, (cur, k, n, t) in FUNDS_RULES.items())
+    faq = [("স্টুডেন্ট ভিসায় ব্যাংকে কত টাকা দেখাতে হয়?", "দেশভেদে আলাদা — যেমন জার্মানিতে ব্লকড অ্যাকাউন্টে বছরে €11,904, যুক্তরাজ্যে লন্ডনের বাইরে মাসে £1,136 (সর্বোচ্চ ৯ মাস) আর প্রথম বছরের বাকি টিউশন, কানাডায় CAD 22,895 আর প্রথম বছরের টিউশন।"),
+           ("টাকা কতদিন অ্যাকাউন্টে রাখতে হয়?", "যুক্তরাজ্যে টানা ২৮ দিন; আয়ারল্যান্ডে ৬ মাসের ব্যাংক স্টেটমেন্ট দেখাতে হয়। অন্য দেশের নিয়ম দূতাবাসের চেকলিস্টে দেখুন।"),
+           ("স্কলারশিপ থাকলে কি টাকা দেখাতে হয়?", "অনেক দেশে স্কলারশিপের চিঠি আর্থিক প্রমাণ হিসেবে গণ্য হয় — যেমন জার্মানিতে ব্লকড অ্যাকাউন্টের বদলে স্কলারশিপ গ্রহণযোগ্য। স্কলারশিপের অঙ্ক কম হলে বাকিটা দেখাতে হয়।")]
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
+    script = """<script>
+(function(){var R=__R__,$=function(i){return document.getElementById(i)};
+var bn=function(x){return String(x).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+var fmt=function(x){return bn(Math.round(x).toLocaleString("en-US"))};
+var lastCur=null;
+function run(){var c=$("vf-c").value,r=R[c],m=+$("vf-m").value||12,tu=+$("vf-t").value||0,fx=+$("vf-fx").value||0,lon=$("vf-lon").checked;
+if(r.cur!==lastCur){var sv="";try{sv=localStorage.getItem("hsi-fx-"+r.cur)||""}catch(e){}$("vf-fx").value=sv;fx=+sv||0;lastCur=r.cur}
+$("vf-lonw").hidden=r.k!=="uk";$("vf-cur").textContent=r.cur;$("vf-cur2").textContent=r.cur;$("vf-rule").textContent=r.t;
+var tot=0,note="";
+if(r.k==="uk"){tot=(lon?r.n[0]:r.n[1])*Math.min(m,9)+tu}
+else if(r.k==="plus_tuition"){tot=r.n[0]+tu}
+else if(r.k==="fixed"){tot=r.n[0]*Math.max(1,Math.ceil(m/12));note=m>12?"(প্রতি বছরের জন্য — সাধারণত প্রথম বছরের অঙ্ক দেখাতে হয়)":""}
+else if(r.k==="monthly"){tot=r.n[0]*m}
+else if(r.k==="monthly12"){tot=r.n[0]*12}
+else if(r.k==="i20"){tot=tu;note="(I-20-তে লেখা মোট খরচ বসান)"}
+$("vf-out").innerHTML='<div><b>'+r.cur+' '+fmt(tot)+'</b><span>দেখাতে হবে (আনুমানিক) '+note+'</span></div>'+(fx?'<div><b>৳ '+fmt(tot*fx)+'</b><span>টাকায় (আপনার দেওয়া রেটে)</span></div>':'');
+try{if($("vf-fx").value)localStorage.setItem("hsi-fx-"+r.cur,$("vf-fx").value)}catch(e){}}
+["vf-c","vf-m","vf-t","vf-fx","vf-lon"].forEach(function(i){$(i).addEventListener("input",run);$(i).addEventListener("change",run)});run()})();
+</script>""".replace("__R__", json.dumps(rules, ensure_ascii=False))
+    return _guide("visa-funds", "স্টুডেন্ট ভিসায় ব্যাংকে কত টাকা দেখাতে হবে — ক্যালকুলেটর",
+        "দেশ, কোর্সের মেয়াদ আর টিউশন দিন — ভিসার জন্য আনুমানিক কত টাকা দেখাতে হবে হিসাব হবে, টাকায়ও। অঙ্কগুলো প্রতিটি দেশের সরকারি সূত্র থেকে, প্রতি সপ্তাহে যাচাই হয়।",
+        f"""<div class="calc">
+    <label>দেশ<select id="vf-c">{opts}</select></label>
+    <label>কোর্সের মেয়াদ (মাস)<input id="vf-m" type="number" min="1" max="72" value="12"></label>
+    <label>প্রথম বছরের বাকি টিউশন (<span id="vf-cur">GBP</span>)<input id="vf-t" type="number" min="0" value="0"></label>
+    <label>বিনিময় হার: ১ <span id="vf-cur2">GBP</span> = কত টাকা<input id="vf-fx" type="number" min="0" step="0.01" placeholder="ব্যাংকের আজকের রেট"></label>
+    <label class="chk" id="vf-lonw"><input id="vf-lon" type="checkbox"> লন্ডনে পড়বেন</label>
+  </div>
+  <div class="out" id="vf-out"></div>
+  <p class="meta">নিয়ম: <span id="vf-rule"></span></p>
+  <p class="warn">এটা আনুমানিক হিসাব। যাতায়াত খরচ, নির্ভরশীলদের অঙ্ক, স্কলারশিপের অংশ আর দূতাবাসভেদে বাড়তি শর্ত এখানে ধরা হয়নি। আবেদনের আগে দূতাবাসের চেকলিস্ট আর <a href="/guides/visa/">ভিসা গাইড</a>-এ সূত্র মিলিয়ে নিন। প্রতিটি মুদ্রার বিনিময় হার শুধু আপনার ব্রাউজারে আলাদা করে মনে থাকে।</p>
+  <h2>দেশভিত্তিক নিয়ম এক নজরে</h2>
+  <div class="tbl-wrap"><table class="t fit"><tr><th>দেশ</th><th>কত দেখাতে হয়</th></tr>{table}</table></div>
+  <p class="meta">{nofig}-এর জন্য নির্দিষ্ট জাতীয় অঙ্ক অফিসিয়াল সূত্রে পাইনি — দূতাবাস বা বিশ্ববিদ্যালয়ের চিঠিতে দেখুন।</p>
+  <h2>সচরাচর প্রশ্ন</h2>
+  {"".join(f'<details class="faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq)}
+  <p>টাকা কীভাবে পাঠাবেন: <a href="/guides/student-file/">স্টুডেন্ট ফাইল</a> · ঋণ: <a href="/guides/education-loan/">শিক্ষা ঋণ</a> · মোট খরচ: <a href="/tools/budget/">বাজেট ক্যালকুলেটর</a></p>
+  <style>.faq{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}}.faq summary{{cursor:pointer;font-weight:600}}.calc select{{font:inherit;font-size:16px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}}.calc .chk{{flex-direction:row;align-items:center;justify-content:flex-start;gap:8px}}.calc .chk input{{width:auto}}</style>
+  {script}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>""",
+        [(t, u) for v in VISA if v["c"] in FUNDS_RULES for t, u in v["src"][:1]])
+
+
+VISA_CHECK_ITEMS = [  # key, question, why / where to fix
+    ("offer", "বিশ্ববিদ্যালয়ের ভর্তির চিঠি (Offer / CoE / I-20 / LOA) হাতে আছে?", "ভর্তির চিঠি ছাড়া স্টুডেন্ট ভিসার আবেদন হয় না; আগে ভিসা করিয়ে দেওয়ার প্রস্তাব প্রতারণার লক্ষণ।", "/guides/fraud/"),
+    ("funds", "দেশের নিয়ম অনুযায়ী পুরো অঙ্ক নিজের/স্পনসরের অ্যাকাউন্টে বা ব্লকড অ্যাকাউন্টে আছে (বা স্কলারশিপের চিঠি)?", "অঙ্ক কম হলে ভিসা প্রত্যাখ্যানের সবচেয়ে বড় কারণগুলোর একটি।", "/tools/visa-funds/"),
+    ("english", "প্রোগ্রামের শর্ত অনুযায়ী ইংরেজির স্কোর বা ছাড়ের প্রমাণ আছে?", "অফারে লেখা শর্ত পূরণ না হলে ভর্তি ও ভিসা আটকে যেতে পারে।", "/guides/english-tests/"),
+    ("passport", "পাসপোর্টের মেয়াদ পুরো কোর্সের সময় (আর যুক্তরাষ্ট্রে থাকার পর আরও ৬ মাস) আছে?", "মেয়াদ কম থাকলে ভিসার মেয়াদও কম হতে পারে; কানাডায় PGWP পাসপোর্টের মেয়াদের বেশি হয় না।", "/guides/pre-departure/"),
+    ("docs", "সনদ ও মার্কশিট সত্যায়ন (বা e-Apostille) করা আছে?", "অনেক দেশ সত্যায়িত কপি চায়।", "/guides/documents/"),
+    ("tuition", "দেশের নিয়মে টিউশনের প্রয়োজনীয় অংশ পরিশোধ করেছেন (যেমন আয়ারল্যান্ডে ভিসার আগে অন্তত €6,000)?", "কিছু দেশ ভিসার আগে টিউশন পরিশোধের প্রমাণ চায়।", "/guides/student-file/"),
+    ("insurance", "দেশ চাইলে স্বাস্থ্যবীমা নেওয়া আছে (যেমন তুরস্কে পুরো মেয়াদের)?", "বাধ্যতামূলক বীমা ছাড়া রেসিডেন্স পারমিট হয় না।", "/guides/visa/"),
+    ("story", "পড়ার পরিকল্পনা, খরচ আর দেশে ফেরার কারণ নিজের ভাষায় ব্যাখ্যা করতে পারবেন?", "যুক্তরাষ্ট্রসহ অনেক দেশে ইন্টারভিউর উত্তরের ওপর সিদ্ধান্ত নির্ভর করে।", "/guides/interview/"),
+    ("gap", "পড়াশোনার বিরতি বা প্রত্যাখ্যাত আগের ভিসা থাকলে তার ব্যাখ্যা ও কাগজ প্রস্তুত?", "অব্যাখ্যাত বিরতি বা তথ্য গোপন সমস্যা তৈরি করে; সব তথ্য সত্য দিন।", "/guides/faq/"),
+    ("genuine", "সব কাগজ আসল আর নিজে পড়ে দেখেছেন (এজেন্ট বানিয়ে দেয়নি)?", "জাল কাগজে প্রত্যাখ্যান আর দীর্ঘ নিষেধাজ্ঞা হয় — কানাডায় ৫ বছর পর্যন্ত।", "/guides/fraud/"),
+]
+
+
+def visa_check_body(updated):
+    bnname = {v["c"]: v["bn"] for v in VISA}
+    opts = "".join(f'<option value="{VISA_IDS[v["c"]]}">{v["bn"]}</option>' for v in VISA)
+    facts = {VISA_IDS[v["c"]]: {"n": v["bn"], "f": v["funds"], "w": v["work"], "p": v["post"], "v": v["visa"]} for v in VISA}
+    qs = "".join(f'<li><label><input type="checkbox" data-k="{k}"> {q}</label><div class="why" hidden>{w} <a href="{h}">কী করবেন →</a></div></li>' for k, q, w, h in VISA_CHECK_ITEMS)
+    faq = [("ভিসা চেক টুল কী দেখে?", "আবেদনের আগে ১০টি জরুরি বিষয় — ভর্তির চিঠি, আর্থিক প্রমাণ, ইংরেজির শর্ত, পাসপোর্টের মেয়াদ, সত্যায়ন, টিউশন পরিশোধ, বীমা, ইন্টারভিউ, বিরতির ব্যাখ্যা আর কাগজের সত্যতা — আর বেছে নেওয়া দেশের অফিসিয়াল নিয়ম।"),
+           ("এটা কি ভিসা পাওয়ার নিশ্চয়তা দেয়?", "না। ভিসার সিদ্ধান্ত শুধু দূতাবাস বা অভিবাসন দপ্তর নেয়। এটা প্রস্তুতির চেকলিস্ট — কোথায় ঘাটতি আছে দেখায়।"),
+           ("কোন কোন দেশের তথ্য আছে?", "১৪টি দেশ: " + "، ".join(v["bn"] for v in VISA) + "।")]
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
+    script = """<script>
+(function(){var F=__F__,$=function(i){return document.getElementById(i)},bx=document.querySelectorAll(".vc input"),K="hsi-visacheck",st={};
+var bn=function(x){return String(x).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})};
+try{st=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+if(st._c)$("vc-c").value=st._c;
+bx.forEach(function(b){b.checked=!!st[b.dataset.k]});
+function run(){var c=F[$("vc-c").value],n=0;
+bx.forEach(function(b){if(b.checked)n++;b.closest("li").querySelector(".why").hidden=b.checked});
+var pct=Math.round(n/bx.length*100);$("vc-score").textContent=bn(pct)+"%";$("vc-bar").style.width=pct+"%";
+$("vc-msg").textContent=pct===100?"সব প্রস্তুত মনে হচ্ছে — দূতাবাসের চেকলিস্টে শেষবার মিলিয়ে নিন।":"বাকি "+bn(bx.length-n)+"টি বিষয় — নিচের লাল লেখায় কী করবেন দেখুন।";
+var rows=[["ভিসার ধরন",c.v],["কত টাকা দেখাতে হয়",c.f],["পড়ার সময় কাজ",c.w],["পড়া শেষে",c.p]].filter(function(x){return x[1]});
+$("vc-facts").innerHTML='<h3>'+c.n+' — অফিসিয়াল নিয়ম</h3><table class="t fit">'+rows.map(function(x){return '<tr><th>'+x[0]+'</th><td>'+x[1].replace(/[<>&]/g,"")+'</td></tr>'}).join("")+'</table><p class="meta"><a href="/guides/visa/#'+$("vc-c").value+'">পূর্ণ তথ্য ও সূত্র →</a></p>';
+st={_c:$("vc-c").value};bx.forEach(function(b){st[b.dataset.k]=b.checked});try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+$("vc-c").addEventListener("change",run);bx.forEach(function(b){b.addEventListener("change",run)});run()})();
+</script>""".replace("__F__", json.dumps(facts, ensure_ascii=False))
+    static = "".join(f'<li><a href="/guides/visa/#{VISA_IDS[v["c"]]}">{v["bn"]} স্টুডেন্ট ভিসা</a></li>' for v in VISA)
+    return _guide("visa-check", "স্টুডেন্ট ভিসা চেক — আবেদনের আগে প্রস্তুতি যাচাই",
+        "দেশ বেছে নিন আর ১০টি প্রশ্নে টিক দিন — কোথায় ঘাটতি আছে, কী করবেন আর সেই দেশের অফিসিয়াল নিয়ম (কত টাকা, কাজের ঘণ্টা, পড়া শেষে ভিসা) এক জায়গায় দেখাবে। উত্তর শুধু আপনার ব্রাউজারে থাকে।",
+        f"""<style>.vc{{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}}.vc label{{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer}}
+.vc input{{margin-top:5px;accent-color:var(--accent)}}.vc .why{{font-size:14px;color:#b42318;padding:4px 12px 0}}.vc .why a{{color:var(--accent)}}
+.bar{{height:10px;background:var(--line);border-radius:99px;overflow:hidden}}.bar i{{display:block;height:100%;background:var(--accent);width:0}}
+.vcsel select{{font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);width:100%;max-width:360px}}
+.faq{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}}.faq summary{{cursor:pointer;font-weight:600}}</style>
+  <p class="vcsel"><label>কোন দেশে যাবেন? <select id="vc-c">{opts}</select></label></p>
+  <p><b>প্রস্তুতি: <span id="vc-score">০%</span></b> — <span id="vc-msg"></span></p>
+  <div class="bar"><i id="vc-bar"></i></div>
+  <ul class="vc">{qs}</ul>
+  <div id="vc-facts" class="vcard"></div>
+  <p class="warn">এটা প্রস্তুতির চেকলিস্ট — ভিসার নিশ্চয়তা নয়। সিদ্ধান্ত শুধু দূতাবাস বা অভিবাসন দপ্তর নেয়।</p>
+  <h2>আবেদনের পর</h2>
+  <p>আবেদনের অবস্থা দেখা আর ভিসা আসল কিনা যাচাই: <a href="/guides/visa-status/">ভিসা স্ট্যাটাস ও যাচাই</a> · কত টাকা দেখাবেন: <a href="/tools/visa-funds/">ভিসা ফান্ড ক্যালকুলেটর</a></p>
+  <h2>দেশভিত্তিক স্টুডেন্ট ভিসা গাইড</h2><ul class="tags">{static}</ul>
+  <h2>সচরাচর প্রশ্ন</h2>
+  {"".join(f'<details class="faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq)}
+  {script}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>""", [])
+
+
+def visa_status_body(updated):
+    track = [("যুক্তরাষ্ট্র", "CEAC Visa Status Check (U.S. Department of State)", "https://ceac.state.gov/ceacstattracker/status.aspx", "ভিসা আবেদনের অবস্থা দেখুন"),
+             ("কানাডা", "IRCC Application Status Tracker", "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-status-tracker.html",
+              "স্টাডি পারমিট আবেদনের অবস্থা — AOR (প্রাপ্তিস্বীকার) পাওয়ার পর ব্যবহার করা যায়; তথ্য প্রতিদিন হালনাগাদ হয়"),
+             ("অস্ট্রেলিয়া", "ImmiAccount (Department of Home Affairs)", "https://immi.homeaffairs.gov.au/help-support/applying-online-or-on-paper/online/after-you-apply",
+              "বার্তা, আবেদনের অবস্থা, তথ্য হালনাগাদ বা আবেদন প্রত্যাহার"),
+             ("VFS Global মাধ্যমে জমা দেওয়া আবেদন", "VFS Global — Track your application", "https://visatracking.vfsglobal.com/",
+              "রেফারেন্স নম্বর আর নামের শেষাংশ দিয়ে ফাইল কোথায় আছে দেখা যায়; সিদ্ধান্ত দূতাবাস নেয়, VFS নয়। যুক্তরাজ্যের আবেদনের অগ্রগতি VFS জানায় না — UKVI যোগাযোগ কেন্দ্রে")]
+    verify = [("অস্ট্রেলিয়া", "VEVO — Visa Entitlement Verification Online", "https://immi.homeaffairs.gov.au/visas/already-have-a-visa/check-visa-details-and-conditions/check-conditions-online",
+               "নিজের ভিসার ধরন, মেয়াদ, কবে পর্যন্ত ঢুকতে হবে আর শর্ত দেখুন; বিশ্ববিদ্যালয় বা নিয়োগকর্তা অনুমতি নিয়ে যাচাই করতে পারে"),
+              ("কানাডা", "IRCC — check your application status", "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-status.html", "নিজের অনলাইন অ্যাকাউন্টে সিদ্ধান্ত ও চিঠি দেখুন — এজেন্টের পাঠানো PDF-এর ওপর ভরসা করবেন না"),
+              ("যুক্তরাষ্ট্র", "CEAC Visa Status Check", "https://ceac.state.gov/ceacstattracker/status.aspx", "দূতাবাসের সিদ্ধান্ত নিজে মিলিয়ে নিন")]
+    rows1 = "".join(f'<tr><td><b>{c}</b></td><td><a href="{u}" target="_blank" rel="noopener">{n} ↗</a><br><span class="meta">{d}</span></td></tr>' for c, n, u, d in track)
+    rows2 = "".join(f'<tr><td><b>{c}</b></td><td><a href="{u}" target="_blank" rel="noopener">{n} ↗</a><br><span class="meta">{d}</span></td></tr>' for c, n, u, d in verify)
+    faq = [("ভিসা আবেদনের অবস্থা কোথায় দেখব?", "যুক্তরাষ্ট্রে CEAC, কানাডায় IRCC Application Status Tracker, অস্ট্রেলিয়ায় ImmiAccount; VFS-এর মাধ্যমে জমা দিলে VFS-এর ট্র্যাকিং পেজে ফাইলের অবস্থান দেখা যায়।"),
+           ("ভিসা আসল কিনা কীভাবে বুঝব?", "সবসময় সরকারের নিজস্ব পোর্টালে মিলিয়ে নিন — যেমন অস্ট্রেলিয়ায় VEVO, কানাডায় নিজের IRCC অ্যাকাউন্ট। শুধু এজেন্টের পাঠানো ছবি বা PDF বিশ্বাস করবেন না।"),
+           ("জার্মানিতে আমার বিশ্ববিদ্যালয় ও ডিগ্রি স্বীকৃত কিনা কীভাবে দেখব?", "anabin ডেটাবেসে বিশ্ববিদ্যালয়ের অবস্থা H+ হলে তা স্বীকৃত; তবে ডিগ্রিটাও আলাদাভাবে খুঁজতে হয় — 'entspricht' বা 'gleichwertig' লেখা থাকলে প্রমাণ সম্পূর্ণ।")]
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
+    return _guide("visa-status", "ভিসা আবেদনের অবস্থা দেখা, ভিসা আসল কিনা যাচাই ও ডিগ্রির স্বীকৃতি",
+        "আবেদনের পর কোথায় অবস্থা দেখবেন, হাতে পাওয়া ভিসা আসল কিনা কীভাবে নিশ্চিত হবেন, আর জার্মানিতে আপনার বিশ্ববিদ্যালয় ও ডিগ্রি স্বীকৃত কিনা — শুধু সরকারি পোর্টালের লিংক।",
+        f"""<h2>আবেদনের অবস্থা দেখুন</h2>
+  <div class="tbl-wrap"><table class="t fit">{rows1}</table></div>
+  <h2>ভিসা আসল কিনা যাচাই করুন</h2>
+  <div class="tbl-wrap"><table class="t fit">{rows2}</table></div>
+  <p class="warn">🚩 এজেন্ট শুধু ছবি বা PDF পাঠিয়ে "ভিসা হয়ে গেছে" বললে নিজে সরকারি পোর্টালে মিলিয়ে নিন। নিজের পোর্টাল অ্যাকাউন্টের পাসওয়ার্ড কাউকে দেবেন না। দেখুন <a href="/guides/fraud/">প্রতারণা সতর্কতা</a>।</p>
+  <h2>ডিগ্রির স্বীকৃতি যাচাই — জার্মানি (anabin)</h2>
+  <ol class="steps">
+    <li><h3>বিশ্ববিদ্যালয় খুঁজুন</h3><p><a href="https://anabin.kmk.org/" target="_blank" rel="noopener">anabin</a>-এ Institutionen → দেশ ও বিশ্ববিদ্যালয়ের নাম → "Status"। <b>H+</b> মানে স্বীকৃত; <b>H+/-</b> মানে নির্দিষ্ট শর্তে।</p></li>
+    <li><h3>ডিগ্রিটাও খুঁজুন</h3><p>H+ বিশ্ববিদ্যালয় হলেও ডিগ্রি আলাদাভাবে খুঁজতে হয় — "entspricht" বা "gleichwertig" লেখা থাকলে প্রমাণ সম্পূর্ণ।</p></li>
+    <li><h3>না পেলে</h3><p>বিশ্ববিদ্যালয় বা ডিগ্রি তালিকায় না থাকলে ZAB থেকে <b>Statement of Comparability</b> নিতে হয়। ডেটাবেস সম্পূর্ণ নয়, তাই না পাওয়া মানেই অস্বীকৃত নয়।</p></li>
+  </ol>
+  <p>জার্মান গ্রেডে রূপান্তর: <a href="/tools/cgpa/">CGPA রূপান্তর</a> · আবেদনের আগে প্রস্তুতি: <a href="/tools/visa-check/">ভিসা চেক</a></p>
+  <h2>সচরাচর প্রশ্ন</h2>
+  <style>.faq{{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}}.faq summary{{cursor:pointer;font-weight:600}}</style>
+  {"".join(f'<details class="faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq)}
+  <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>""",
+        [("U.S. Department of State — CEAC Visa Status Check", "https://ceac.state.gov/ceacstattracker/status.aspx"),
+         ("IRCC — Application Status Tracker", "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-status-tracker.html"),
+         ("Home Affairs — After you apply (ImmiAccount)", "https://immi.homeaffairs.gov.au/help-support/applying-online-or-on-paper/online/after-you-apply"),
+         ("Home Affairs — VEVO", "https://immi.homeaffairs.gov.au/visas/already-have-a-visa/check-visa-details-and-conditions/check-conditions-online"),
+         ("VFS Global — FAQ", "https://www.vfsglobal.com/en/individuals/faq.html"),
+         ("anabin (KMK) — How to check a foreign university", "https://anabin.kmk.org/rechercheanleitung-hochschule"),
+         ("Make it in Germany — anabin manual (PDF)", "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/1_Arbeiten_in_DE/2023_Jan_MiiG_Anleitung_anabin-Datenbank_EN.pdf")])
