@@ -54,7 +54,7 @@ CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
 FUND_BN = {"full": "ফুল ফান্ডেড (টিউশন + ভাতা)", "tuition": "টিউশন মওকুফ", "stipend": "ভাতা / অনুদান", "partial": "আংশিক সহায়তা", "unknown": "সূত্রে উল্লেখ নেই"}
 FUND_EN = {"full": "Fully funded (tuition + stipend)", "tuition": "Tuition waiver", "stipend": "Stipend / grant", "partial": "Partial support", "unknown": "Not stated in source"}
 PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_site.main
-GUIDES_CHECKED = "2026-11-08"  # when the guide and tool figures were last verified
+GUIDES_CHECKED = "2026-11-15"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
 
 FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
@@ -562,12 +562,12 @@ VISA = [
              ("DAAD — Side jobs", "https://www.daad.de/en/studying-in-germany/work-career/side-jobs/"),
              ("Make it in Germany — Seeking employment after graduation", "https://www.make-it-in-germany.com/en/study-training/study/prospects/seeking-employment")]},
     {"c": "United Kingdom", "bn": "যুক্তরাজ্য", "visa": "Student visa",
-     "funds": "লন্ডনে মাসে £1,483, লন্ডনের বাইরে মাসে £1,136 (সর্বোচ্চ 9 মাস) + প্রথম বছরের বাকি টিউশন; টাকা টানা 28 দিন অ্যাকাউন্টে থাকতে হবে",
+     "funds": "লন্ডনে মাসে £1,529, লন্ডনের বাইরে মাসে £1,171 (সর্বোচ্চ 9 মাস) + প্রথম বছরের বাকি টিউশন; টাকা টানা 28 দিন অ্যাকাউন্টে থাকতে হবে",
      "work": "ডিগ্রি-লেভেল ফুল-টাইম কোর্সে টার্মে সপ্তাহে 20 ঘণ্টা, ছুটিতে ফুল-টাইম",
      "post": "Graduate visa: 31 Dec 2026 পর্যন্ত আবেদনে 2 বছর, 1 Jan 2027 থেকে 18 মাস; PhD হলে 3 বছর",
      "fee": "বাইরে থেকে আবেদন £558 (gov.uk-এ বর্তমান ফি দেখে নিন)",
      "apply": ("GOV.UK — Student visa", "https://www.gov.uk/student-visa"),
-     "src": [("GOV.UK — Financial evidence for Student visa", "https://www.gov.uk/guidance/financial-evidence-for-student-and-child-student-route-applicants"),
+     "src": [("GOV.UK — Student visa: money you need", "https://www.gov.uk/student-visa/money"),
              ("GOV.UK — Immigration Rules Appendix Student", "https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-student"),
              ("GOV.UK — Graduate visa", "https://www.gov.uk/graduate-visa")]},
     {"c": "United States", "bn": "যুক্তরাষ্ট্র", "visa": "F-1 student visa",
@@ -742,8 +742,8 @@ def tuition_body(updated):
 # Preset values for the budget calculator, all from VISA sources above.
 BUDGET = [
     {"k": "de", "n": "জার্মানি", "cur": "EUR", "funds": 11904, "fee": 0, "note": "ব্লকড অ্যাকাউন্টের ন্যূনতম (বছরে)। সরকারি বিশ্ববিদ্যালয়ে সাধারণত টিউশন নেই; Baden-Württemberg-এ non-EU সেমিস্টারে €1,500।"},
-    {"k": "uk-l", "n": "যুক্তরাজ্য — লন্ডন", "cur": "GBP", "funds": 1483 * 9, "fee": 558, "note": "£1,483 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও অ্যাকাউন্টে দেখাতে হয়।"},
-    {"k": "uk-o", "n": "যুক্তরাজ্য — লন্ডনের বাইরে", "cur": "GBP", "funds": 1136 * 9, "fee": 558, "note": "£1,136 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও দেখাতে হয়।"},
+    {"k": "uk-l", "n": "যুক্তরাজ্য — লন্ডন", "cur": "GBP", "funds": 1529 * 9, "fee": 558, "note": "£1,529 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও অ্যাকাউন্টে দেখাতে হয়।"},
+    {"k": "uk-o", "n": "যুক্তরাজ্য — লন্ডনের বাইরে", "cur": "GBP", "funds": 1171 * 9, "fee": 558, "note": "£1,171 × 9 মাস। এর সাথে প্রথম বছরের বাকি টিউশনও দেখাতে হয়।"},
     {"k": "us", "n": "যুক্তরাষ্ট্র", "cur": "USD", "funds": 0, "fee": 185 + 350, "note": "জাতীয় ন্যূনতম নেই — I-20-তে লেখা জীবনযাত্রার খরচ বসান। ফি = ভিসা $185 + SEVIS $350।"},
     {"k": "ca", "n": "কানাডা", "cur": "CAD", "funds": 22895, "fee": 0, "note": "একক আবেদনকারীর জীবনযাত্রার ন্যূনতম; এর সাথে প্রথম বছরের টিউশন ও যাতায়াত দেখাতে হয়।"},
     {"k": "au", "n": "অস্ট্রেলিয়া", "cur": "AUD", "funds": 29710, "fee": 0, "note": "১২ মাসের জীবনযাত্রা; এর সাথে প্রথম ১২ মাসের কোর্স ফি ও যাতায়াত। ভিসা ফি Home Affairs-এ দেখে বসান।"},
@@ -2323,7 +2323,7 @@ def roundup_text(updated):
 
 # ---- Visa tools ----
 FUNDS_RULES = {  # country -> (currency, rule kind, numbers, explanation) — figures from VISA (official sources)
-    "United Kingdom": ("GBP", "uk", (1483, 1136), "জীবনযাত্রা: লন্ডনে মাসে £1,483, বাইরে £1,136 (সর্বোচ্চ ৯ মাস) + প্রথম বছরের বাকি টিউশন; টানা ২৮ দিন অ্যাকাউন্টে"),
+    "United Kingdom": ("GBP", "uk", (1529, 1171), "জীবনযাত্রা: লন্ডনে মাসে £1,529, বাইরে £1,171 (সর্বোচ্চ ৯ মাস) + প্রথম বছরের বাকি টিউশন; টানা ২৮ দিন অ্যাকাউন্টে"),
     "Australia": ("AUD", "plus_tuition", (29710,), "১২ মাসের জীবনযাত্রা AUD 29,710 + প্রথম ১২ মাসের কোর্স ফি (+ যাতায়াত)"),
     "Canada": ("CAD", "plus_tuition", (22895,), "জীবনযাত্রা CAD 22,895 (একক আবেদনকারী) + প্রথম বছরের টিউশন (+ যাতায়াত)"),
     "Germany": ("EUR", "fixed", (11904,), "ব্লকড অ্যাকাউন্টে বছরে €11,904 (মাসে €992)"),
@@ -2342,7 +2342,7 @@ def visa_funds_body(updated):
     opts = "".join(f'<option value="{html.escape(c)}">{bnname.get(c, c)}</option>' for c in FUNDS_RULES)
     nofig = "، ".join(v["bn"] for v in VISA if v["c"] not in FUNDS_RULES)
     table = "".join(f'<tr><td><a href="/guides/visa/#{VISA_IDS[c]}">{bnname.get(c, c)}</a></td><td>{html.escape(t)}</td></tr>' for c, (cur, k, n, t) in FUNDS_RULES.items())
-    faq = [("স্টুডেন্ট ভিসায় ব্যাংকে কত টাকা দেখাতে হয়?", "দেশভেদে আলাদা — যেমন জার্মানিতে ব্লকড অ্যাকাউন্টে বছরে €11,904, যুক্তরাজ্যে লন্ডনের বাইরে মাসে £1,136 (সর্বোচ্চ ৯ মাস) আর প্রথম বছরের বাকি টিউশন, কানাডায় CAD 22,895 আর প্রথম বছরের টিউশন।"),
+    faq = [("স্টুডেন্ট ভিসায় ব্যাংকে কত টাকা দেখাতে হয়?", "দেশভেদে আলাদা — যেমন জার্মানিতে ব্লকড অ্যাকাউন্টে বছরে €11,904, যুক্তরাজ্যে লন্ডনের বাইরে মাসে £1,171 (সর্বোচ্চ ৯ মাস) আর প্রথম বছরের বাকি টিউশন, কানাডায় CAD 22,895 আর প্রথম বছরের টিউশন।"),
            ("টাকা কতদিন অ্যাকাউন্টে রাখতে হয়?", "যুক্তরাজ্যে টানা ২৮ দিন; আয়ারল্যান্ডে ৬ মাসের ব্যাংক স্টেটমেন্ট দেখাতে হয়। অন্য দেশের নিয়ম দূতাবাসের চেকলিস্টে দেখুন।"),
            ("স্কলারশিপ থাকলে কি টাকা দেখাতে হয়?", "অনেক দেশে স্কলারশিপের চিঠি আর্থিক প্রমাণ হিসেবে গণ্য হয় — যেমন জার্মানিতে ব্লকড অ্যাকাউন্টের বদলে স্কলারশিপ গ্রহণযোগ্য। স্কলারশিপের অঙ্ক কম হলে বাকিটা দেখাতে হয়।")]
     ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}

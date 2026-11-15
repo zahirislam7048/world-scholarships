@@ -26,3 +26,4 @@ The weekly update re-checks about four guide figures against their official sour
 
 - 2026-11-05 — all guides written from official sources (visa ×14 countries, part-time work, post-study work, test fees, Bangladesh Bank student remittances, PhD funding, application portals).
 - 2026-11-08 — Germany blocked account €11,904/yr (€992/month) confirmed (DAAD, Make it in Germany); Netherlands study norm filled: €1,130.77/month for 2026 (IND); Norway: NTNU/UiO confirm no general tuition scholarships for non-EU degree students; UGC Bangladesh PhD fellowship 2026-27 amount added.
+- 2026-11-15 — UK Student visa maintenance updated to £1,529/month London and £1,171 outside London (GOV.UK 'Money you need'); UK Student visa fee £558 confirmed (Home Office fees, 8 Oct 2026); Australia living-cost evidence AUD 29,710 confirmed (Study Australia); Canada CAD 22,895 still the latest figure found (IRCC CIMM briefing; annual September update not yet located).

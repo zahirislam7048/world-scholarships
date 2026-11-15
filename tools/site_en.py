@@ -223,7 +223,7 @@ VISA_EN = {
     "Germany": ("At least €11,904 a year in a blocked account (€992 a month can be withdrawn) — or a scholarship, bank guarantee or formal obligation letter",
                 "140 full or 280 half days a year without Federal Employment Agency approval; student-assistant jobs at the university are extra",
                 "Non-EU graduates of German universities get a job-seeker residence permit of up to 18 months (not renewable); any job allowed meanwhile, living costs must be covered; switch to a work permit (e.g. EU Blue Card) once employed", ""),
-    "United Kingdom": ("£1,483 a month in London or £1,136 outside London (up to 9 months) + remaining first-year tuition; held for 28 consecutive days",
+    "United Kingdom": ("£1,529 a month in London or £1,171 outside London (up to 9 months) + remaining first-year tuition; held for 28 consecutive days",
                        "20 hours a week in term for full-time degree-level courses; full time in vacations",
                        "Graduate visa: 2 years if applying by 31 Dec 2026, 18 months from 1 Jan 2027; 3 years after a PhD", "£558 when applying from outside the UK (check gov.uk for the current fee)"),
     "United States": ("No fixed national amount — show the total cost stated on your I-20", "On campus, up to 20 hours a week while classes are in session",

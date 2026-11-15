@@ -18,6 +18,7 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Checked — no current scholarship for international students found
 
+- **Croatia:** Croatian Government Scholarships (AMPEU) 2026/27 closed 10 Apr 2026; Pool 1 needs a bilateral agreement and home nomination, Pool 2 is for students of Croatian — next call usually March–April (checked 2026-11-15)
 - **Bulgaria:** no 2026/27 government scholarship for foreign students found on mon.bg / studyinbulgaria.bg (checked 2026-11-08)
 - **Spain:** no 2027-28 national or university excellence scholarship found for non-EU students (UC3M 2026-27 calls closed; AUIP for Latin Americans)
 - **Portugal:** FCT studentships require residence in Portugal
@@ -25,4 +26,4 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Not yet added (not individually searched)
 
-Albania, Andorra, Belarus, Bosnia and Herzegovina, Croatia, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, San Marino, Ukraine, Vatican City — plus the watched countries above.
+Albania, Andorra, Belarus, Bosnia and Herzegovina, Iceland, Kosovo, Liechtenstein, Luxembourg, Malta, Moldova, Monaco, Montenegro, North Macedonia, San Marino, Ukraine, Vatican City — plus the watched countries above.
