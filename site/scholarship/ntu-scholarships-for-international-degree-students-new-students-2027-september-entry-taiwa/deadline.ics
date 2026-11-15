@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:NTU Scholarships for International Degree Students (new studen
+ ts\, 2027 September entry)
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-ntu-scholarships-for-international-degree-students-new-stud
+ ents-2027-september-entry-taiwa-20270128@higherstudyinfo.com
+DTSTAMP:20261115T000000Z
+DTSTART;VALUE=DATE:20270128
+DTEND;VALUE=DATE:20270129
+SUMMARY:শেষ তারিখ: NTU Scholarships for International Degre
+ e Students (new students\, 2027 September entry) (Taiwan)
+URL:https://higherstudyinfo.com/scholarship/ntu-scholarships-for-internatio
+ nal-degree-students-new-students-2027-september-entry-taiwa/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/n
+ tu-scholarships-for-international-degree-students-new-students-2027-septem
+ ber-entry-taiwa/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — NTU Scholarships for Internation
+ al Degree Students (new students\, 2027 September entry)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — NTU Scholarships for In
+ ternational Degree Students (new students\, 2027 September entry)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

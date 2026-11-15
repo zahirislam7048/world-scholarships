@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Higher Study Info//Scholarship deadlines//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:International MSc scholarships 2027–28 (MSc in Nutritional S
+ ciences / MSc in Animal Sciences)
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:scholarship-international-msc-scholarships-202728-msc-in-nutritional-sc
+ iences-msc-in-animal-sciences-i-20270331@higherstudyinfo.com
+DTSTAMP:20261115T000000Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:শেষ তারিখ: International MSc scholarships 2027–28
+  (MSc in Nutritional Sciences / MSc in Animal Sciences) (Israel)
+URL:https://higherstudyinfo.com/scholarship/international-msc-scholarships-
+ 202728-msc-in-nutritional-sciences-msc-in-animal-sciences-i/
+DESCRIPTION:আবেদনের আগে অফিসিয়াল প
+ েজে শেষ তারিখ আর সময় অঞ্চল 
+ মিলিয়ে নিন: https://higherstudyinfo.com/scholarship/i
+ nternational-msc-scholarships-202728-msc-in-nutritional-sciences-msc-in-an
+ imal-sciences-i/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P7D
+DESCRIPTION:৭ দিন বাকি — International MSc scholarships 2
+ 027–28 (MSc in Nutritional Sciences / MSc in Animal Sciences)
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:কাল শেষ তারিখ — International MSc schol
+ arships 2027–28 (MSc in Nutritional Sciences / MSc in Animal Sciences)
+END:VALARM
+END:VEVENT
+END:VCALENDAR
