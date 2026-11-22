@@ -54,7 +54,7 @@ CHECKED = ""  # set by build_site.main from data/LAST_CHECKED
 FUND_BN = {"full": "ফুল ফান্ডেড (টিউশন + ভাতা)", "tuition": "টিউশন মওকুফ", "stipend": "ভাতা / অনুদান", "partial": "আংশিক সহায়তা", "unknown": "সূত্রে উল্লেখ নেই"}
 FUND_EN = {"full": "Fully funded (tuition + stipend)", "tuition": "Tuition waiver", "stipend": "Stipend / grant", "partial": "Partial support", "unknown": "Not stated in source"}
 PAGES = {}  # (country slug, row index) -> scholarship page slug; set by build_site.main
-GUIDES_CHECKED = "2026-11-15"  # when the guide and tool figures were last verified
+GUIDES_CHECKED = "2026-11-22"  # when the guide and tool figures were last verified
 PRIVACY_EFFECTIVE = "2026-11-04"
 
 FOOTER_CORE = (f'<p class="fbase"><a href="/about/">আমাদের সম্পর্কে</a> · <a href="/privacy/">Privacy Policy</a>'
@@ -605,11 +605,11 @@ VISA = [
              ("Integrazione Migranti (Ministry of Labour) — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio"),
              ("Integrazione Migranti — Working with a study permit", "https://integrazionemigranti.gov.it/it-it/Ricerca-news/Dettaglio-news/id/3085/-possibile-lavorare-con-un-permesso-per-motivi-di-studio-E-svolgere-un-tirocinio")]},
     {"c": "Japan", "bn": "জাপান", "visa": "Student (College Student)",
-     "funds": "",
+     "funds": "নির্দিষ্ট জাতীয় অঙ্ক নেই — COE/ভিসার সময় পড়ার খরচ চালানোর সামর্থ্য দেখাতে হয়: সঞ্চয়ের সনদ, গত বছরের আয়ের সনদ ও টাকার উৎসের প্রমাণ (নিজের বা স্পনসরের); ঢাকার জাপান দূতাবাস ট্যাক্স/আয়ের সনদ ও ব্যাংক স্টেটমেন্ট চায়; স্কুলভেদে শর্ত আলাদা",
      "work": "অনুমতি নিয়ে সপ্তাহে 28 ঘণ্টা (দীর্ঘ ছুটিতে দিনে 8 ঘণ্টা); অনুমতি বিমানবন্দরেই নেওয়া যায়",
      "post": "চাকরি না পেলে Designated Activities স্ট্যাটাসে চাকরি খোঁজা: 6 মাস, সাধারণত একবার 6 মাস নবায়ন (শর্তসাপেক্ষে দ্বিতীয় বছর); বিশ্ববিদ্যালয়ের সুপারিশপত্র লাগে", "fee": "",
      "apply": ("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
-     "src": [("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
+     "src": [("Study in Japan — Immigration and student visas", "https://www.studyinjapan.go.jp/en/planning/immigration-procedures/"), ("Embassy of Japan in Bangladesh — Documents required", "https://www.bd.emb-japan.go.jp/itpr_en/visadocuments.html"), ("Study in Japan — Part-time work", "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"),
              ("Study in Japan — For former international students", "https://www.studyinjapan.go.jp/en/faq/after/"),
              ("Immigration Services Agency — Designated Activities", "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00208.html")]},
     {"c": "South Korea", "bn": "দক্ষিণ কোরিয়া", "visa": "D-2 student visa",
@@ -2312,9 +2312,9 @@ def roundup_text(updated):
         return f"• {r['scholarship_name']} — {COUNTRIES[r['slug']][0]}{f}{d}\n  https://higherstudyinfo.com{r['page']}"
     parts = [f"🎓 এই সপ্তাহের স্কলারশিপ আপডেট ({bn(today.day)} {BN_MONTHS[today.month - 1]} {bn(today.year)})", ""]
     if soon:
-        parts += [f"⏰ আগামী ৩০ দিনে শেষ তারিখ ({bn(len(soon))}টি):"] + [line(r) for r in soon[:12]] + [""]
+        parts += [f"⏰ আগামী ৩০ দিনে শেষ তারিখ ({bn(len(soon))}টি" + (f", প্রথম ১২টি নিচে — বাকিগুলো: https://higherstudyinfo.com/deadlines/" if len(soon) > 12 else "") + "):"] + [line(r) for r in soon[:12]] + [""]
     if new:
-        parts += [f"🆕 নতুন যোগ/হালনাগাদ ({bn(len(new))}টি):"] + [line(r) for r in new[:8]] + [""]
+        parts += [f"🆕 নতুন যোগ/হালনাগাদ ({bn(len(new))}টি" + (", প্রথম ৮টি নিচে" if len(new) > 8 else "") + "):"] + [line(r) for r in new[:8]] + [""]
     parts += ["📋 সব স্কলারশিপ: https://higherstudyinfo.com/scholarships/", "✅ ফুল ফান্ডেড: https://higherstudyinfo.com/scholarships/fully-funded/",
               "📅 শেষ তারিখ ক্যালেন্ডারে: https://higherstudyinfo.com/deadlines/", "",
               "সব তথ্য অফিসিয়াল সূত্র থেকে। আবেদনের আগে লিংকে শর্ত মিলিয়ে নিন।"]

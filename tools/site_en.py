@@ -236,7 +236,7 @@ VISA_EN = {
     "Italy": ("€10,179.85 a year (about €848 a month); some consulates also ask for return-travel funds (about €500)",
               "Up to 20 hours a week and 1,040 hours a year; more during breaks if the annual cap is respected",
               "Job-search permit (ricerca di lavoro) of 9–12 months without the 20-hour limit; convert to a work permit once employed", ""),
-    "Japan": ("", "With permission, 28 hours a week (8 hours a day in long vacations); permission can be obtained at the airport",
+    "Japan": ("No fixed national amount: for the COE/visa you show you can cover study costs (savings certificate, last year's income certificate and proof of the source of funds, yours or a sponsor's); the Embassy of Japan in Bangladesh asks for a tax/income certificate and bank statement; requirements vary by school", "With permission, 28 hours a week (8 hours a day in long vacations); permission can be obtained at the airport",
               "If no job yet: Designated Activities status for job hunting, 6 months, usually renewable once (a second year under conditions); school recommendation letter needed", ""),
     "South Korea": ("At least KRW 900,000 a month × 6 months ≈ KRW 5,400,000", "With permission, about 30 hours a week (UG) or 35 (PG) — sources differ; Korean proficiency usually required",
                     "D-10-1 job-seeker visa for professional jobs (E-1–E-7 types); internships allowed; no financial proof on a first change from D-2", ""),

@@ -11,6 +11,7 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 
 ## Checked — no current scholarship for international students found
 
+- **Jordan:** official results (MoHE, University of Jordan, GJU) are scholarships for Jordanians going abroad or for students already at GJU; no scholarship for incoming international students found (checked 2026-11-22)
 - **Mongolia:** official pages list only scholarships for Mongolians going abroad (e.g. Mongolia–France master's, deadline 16 May 2026); no scholarship for incoming international students found (checked 2026-11-15)
 - **Georgia:** Ministry of Education lists a state grant programme for foreign citizens (Decree No. 149) but no current call, eligibility or deadline was found; TSU's state scholarship is not stated to cover international students (checked 2026-11-15)
 - **Cyprus:** CyprusAid (Foreign Ministry) awards at CUT closed 12 Jun 2026 and are limited to listed nationalities; UCY postgraduate awards are 50% departmental waivers for 2026/27 (checked 2026-11-08)
@@ -20,4 +21,4 @@ Columns and keep/remove rule: see [`bangladesh/README.md`](bangladesh/README.md)
 
 ## Not yet added (not individually searched)
 
-GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Iran, Iraq, Jordan, Kyrgyzstan, Laos, Lebanon, Maldives, Myanmar, North Korea, Palestine, Syria, Tajikistan, Timor-Leste, Turkmenistan, Yemen — plus the watched countries above.
+GCC countries are in [`../gcc/`](../gcc/). Afghanistan, Armenia, Azerbaijan, Bhutan, Cambodia, Iran, Iraq, Kyrgyzstan, Laos, Lebanon, Maldives, Myanmar, North Korea, Palestine, Syria, Tajikistan, Timor-Leste, Turkmenistan, Yemen — plus the watched countries above.

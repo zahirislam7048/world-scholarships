@@ -14,8 +14,9 @@ Columns and keep/remove rule: see [`../asia/bangladesh/README.md`](../asia/bangl
 
 ## Checked — no current scholarship for international students found
 
+- **Ecuador:** SENESCYT lists scholarships for Ecuadorians; UASB/FLACSO only offer partial discounts or aid to enrolled students; no current scholarship for incoming international students found (checked 2026-11-22)
 - **Peru:** official results (Pronabec, APCI, PUCP) are scholarships for Peruvians going abroad; no scholarship for incoming international students found (checked 2026-11-15)
 
 ## Not yet added (not individually searched)
 
-Bolivia, Costa Rica, Cuba, Dominican Republic, Ecuador, El Salvador, Guatemala, Honduras, Nicaragua, Panama, Paraguay, Uruguay, Venezuela.
+Bolivia, Costa Rica, Cuba, Dominican Republic, El Salvador, Guatemala, Honduras, Nicaragua, Panama, Paraguay, Uruguay, Venezuela.
