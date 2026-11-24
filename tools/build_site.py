@@ -25,7 +25,8 @@ from site_extra import (FOOTER, GUIDE_CSS, NAV_CSS, PAGE_CSS, about_body, budget
 
 DOMAIN = "https://higherstudyinfo.com"
 OUT = ROOT / "site"
-BASE_CSS = "body{margin:0}img{max-width:100%}[hidden]{display:none!important}"
+BASE_CSS = "body{margin:0}img{max-width:100%}[hidden]{display:none!important}#totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:50;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent,#0b6b4a);color:var(--surface,#fff);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}#totop.show{opacity:1;visibility:visible;transform:none}#totop:focus-visible{outline:3px solid var(--fg,#17211b);outline-offset:2px}@media print{#totop{display:none}}"
+TOTOP_JS = "(function(){var b=document.getElementById('totop');if(!b)return;var t=0;function u(){t=0;b.classList.toggle('show',window.scrollY>600)}window.addEventListener('scroll',function(){if(!t){t=1;requestAnimationFrame(u)}},{passive:true});u();b.addEventListener('click',function(){var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:r?'auto':'smooth'})})})();"
 
 
 def jsonld(*objs):
@@ -74,6 +75,8 @@ def page(title, description, path, head_extra, body, ld="", lang="bn"):
 </head>
 <body>
 {body}
+<button id="totop" type="button" aria-label="{"উপরে ফিরে যান" if lang == "bn" else "Back to top"}" title="{"উপরে ফিরে যান" if lang == "bn" else "Back to top"}">↑</button>
+<script>{TOTOP_JS}</script>
 </body>
 </html>
 """
