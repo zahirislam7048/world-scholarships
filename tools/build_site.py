@@ -90,6 +90,9 @@ def country_page(slug, updated):
     cont = slug.split("/")[0]
     crumbs = f'<nav class="crumbs"><a href="/">হোম</a> / <a href="/{cont}/">{CONTINENTS[cont][1]}</a></nav>'
     body = '<div class="wrap">\n' + nav() + crumbs + body
+    # Country facts box (capital, population, language, currency, cities) right under the page header.
+    import country_info
+    body = body.replace("</header>", "</header>\n" + country_info.box_bn(slug), 1)
     # The repo-maintenance footer is for the preview pages only.
     start = body.index("<footer>")
     body = body[:start] + country_links(slug) + FOOTER + body[body.index("</footer>") + 9:]

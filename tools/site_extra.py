@@ -1334,6 +1334,8 @@ LINK_CSS = """<style>
 .rel a{color:var(--accent)}.rel .tags{list-style:none;padding:0;flex-direction:row;flex-wrap:wrap;gap:8px}
 .rel .tags a{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;text-decoration:none;background:var(--surface);font-size:14px}
 </style>"""
+import country_info  # noqa: E402
+LINK_CSS += country_info.CSS
 
 
 def _rows_with_pages(pred=lambda slug, r: True):

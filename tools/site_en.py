@@ -3,6 +3,7 @@ import html
 
 from build_preview import CONTINENTS, COUNTRIES, is_watch, load_rows
 import site_extra
+import country_info
 
 E = html.escape
 TYPE_EN = {"government": "Government", "eu": "European Union", "consortium": "Consortium", "public": "Public university",
@@ -109,6 +110,7 @@ def country_en(s, pages, checked):
 {nav_en("", f"/{s}/")}
 <nav class="crumbs"><a href="/en/">Home</a> / <a href="/en/{k}/">{E(CONTINENTS[k][0])}</a></nav>
 <header style="display:flex;flex-direction:column;gap:10px"><span class="eyebrow">{E(name)} · last checked {checked}</span><h1>Scholarships in {E(name)}</h1></header>
+{country_info.box_en(s)}
 <div style="display:flex;flex-direction:column;gap:14px;max-width:820px">{"".join(cards) or '<p class="empty">No current scholarship listed for this country.</p>'}</div>
 <section class="rel"><h2>Other countries in {E(CONTINENTS[k][0])}</h2><ul class="tags">{others}</ul></section>
 {NOTICE_EN}
