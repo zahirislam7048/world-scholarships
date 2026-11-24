@@ -158,7 +158,7 @@ const TODAY = (d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"
 // Scholarships whose deadline has passed since the last data check are hidden.
 const FUNDS = {full:"ফুল ফান্ডেড",tuition:"টিউশন মওকুফ",stipend:"ভাতা / অনুদান",partial:"আংশিক"};
 const DATA = ([{"country": "Nepal", "provider": "Kathmandu University", "provider_type": "public", "scholarship_name": "NOMA scholarship – M.E. in Electrical Power Engineering", "level": "PG", "coverage_amount": "Full tuition + stipend NRS 18,000 per month", "eligibility": "5 Nepalese and 5 foreign students", "english_requirement": "Not stated in source snippet", "english_source": "", "session_year": "ongoing", "deadline": "", "source_url": "https://ku.edu.np/scholarships-aid", "source_domain": "ku.edu.np", "collected_on": "2026-11-04", "verification_status": "search-snippet", "notes": "No intake date in source snippet; KU School of Arts also reserves 10% of seats for foreign students", "apply_url": "https://ku.edu.np/scholarships-aid", "funding_type": "full", "fields": "Engineering", "page": "/scholarship/noma-scholarship-m-e-in-electrical-power-engineering-nepal/"}]).filter(d => !d.deadline || d.deadline >= TODAY);
-const UPDATED = "2026-11-15";
+const UPDATED = "2026-11-22";
 const ALL_TYPES = {government:"সরকারি",eu:"EU / Erasmus",consortium:"Erasmus Mundus প্রোগ্রাম",public:"পাবলিক",private:"প্রাইভেট",international:"আন্তর্জাতিক"};
 const TYPES = Object.fromEntries(Object.entries(ALL_TYPES).filter(([k])=>DATA.some(d=>d.provider_type===k)));
 const bn = n => String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
