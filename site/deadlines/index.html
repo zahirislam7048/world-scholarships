@@ -31,7 +31,7 @@
 
   gtag('config', 'G-WY2KEFM167');
 </script>
-<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}#totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:50;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent,#0b6b4a);color:var(--surface,#fff);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}#totop.show{opacity:1;visibility:visible;transform:none}#totop:focus-visible{outline:3px solid var(--fg,#17211b);outline-offset:2px}@media print{#totop{display:none}}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{--bg:#f5f7f4;--surface:#fff;--fg:#17211b;--muted:#5b6a61;--line:#dde4de;--accent:#0b6b4a;--accent-soft:#e3f1ea;
@@ -505,5 +505,7 @@ table.t.fit{min-width:0;width:100%}
   });
 })();
 </script>
+<button id="totop" type="button" aria-label="উপরে ফিরে যান" title="উপরে ফিরে যান">↑</button>
+<script>(function(){var b=document.getElementById('totop');if(!b)return;var t=0;function u(){t=0;b.classList.toggle('show',window.scrollY>600)}window.addEventListener('scroll',function(){if(!t){t=1;requestAnimationFrame(u)}},{passive:true});u();b.addEventListener('click',function(){var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:r?'auto':'smooth'})})})();</script>
 </body>
 </html>
