@@ -140,6 +140,7 @@ CSS = """<style>
 .facts dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;margin:0}
 .facts dt{font-size:13px;color:var(--muted)}.facts dd{margin:2px 0 0;font-weight:600}
 .facts .wide{grid-column:1/-1}
+.facts dd a{color:var(--accent);font-weight:600}
 .facts .src{font-size:12px;color:var(--muted);font-family:var(--body);margin:0}.facts .src a{color:var(--accent)}
 </style>"""
 
@@ -150,7 +151,9 @@ def box_bn(slug):
         return ""
     items = [("🏛️ রাজধানী", d["capital"][0]), ("👥 জনসংখ্যা", pop_bn(d["pop"])), ("🗣️ দাপ্তরিক ভাষা", d["lang"][0]),
              ("💱 মুদ্রা", d["cur"][0]), ("🎓 পড়াশোনার বড় শহর", d["cities"][0])]
-    dl = "".join(f"<div{' class=\"wide\"' if i == len(items) - 1 else ''}><dt>{a}</dt><dd>{b}</dd></div>" for i, (a, b) in enumerate(items))
+    if UNIS.get(slug):
+        items.append(("🏫 উল্লেখযোগ্য সরকারি বিশ্ববিদ্যালয় (কয়েকটি, পূর্ণ তালিকা নয়)", unis_html(slug)))
+    dl = "".join(f"<div{' class=\"wide\"' if i >= 4 else ''}><dt>{a}</dt><dd>{b}</dd></div>" for i, (a, b) in enumerate(items))
     return (f'<section class="facts" aria-label="দেশ পরিচিতি"><h2>এক নজরে দেশটি</h2><dl>{dl}</dl>'
             f'<p class="src">জনসংখ্যা আনুমানিক (২০২৪-এর কাছাকাছি)। সর্বশেষ সংখ্যা: <a href="{d["src"][1]}" target="_blank" rel="noopener">{d["src"][0]} ↗</a></p></section>')
 
@@ -161,6 +164,102 @@ def box_en(slug):
         return ""
     items = [("🏛️ Capital", d["capital"][1]), ("👥 Population", pop_en(d["pop"])), ("🗣️ Official language(s)", d["lang"][1]),
              ("💱 Currency", d["cur"][1]), ("🎓 Main study cities", d["cities"][1])]
-    dl = "".join(f"<div{' class=\"wide\"' if i == len(items) - 1 else ''}><dt>{a}</dt><dd>{b}</dd></div>" for i, (a, b) in enumerate(items))
+    if UNIS.get(slug):
+        items.append(("🏫 Notable public universities (a selection)", unis_html(slug)))
+    dl = "".join(f"<div{' class=\"wide\"' if i >= 4 else ''}><dt>{a}</dt><dd>{b}</dd></div>" for i, (a, b) in enumerate(items))
     return (f'<section class="facts" aria-label="Country facts"><h2>At a glance</h2><dl>{dl}</dl>'
             f'<p class="src">Population is a rounded estimate (around 2024). Latest figure: <a href="{d["src"][1]}" target="_blank" rel="noopener">{d["src"][0]} ↗</a></p></section>')
+
+
+# Well-known public (state-funded) universities per country — a short selection, not a full list.
+# (name, official domain); the box links to https://<domain>/.
+UNIS = {
+    "asia/bangladesh": [("University of Dhaka", "du.ac.bd"), ("BUET", "buet.ac.bd"), ("University of Rajshahi", "ru.ac.bd"),
+                        ("University of Chittagong", "cu.ac.bd"), ("Jahangirnagar University", "juniv.edu"), ("SUST", "sust.edu")],
+    "asia/india": [("IISc Bangalore", "iisc.ac.in"), ("IIT Bombay", "iitb.ac.in"), ("IIT Delhi", "home.iitd.ac.in"),
+                   ("University of Delhi", "du.ac.in"), ("JNU", "jnu.ac.in"), ("Jadavpur University", "jadavpuruniversity.in")],
+    "asia/china": [("Tsinghua University", "tsinghua.edu.cn"), ("Peking University", "pku.edu.cn"), ("Zhejiang University", "zju.edu.cn"),
+                   ("Fudan University", "fudan.edu.cn"), ("Shanghai Jiao Tong University", "sjtu.edu.cn")],
+    "asia/japan": [("University of Tokyo", "u-tokyo.ac.jp"), ("Kyoto University", "kyoto-u.ac.jp"), ("Osaka University", "osaka-u.ac.jp"),
+                   ("Tohoku University", "tohoku.ac.jp"), ("Nagoya University", "nagoya-u.ac.jp"), ("Hokkaido University", "hokudai.ac.jp")],
+    "asia/south-korea": [("Seoul National University", "snu.ac.kr"), ("KAIST", "kaist.ac.kr"), ("Kyungpook National University", "knu.ac.kr"),
+                         ("Pusan National University", "pusan.ac.kr"), ("Chungnam National University", "cnu.ac.kr")],
+    "asia/singapore": [("NUS", "nus.edu.sg"), ("NTU Singapore", "ntu.edu.sg"), ("SMU", "smu.edu.sg"), ("SUTD", "sutd.edu.sg")],
+    "asia/hong-kong": [("HKU", "hku.hk"), ("CUHK", "cuhk.edu.hk"), ("HKUST", "hkust.edu.hk"), ("PolyU", "polyu.edu.hk"), ("CityU", "cityu.edu.hk")],
+    "asia/taiwan": [("National Taiwan University", "ntu.edu.tw"), ("National Tsing Hua University", "nthu.edu.tw"),
+                    ("NYCU", "nycu.edu.tw"), ("National Cheng Kung University", "ncku.edu.tw"), ("NTUST", "ntust.edu.tw")],
+    "asia/thailand": [("Chulalongkorn University", "chula.ac.th"), ("Mahidol University", "mahidol.ac.th"), ("Kasetsart University", "ku.ac.th"),
+                      ("Chiang Mai University", "cmu.ac.th"), ("Khon Kaen University", "kku.ac.th")],
+    "asia/pakistan": [("Quaid-i-Azam University", "qau.edu.pk"), ("NUST", "nust.edu.pk"), ("University of the Punjab", "pu.edu.pk"),
+                      ("University of Karachi", "uok.edu.pk"), ("COMSATS University", "comsats.edu.pk")],
+    "asia/israel": [("Hebrew University of Jerusalem", "huji.ac.il"), ("Tel Aviv University", "tau.ac.il"), ("Technion", "technion.ac.il"),
+                    ("Ben-Gurion University", "bgu.ac.il"), ("Weizmann Institute (graduate)", "weizmann.ac.il")],
+    "asia/nepal": [("Tribhuvan University", "tu.edu.np"), ("Kathmandu University", "ku.edu.np"), ("Pokhara University", "pu.edu.np"),
+                   ("Purbanchal University", "purbanchaluniversity.edu.np")],
+    "asia/malaysia": [("Universiti Malaya", "um.edu.my"), ("UKM", "ukm.my"), ("UPM", "upm.edu.my"), ("USM", "usm.my"), ("UTM", "utm.my")],
+    "asia/indonesia": [("Universitas Indonesia", "ui.ac.id"), ("ITB", "itb.ac.id"), ("Universitas Gadjah Mada", "ugm.ac.id"),
+                       ("IPB University", "ipb.ac.id"), ("Universitas Airlangga", "unair.ac.id")],
+    "asia/brunei": [("Universiti Brunei Darussalam", "ubd.edu.bn"), ("Universiti Teknologi Brunei", "utb.edu.bn"),
+                    ("UNISSA", "unissa.edu.bn")],
+    "gcc/saudi-arabia": [("King Saud University", "ksu.edu.sa"), ("King Abdulaziz University", "kau.edu.sa"), ("KFUPM", "kfupm.edu.sa"),
+                         ("Umm Al-Qura University", "uqu.edu.sa"), ("Islamic University of Madinah", "iu.edu.sa")],
+    "gcc/uae": [("UAE University", "uaeu.ac.ae"), ("Khalifa University", "ku.ac.ae"), ("Zayed University", "zu.ac.ae"),
+                ("Higher Colleges of Technology", "hct.ac.ae")],
+    "gcc/qatar": [("Qatar University", "qu.edu.qa"), ("University of Doha for Science and Technology", "udst.edu.qa")],
+    "gcc/kuwait": [("Kuwait University", "ku.edu.kw")],
+    "gcc/oman": [("Sultan Qaboos University", "squ.edu.om"), ("University of Technology and Applied Sciences", "utas.edu.om")],
+    "gcc/bahrain": [("University of Bahrain", "uob.edu.bh"), ("Arabian Gulf University", "agu.edu.bh")],
+    "europe/italy": [("Sapienza University of Rome", "uniroma1.it"), ("Politecnico di Milano", "polimi.it"), ("University of Bologna", "unibo.it"),
+                     ("University of Padua", "unipd.it"), ("Politecnico di Torino", "polito.it"), ("University of Milan", "unimi.it")],
+    "europe/germany": [("TU Munich", "tum.de"), ("LMU Munich", "lmu.de"), ("Heidelberg University", "uni-heidelberg.de"),
+                       ("RWTH Aachen", "rwth-aachen.de"), ("Humboldt University of Berlin", "hu-berlin.de"), ("KIT", "kit.edu")],
+    "europe/united-kingdom": [("University of Oxford", "ox.ac.uk"), ("University of Cambridge", "cam.ac.uk"), ("Imperial College London", "imperial.ac.uk"),
+                              ("UCL", "ucl.ac.uk"), ("University of Edinburgh", "ed.ac.uk"), ("University of Manchester", "manchester.ac.uk")],
+    "europe/france": [("Université Paris-Saclay", "universite-paris-saclay.fr"), ("Sorbonne Université", "sorbonne-universite.fr"),
+                      ("Université PSL", "psl.eu"), ("Université Grenoble Alpes", "univ-grenoble-alpes.fr"), ("Université de Strasbourg", "unistra.fr")],
+    "europe/sweden": [("Lund University", "lunduniversity.lu.se"), ("Uppsala University", "uu.se"), ("KTH", "kth.se"),
+                      ("Stockholm University", "su.se"), ("University of Gothenburg", "gu.se")],
+    "europe/switzerland": [("ETH Zurich", "ethz.ch"), ("EPFL", "epfl.ch"), ("University of Zurich", "uzh.ch"),
+                           ("University of Geneva", "unige.ch"), ("University of Basel", "unibas.ch")],
+    "europe/netherlands": [("TU Delft", "tudelft.nl"), ("University of Amsterdam", "uva.nl"), ("Utrecht University", "uu.nl"),
+                           ("Leiden University", "universiteitleiden.nl"), ("Wageningen University", "wur.nl"), ("TU Eindhoven", "tue.nl")],
+    "europe/belgium": [("KU Leuven", "kuleuven.be"), ("Ghent University", "ugent.be"), ("Université libre de Bruxelles", "ulb.be"),
+                       ("UCLouvain", "uclouvain.be"), ("University of Antwerp", "uantwerpen.be")],
+    "europe/finland": [("University of Helsinki", "helsinki.fi"), ("Aalto University", "aalto.fi"), ("Tampere University", "tuni.fi"),
+                       ("University of Turku", "utu.fi"), ("University of Oulu", "oulu.fi")],
+    "europe/austria": [("University of Vienna", "univie.ac.at"), ("TU Wien", "tuwien.at"), ("TU Graz", "tugraz.at"),
+                       ("University of Innsbruck", "uibk.ac.at"), ("University of Graz", "uni-graz.at")],
+    "europe/denmark": [("University of Copenhagen", "ku.dk"), ("DTU", "dtu.dk"), ("Aarhus University", "au.dk"),
+                       ("Aalborg University", "aau.dk"), ("University of Southern Denmark", "sdu.dk")],
+    "europe/norway": [("University of Oslo", "uio.no"), ("NTNU", "ntnu.edu"), ("University of Bergen", "uib.no"),
+                      ("UiT The Arctic University of Norway", "uit.no"), ("NMBU", "nmbu.no")],
+    "europe/latvia": [("University of Latvia", "lu.lv"), ("Riga Technical University", "rtu.lv"), ("Rīga Stradiņš University", "rsu.lv")],
+    "europe/slovakia": [("Comenius University Bratislava", "uniba.sk"), ("Slovak University of Technology", "stuba.sk"),
+                        ("Technical University of Košice", "tuke.sk"), ("Pavol Jozef Šafárik University", "upjs.sk")],
+    "europe/turkiye": [("Middle East Technical University", "metu.edu.tr"), ("Istanbul Technical University", "itu.edu.tr"),
+                       ("Boğaziçi University", "bogazici.edu.tr"), ("Hacettepe University", "hacettepe.edu.tr"), ("Ankara University", "ankara.edu.tr")],
+    "europe/hungary": [("ELTE", "elte.hu"), ("BME", "bme.hu"), ("Semmelweis University", "semmelweis.hu"),
+                       ("University of Debrecen", "unideb.hu"), ("University of Szeged", "u-szeged.hu")],
+    "europe/ireland": [("Trinity College Dublin", "tcd.ie"), ("University College Dublin", "ucd.ie"), ("University of Galway", "universityofgalway.ie"),
+                       ("University College Cork", "ucc.ie"), ("Dublin City University", "dcu.ie")],
+    "north-america/usa": [("UC Berkeley", "berkeley.edu"), ("UCLA", "ucla.edu"), ("University of Michigan", "umich.edu"),
+                          ("Georgia Tech", "gatech.edu"), ("UT Austin", "utexas.edu"), ("UIUC", "illinois.edu")],
+    "north-america/canada": [("University of Toronto", "utoronto.ca"), ("UBC", "ubc.ca"), ("McGill University", "mcgill.ca"),
+                             ("University of Alberta", "ualberta.ca"), ("University of Waterloo", "uwaterloo.ca")],
+    "latin-america/brazil": [("Universidade de São Paulo", "usp.br"), ("UNICAMP", "unicamp.br"), ("UFRJ", "ufrj.br"),
+                             ("UNESP", "unesp.br"), ("UFMG", "ufmg.br")],
+    "latin-america/colombia": [("Universidad Nacional de Colombia", "unal.edu.co"), ("Universidad de Antioquia", "udea.edu.co"),
+                               ("Universidad del Valle", "univalle.edu.co"), ("Universidad Industrial de Santander", "uis.edu.co")],
+    "oceania/australia": [("ANU", "anu.edu.au"), ("University of Melbourne", "unimelb.edu.au"), ("University of Sydney", "sydney.edu.au"),
+                          ("UNSW Sydney", "unsw.edu.au"), ("University of Queensland", "uq.edu.au"), ("Monash University", "monash.edu")],
+    "oceania/new-zealand": [("University of Auckland", "auckland.ac.nz"), ("University of Otago", "otago.ac.nz"),
+                            ("Victoria University of Wellington", "wgtn.ac.nz"), ("University of Canterbury", "canterbury.ac.nz"), ("Massey University", "massey.ac.nz")],
+    "africa/mauritius": [("University of Mauritius", "uom.ac.mu"), ("University of Technology, Mauritius", "utm.ac.mu"),
+                         ("Université des Mascareignes", "udm.ac.mu")],
+    "africa/nigeria": [("University of Ibadan", "ui.edu.ng"), ("University of Lagos", "unilag.edu.ng"), ("Obafemi Awolowo University", "oauife.edu.ng"),
+                       ("Ahmadu Bello University", "abu.edu.ng"), ("University of Nigeria, Nsukka", "unn.edu.ng")],
+}
+
+
+def unis_html(slug):
+    return ", ".join(f'<a href="https://{d}/" target="_blank" rel="noopener">{n}</a>' for n, d in UNIS.get(slug, []))
